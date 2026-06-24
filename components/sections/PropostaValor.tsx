@@ -25,11 +25,11 @@ export function PropostaValor() {
           mão dos critérios técnicos.
         </p>
 
-        <div className="grid sm:grid-cols-3 gap-6 mb-16">
+        <div className="grid sm:grid-cols-3 gap-4 sm:gap-6 mb-16">
           {pilares.map((p) => (
             <div
               key={p.titulo}
-              className="bg-[#111] border border-white/5 rounded-lg p-6"
+              className="bg-[#111] border border-white/5 rounded-lg p-4 sm:p-6"
             >
               <div className="w-8 h-1 bg-[#1565c0] mb-4 rounded" />
               <h3 className="text-white font-bold text-base mb-2">{p.titulo}</h3>

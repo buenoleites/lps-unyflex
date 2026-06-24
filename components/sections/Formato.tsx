@@ -20,7 +20,7 @@ export function Formato() {
           em documentos da fase preparatória da Lei 14.133.
         </p>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mb-12">
           {detalhes.map((d) => (
             <div
               key={d.label}
