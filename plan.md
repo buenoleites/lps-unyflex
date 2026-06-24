@@ -93,9 +93,9 @@ Sem backend, banco de dados ou autenticação — LP estática.
 
 ## 7. Melhorias em relação à LP original
 
-- [ ] Performance: SSG puro, sem JavaScript de page builder
-- [ ] Responsividade real com Tailwind (a original tem bugs no mobile)
-- [ ] Animações sutis com Tailwind (fade-in nas seções ao scroll)
+- [x] Performance: SSG puro, sem JavaScript de page builder
+- [x] Responsividade real com Tailwind (a original tem bugs no mobile)
+- [x] Animações sutis com Tailwind (fade-in nas seções ao scroll)
 - [ ] SEO melhorado: metadata estruturada, Open Graph, canonical
 - [ ] Acessibilidade: contraste adequado, alt texts, semântica HTML5
 - [ ] CTA destacado e sticky no mobile
