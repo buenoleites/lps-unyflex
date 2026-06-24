@@ -59,7 +59,6 @@ export function CTA() {
           <form
             onSubmit={handleSubmit}
             className="bg-[#111] border border-white/5 rounded-lg p-5 sm:p-8 flex flex-col gap-5"
-            noValidate
           >
             <div className="flex flex-col gap-1">
               <label htmlFor="campo-nome" className={labelClass}>Nome</label>
