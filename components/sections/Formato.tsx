@@ -11,7 +11,7 @@ export function Formato() {
   return (
     <section id="formato" className="bg-[#0f0f0f] py-20 border-t border-white/5">
       <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3">
           Formato, duração
           <br />e entrega do curso.
         </h2>
@@ -24,7 +24,7 @@ export function Formato() {
           {detalhes.map((d) => (
             <div
               key={d.label}
-              className="bg-[#111] border border-white/5 rounded-lg p-6"
+              className="bg-[#111] border border-white/5 rounded-lg p-4 sm:p-6"
             >
               <div className="w-6 h-1 bg-[#1565c0] mb-4 rounded" />
               <h3 className="text-white font-bold text-base mb-2">{d.label}</h3>

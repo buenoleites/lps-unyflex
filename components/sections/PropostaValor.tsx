@@ -17,7 +17,7 @@ export function PropostaValor() {
   return (
     <section id="curso" className="bg-[#0a0a0a] py-20 border-t border-white/5">
       <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
           O que esse curso ajuda você a sustentar na prática
         </h2>
         <p className="text-white/60 text-base mb-14 max-w-2xl">
@@ -39,8 +39,8 @@ export function PropostaValor() {
         </div>
 
         {/* Second block */}
-        <div className="bg-[#111] border border-white/5 rounded-lg p-10">
-          <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+        <div className="bg-[#111] border border-white/5 rounded-lg p-6 sm:p-10">
+          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-4">
             O curso mostra como usar IA sem deixar o processo frágil.
           </h3>
           <p className="text-white/60 text-base mb-8 max-w-xl">

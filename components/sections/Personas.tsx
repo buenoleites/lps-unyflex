@@ -15,7 +15,7 @@ export function Personas() {
   return (
     <section id="publico" className="bg-[#0f0f0f] py-20 border-t border-white/5">
       <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
           Quem mais sente essa pressão no dia a dia
         </h2>
         <p className="text-white/60 text-base mb-12 max-w-2xl">
@@ -23,11 +23,11 @@ export function Personas() {
           preparatória na Lei 14.133.
         </p>
 
-        <div className="grid sm:grid-cols-2 gap-6 mb-10">
+        <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 mb-10">
           {cards.map((c) => (
             <div
               key={c.title}
-              className="relative rounded-lg overflow-hidden h-64 group"
+              className="relative rounded-lg overflow-hidden h-52 sm:h-64 group"
             >
               <img
                 src={c.img}

@@ -12,15 +12,15 @@ export function Hero() {
         }}
       />
 
-      <div className="relative max-w-6xl mx-auto px-6 pt-28 pb-20 w-full">
+      <div className="relative max-w-6xl mx-auto px-6 pt-20 sm:pt-28 pb-14 sm:pb-20 w-full">
         <div className="max-w-3xl">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
             IA na fase preparatória
             <br />
             sem perder segurança técnica.
           </h1>
 
-          <p className="text-lg text-white/70 max-w-2xl leading-relaxed mb-4">
+          <p className="text-base sm:text-lg text-white/70 max-w-2xl leading-relaxed mb-4">
             Curso presencial em Curitiba para quem precisa usar IA em DFD, ETP,
             TR e mapa de riscos sem gerar documentos genéricos.
           </p>

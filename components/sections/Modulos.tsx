@@ -25,11 +25,11 @@ export function Modulos() {
   return (
     <section id="conteudo" className="bg-[#0f0f0f] py-20 border-t border-white/5">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
           {modulos.map((m) => (
             <div
               key={m.titulo}
-              className="relative rounded-lg overflow-hidden h-56 group"
+              className="relative rounded-lg overflow-hidden h-48 sm:h-56 group"
             >
               <img
                 src={m.img}

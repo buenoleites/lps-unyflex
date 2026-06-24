@@ -34,7 +34,7 @@ export function CTA() {
   return (
     <section id="inscricao" className="bg-[#0f0f0f] py-20 border-t border-white/5">
       <div className="max-w-2xl mx-auto px-6">
-        <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
           Garanta sua vaga para aprender IA aplicada às licitações.
         </h2>
         <p className="text-white/60 text-base mb-10">
@@ -51,7 +51,7 @@ export function CTA() {
             </p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="bg-[#111] border border-white/5 rounded-lg p-8 flex flex-col gap-5">
+          <form onSubmit={handleSubmit} className="bg-[#111] border border-white/5 rounded-lg p-5 sm:p-8 flex flex-col gap-5">
             {/* Nome */}
             <div className="flex flex-col gap-1">
               <label className="text-white/50 text-xs font-semibold uppercase tracking-wider">Nome</label>
@@ -122,7 +122,7 @@ export function CTA() {
               <label className="text-white/50 text-xs font-semibold uppercase tracking-wider">
                 Você trabalha em órgão público?
               </label>
-              <div className="flex gap-4">
+              <div className="flex flex-wrap gap-3 sm:gap-4">
                 {["Sim", "Não"].map((op) => (
                   <label key={op} className="flex items-center gap-2 cursor-pointer">
                     <input
