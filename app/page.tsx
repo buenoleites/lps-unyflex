@@ -9,6 +9,7 @@ import { ProvasSocial } from "@/components/sections/ProvasSocial";
 import { CTA } from "@/components/sections/CTA";
 import { Footer } from "@/components/sections/Footer";
 import { FadeIn } from "@/components/ui/FadeIn";
+import { StickyCtaMobile } from "@/components/ui/StickyCtaMobile";
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
       <FadeIn><ProvasSocial /></FadeIn>
       <FadeIn><CTA /></FadeIn>
       <FadeIn><Footer /></FadeIn>
+      <StickyCtaMobile />
     </main>
   );
 }
