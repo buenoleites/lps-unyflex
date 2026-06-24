@@ -105,7 +105,7 @@ Sem backend, banco de dados ou autenticação — LP estática.
 
 ## 8. Verificação / Critérios de Aceite
 
-- [ ] Todas as 11 seções da LP original estão presentes e com conteúdo fiel
+- [x] Todas as 11 seções da LP original estão presentes e com conteúdo fiel
 - [ ] Design aprovado visualmente contra a `LP.png`
 - [ ] Responsivo: funciona em 375px (mobile) e 1440px (desktop)
 - [ ] Build passa sem erros (`npm run build`)

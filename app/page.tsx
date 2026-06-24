@@ -4,6 +4,7 @@ import { Personas } from "@/components/sections/Personas";
 import { PropostaValor } from "@/components/sections/PropostaValor";
 import { Diferencial } from "@/components/sections/Diferencial";
 import { Modulos } from "@/components/sections/Modulos";
+import { AvisoPosicionamento } from "@/components/sections/AvisoPosicionamento";
 import { Formato } from "@/components/sections/Formato";
 import { ProvasSocial } from "@/components/sections/ProvasSocial";
 import { CTA } from "@/components/sections/CTA";
@@ -20,6 +21,7 @@ export default function Home() {
       <FadeIn><PropostaValor /></FadeIn>
       <FadeIn><Diferencial /></FadeIn>
       <FadeIn><Modulos /></FadeIn>
+      <FadeIn><AvisoPosicionamento /></FadeIn>
       <FadeIn><Formato /></FadeIn>
       <FadeIn><ProvasSocial /></FadeIn>
       <FadeIn><CTA /></FadeIn>
