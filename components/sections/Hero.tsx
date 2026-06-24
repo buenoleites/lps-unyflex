@@ -25,7 +25,7 @@ export function Hero() {
             TR e mapa de riscos sem gerar documentos genéricos.
           </p>
 
-          <p className="text-white/40 text-sm mb-10">
+          <p className="text-white/55 text-sm mb-10">
             licitações • compras • agente de contratação • controle interno • jurídico
           </p>
 
@@ -36,7 +36,7 @@ export function Hero() {
             Garantir minha vaga
           </a>
 
-          <p className="mt-6 text-white/40 text-sm">
+          <p className="mt-6 text-white/55 text-sm">
             28 a 31 de julho • 17 horas • Curitiba
           </p>
         </div>

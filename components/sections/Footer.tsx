@@ -62,7 +62,7 @@ export function Footer() {
           </a>
         </div>
 
-        <p className="text-white/25 text-xs">© Unyflex 2026</p>
+        <p className="text-white/50 text-xs">© Unyflex 2026</p>
       </div>
     </footer>
   );

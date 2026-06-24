@@ -92,6 +92,12 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${montserrat.variable} antialiased`}>
       <body className="min-h-full">
+        <a
+          href="#conteudo-principal"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-[#1565c0] focus:text-white focus:font-bold focus:px-4 focus:py-2 focus:rounded focus:outline-none"
+        >
+          Pular para o conteúdo
+        </a>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

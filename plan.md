@@ -97,7 +97,7 @@ Sem backend, banco de dados ou autenticação — LP estática.
 - [x] Responsividade real com Tailwind (a original tem bugs no mobile)
 - [x] Animações sutis com Tailwind (fade-in nas seções ao scroll)
 - [x] SEO melhorado: metadata estruturada, Open Graph, canonical
-- [ ] Acessibilidade: contraste adequado, alt texts, semântica HTML5
+- [x] Acessibilidade: contraste adequado, alt texts, semântica HTML5
 - [ ] CTA destacado e sticky no mobile
 - [ ] Logos de clientes em carrossel ou grid limpo
 

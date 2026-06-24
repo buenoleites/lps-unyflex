@@ -12,7 +12,7 @@ import { FadeIn } from "@/components/ui/FadeIn";
 
 export default function Home() {
   return (
-    <main>
+    <main id="conteudo-principal">
       <Header />
       <FadeIn><Hero /></FadeIn>
       <FadeIn><Personas /></FadeIn>

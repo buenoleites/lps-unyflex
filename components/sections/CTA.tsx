@@ -31,6 +31,11 @@ export function CTA() {
     setForm((prev) => ({ ...prev, [field]: value }));
   }
 
+  const inputClass =
+    "bg-[#0a0a0a] border border-white/10 rounded px-4 py-3 text-white text-sm placeholder:text-white/25 focus:outline-none focus:border-[#1565c0]/60 transition-colors";
+  const labelClass =
+    "text-white/60 text-xs font-semibold uppercase tracking-wider";
+
   return (
     <section id="inscricao" className="bg-[#0f0f0f] py-20 border-t border-white/5">
       <div className="max-w-2xl mx-auto px-6">
@@ -43,85 +48,93 @@ export function CTA() {
         </p>
 
         {submitted ? (
-          <div className="bg-[#111] border border-[#1565c0]/30 rounded-lg p-10 text-center">
-            <div className="text-[#1565c0] text-5xl mb-4">✓</div>
+          <div role="status" className="bg-[#111] border border-[#1565c0]/30 rounded-lg p-10 text-center">
+            <div className="text-[#1565c0] text-5xl mb-4" aria-hidden="true">✓</div>
             <p className="text-white font-bold text-xl">Recebemos seu interesse!</p>
-            <p className="text-white/55 text-sm mt-3">
+            <p className="text-white/60 text-sm mt-3">
               Em breve nossa equipe entrará em contato pelo e-mail informado.
             </p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="bg-[#111] border border-white/5 rounded-lg p-5 sm:p-8 flex flex-col gap-5">
-            {/* Nome */}
+          <form
+            onSubmit={handleSubmit}
+            className="bg-[#111] border border-white/5 rounded-lg p-5 sm:p-8 flex flex-col gap-5"
+            noValidate
+          >
             <div className="flex flex-col gap-1">
-              <label className="text-white/50 text-xs font-semibold uppercase tracking-wider">Nome</label>
+              <label htmlFor="campo-nome" className={labelClass}>Nome</label>
               <input
+                id="campo-nome"
                 type="text"
                 required
                 value={form.nome}
                 onChange={(e) => update("nome", e.target.value)}
                 placeholder="Seu nome completo"
-                className="bg-[#0a0a0a] border border-white/10 rounded px-4 py-3 text-white text-sm placeholder:text-white/25 focus:outline-none focus:border-[#1565c0]/60 transition-colors"
+                autoComplete="name"
+                className={inputClass}
               />
             </div>
 
-            {/* Email */}
             <div className="flex flex-col gap-1">
-              <label className="text-white/50 text-xs font-semibold uppercase tracking-wider">E-mail</label>
+              <label htmlFor="campo-email" className={labelClass}>E-mail</label>
               <input
+                id="campo-email"
                 type="email"
                 required
                 value={form.email}
                 onChange={(e) => update("email", e.target.value)}
                 placeholder="seu@email.com"
-                className="bg-[#0a0a0a] border border-white/10 rounded px-4 py-3 text-white text-sm placeholder:text-white/25 focus:outline-none focus:border-[#1565c0]/60 transition-colors"
+                autoComplete="email"
+                className={inputClass}
               />
             </div>
 
-            {/* WhatsApp */}
             <div className="flex flex-col gap-1">
-              <label className="text-white/50 text-xs font-semibold uppercase tracking-wider">WhatsApp</label>
+              <label htmlFor="campo-whatsapp" className={labelClass}>WhatsApp</label>
               <input
+                id="campo-whatsapp"
                 type="tel"
                 required
                 value={form.whatsapp}
                 onChange={(e) => update("whatsapp", e.target.value)}
                 placeholder="(XX) XXXXX-XXXX"
-                className="bg-[#0a0a0a] border border-white/10 rounded px-4 py-3 text-white text-sm placeholder:text-white/25 focus:outline-none focus:border-[#1565c0]/60 transition-colors"
+                autoComplete="tel"
+                className={inputClass}
               />
             </div>
 
-            {/* Cargo */}
             <div className="flex flex-col gap-1">
-              <label className="text-white/50 text-xs font-semibold uppercase tracking-wider">Cargo / Setor</label>
+              <label htmlFor="campo-cargo" className={labelClass}>Cargo / Setor</label>
               <input
+                id="campo-cargo"
                 type="text"
                 required
                 value={form.cargo}
                 onChange={(e) => update("cargo", e.target.value)}
                 placeholder="Seu cargo ou setor"
-                className="bg-[#0a0a0a] border border-white/10 rounded px-4 py-3 text-white text-sm placeholder:text-white/25 focus:outline-none focus:border-[#1565c0]/60 transition-colors"
+                autoComplete="organization-title"
+                className={inputClass}
               />
             </div>
 
-            {/* Órgão */}
             <div className="flex flex-col gap-1">
-              <label className="text-white/50 text-xs font-semibold uppercase tracking-wider">Órgão / Município</label>
+              <label htmlFor="campo-orgao" className={labelClass}>Órgão / Município</label>
               <input
+                id="campo-orgao"
                 type="text"
                 required
                 value={form.orgao}
                 onChange={(e) => update("orgao", e.target.value)}
                 placeholder="Nome do órgão ou município"
-                className="bg-[#0a0a0a] border border-white/10 rounded px-4 py-3 text-white text-sm placeholder:text-white/25 focus:outline-none focus:border-[#1565c0]/60 transition-colors"
+                autoComplete="organization"
+                className={inputClass}
               />
             </div>
 
-            {/* Servidor */}
-            <div className="flex flex-col gap-2">
-              <label className="text-white/50 text-xs font-semibold uppercase tracking-wider">
+            <fieldset className="flex flex-col gap-2 border-0 p-0 m-0">
+              <legend className={labelClass}>
                 Você trabalha em órgão público?
-              </label>
+              </legend>
               <div className="flex flex-wrap gap-3 sm:gap-4">
                 {["Sim", "Não"].map((op) => (
                   <label key={op} className="flex items-center gap-2 cursor-pointer">
@@ -137,7 +150,7 @@ export function CTA() {
                   </label>
                 ))}
               </div>
-            </div>
+            </fieldset>
 
             <button
               type="submit"
@@ -146,7 +159,7 @@ export function CTA() {
               Garantir minha vaga
             </button>
 
-            <p className="text-white/30 text-xs text-center">
+            <p className="text-white/50 text-xs text-center">
               Ao enviar, você autoriza o contato da equipe da Unyflex sobre esta turma.
             </p>
           </form>

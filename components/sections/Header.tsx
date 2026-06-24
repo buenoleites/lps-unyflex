@@ -22,7 +22,7 @@ export function Header() {
         </a>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav aria-label="Navegação principal" className="hidden md:flex items-center gap-6">
           {navLinks.map((l) => (
             <a
               key={l.label}
@@ -46,7 +46,9 @@ export function Header() {
         <button
           className="md:hidden text-white p-2"
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Menu"
+          aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
         >
           <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
             {menuOpen ? (
@@ -60,7 +62,7 @@ export function Header() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="md:hidden bg-[#071016]/98 border-t border-white/5 px-6 py-4 flex flex-col gap-4">
+        <div id="mobile-menu" className="md:hidden bg-[#071016]/98 border-t border-white/5 px-6 py-4 flex flex-col gap-4">
           {navLinks.map((l) => (
             <a
               key={l.label}
