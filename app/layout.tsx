@@ -8,7 +8,7 @@ const montserrat = Montserrat({
   weight: ["400", "500", "600", "700", "800"],
 });
 
-const siteUrl = "https://licitacoescomia.unyflex.com.br";
+const siteUrl = "https://mkt.unyflex.com.br/licitacao";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
