@@ -97,8 +97,8 @@ Sem backend, banco de dados ou autenticação — LP estática.
 - [x] Responsividade real com Tailwind (a original tem bugs no mobile)
 - [x] Animações sutis com Tailwind (fade-in nas seções ao scroll)
 - [x] SEO melhorado: metadata estruturada, Open Graph, canonical
-- [ ] Acessibilidade: contraste adequado, alt texts, semântica HTML5
-- [ ] CTA destacado e sticky no mobile
+- [x] Acessibilidade: contraste adequado, alt texts, semântica HTML5
+- [x] CTA destacado e sticky no mobile
 - [x] Logos de clientes em carrossel ou grid limpo
 
 ---
@@ -106,8 +106,8 @@ Sem backend, banco de dados ou autenticação — LP estática.
 ## 8. Verificação / Critérios de Aceite
 
 - [x] Todas as 11 seções da LP original estão presentes e com conteúdo fiel
-- [ ] Design aprovado visualmente contra a `LP.png`
-- [ ] Responsivo: funciona em 375px (mobile) e 1440px (desktop)
-- [ ] Build passa sem erros (`npm run build`)
+- [x] Design aprovado visualmente contra a `LP.png`
+- [x] Responsivo: funciona em 375px (mobile) e 1440px (desktop)
+- [x] Build passa sem erros (`npm run build`)
 - [ ] Deploy na Vercel funcionando com URL pública
 - [ ] Lighthouse Performance > 90 na versão desktop
