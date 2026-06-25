@@ -19,7 +19,7 @@ export function StickyCtaMobile() {
 
   return (
     <div
-      className={`fixed bottom-0 left-0 right-0 z-40 sm:hidden bg-[#071016]/95 backdrop-blur-sm border-t border-white/10 px-4 py-3 transition-transform duration-300 ${
+      className={`fixed bottom-0 left-0 right-0 z-40 sm:hidden bg-[#0D1B2A]/95 backdrop-blur-sm border-t border-white/10 px-4 py-3 transition-transform duration-300 ${
         hidden ? "translate-y-full" : "translate-y-0"
       }`}
       aria-hidden={hidden}

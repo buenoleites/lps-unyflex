@@ -56,13 +56,13 @@
   --popover: #ffffff;
   --popover-foreground: #111827;
   --primary: #00BFF3;
-  --primary-foreground: #071016;
-  --secondary: #f3f4f6;
+  --primary-foreground: #0D1B2A;
+  --secondary: #F4EEE2;
   --secondary-foreground: #111827;
-  --muted: #f3f4f6;
+  --muted: #F4EEE2;
   --muted-foreground: #6b7280;
   --accent: #00BFF3;
-  --accent-foreground: #071016;
+  --accent-foreground: #0D1B2A;
   --destructive: oklch(0.577 0.245 27.325);
   --border: #e5e7eb;
   --input: #e5e7eb;
@@ -82,6 +82,7 @@
     scroll-behavior: smooth;
   }
 }
+
 
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(24px); }
@@ -103,7 +104,7 @@
   align-items: center;
   justify-content: center;
   background: linear-gradient(180deg, #00BFF3 0%, #009FD4 100%);
-  color: #071016;
+  color: #0D1B2A;
   font-weight: 700;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.28);
@@ -130,6 +131,10 @@
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.25),
     0 6px 14px rgba(0, 174, 239, 0.16);
+}
+.btn-cta:focus-visible {
+  outline: 2px solid #00BFF3;
+  outline-offset: 3px;
 }
 
 /* ── Carousel seção 4 (uny-fpa2) ── */
@@ -185,7 +190,7 @@
   height: 428px;
   min-height: 428px;
   max-height: 428px;
-  background: #f5f3f1;
+  background: #F4EEE2;
   border-radius: 30px;
   border: none;
   outline: none;

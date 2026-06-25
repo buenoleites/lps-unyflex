@@ -15,6 +15,14 @@ type FormData = {
   servidor: string;
 };
 
+function maskPhone(v: string) {
+  const d = v.replace(/\D/g, "").slice(0, 11);
+  if (!d.length) return "";
+  if (d.length <= 2) return `(${d}`;
+  if (d.length <= 7) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
+  return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
+}
+
 function getUtmParams() {
   if (typeof window === "undefined") return {};
   const p = new URLSearchParams(window.location.search);
@@ -49,13 +57,29 @@ export function CTA() {
   });
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(false);
+  const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
 
   function update(field: keyof FormData, value: string) {
     setForm((prev) => ({ ...prev, [field]: value }));
+    setErrors((prev) => ({ ...prev, [field]: undefined }));
+  }
+
+  function validate(): boolean {
+    const e: Partial<Record<keyof FormData, string>> = {};
+    if (!form.nome.trim()) e.nome = "Nome obrigatório";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "E-mail inválido";
+    const digits = form.whatsapp.replace(/\D/g, "");
+    if (digits.length < 10 || digits.length > 11) e.whatsapp = "WhatsApp inválido";
+    if (!form.cargo.trim()) e.cargo = "Campo obrigatório";
+    if (!form.orgao.trim()) e.orgao = "Campo obrigatório";
+    if (!form.servidor) e.servidor = "Selecione uma opção";
+    setErrors(e);
+    return Object.keys(e).length === 0;
   }
 
   async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (!validate()) return;
     setSubmitting(true);
     setSubmitError(false);
 
@@ -113,8 +137,14 @@ export function CTA() {
   }
 
   const inputClass =
-    "bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white text-sm placeholder:text-white/40 focus:outline-none focus:border-[#00BFF3]/60 transition-colors w-full";
+    "bg-white/10 border border-white/20 rounded-full px-4 py-3 text-white text-sm placeholder:text-white/40 focus:outline-none focus:border-[#00BFF3]/60 transition-colors w-full";
+  const inputErrorClass =
+    "bg-white/10 border border-red-400/60 rounded-full px-4 py-3 text-white text-sm placeholder:text-white/40 focus:outline-none focus:border-red-400/80 transition-colors w-full";
   const labelClass = "text-white/60 text-xs font-semibold uppercase tracking-wider";
+
+  function fieldClass(field: keyof FormData) {
+    return errors[field] ? inputErrorClass : inputClass;
+  }
 
   return (
     <section id="inscricao" className="relative overflow-hidden py-20">
@@ -140,7 +170,8 @@ export function CTA() {
 
         <form
           onSubmit={handleSubmit}
-          className="bg-white/10 border border-white/15 rounded-2xl p-5 sm:p-8 flex flex-col gap-5 backdrop-blur-sm"
+          noValidate
+          className="bg-white/10 border border-white/15 rounded-[26px] sm:rounded-[30px] p-5 sm:p-8 flex flex-col gap-5 backdrop-blur-sm"
         >
           {/* Nome + E-mail */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -148,27 +179,30 @@ export function CTA() {
               <label htmlFor="campo-nome" className={labelClass}>Nome</label>
               <input
                 id="campo-nome"
+                name="nome"
                 type="text"
-                required
                 value={form.nome}
                 onChange={(e) => update("nome", e.target.value)}
                 placeholder="Seu nome completo"
                 autoComplete="name"
-                className={inputClass}
+                className={fieldClass("nome")}
               />
+              {errors.nome && <span className="text-red-400 text-xs mt-0.5">{errors.nome}</span>}
             </div>
             <div className="flex flex-col gap-1">
               <label htmlFor="campo-email" className={labelClass}>E-mail</label>
               <input
                 id="campo-email"
+                name="email"
                 type="email"
-                required
+                spellCheck={false}
                 value={form.email}
                 onChange={(e) => update("email", e.target.value)}
                 placeholder="seu@email.com"
                 autoComplete="email"
-                className={inputClass}
+                className={fieldClass("email")}
               />
+              {errors.email && <span className="text-red-400 text-xs mt-0.5">{errors.email}</span>}
             </div>
           </div>
 
@@ -178,27 +212,30 @@ export function CTA() {
               <label htmlFor="campo-whatsapp" className={labelClass}>WhatsApp</label>
               <input
                 id="campo-whatsapp"
+                name="whatsapp"
                 type="tel"
-                required
+                spellCheck={false}
                 value={form.whatsapp}
-                onChange={(e) => update("whatsapp", e.target.value)}
+                onChange={(e) => update("whatsapp", maskPhone(e.target.value))}
                 placeholder="(XX) XXXXX-XXXX"
                 autoComplete="tel"
-                className={inputClass}
+                className={fieldClass("whatsapp")}
               />
+              {errors.whatsapp && <span className="text-red-400 text-xs mt-0.5">{errors.whatsapp}</span>}
             </div>
             <div className="flex flex-col gap-1">
               <label htmlFor="campo-cargo" className={labelClass}>Cargo / Setor</label>
               <input
                 id="campo-cargo"
+                name="cargo"
                 type="text"
-                required
                 value={form.cargo}
                 onChange={(e) => update("cargo", e.target.value)}
                 placeholder="Seu cargo ou setor"
                 autoComplete="organization-title"
-                className={inputClass}
+                className={fieldClass("cargo")}
               />
+              {errors.cargo && <span className="text-red-400 text-xs mt-0.5">{errors.cargo}</span>}
             </div>
           </div>
 
@@ -207,14 +244,15 @@ export function CTA() {
             <label htmlFor="campo-orgao" className={labelClass}>Órgão / Município</label>
             <input
               id="campo-orgao"
+              name="orgao"
               type="text"
-              required
               value={form.orgao}
               onChange={(e) => update("orgao", e.target.value)}
               placeholder="Nome do órgão ou município"
               autoComplete="organization"
-              className={inputClass}
+              className={fieldClass("orgao")}
             />
+            {errors.orgao && <span className="text-red-400 text-xs mt-0.5">{errors.orgao}</span>}
           </div>
 
           <fieldset className="flex flex-col gap-2 border-0 p-0 m-0">
@@ -236,6 +274,7 @@ export function CTA() {
                 </label>
               ))}
             </div>
+            {errors.servidor && <span className="text-red-400 text-xs">{errors.servidor}</span>}
           </fieldset>
 
           {submitError && (

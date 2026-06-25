@@ -8,7 +8,6 @@ const navLinks = [
   { label: "Curso", href: "#curso" },
   { label: "Conteúdo", href: "#conteudo" },
   { label: "Formato", href: "#formato" },
-  { label: "Docentes", href: "#docentes" },
 ];
 
 function easeInOutCubic(t: number) {
@@ -49,13 +48,14 @@ export function Header() {
     setOpen(false);
     const target = document.querySelector(href);
     if (!target) return;
-    const offset = window.innerWidth <= 767 ? 76 : 70;
+    const offset = window.innerWidth <= 767 ? 20 : 16;
     const targetTop = target.getBoundingClientRect().top + window.pageYOffset - offset;
+    history.pushState(null, "", href);
     smoothScrollTo(targetTop, 1200);
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 pointer-events-none">
+    <header className="absolute top-0 left-0 right-0 z-50 pointer-events-none">
       <nav
         ref={navRef}
         className="pointer-events-auto flex items-center justify-between px-8 h-16 w-full"
@@ -127,6 +127,7 @@ export function Header() {
         {/* Mobile: dropdown */}
         <div
           className="absolute top-[68px] right-4 w-[220px] p-4 flex flex-col gap-[14px] rounded-[22px] border border-white/12 backdrop-blur-xl md:hidden"
+          aria-hidden={!open}
           style={{
             background: "rgba(35, 36, 32, 0.86)",
             boxShadow: "inset 0 1px 0 rgba(255,255,255,0.10), 0 14px 32px rgba(0,0,0,0.22)",

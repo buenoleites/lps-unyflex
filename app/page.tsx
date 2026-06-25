@@ -13,8 +13,10 @@ import { StickyCtaMobile } from "@/components/ui/StickyCtaMobile";
 export default function Home() {
   return (
     <main id="conteudo-principal">
-      <Header />
-      <FadeIn><Hero /></FadeIn>
+      <div className="relative">
+        <Header />
+        <FadeIn><Hero /></FadeIn>
+      </div>
       <FadeIn><Personas /></FadeIn>
       <FadeIn><PropostaValor /></FadeIn>
       <FadeIn><Diferencial /></FadeIn>

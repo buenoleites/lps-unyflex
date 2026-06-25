@@ -9,7 +9,7 @@ const clientes = [
 
 export function ProvasSocial() {
   return (
-    <section className="bg-white py-20 border-t border-gray-100">
+    <section className="bg-[#F4EEE2] py-20 border-t border-[#E8DFD0]">
       <div className="max-w-6xl mx-auto px-6">
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
           Presença construída
@@ -23,10 +23,13 @@ export function ProvasSocial() {
 
         <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 gap-3">
           {clientes.map(({ slug, nome }) => (
-            <div key={slug} className="relative rounded-xl overflow-hidden h-40 sm:h-52 group">
+            <div key={slug} className="relative rounded-[26px] sm:rounded-[30px] overflow-hidden h-40 sm:h-52 group">
               <img
                 src={`/imagens/muni/${slug}-bg.jpg`}
                 alt={nome}
+                width={400}
+                height={208}
+                loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-black/55" />
@@ -34,6 +37,9 @@ export function ProvasSocial() {
                 <img
                   src={`/imagens/muni/${slug}-logo.png`}
                   alt={`Logo ${nome}`}
+                  width={112}
+                  height={56}
+                  loading="lazy"
                   className="w-20 sm:w-28 object-contain brightness-0 invert"
                 />
               </div>

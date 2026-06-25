@@ -16,10 +16,13 @@ export function Personas() {
     <section id="publico" className="bg-white py-20 border-t border-gray-100">
       <div className="max-w-6xl mx-auto px-6 flex flex-col gap-4">
         {/* Card superior full-width */}
-        <div className="relative rounded-xl overflow-hidden h-56 sm:h-72 flex items-center justify-center">
+        <div className="relative rounded-[26px] sm:rounded-[30px] overflow-hidden h-56 sm:h-72 flex items-center justify-center">
           <img
             src="/imagens/seção2/imagem_seção2_1.jpg"
             alt="Quem mais sente essa pressão no dia a dia"
+            width={1200}
+            height={576}
+            loading="lazy"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/55" />
@@ -42,11 +45,14 @@ export function Personas() {
           {bottomCards.map((c) => (
             <div
               key={c.title}
-              className="relative rounded-xl overflow-hidden h-52 sm:h-64 group"
+              className="relative rounded-[26px] sm:rounded-[30px] overflow-hidden h-52 sm:h-64 group"
             >
               <img
                 src={c.img}
                 alt={c.title}
+                width={600}
+                height={256}
+                loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />

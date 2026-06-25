@@ -1,8 +1,8 @@
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center bg-[#071016] overflow-hidden">
+    <section className="relative min-h-screen flex items-center bg-[#0D1B2A] overflow-hidden">
       {/* Dark overlay gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#071016]/80 via-[#071016]/60 to-[#071016]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0D1B2A]/80 via-[#0D1B2A]/60 to-[#0D1B2A]" />
 
       {/* Background image from original LP */}
       <div
