@@ -2,6 +2,10 @@
 
 import { useState } from "react";
 
+const WEBHOOK_URL = "https://n8n.unyflex.com.br/webhook/lp-leads-unyflex";
+const OBRIGADO_URL = "https://landingpages.unyflex.com.br/obrigado";
+const FORM_ID = "lp-licitacao-ia";
+
 type FormData = {
   nome: string;
   email: string;
@@ -10,6 +14,29 @@ type FormData = {
   orgao: string;
   servidor: string;
 };
+
+function getUtmParams() {
+  if (typeof window === "undefined") return {};
+  const p = new URLSearchParams(window.location.search);
+  return {
+    UTM_Source: p.get("utm_source") ?? "",
+    UTM_Medium: p.get("utm_medium") ?? "",
+    UTM_Campaign: p.get("utm_campaign") ?? "",
+    UTM_Id: p.get("utm_id") ?? "",
+    UTM_Term: p.get("utm_term") ?? "",
+    UTM_Content: p.get("utm_content") ?? "",
+  };
+}
+
+function getDispositivo() {
+  if (typeof window === "undefined") return "Desktop";
+  return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) ? "Mobile" : "Desktop";
+}
+
+function formatDate(d: Date) {
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+}
 
 export function CTA() {
   const [form, setForm] = useState<FormData>({
@@ -20,15 +47,69 @@ export function CTA() {
     orgao: "",
     servidor: "",
   });
-  const [submitted, setSubmitted] = useState(false);
-
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setSubmitted(true);
-  }
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
 
   function update(field: keyof FormData, value: string) {
     setForm((prev) => ({ ...prev, [field]: value }));
+  }
+
+  async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setSubmitting(true);
+    setSubmitError(false);
+
+    let ip = "", country = "", region = "", city = "";
+    try {
+      const geo = await fetch("https://ipwho.is/").then((r) => r.json());
+      ip = geo.ip ?? "";
+      country = geo.country_code ?? "";
+      region = geo.region ?? "";
+      city = geo.city ?? "";
+    } catch {
+      // geo é opcional — prossegue sem ela
+    }
+
+    const payload = {
+      Nome: form.nome,
+      E_mail: form.email,
+      WhatsApp: form.whatsapp,
+      Cargo_Setor: form.cargo,
+      Orgao_Municipio: form.orgao,
+      Orgao_Publico: form.servidor,
+      Referral_Source: typeof document !== "undefined" ? document.referrer : "",
+      Dispositivo: getDispositivo(),
+      URL: typeof window !== "undefined" ? window.location.href : "",
+      IP_do_usuario: ip,
+      Data_da_conversao: formatDate(new Date()),
+      Id_do_formulario: FORM_ID,
+      Pais_do_usuario: country,
+      Regiao_do_usuario: region,
+      Cidade_do_usuario: city,
+      ...getUtmParams(),
+    };
+
+    try {
+      const res = await fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error("webhook error");
+    } catch {
+      setSubmitError(true);
+      setSubmitting(false);
+      return;
+    }
+
+    const params = new URLSearchParams({
+      Nome: form.nome,
+      E_mail: form.email,
+      WhatsApp: form.whatsapp,
+      Cargo_Setor: form.cargo,
+      Orgao_Municipio: form.orgao,
+    });
+    window.location.href = `${OBRIGADO_URL}?${params.toString()}`;
   }
 
   const inputClass =
@@ -57,124 +138,124 @@ export function CTA() {
           Licitações com Inteligência Artificial.
         </p>
 
-        {submitted ? (
-          <div role="status" className="bg-white/10 border border-white/15 rounded-2xl p-10 text-center">
-            <div className="text-[#00BFF3] text-5xl mb-4" aria-hidden="true">✓</div>
-            <p className="text-white font-bold text-xl">Recebemos seu interesse!</p>
-            <p className="text-white/60 text-sm mt-3">
-              Em breve nossa equipe entrará em contato pelo e-mail informado.
-            </p>
-          </div>
-        ) : (
-          <form
-            onSubmit={handleSubmit}
-            className="bg-white/10 border border-white/15 rounded-2xl p-5 sm:p-8 flex flex-col gap-5 backdrop-blur-sm"
-          >
-            {/* Nome + E-mail */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              <div className="flex flex-col gap-1">
-                <label htmlFor="campo-nome" className={labelClass}>Nome</label>
-                <input
-                  id="campo-nome"
-                  type="text"
-                  required
-                  value={form.nome}
-                  onChange={(e) => update("nome", e.target.value)}
-                  placeholder="Seu nome completo"
-                  autoComplete="name"
-                  className={inputClass}
-                />
-              </div>
-              <div className="flex flex-col gap-1">
-                <label htmlFor="campo-email" className={labelClass}>E-mail</label>
-                <input
-                  id="campo-email"
-                  type="email"
-                  required
-                  value={form.email}
-                  onChange={(e) => update("email", e.target.value)}
-                  placeholder="seu@email.com"
-                  autoComplete="email"
-                  className={inputClass}
-                />
-              </div>
-            </div>
-
-            {/* WhatsApp + Cargo */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              <div className="flex flex-col gap-1">
-                <label htmlFor="campo-whatsapp" className={labelClass}>WhatsApp</label>
-                <input
-                  id="campo-whatsapp"
-                  type="tel"
-                  required
-                  value={form.whatsapp}
-                  onChange={(e) => update("whatsapp", e.target.value)}
-                  placeholder="(XX) XXXXX-XXXX"
-                  autoComplete="tel"
-                  className={inputClass}
-                />
-              </div>
-              <div className="flex flex-col gap-1">
-                <label htmlFor="campo-cargo" className={labelClass}>Cargo / Setor</label>
-                <input
-                  id="campo-cargo"
-                  type="text"
-                  required
-                  value={form.cargo}
-                  onChange={(e) => update("cargo", e.target.value)}
-                  placeholder="Seu cargo ou setor"
-                  autoComplete="organization-title"
-                  className={inputClass}
-                />
-              </div>
-            </div>
-
-            {/* Órgão full-width */}
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white/10 border border-white/15 rounded-2xl p-5 sm:p-8 flex flex-col gap-5 backdrop-blur-sm"
+        >
+          {/* Nome + E-mail */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div className="flex flex-col gap-1">
-              <label htmlFor="campo-orgao" className={labelClass}>Órgão / Município</label>
+              <label htmlFor="campo-nome" className={labelClass}>Nome</label>
               <input
-                id="campo-orgao"
+                id="campo-nome"
                 type="text"
                 required
-                value={form.orgao}
-                onChange={(e) => update("orgao", e.target.value)}
-                placeholder="Nome do órgão ou município"
-                autoComplete="organization"
+                value={form.nome}
+                onChange={(e) => update("nome", e.target.value)}
+                placeholder="Seu nome completo"
+                autoComplete="name"
                 className={inputClass}
               />
             </div>
+            <div className="flex flex-col gap-1">
+              <label htmlFor="campo-email" className={labelClass}>E-mail</label>
+              <input
+                id="campo-email"
+                type="email"
+                required
+                value={form.email}
+                onChange={(e) => update("email", e.target.value)}
+                placeholder="seu@email.com"
+                autoComplete="email"
+                className={inputClass}
+              />
+            </div>
+          </div>
 
-            <fieldset className="flex flex-col gap-2 border-0 p-0 m-0">
-              <legend className={labelClass}>
-                Você trabalha em órgão público?
-              </legend>
-              <div className="flex flex-wrap gap-3 sm:gap-4">
-                {["Sim", "Não"].map((op) => (
-                  <label key={op} className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="servidor"
-                      value={op}
-                      checked={form.servidor === op}
-                      onChange={() => update("servidor", op)}
-                      className="accent-[#00BFF3]"
-                    />
-                    <span className="text-white/80 text-sm">{op}</span>
-                  </label>
-                ))}
-              </div>
-            </fieldset>
+          {/* WhatsApp + Cargo */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div className="flex flex-col gap-1">
+              <label htmlFor="campo-whatsapp" className={labelClass}>WhatsApp</label>
+              <input
+                id="campo-whatsapp"
+                type="tel"
+                required
+                value={form.whatsapp}
+                onChange={(e) => update("whatsapp", e.target.value)}
+                placeholder="(XX) XXXXX-XXXX"
+                autoComplete="tel"
+                className={inputClass}
+              />
+            </div>
+            <div className="flex flex-col gap-1">
+              <label htmlFor="campo-cargo" className={labelClass}>Cargo / Setor</label>
+              <input
+                id="campo-cargo"
+                type="text"
+                required
+                value={form.cargo}
+                onChange={(e) => update("cargo", e.target.value)}
+                placeholder="Seu cargo ou setor"
+                autoComplete="organization-title"
+                className={inputClass}
+              />
+            </div>
+          </div>
 
-            <button type="submit" className="btn-cta mt-2 w-full py-4 text-base">
-              Garantir minha vaga
-            </button>
+          {/* Órgão full-width */}
+          <div className="flex flex-col gap-1">
+            <label htmlFor="campo-orgao" className={labelClass}>Órgão / Município</label>
+            <input
+              id="campo-orgao"
+              type="text"
+              required
+              value={form.orgao}
+              onChange={(e) => update("orgao", e.target.value)}
+              placeholder="Nome do órgão ou município"
+              autoComplete="organization"
+              className={inputClass}
+            />
+          </div>
 
-            <p className="text-white/40 text-xs text-center">
-              Ao enviar, você autoriza o contato da equipe da Unyflex sobre esta turma.
+          <fieldset className="flex flex-col gap-2 border-0 p-0 m-0">
+            <legend className={labelClass}>
+              Você trabalha em órgão público?
+            </legend>
+            <div className="flex flex-wrap gap-3 sm:gap-4">
+              {["Sim", "Não"].map((op) => (
+                <label key={op} className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="servidor"
+                    value={op}
+                    checked={form.servidor === op}
+                    onChange={() => update("servidor", op)}
+                    className="accent-[#00BFF3]"
+                  />
+                  <span className="text-white/80 text-sm">{op}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          {submitError && (
+            <p role="alert" className="text-red-400 text-sm text-center">
+              Erro ao enviar. Tente novamente ou entre em contato conosco.
             </p>
-          </form>
-        )}
+          )}
+
+          <button
+            type="submit"
+            disabled={submitting}
+            className="btn-cta mt-2 w-full py-4 text-base disabled:opacity-60 disabled:cursor-not-allowed"
+          >
+            {submitting ? "Enviando…" : "Garantir minha vaga"}
+          </button>
+
+          <p className="text-white/40 text-xs text-center">
+            Ao enviar, você autoriza o contato da equipe da Unyflex sobre esta turma.
+          </p>
+        </form>
       </div>
     </section>
   );
