@@ -15,27 +15,40 @@ const pilares = [
 
 export function PropostaValor() {
   return (
-    <section id="curso" className="bg-[#0a0a0a] py-20 border-t border-white/5">
+    <section id="curso" className="bg-gray-50 py-20 border-t border-gray-100">
       <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 text-center mb-10 lg:mb-12">
           O que esse curso ajuda você a sustentar na prática
         </h2>
-        <p className="text-white/60 text-base mb-14 max-w-2xl">
-          Mais agilidade para estruturar DFD, ETP, TR e mapa de riscos sem abrir
-          mão dos critérios técnicos.
-        </p>
 
-        <div className="grid sm:grid-cols-3 gap-4 sm:gap-6 mb-16">
-          {pilares.map((p) => (
-            <div
-              key={p.titulo}
-              className="bg-[#111] border border-white/5 rounded-lg p-4 sm:p-6"
-            >
-              <div className="w-8 h-1 bg-[#1565c0] mb-4 rounded" />
-              <h3 className="text-white font-bold text-base mb-2">{p.titulo}</h3>
-              <p className="text-white/55 text-sm leading-relaxed">{p.desc}</p>
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div>
+            <p className="text-gray-900 font-bold text-base mb-8 leading-relaxed">
+              Mais agilidade para estruturar DFD, ETP, TR e mapa de riscos sem
+              abrir mão dos critérios técnicos.
+            </p>
+
+            <div className="flex flex-col gap-6 mb-10">
+              {pilares.map((p) => (
+                <div key={p.titulo}>
+                  <h3 className="text-gray-900 font-bold text-base mb-1">{p.titulo}</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed">{p.desc}</p>
+                </div>
+              ))}
             </div>
-          ))}
+
+            <a href="#inscricao" className="btn-cta px-7 py-3 text-sm sm:text-base">
+              Garantir minha vaga
+            </a>
+          </div>
+
+          <div className="relative rounded-xl overflow-hidden h-72 lg:h-full min-h-[320px]">
+            <img
+              src="/imagens/seção3/imagem_seção3.jpg"
+              alt="Profissionais em capacitação"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          </div>
         </div>
       </div>
     </section>

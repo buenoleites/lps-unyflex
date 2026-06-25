@@ -8,7 +8,7 @@ export function Hero() {
       <div
         className="absolute inset-0 bg-cover bg-center opacity-30"
         style={{
-          backgroundImage: `url('https://pages.greatpages.com.br/landingpages.unyflex.com.br-licitacao/1781125294/imagens/desktop/3584854_1_17792795126a0da6983a0a4.jpg')`,
+          backgroundImage: `url('/imagens/hero_section/imagem_hero.jpg')`,
         }}
       />
 
@@ -31,7 +31,7 @@ export function Hero() {
 
           <a
             href="#inscricao"
-            className="inline-flex items-center bg-[#1565c0] hover:bg-[#0e5aaf] text-white font-bold px-8 py-4 rounded text-base transition-colors"
+            className="btn-cta px-8 py-4 text-base"
           >
             Garantir minha vaga
           </a>

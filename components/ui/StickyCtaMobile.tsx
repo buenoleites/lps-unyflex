@@ -24,10 +24,7 @@ export function StickyCtaMobile() {
       }`}
       aria-hidden={hidden}
     >
-      <a
-        href="#inscricao"
-        className="block w-full bg-[#1565c0] hover:bg-[#0e5aaf] text-white font-bold py-3.5 rounded text-sm text-center transition-colors"
-      >
+      <a href="#inscricao" className="btn-cta w-full py-3.5 text-sm">
         Garantir minha vaga
       </a>
     </div>

@@ -3,7 +3,6 @@ import { Hero } from "@/components/sections/Hero";
 import { Personas } from "@/components/sections/Personas";
 import { PropostaValor } from "@/components/sections/PropostaValor";
 import { Diferencial } from "@/components/sections/Diferencial";
-import { Modulos } from "@/components/sections/Modulos";
 import { AvisoPosicionamento } from "@/components/sections/AvisoPosicionamento";
 import { Formato } from "@/components/sections/Formato";
 import { ProvasSocial } from "@/components/sections/ProvasSocial";
@@ -20,7 +19,6 @@ export default function Home() {
       <FadeIn><Personas /></FadeIn>
       <FadeIn><PropostaValor /></FadeIn>
       <FadeIn><Diferencial /></FadeIn>
-      <FadeIn><Modulos /></FadeIn>
       <FadeIn><AvisoPosicionamento /></FadeIn>
       <FadeIn><Formato /></FadeIn>
       <FadeIn><ProvasSocial /></FadeIn>

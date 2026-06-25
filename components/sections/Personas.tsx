@@ -1,33 +1,48 @@
-const cards = [
-  {
-    title: "Quem revisa e sustenta o processo",
-    desc: "Controle interno, jurídico e chefias que precisam reduzir documentos genéricos, falhas técnicas e riscos de responsabilização.",
-    img: "https://pages.greatpages.com.br/landingpages.unyflex.com.br-licitacao/1781125294/imagens/desktop/3584854_1_17792795126a0da6983ab3b735036186.jpg",
-  },
+const bottomCards = [
   {
     title: "Quem monta os documentos",
     desc: "Licitações, compras, planejamento e áreas técnicas que elaboram DFD, ETP, TR, PCA e mapa de riscos.",
-    img: "https://pages.greatpages.com.br/landingpages.unyflex.com.br-licitacao/1781125294/imagens/desktop/3584854_1_17792795126a0da6983aba9323366969.jpg",
+    img: "/imagens/seção2/imagem_seção2_2.jpg",
+  },
+  {
+    title: "Quem revisa e sustenta o processo",
+    desc: "Controle interno, jurídico e chefias que precisam reduzir documentos genéricos, falhas técnicas e riscos de responsabilização.",
+    img: "/imagens/seção2/imagem_seção2_3.jpg",
   },
 ];
 
 export function Personas() {
   return (
-    <section id="publico" className="bg-[#0f0f0f] py-20 border-t border-white/5">
-      <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
-          Quem mais sente essa pressão no dia a dia
-        </h2>
-        <p className="text-white/60 text-base mb-12 max-w-2xl">
-          Capacitação para quem elabora, revisa ou sustenta documentos da fase
-          preparatória na Lei 14.133.
-        </p>
+    <section id="publico" className="bg-white py-20 border-t border-gray-100">
+      <div className="max-w-6xl mx-auto px-6 flex flex-col gap-4">
+        {/* Card superior full-width */}
+        <div className="relative rounded-xl overflow-hidden h-56 sm:h-72 flex items-center justify-center">
+          <img
+            src="/imagens/seção2/imagem_seção2_1.jpg"
+            alt="Quem mais sente essa pressão no dia a dia"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/55" />
+          <div className="relative z-10 text-center px-6 max-w-2xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 leading-tight">
+              Quem mais sente essa pressão no dia a dia
+            </h2>
+            <p className="text-white/80 text-sm sm:text-base mb-6">
+              Capacitação para quem elabora, revisa ou sustenta documentos da
+              fase preparatória na Lei 14.133.
+            </p>
+            <a href="#inscricao" className="btn-cta px-7 py-3 text-sm sm:text-base">
+              Garantir minha vaga
+            </a>
+          </div>
+        </div>
 
-        <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 mb-10">
-          {cards.map((c) => (
+        {/* Dois cards inferiores */}
+        <div className="grid sm:grid-cols-2 gap-4">
+          {bottomCards.map((c) => (
             <div
               key={c.title}
-              className="relative rounded-lg overflow-hidden h-52 sm:h-64 group"
+              className="relative rounded-xl overflow-hidden h-52 sm:h-64 group"
             >
               <img
                 src={c.img}
@@ -41,15 +56,6 @@ export function Personas() {
               </div>
             </div>
           ))}
-        </div>
-
-        <div className="text-center">
-          <a
-            href="#inscricao"
-            className="inline-flex items-center bg-[#1565c0] hover:bg-[#0e5aaf] text-white font-bold px-8 py-4 rounded text-base transition-colors"
-          >
-            Garantir minha vaga
-          </a>
         </div>
       </div>
     </section>

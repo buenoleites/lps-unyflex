@@ -1,10 +1,12 @@
+import Image from "next/image";
+
 export function Footer() {
   return (
-    <footer className="bg-[#071016] border-t border-white/5 py-10">
+    <footer className="bg-gray-900 border-t border-white/5 py-10">
       <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6">
         {/* Logo */}
-        <a href="#" className="text-white font-bold text-lg">
-          uni<span className="text-[#1565c0]">flex</span>
+        <a href="#">
+          <Image src="/logo.png" alt="Unyflex" width={100} height={28} className="h-6 w-auto" />
         </a>
 
         {/* Social */}
