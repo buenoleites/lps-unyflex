@@ -292,6 +292,42 @@ export function Diferencial() {
             ›
           </button>
         </div>
+
+        {/* Dots de paginação */}
+        <div className="flex items-center justify-center gap-2 pt-1">
+          {Array.from({ length: maxIndex + 1 }).map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              aria-label={`Ir para card ${i + 1}`}
+              onClick={() => { if (autoplayRef.current) clearTimeout(autoplayRef.current); moveTo(i); startAutoplay(); }}
+              style={{
+                width: current === i ? 20 : 8,
+                height: 8,
+                borderRadius: 999,
+                border: "none",
+                padding: 0,
+                cursor: "pointer",
+                background: current === i ? "#00BFF3" : "rgba(15,15,15,0.20)",
+                transition: "width 280ms ease, background 280ms ease",
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Posicionamento */}
+        <div className="max-w-3xl pt-10 border-t border-gray-100 mt-2">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+            Não basta pedir um documento para a IA.{" "}
+            <span className="text-[#00BFF3]">
+              Você precisa sustentar o que ela entrega.
+            </span>
+          </h2>
+          <p className="mt-6 text-gray-600 text-base leading-relaxed">
+            O curso mostra como usar IA como apoio na fase preparatória, sem
+            terceirizar a decisão do servidor.
+          </p>
+        </div>
       </div>
     </section>
   );
