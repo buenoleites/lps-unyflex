@@ -108,6 +108,10 @@ export function Diferencial() {
   useEffect(() => {
     const el = carouselRef.current;
     if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setVisible(true);
+      return;
+    }
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setVisible(true); },
       { threshold: 0.15 }
@@ -151,14 +155,14 @@ export function Diferencial() {
   };
 
   return (
-    <section className="bg-white py-20 border-t border-gray-100">
+    <section id="conteudo" className="bg-white py-20 border-t border-gray-100">
       <div className="max-w-6xl mx-auto px-6 flex flex-col gap-4">
         {/* Card superior full-width com imagem de fundo */}
-        <div className="relative rounded-xl overflow-hidden h-64 sm:h-80 flex items-center justify-center">
+        <div className="relative rounded-[26px] sm:rounded-[30px] overflow-hidden h-64 sm:h-80 flex items-center justify-center">
           <img
             src="/imagens/seção4/imagem_seção4.jpg"
             alt="Curso presencial Unyflex"
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover object-top"
           />
           <div className="absolute inset-0 bg-black/55" />
           <div className="relative z-10 text-center px-6 max-w-2xl mx-auto">
@@ -233,7 +237,7 @@ export function Diferencial() {
                     height: cardH,
                     minHeight: cardH,
                     maxHeight: cardH,
-                    background: "#f5f3f1",
+                    background: "#F4EEE2",
                     borderRadius: mobile ? 26 : 30,
                     border: "none",
                     outline: "none",

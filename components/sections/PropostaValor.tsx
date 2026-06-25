@@ -15,7 +15,7 @@ const pilares = [
 
 export function PropostaValor() {
   return (
-    <section id="curso" className="bg-gray-50 py-20 border-t border-gray-100">
+    <section id="curso" className="bg-[#F4EEE2] py-20 border-t border-[#E8DFD0]">
       <div className="max-w-6xl mx-auto px-6">
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 text-center mb-10 lg:mb-12">
           O que esse curso ajuda você a sustentar na prática
@@ -42,7 +42,7 @@ export function PropostaValor() {
             </a>
           </div>
 
-          <div className="relative rounded-xl overflow-hidden h-72 lg:h-full min-h-[320px]">
+          <div className="relative rounded-[26px] sm:rounded-[30px] overflow-hidden h-72 lg:h-full min-h-[320px]">
             <img
               src="/imagens/seção3/imagem_seção3.jpg"
               alt="Profissionais em capacitação"
