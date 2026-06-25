@@ -1,8 +1,13 @@
 "use client";
-
 import { useEffect, useState } from "react";
+import { handleAnchorClick } from "@/lib/lp/scroll";
+import type { LpContent } from "./types";
 
-export function StickyCtaMobile() {
+export default function StickyCtaMobile({
+  content,
+}: {
+  content: LpContent["stickyCta"];
+}) {
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
@@ -18,14 +23,13 @@ export function StickyCtaMobile() {
   }, []);
 
   return (
-    <div
-      className={`fixed bottom-0 left-0 right-0 z-40 sm:hidden bg-[#0D1B2A]/95 backdrop-blur-sm border-t border-white/10 px-4 py-3 transition-transform duration-300 ${
-        hidden ? "translate-y-full" : "translate-y-0"
-      }`}
-      aria-hidden={hidden}
-    >
-      <a href="#inscricao" className="btn-cta w-full py-3.5 text-sm">
-        Garantir minha vaga
+    <div className={`sticky-cta${hidden ? " is-hidden" : ""}`} aria-hidden={hidden}>
+      <a
+        href="#inscricao"
+        className="btn btn--primary"
+        onClick={handleAnchorClick}
+      >
+        {content.label}
       </a>
     </div>
   );

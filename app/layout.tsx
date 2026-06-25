@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     "mapa de riscos com IA",
   ],
   alternates: {
-    canonical: "/",
+    canonical: "/licitacao",
   },
   openGraph: {
     title: "Licitações com Inteligência Artificial | Curso presencial em Curitiba",
