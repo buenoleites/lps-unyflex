@@ -1,5 +1,5 @@
 const WEBHOOK_URL = "https://n8n.unyflex.com.br/webhook/lp-leads-unyflex";
-const REDIRECT_URL = "https://landingpages.unyflex.com.br/obrigado";
+const REDIRECT_URL = "/obrigado";
 
 function nowStamp(): string {
   const d = new Date();

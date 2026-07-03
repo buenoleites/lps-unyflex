@@ -1,5 +1,9 @@
-import { redirect } from "next/navigation";
+"use client";
+import { useEffect } from "react";
 
 export default function Root() {
-  redirect("/licitacao");
+  useEffect(() => {
+    window.location.replace("/licitacao");
+  }, []);
+  return null;
 }
