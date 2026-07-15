@@ -50,8 +50,8 @@ export default function LicitaexpoPage() {
               </p>
 
               <p className="hero__tags">
-                Licitações • compras • agente de contratação • pregoeiro • controle
-                interno • jurídico
+                Licitações • compras • agente de contratação • pregoeiro • vereador •
+                controle interno • jurídico
               </p>
 
               <a
@@ -347,7 +347,11 @@ export default function LicitaexpoPage() {
         {/* Seção 5 — Prova.
             "Mais de 270 inscritos": 271 inscritos históricos, arredondado para baixo.
             "inscritos" (não "servidores") porque ~14 dos 271 eram do setor privado —
-            só ~257 eram servidores, então "mais de 270 servidores" seria overclaim. */}
+            só ~257 eram servidores, então "mais de 270 servidores" seria overclaim.
+            "98 municípios": contagem real de municípios distintos citados como
+            Órgão/Município nos 271 inscritos históricos, deduplicando acentuação,
+            hífen e variações de grafia (ex.: "Caçador" e "CACADOR-" eram o mesmo
+            município). Número exato, não arredondado — resiste a ser checado. */}
         <section
           ref={provaRef as React.RefObject<HTMLElement>}
           className={`section resultados${provaVisible ? " is-visible" : ""}`}
@@ -377,7 +381,7 @@ export default function LicitaexpoPage() {
               style={{ "--reveal-i": 2 } as React.CSSProperties}
             >
               Prefeituras, Câmaras Municipais, autarquias, consórcios e institutos de
-              previdência de mais de 100 municípios do Paraná e de Santa Catarina.
+              previdência de 98 municípios do Paraná e de Santa Catarina.
             </p>
           </div>
         </section>
