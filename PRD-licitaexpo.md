@@ -1,7 +1,7 @@
 # PRD — LicitaExpo (landing page de lista de espera)
 
 **Rota:** `/licitaexpo` · **Status:** ativa · **Escrito em:** 14/07/2026 · **Atualizado:**
-15/07/2026 (seções da programática; data confirmada 23–26/nov)
+15/07/2026 (hero passa a citar o Legislativo; município recontado para 98)
 
 Este documento existe para travar as decisões estratégicas que são fáceis de perder
 daqui a dois meses. Se alguém for mexer nesta LP, lê isto antes.
@@ -62,9 +62,12 @@ houver checkout de verdade.
   "as falhas que mais geram apontamento", não em "as 10 maiores".
 - **Programação** — os 4 dias / 17 horas, com as dinâmicas de fixação sinalizadas.
 - **Prova** — "Mais de 270 inscritos já passaram pelo LicitaExpo"; edições em 2023, 2024,
-  2025 e 2026, presenciais em Curitiba; 100+ municípios do PR/SC. Número arredondado dos
+  2025 e 2026, presenciais em Curitiba; 98 municípios do PR/SC. Número arredondado dos
   271 inscritos históricos, e **"inscritos" (não "servidores")** porque ~14 eram do setor
-  privado — "mais de 270 servidores" seria overclaim.
+  privado — "mais de 270 servidores" seria overclaim. **98 é contagem exata**, não
+  arredondada: recontagem dos municípios distintos citados como Órgão/Município,
+  deduplicando acentuação, hífen e variações de grafia (ex.: "Caçador" e "CACADOR-" eram
+  o mesmo município duas vezes) — o "100+" anterior estava inflado por esse duplicado.
 - **Metodologia** — "não é aula sobre a lei; é como o Tribunal lê a sua decisão".
 - **Formulário** (seção `#inscricao`): Nome, E-mail, WhatsApp, Cargo/Setor,
   Órgão/Município e o toggle "É servidor público?". Validação no blur e no submit.
