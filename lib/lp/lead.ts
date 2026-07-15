@@ -79,7 +79,24 @@ export async function submitLead(form: LeadForm, formId: string): Promise<void> 
   });
 }
 
-export function redirectToThankYou(form: LeadForm): void {
+export interface ThankYouOptions {
+  url?: string;
+  /** Anexa nome, e-mail e WhatsApp na query string. O Pixel dispara na página de
+   *  destino, então isso manda PII no event_source_url — use false em LPs novas. */
+  withPii?: boolean;
+}
+
+export function redirectToThankYou(
+  form: LeadForm,
+  opts: ThankYouOptions = {}
+): void {
+  const { url = REDIRECT_URL, withPii = true } = opts;
+
+  if (!withPii) {
+    window.location.href = url;
+    return;
+  }
+
   const params = new URLSearchParams({
     Nome: form.nome,
     E_mail: form.email,
@@ -87,5 +104,5 @@ export function redirectToThankYou(form: LeadForm): void {
     Cargo_Setor: form.cargo,
     Orgao_Municipio: form.orgao,
   });
-  window.location.href = `${REDIRECT_URL}?${params.toString()}`;
+  window.location.href = `${url}?${params.toString()}`;
 }

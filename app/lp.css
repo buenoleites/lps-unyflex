@@ -437,6 +437,7 @@
 .lp-root .hero__content > *:nth-child(3) { animation-delay: 0.3s; }
 .lp-root .hero__content > *:nth-child(4) { animation-delay: 0.42s; }
 .lp-root .hero__content > *:nth-child(5) { animation-delay: 0.54s; }
+.lp-root .hero__content > *:nth-child(6) { animation-delay: 0.66s; }
 
 .lp-root .hero__title {
   font-size: 44px;
@@ -475,6 +476,13 @@
   letter-spacing: -0.1px;
   color: var(--color-white-mute);
   white-space: nowrap;
+}
+
+/* Para linhas de credibilidade longas demais para caber em uma linha. */
+.lp-root .hero__microcopy--wrap {
+  max-width: 620px;
+  margin-inline: auto;
+  white-space: normal;
 }
 
 @media (max-width: 800px) {
