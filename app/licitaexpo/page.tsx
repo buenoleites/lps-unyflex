@@ -31,7 +31,11 @@ export default function LicitaexpoPage() {
 
       <main id="conteudo-principal">
         <section className="hero" id="topo">
-          <div className="hero__media" aria-hidden="true" />
+          <div
+            className="hero__media"
+            aria-hidden="true"
+            style={{ "--media-bg": "url(/licitaexpo/hero.jpg)" } as React.CSSProperties}
+          />
           <div className="hero__overlay" aria-hidden="true" />
 
           <div className="container hero__inner">
@@ -82,7 +86,11 @@ export default function LicitaexpoPage() {
               data-reveal
               style={{ "--reveal-i": 0 } as React.CSSProperties}
             >
-              <div className="pq-band__media" aria-hidden="true" />
+              <div
+                className="pq-band__media"
+                aria-hidden="true"
+                style={{ "--media-bg": "url(/licitaexpo/para-quem.jpg)" } as React.CSSProperties}
+              />
               <div className="pq-band__overlay" aria-hidden="true" />
               <div className="pq-band__content">
                 <h2 id="para-quem-title" className="pq-band__title">
@@ -398,7 +406,11 @@ export default function LicitaexpoPage() {
               data-reveal
               style={{ "--reveal-i": 0 } as React.CSSProperties}
             >
-              <div className="abordagem-band__media" aria-hidden="true" />
+              <div
+                className="abordagem-band__media"
+                aria-hidden="true"
+                style={{ "--media-bg": "url(/licitaexpo/metodologia.jpg)" } as React.CSSProperties}
+              />
               <div className="abordagem-band__overlay" aria-hidden="true" />
               <div className="abordagem-band__content">
                 <h2 id="metodologia-title" className="abordagem-band__title">
@@ -415,7 +427,11 @@ export default function LicitaexpoPage() {
         </section>
 
         <section className="cta-final" id="inscricao">
-          <div className="cta-final__media" aria-hidden="true" />
+          <div
+            className="cta-final__media"
+            aria-hidden="true"
+            style={{ "--media-bg": "url(/licitaexpo/cta-final.jpg)" } as React.CSSProperties}
+          />
           <div className="cta-final__overlay" aria-hidden="true" />
 
           <div className="container cta-final__inner">
