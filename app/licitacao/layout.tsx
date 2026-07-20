@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "IA na Fase Preparatória de Licitações | Unyflex",
     description:
-      "Domine DFD, ETP, TR, PCA e mapa de riscos com apoio de IA. Curso presencial em Curitiba, 28 a 31 de julho de 2025.",
+      "Domine DFD, ETP, TR, PCA e mapa de riscos com apoio de IA. Curso presencial em Curitiba, 25 a 28 de agosto de 2025.",
     type: "website",
   },
 };

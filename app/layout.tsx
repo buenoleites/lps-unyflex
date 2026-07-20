@@ -60,8 +60,8 @@ const jsonLd = {
   description:
     "Curso presencial para servidores públicos que precisam usar IA em DFD, ETP, TR e mapa de riscos na fase preparatória da Lei 14.133.",
   url: siteUrl,
-  startDate: "2025-07-28",
-  endDate: "2025-07-31",
+  startDate: "2025-08-25",
+  endDate: "2025-08-28",
   eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
   eventStatus: "https://schema.org/EventScheduled",
   location: {
