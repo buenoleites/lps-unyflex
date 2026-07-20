@@ -62,7 +62,7 @@ export default function OgImage() {
             textTransform: "uppercase",
           }}
         >
-          Unyflex · Curitiba · 28–31 de julho
+          Unyflex · Curitiba · 25–28 de agosto
         </div>
       </div>
     ),

@@ -33,7 +33,7 @@ export const licitacaoContent: LpContent = {
       "Curso presencial em Curitiba para quem precisa usar IA em DFD, ETP, TR e mapa de riscos sem gerar documentos genéricos ou perder segurança técnica.",
     tags: "Licitações • compras • agente de contratação • controle interno • jurídico",
     ctaLabel: "Garantir minha vaga",
-    microcopy: "28 a 31 de julho • 17 horas • Curitiba-PR",
+    microcopy: "25 a 28 de agosto • 17 horas • Curitiba-PR",
   },
 
   paraQuem: {
@@ -168,7 +168,7 @@ export const licitacaoContent: LpContent = {
     lead: "No formato presencial, você tem:",
     items: [
       "17 horas de capacitação com aprofundamento técnico.",
-      "4 dias de curso, de 28 a 31 de julho.",
+      "4 dias de curso, de 25 a 28 de agosto.",
       "Certificado de conclusão para o participante.",
       "Materiais didáticos com acesso ilimitado.",
     ],
@@ -212,7 +212,7 @@ export const licitacaoContent: LpContent = {
       },
       {
         q: "Onde e quando será realizado?",
-        a: "Presencialmente em Curitiba-PR, de 28 a 31 de julho, com 17 horas de capacitação.",
+        a: "Presencialmente em Curitiba-PR, de 25 a 28 de agosto, com 17 horas de capacitação.",
       },
     ],
   },
@@ -221,7 +221,7 @@ export const licitacaoContent: LpContent = {
     bgSrc: "/imagens/imagem_secaoCTA.png",
     title: "Garanta sua vaga para aprender IA aplicada às licitações.",
     text: "Preencha seus dados para demonstrar interesse na turma presencial de Licitações com Inteligência Artificial.",
-    microcopy: "28 a 31 de julho • Curitiba-PR • 17 horas • Certificado incluído",
+    microcopy: "25 a 28 de agosto • Curitiba-PR • 17 horas • Certificado incluído",
     formId: "lp-licitacao-ia",
     submitLabel: "Garantir minha vaga",
   },
