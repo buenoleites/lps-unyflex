@@ -6,6 +6,79 @@ import { useReveal } from "@/lib/lp/useReveal";
 import LeadForm from "@/components/lp/LeadForm";
 import Footer from "@/components/lp/Footer";
 
+/* Copy das seções novas. A ordem de PLANO_ITENS é a mesma nos 3 planos — é o
+   que faz o subgrid alinhar as linhas horizontalmente no desktop, então os
+   arrays de `inclui` têm de ter sempre o mesmo comprimento. */
+const PLANO_ITENS = [
+  "Acesso aos 4 dias + 6 painéis",
+  "Certificado",
+  "Kit escolar exclusivo",
+  "6 coffee-breaks gourmet",
+  "Almoço no Madalosso",
+  "Voucher churrascaria",
+  "Assinatura Premium",
+  "Semestre de graduação",
+  "Mochila de couro",
+  "Mentoria exclusiva",
+  "Bolsa de pós-graduação",
+];
+
+const PLANOS: {
+  nome: string;
+  preco: string;
+  destaque: boolean;
+  inclui: boolean[];
+}[] = [
+  {
+    nome: "BasicClass",
+    preco: "R$ 3.300",
+    destaque: false,
+    inclui: [true, true, true, true, true, false, false, false, false, false, false],
+  },
+  {
+    nome: "MasterClass",
+    preco: "R$ 3.800",
+    destaque: true,
+    inclui: [true, true, true, true, true, true, true, true, false, false, true],
+  },
+  {
+    nome: "PremiumClass",
+    preco: "R$ 5.200",
+    destaque: false,
+    inclui: [true, true, true, true, true, true, true, true, true, true, true],
+  },
+];
+
+/* `foto: null` renderiza o círculo com o gradiente escuro de fallback. Para
+   publicar a foto, basta trocar por "/licitaexpo/palestrantes/<nome>.jpg". */
+const PALESTRANTES: { nome: string; foto: string | null; bio: string }[] = [
+  {
+    nome: "Antonio Lima",
+    foto: null,
+    bio: "Pregoeiro e ex-Diretor Geral de Licitações e Compras. Coautor de livro sobre a Nova Lei de Licitações, podcaster no CONLICITAÇÃO e criador do @licitacaodadepressao. Professor em Escolas de Governo e pós-graduação.",
+  },
+  {
+    nome: "Gisella Leitão",
+    foto: null,
+    bio: "Advogada, mestra em Direito, especialista em Licitações e Contratos. Ex-pregoeira e controladora interna. Idealizadora do @diariodalicitante.",
+  },
+  {
+    nome: "Raphael Icaro",
+    foto: null,
+    bio: "Consultor sênior em contratações públicas, 20 anos de atuação e mais de R$1 bilhão em processos licitatórios. Professor de pós-graduação com mais de 5.000 alunos capacitados.",
+  },
+  {
+    nome: "Augusto Alexandria",
+    foto: null,
+    bio: "Procurador da Câmara Municipal de Curitiba, com atuação em Licitações e Contratos Administrativos. Pós-graduado em Direito Público.",
+  },
+  {
+    nome: "Jarbas Rene",
+    foto: null,
+    bio: "Analista Judiciário na área de Contabilidade do TRT-24ª Região (MS). Graduado em Ciências Contábeis.",
+  },
+];
+
 export default function LicitaexpoPage() {
   useEffect(() => {
     trackEvent("PageView");
@@ -17,6 +90,9 @@ export default function LicitaexpoPage() {
   const [progRef, progVisible] = useReveal();
   const [provaRef, provaVisible] = useReveal();
   const [metRef, metVisible] = useReveal();
+  const [planosRef, planosVisible] = useReveal();
+  const [palRef, palVisible] = useReveal();
+  const [parcRef, parcVisible] = useReveal();
 
   return (
     <div className="lp-root">
@@ -421,6 +497,216 @@ export default function LicitaexpoPage() {
                   decisões dos órgãos de controle e dinâmicas de fixação nos módulos de
                   ETP/TR/edital e julgamento de propostas.
                 </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Seção 7 — Planos */}
+        <section
+          ref={planosRef as React.RefObject<HTMLElement>}
+          className={`section planos${planosVisible ? " is-visible" : ""}`}
+          aria-labelledby="planos-title"
+        >
+          <div className="container">
+            <h2
+              id="planos-title"
+              className="modulos__heading"
+              data-reveal
+              style={{ "--reveal-i": 0 } as React.CSSProperties}
+            >
+              Escolha como quer viver o LicitaExpo.
+            </h2>
+
+            <p
+              className="resultados__text"
+              data-reveal
+              style={{ "--reveal-i": 1 } as React.CSSProperties}
+            >
+              Todos os planos dão acesso aos 4 dias, aos 6 painéis e ao certificado. A
+              diferença está no que você leva além do conteúdo.
+            </p>
+
+            <p
+              className="planos__lead"
+              data-reveal
+              style={{ "--reveal-i": 2 } as React.CSSProperties}
+            >
+              O que protege sua decisão é o conteúdo — e ele é o mesmo nos três planos. O
+              restante é o que torna os quatro dias mais leves: alimentação, materiais e,
+              nos planos superiores, formação que continua depois do evento.
+            </p>
+
+            <div
+              className="planos__grid"
+              data-reveal
+              style={{ "--reveal-i": 3 } as React.CSSProperties}
+            >
+              {PLANOS.map((plano) => (
+                <article
+                  key={plano.nome}
+                  className={`plano${plano.destaque ? " plano--destaque" : ""}`}
+                >
+                  <div className="plano__head">
+                    {plano.destaque && (
+                      <span className="plano__selo">Mais escolhido</span>
+                    )}
+                    <h3 className="plano__nome">{plano.nome}</h3>
+                    <p className="plano__preco">{plano.preco}</p>
+                  </div>
+
+                  <ul className="plano__itens">
+                    {PLANO_ITENS.map((item, i) => (
+                      <li
+                        key={item}
+                        className={`plano__item${
+                          plano.inclui[i] ? "" : " plano__item--off"
+                        }`}
+                      >
+                        <span
+                          className="plano__mark"
+                          role="img"
+                          aria-label={plano.inclui[i] ? "incluso" : "não incluso"}
+                        >
+                          {plano.inclui[i] ? "✓" : "—"}
+                        </span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+            </div>
+
+            <p
+              className="planos__microcopy"
+              data-reveal
+              style={{ "--reveal-i": 4 } as React.CSSProperties}
+            >
+              Estes são os valores do 1º lote. A partir de 25/10, o preço sobe 10%.
+              Inscrições até 21/11.
+            </p>
+
+            <div
+              className="planos__cta"
+              data-reveal
+              style={{ "--reveal-i": 5 } as React.CSSProperties}
+            >
+              <a
+                className="btn btn--primary btn--lg"
+                href="#inscricao"
+                onClick={handleAnchorClick}
+              >
+                Quero ser avisado da abertura
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Seção 8 — Palestrantes */}
+        <section
+          ref={palRef as React.RefObject<HTMLElement>}
+          className={`section palestrantes${palVisible ? " is-visible" : ""}`}
+          aria-labelledby="palestrantes-title"
+        >
+          <div className="container">
+            <h2
+              id="palestrantes-title"
+              className="modulos__heading"
+              data-reveal
+              style={{ "--reveal-i": 0 } as React.CSSProperties}
+            >
+              Quem vai te ensinar já esteve onde você está.
+            </h2>
+
+            <p
+              className="resultados__text"
+              data-reveal
+              style={{ "--reveal-i": 1 } as React.CSSProperties}
+            >
+              Pregoeiros, procuradores e consultores que conduziram, fiscalizaram e
+              responderam por processos reais.
+            </p>
+
+            <div className="palestrantes__grid">
+              {PALESTRANTES.map((p, i) => (
+                <article
+                  key={p.nome}
+                  className="palestrante"
+                  data-reveal
+                  style={{ "--reveal-i": i + 2 } as React.CSSProperties}
+                >
+                  <div
+                    className="palestrante__foto"
+                    aria-hidden="true"
+                    style={
+                      p.foto
+                        ? ({ "--foto": `url(${p.foto})` } as React.CSSProperties)
+                        : undefined
+                    }
+                  />
+                  <h3 className="palestrante__nome">{p.nome}</h3>
+                  <p className="palestrante__bio">{p.bio}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Seção 9 — Parceiros */}
+        <section
+          ref={parcRef as React.RefObject<HTMLElement>}
+          className={`section parceiros${parcVisible ? " is-visible" : ""}`}
+          aria-labelledby="parceiros-title"
+        >
+          <div className="container">
+            <h2
+              id="parceiros-title"
+              className="modulos__heading"
+              data-reveal
+              style={{ "--reveal-i": 0 } as React.CSSProperties}
+            >
+              Uma iniciativa Unyflex, com Unyboss e Faculdade Unypública.
+            </h2>
+
+            <p
+              className="resultados__text"
+              data-reveal
+              style={{ "--reveal-i": 1 } as React.CSSProperties}
+            >
+              A parceria com a Unyboss e a Faculdade Unypública é o que torna possível
+              oferecer, nos planos MasterClass e PremiumClass, semestre de graduação e
+              bolsa de pós — formação que continua depois que o seminário acaba.
+            </p>
+
+            <div
+              className="parceiros__grid"
+              data-reveal
+              style={{ "--reveal-i": 2 } as React.CSSProperties}
+            >
+              <div className="parceiro">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  className="parceiro__logo parceiro__logo--invert"
+                  src="/logo.png"
+                  alt="Unyflex"
+                />
+              </div>
+              <div className="parceiro">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  className="parceiro__logo"
+                  src="/licitaexpo/parceiros/unyboss.png"
+                  alt="Unyboss"
+                />
+              </div>
+              <div className="parceiro">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  className="parceiro__logo"
+                  src="/licitaexpo/parceiros/faculdade-unypublica.png"
+                  alt="Faculdade Unypública"
+                />
               </div>
             </div>
           </div>
