@@ -139,12 +139,11 @@ export default function LicitaexpoPage() {
                 href="#inscricao"
                 onClick={handleAnchorClick}
               >
-                Quero ser avisado da abertura
+                Garanta sua vaga
               </a>
 
               <p className="hero__microcopy hero__microcopy--wrap">
-                4 dias · 17 horas · Curitiba-PR · 23 a 26 de novembro de 2026 ·
-                Inscrições abrem em setembro
+                4 dias · 17 horas · Curitiba-PR · 23 a 26 de novembro de 2026
               </p>
             </div>
           </div>
@@ -597,7 +596,7 @@ export default function LicitaexpoPage() {
                 href="#inscricao"
                 onClick={handleAnchorClick}
               >
-                Quero ser avisado da abertura
+                Garanta sua vaga
               </a>
             </div>
           </div>
@@ -724,8 +723,8 @@ export default function LicitaexpoPage() {
             <div className="cta-final__card">
               <LeadForm
                 formId="lp-licitaexpo"
-                submitLabel="Quero ser avisado da abertura"
-                thankYou={{ url: "/licitaexpo/obrigado", withPii: false }}
+                submitLabel="Garanta sua vaga"
+                thankYou={{ url: "/obrigado", withPii: false }}
               />
             </div>
           </div>

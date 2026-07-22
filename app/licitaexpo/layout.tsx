@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://mkt.unyflex.com.br"),
   title: "LicitaExpo | Seminário presencial de licitações e contratos em Curitiba",
   description:
-    "Seminário presencial em Curitiba para servidores públicos: os pontos onde o certame e a execução contratual travam, mapeados para você decidir com respaldo. 4 dias, 17 horas, 23 a 26 de novembro de 2026. Inscrições abrem em setembro — entre na lista e seja avisado.",
+    "Seminário presencial em Curitiba para servidores públicos: os pontos onde o certame e a execução contratual travam, mapeados para você decidir com respaldo. 4 dias, 17 horas, 23 a 26 de novembro de 2026.",
   keywords: [
     "LicitaExpo",
     "seminário de licitações",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "LicitaExpo | Seminário presencial de licitações em Curitiba",
     description:
-      "Todo erro no processo tem um nome no papel. 4 dias, 17 horas, Curitiba, 23 a 26 de novembro de 2026. Inscrições abrem em setembro — seja avisado da abertura.",
+      "Todo erro no processo tem um nome no papel. 4 dias, 17 horas, Curitiba, 23 a 26 de novembro de 2026.",
     url: "/licitaexpo",
     siteName: "Unyflex",
     locale: "pt_BR",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "LicitaExpo | Seminário presencial de licitações em Curitiba",
     description:
-      "Todo erro no processo tem um nome no papel. 4 dias, 17 horas, Curitiba, 23 a 26 de novembro de 2026. Inscrições abrem em setembro.",
+      "Todo erro no processo tem um nome no papel. 4 dias, 17 horas, Curitiba, 23 a 26 de novembro de 2026.",
   },
 };
 
