@@ -54,27 +54,27 @@ const PLANOS: {
 const PALESTRANTES: { nome: string; foto: string | null; bio: string }[] = [
   {
     nome: "Antonio Lima",
-    foto: null,
+    foto: "/licitaexpo/palestrantes/antonio-lima.jpg",
     bio: "Pregoeiro e ex-Diretor Geral de Licitações e Compras. Coautor de livro sobre a Nova Lei de Licitações, podcaster no CONLICITAÇÃO e criador do @licitacaodadepressao. Professor em Escolas de Governo e pós-graduação.",
   },
   {
     nome: "Gisella Leitão",
-    foto: null,
+    foto: "/licitaexpo/palestrantes/gisella-leitao.jpg",
     bio: "Advogada, mestra em Direito, especialista em Licitações e Contratos. Ex-pregoeira e controladora interna. Idealizadora do @diariodalicitante.",
   },
   {
     nome: "Raphael Icaro",
-    foto: null,
+    foto: "/licitaexpo/palestrantes/raphael-icaro.jpg",
     bio: "Consultor sênior em contratações públicas, 20 anos de atuação e mais de R$1 bilhão em processos licitatórios. Professor de pós-graduação com mais de 5.000 alunos capacitados.",
   },
   {
     nome: "Augusto Alexandria",
-    foto: null,
+    foto: "/licitaexpo/palestrantes/augusto-alexandria.jpg",
     bio: "Procurador da Câmara Municipal de Curitiba, com atuação em Licitações e Contratos Administrativos. Pós-graduado em Direito Público.",
   },
   {
     nome: "Jarbas Rene",
-    foto: null,
+    foto: "/licitaexpo/palestrantes/jarbas-rene.jpg",
     bio: "Analista Judiciário na área de Contabilidade do TRT-24ª Região (MS). Graduado em Ciências Contábeis.",
   },
 ];
