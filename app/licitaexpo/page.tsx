@@ -49,33 +49,50 @@ const PLANOS: {
   },
 ];
 
-/* `foto: null` renderiza o círculo com o gradiente escuro de fallback. Para
-   publicar a foto, basta trocar por "/licitaexpo/palestrantes/<nome>.jpg". */
-const PALESTRANTES: { nome: string; foto: string | null; bio: string }[] = [
+/* `foto: null` renderiza o círculo com o gradiente escuro de fallback. Para trocar
+   uma foto, sobrescreva o arquivo do slug em public/licitaexpo/palestrantes/
+   (quadrada — o círculo corta com `cover` pelo centro). */
+const PALESTRANTES: {
+  nome: string;
+  cargo: string;
+  foto: string | null;
+  bio: string;
+}[] = [
   {
-    nome: "Antonio Lima",
-    foto: "/licitaexpo/palestrantes/antonio-lima.jpg",
-    bio: "Pregoeiro e ex-Diretor Geral de Licitações e Compras. Coautor de livro sobre a Nova Lei de Licitações, podcaster no CONLICITAÇÃO e criador do @licitacaodadepressao. Professor em Escolas de Governo e pós-graduação.",
+    nome: "Marcio José Assumpção",
+    cargo: "Tribunal de Contas do Estado do Paraná",
+    foto: "/licitaexpo/palestrantes/marcio-jose-assumpcao.jpg",
+    bio: "Auditor do TCE/PR. Mestre em Administração e Finanças (Universidad de Extremadura). Contador público, ex-professor da Universidade Positivo, especialista em contabilidade aplicada ao setor público e auditoria.",
   },
   {
-    nome: "Gisella Leitão",
-    foto: "/licitaexpo/palestrantes/gisella-leitao.jpg",
-    bio: "Advogada, mestra em Direito, especialista em Licitações e Contratos. Ex-pregoeira e controladora interna. Idealizadora do @diariodalicitante.",
+    nome: "Rafael Costa Santos",
+    cargo: "Procurador-Chefe PGE/PR",
+    foto: "/licitaexpo/palestrantes/rafael-costa-santos.jpg",
+    bio: "Procurador-Chefe da Procuradoria de Obras e Serviços de Engenharia da PGE/PR. Doutorando e Mestre em Direito (UFPR). Presidiu os grupos que regulamentaram a Lei 14.133/21 no Paraná. Autor pela Editora Fórum.",
   },
   {
-    nome: "Raphael Icaro",
-    foto: "/licitaexpo/palestrantes/raphael-icaro.jpg",
-    bio: "Consultor sênior em contratações públicas, 20 anos de atuação e mais de R$1 bilhão em processos licitatórios. Professor de pós-graduação com mais de 5.000 alunos capacitados.",
+    nome: "Everson da Silva Biazon",
+    cargo: "Procurador do Estado do Paraná",
+    foto: "/licitaexpo/palestrantes/everson-da-silva-biazon.jpg",
+    bio: "Procurador do Estado do Paraná, ex-Procurador-Chefe da Consultiva junto à Governadoria. Pós-graduado em Direito do Estado (UEL). Coautor de Direito Administrativo Sancionador nas Estatais. Professor de pós-graduação.",
   },
   {
-    nome: "Augusto Alexandria",
-    foto: "/licitaexpo/palestrantes/augusto-alexandria.jpg",
-    bio: "Procurador da Câmara Municipal de Curitiba, com atuação em Licitações e Contratos Administrativos. Pós-graduado em Direito Público.",
+    nome: "Igor Pires Gomes da Costa",
+    cargo: "Procurador do Estado do Paraná",
+    foto: "/licitaexpo/palestrantes/igor-pires-gomes-da-costa.jpg",
+    bio: "Procurador do Estado do Paraná. Mestre em Direito Público (Université de Nantes) e em Direito do Estado (UFPR). Pesquisa e publica sobre governança pública e gestão de riscos na nova Lei de Licitações.",
   },
   {
-    nome: "Jarbas Rene",
-    foto: "/licitaexpo/palestrantes/jarbas-rene.jpg",
-    bio: "Analista Judiciário na área de Contabilidade do TRT-24ª Região (MS). Graduado em Ciências Contábeis.",
+    nome: "Gabriela Lira Borges",
+    cargo: "Consultora Jurídica e Parecerista",
+    foto: "/licitaexpo/palestrantes/gabriela-lira-borges.jpg",
+    bio: "Mestre em Governança e Planejamento Público (UTFPR). Ex-Procuradora do Estado do Acre e ex-consultora da Zênite. Coautora de Horizontes e Perspectivas da Lei nº 14.133/2021 (Lumen Juris).",
+  },
+  {
+    nome: "Caroline de Souza",
+    cargo: "Tribunal de Contas do Estado de Santa Catarina",
+    foto: "/licitaexpo/palestrantes/caroline-de-souza.jpg",
+    bio: "Mais de 23 anos de TCE/SC. Ex-Diretora da Diretoria de Licitações e Contratações, hoje Coordenadora Jurídica com ênfase na Lei 14.133/21. Palestrante nos Ciclos de Estudos do TCE/SC.",
   },
 ];
 
@@ -143,7 +160,7 @@ export default function LicitaexpoPage() {
               </a>
 
               <p className="hero__microcopy hero__microcopy--wrap">
-                4 dias · 17 horas · Curitiba-PR · 23 a 26 de novembro de 2026
+                4 dias · 17 horas · Curitiba-PR · 24 a 27 de novembro de 2026
               </p>
             </div>
           </div>
@@ -531,15 +548,52 @@ export default function LicitaexpoPage() {
               data-reveal
               style={{ "--reveal-i": 2 } as React.CSSProperties}
             >
-              O que protege sua decisão é o conteúdo — e ele é o mesmo nos três planos. O
-              restante é o que torna os quatro dias mais leves: alimentação, materiais e,
+              O que protege sua decisão é o conteúdo — e ele é o mesmo em todos os planos.
+              O restante é o que torna os quatro dias mais leves: alimentação, materiais e,
               nos planos superiores, formação que continua depois do evento.
             </p>
+
+            {/* Plano de acesso remoto: fora do grid de 3 presenciais (o subgrid de
+                itens não se aplica a ele) e antes do BasicClass na ordem de leitura. */}
+            <article
+              className="plano plano--online"
+              data-reveal
+              style={{ "--reveal-i": 3 } as React.CSSProperties}
+            >
+              <div className="plano__head">
+                <span className="plano__selo plano__selo--online">
+                  100% online · ao vivo
+                </span>
+                <h3 className="plano__nome">Online Ao Vivo</h3>
+                <p className="plano__preco">R$ 2.000</p>
+              </div>
+
+              <ul className="plano__itens">
+                <li className="plano__item">
+                  <span className="plano__mark" role="img" aria-label="incluso">
+                    ✓
+                  </span>
+                  Acesso à transmissão ao vivo dos 4 dias + 6 painéis
+                </li>
+                <li className="plano__item">
+                  <span className="plano__mark" role="img" aria-label="incluso">
+                    ✓
+                  </span>
+                  Certificado
+                </li>
+                <li className="plano__item plano__item--off">
+                  <span className="plano__mark" role="img" aria-label="não incluso">
+                    —
+                  </span>
+                  Itens presenciais (coffee-breaks, almoço, kit e vouchers)
+                </li>
+              </ul>
+            </article>
 
             <div
               className="planos__grid"
               data-reveal
-              style={{ "--reveal-i": 3 } as React.CSSProperties}
+              style={{ "--reveal-i": 4 } as React.CSSProperties}
             >
               {PLANOS.map((plano) => (
                 <article
@@ -580,7 +634,7 @@ export default function LicitaexpoPage() {
             <p
               className="planos__microcopy"
               data-reveal
-              style={{ "--reveal-i": 4 } as React.CSSProperties}
+              style={{ "--reveal-i": 5 } as React.CSSProperties}
             >
               Estes são os valores do 1º lote. A partir de 25/10, o preço sobe 10%.
               Inscrições até 21/11.
@@ -589,7 +643,7 @@ export default function LicitaexpoPage() {
             <div
               className="planos__cta"
               data-reveal
-              style={{ "--reveal-i": 5 } as React.CSSProperties}
+              style={{ "--reveal-i": 6 } as React.CSSProperties}
             >
               <a
                 className="btn btn--primary btn--lg"
@@ -623,7 +677,7 @@ export default function LicitaexpoPage() {
               data-reveal
               style={{ "--reveal-i": 1 } as React.CSSProperties}
             >
-              Pregoeiros, procuradores e consultores que conduziram, fiscalizaram e
+              Auditores, procuradores e consultores que conduziram, fiscalizaram e
               responderam por processos reais.
             </p>
 
@@ -645,6 +699,7 @@ export default function LicitaexpoPage() {
                     }
                   />
                   <h3 className="palestrante__nome">{p.nome}</h3>
+                  <p className="palestrante__cargo">{p.cargo}</p>
                   <p className="palestrante__bio">{p.bio}</p>
                 </article>
               ))}

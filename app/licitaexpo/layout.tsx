@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://mkt.unyflex.com.br"),
   title: "LicitaExpo | Seminário presencial de licitações e contratos em Curitiba",
   description:
-    "Seminário presencial em Curitiba para servidores públicos: os pontos onde o certame e a execução contratual travam, mapeados para você decidir com respaldo. 4 dias, 17 horas, 23 a 26 de novembro de 2026.",
+    "Seminário presencial em Curitiba para servidores públicos: os pontos onde o certame e a execução contratual travam, mapeados para você decidir com respaldo. 4 dias, 17 horas, 24 a 27 de novembro de 2026.",
   keywords: [
     "LicitaExpo",
     "seminário de licitações",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "LicitaExpo | Seminário presencial de licitações em Curitiba",
     description:
-      "Todo erro no processo tem um nome no papel. 4 dias, 17 horas, Curitiba, 23 a 26 de novembro de 2026.",
+      "Todo erro no processo tem um nome no papel. 4 dias, 17 horas, Curitiba, 24 a 27 de novembro de 2026.",
     url: "/licitaexpo",
     siteName: "Unyflex",
     locale: "pt_BR",
@@ -40,7 +40,37 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "LicitaExpo | Seminário presencial de licitações em Curitiba",
     description:
-      "Todo erro no processo tem um nome no papel. 4 dias, 17 horas, Curitiba, 23 a 26 de novembro de 2026.",
+      "Todo erro no processo tem um nome no papel. 4 dias, 17 horas, Curitiba, 24 a 27 de novembro de 2026.",
+  },
+};
+
+// O root layout injeta um EducationEvent de outra LP (dívida conhecida); este schema
+// é o que descreve o LicitaExpo de verdade, com as datas corretas do evento.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "EducationEvent",
+  name: "LicitaExpo",
+  description:
+    "Seminário de licitações e contratos para servidores públicos: 4 dias, 17 horas, 6 painéis. Presencial em Curitiba, com plano de acesso online à transmissão ao vivo.",
+  url: "https://mkt.unyflex.com.br/licitaexpo",
+  startDate: "2026-11-24",
+  endDate: "2026-11-27",
+  eventAttendanceMode: "https://schema.org/MixedEventAttendanceMode",
+  eventStatus: "https://schema.org/EventScheduled",
+  location: {
+    "@type": "Place",
+    name: "Curitiba",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Curitiba",
+      addressRegion: "PR",
+      addressCountry: "BR",
+    },
+  },
+  organizer: {
+    "@type": "Organization",
+    name: "Unyflex",
+    url: "https://unyflex.com.br",
   },
 };
 
@@ -51,6 +81,12 @@ export default function LicitaexpoLayout({
 }) {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
       <Script id="meta-pixel" strategy="afterInteractive">{`
         !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
         n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;

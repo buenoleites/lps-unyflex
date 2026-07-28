@@ -1719,6 +1719,39 @@
   color: rgba(15, 15, 15, 0.28);
 }
 
+/* Plano online: banner horizontal fora do grid de 3 — o subgrid de 11 linhas
+   não se aplica. Borda tracejada e selo vazado marcam o acesso remoto. */
+.lp-root .plano--online {
+  margin-top: 48px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 48px;
+  border-style: dashed;
+  border-color: var(--brand);
+}
+
+.lp-root .plano--online .plano__head {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.lp-root .plano--online .plano__itens {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lp-root .plano--online + .planos__grid {
+  margin-top: 20px;
+}
+
+.lp-root .plano__selo--online {
+  background: none;
+  border: 1px solid var(--brand);
+  color: var(--brand);
+}
+
 .lp-root .planos__microcopy {
   max-width: 640px;
   margin: 28px auto 0;
@@ -1789,6 +1822,13 @@
   line-height: 1.18;
   font-weight: 700;
   color: var(--color-ink);
+}
+
+.lp-root .palestrante__cargo {
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--brand);
 }
 
 .lp-root .palestrante__bio {
