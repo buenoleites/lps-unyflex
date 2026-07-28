@@ -64,7 +64,7 @@ export default function OgImage() {
             fontWeight: 700,
           }}
         >
-          4 dias · 17 horas · 23–26 de novembro de 2026 · Inscrições abrem em setembro
+          4 dias · 17 horas · 24–27 de novembro de 2026 · Inscrições abrem em setembro
         </div>
       </div>
     ),

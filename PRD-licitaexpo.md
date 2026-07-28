@@ -10,7 +10,7 @@ daqui a dois meses. Se alguém for mexer nesta LP, lê isto antes.
 
 ## 1. Problema Identificado
 
-O seminário LicitaExpo acontece de **23 a 26 de novembro de 2026** e as **inscrições só
+O seminário LicitaExpo acontece de **24 a 27 de novembro de 2026** e as **inscrições só
 abrem em setembro**. A data está fechada (programática oficial), mas **não há preço
 definido, lote aberto nem palestrante confirmado** — ou seja, **não há checkout, não há o
 que vender hoje**.
@@ -52,7 +52,7 @@ houver checkout de verdade.
 
 **O que entra (a página cresceu com o que a programática oficial sustenta):**
 - **Hero** com eyebrow, headline, subheadline, linha de perfil, CTA e linha de
-  credibilidade (4 dias · 17 horas · Curitiba-PR · 23 a 26 de novembro de 2026 ·
+  credibilidade (4 dias · 17 horas · Curitiba-PR · 24 a 27 de novembro de 2026 ·
   Inscrições abrem em setembro).
 - **Para quem é** — quatro grupos: quem conduz, quem fiscaliza, quem respalda e o
   **Legislativo** (Câmaras Municipais). Ver seção 4.
