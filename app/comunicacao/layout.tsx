@@ -3,9 +3,7 @@ import Script from "next/script";
 import "../lp2.css";
 import "./theme.css";
 
-/* ROTA DE TESTE do Comunicação Pública 360º no template lp2. Na promoção a
-   definitivo: remover o `robots` de noindex abaixo e trocar o formId em
-   content.tsx (ver TODO lá). */
+/* Comunicação Pública 360º no template lp2. */
 
 export const metadata: Metadata = {
   // O root layout define metadataBase com o path /licitacao embutido, o que
@@ -29,8 +27,6 @@ export const metadata: Metadata = {
     "LGPD",
     "media training",
   ],
-  // TODO na promoção a definitivo: remover este robots (URL de teste, não indexar).
-  robots: { index: false, follow: false },
   alternates: {
     canonical: "/comunicacao",
   },

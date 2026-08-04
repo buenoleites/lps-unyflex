@@ -361,9 +361,7 @@ export const comunicacaoContent: EventLpContent = {
     meta: "4 dias · 17 horas · Curitiba-PR · 01 a 04 de setembro de 2026 · presencial e online ao vivo",
     // Foto oficial Unyflex (planilha de fotos, "IMG_5948"): plateia atenta.
     bgSrc: "/comunicacao/cta-final.jpg",
-    // TODO na promoção a definitivo: trocar para "lp-comunicacao" para abrir a
-    // série no CRM. O id -teste evita misturar leads de teste com produção.
-    formId: "lp-comunicacao-teste",
+    formId: "lp-comunicacao",
     submitLabel: "Garanta sua vaga",
     thankYou: { url: "/obrigado", withPii: false },
   },
