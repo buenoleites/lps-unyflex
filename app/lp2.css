@@ -1,0 +1,1661 @@
+/* ============================================================================
+   lp2 — design system do template de LP de evento (segunda geração).
+
+   REGRAS:
+   - Mobile-first: estilos base são mobile; expansão só com @media (min-width).
+   - TODO valor de cor/sombra/raio/fonte/movimento vive no bloco de TOKENS
+     abaixo. Nenhum literal fora dele (auditável por grep de `#hex`/`rgba(`).
+   - Grade de 8px para espaçamento (múltiplos de 8 são regra, não token).
+   - accent é EXCLUSIVO para ação (botões, links, destaque de plano), para a
+     palavra-chave de headline (.lp2-kw) e para os realces sancionados pela
+     spec (números do ticker, instituição do professor). Nunca fundo de seção.
+   - Blocos escuros: borda 1px --border-dark, SEM sombra.
+     Blocos claros: sombra --shadow-card, SEM borda (exceção: plano destacado).
+   - Tudo escopado sob .lp2-root para não colidir com Tailwind nem com o lp.css.
+   ========================================================================== */
+
+/* ============================== TOKENS ==================================== */
+
+.lp2-root {
+  /* cor */
+  --bg-dark: #0a0e14;
+  --bg-elevated: #131922;
+  --bg-light: #f4f6f9;
+  --bg-white: #ffffff;
+  --accent: #00aeef;
+  --accent-ink: #071016; /* texto sobre accent — branco sobre #00aeef reprova AA */
+  --accent-ring: rgba(0, 174, 239, 0.28);
+  --accent-tint: rgba(0, 174, 239, 0.12);
+  --accent-deep: #006b93; /* accent p/ texto/foco em superfície clara — 5,9:1 no branco */
+  --text-on-dark: #ffffff;
+  --text-on-dark-muted: rgba(255, 255, 255, 0.7);
+  --text-on-light: #0a0e14;
+  --text-on-light-muted: rgba(10, 14, 20, 0.65);
+  --border-dark: rgba(255, 255, 255, 0.08);
+  --border-light: rgba(10, 14, 20, 0.1);
+  --scrim-strong: rgba(10, 14, 20, 0.85);
+  --scrim-weak: rgba(10, 14, 20, 0.25);
+  --nav-bg: rgba(10, 14, 20, 0.78);
+  --error: #f87171;
+
+  /* tipografia — clamp interpola entre 390px e 1440px de viewport */
+  --font: var(--font-montserrat), system-ui, -apple-system, sans-serif;
+  --fs-display: clamp(36px, calc(24.6px + 3.05vw), 68px); /* lh 1.05  ls -.02em  w800 */
+  --fs-h2: clamp(28px, calc(21.3px + 1.71vw), 46px);      /* lh 1.10  ls -.015em w800 */
+  --fs-h3: clamp(20px, calc(18.5px + 0.38vw), 24px);      /* lh 1.25  ls -.01em  w600 */
+  --fs-body: clamp(17px, calc(16.6px + 0.1vw), 18px);     /* lh 1.60             w400 */
+  --fs-small: clamp(13px, calc(12.6px + 0.1vw), 14px);    /* lh 1.40  +.08em     w600 */
+
+  /* espaçamento e forma */
+  --section-y: 80px;
+  --container: 1200px;
+  --gutter: 20px;
+  --radius-card: 14px;
+  --radius-input: 8px;
+  --radius-pill: 999px;
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.06);
+
+  /* movimento */
+  --reveal-duration: 400ms;
+  --reveal-offset: 8px;
+  --reveal-stagger: 60ms;
+
+  /* layout fixo */
+  --nav-h: 56px;
+  --sticky-cta-h: 64px;
+}
+
+@media (min-width: 800px) {
+  .lp2-root {
+    --section-y: 128px;
+    --gutter: 40px;
+    --nav-h: 64px;
+  }
+}
+
+/* ============================== BASE ====================================== */
+
+.lp2-root {
+  font-family: var(--font);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--text-on-dark);
+  background: var(--bg-dark);
+  color-scheme: light;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
+}
+
+.lp2-root *,
+.lp2-root *::before,
+.lp2-root *::after {
+  box-sizing: border-box;
+}
+
+/* Resets em :where() — especificidade zero no seletor interno, para que
+   qualquer classe de componente (.lp2-*) vença o reset sem guerra de cascata. */
+.lp2-root :where(h1, h2, h3, p, ul, ol, figure, blockquote) {
+  margin: 0;
+  padding: 0;
+}
+
+.lp2-root :where(ul, ol) {
+  list-style: none;
+}
+
+.lp2-root :where(a) {
+  color: inherit;
+  text-decoration: none;
+}
+
+.lp2-root :where(img) {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.lp2-root :where(button) {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0 solid transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* Anel de foco tone-aware: accent no escuro, accent-deep no claro (>=3:1). */
+.lp2-root :where(a, button, input, [tabindex]):focus-visible {
+  outline: 2px solid var(--tone-accent, var(--accent));
+  outline-offset: 2px;
+  border-radius: var(--radius-input);
+}
+
+.lp2-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ========================= PRIMITIVOS ===================================== */
+
+.lp2-container {
+  max-width: calc(var(--container) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.lp2-section {
+  position: relative;
+  padding: var(--section-y) 0;
+}
+
+/* Tons de seção: cada um define texto, muted, borda e accent contextuais. */
+.lp2-section--dark,
+.lp2-section--photo {
+  background: var(--bg-dark);
+  color: var(--text-on-dark);
+  --tone-muted: var(--text-on-dark-muted);
+  --tone-border: var(--border-dark);
+  --tone-accent: var(--accent);
+}
+
+.lp2-section--light {
+  background: var(--bg-light);
+  color: var(--text-on-light);
+  --tone-muted: var(--text-on-light-muted);
+  --tone-border: var(--border-light);
+  --tone-accent: var(--accent-deep);
+}
+
+.lp2-section--white {
+  background: var(--bg-white);
+  color: var(--text-on-light);
+  --tone-muted: var(--text-on-light-muted);
+  --tone-border: var(--border-light);
+  --tone-accent: var(--accent-deep);
+}
+
+.lp2-section--photo {
+  overflow: hidden;
+}
+
+.lp2-section--photo .lp2-container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Tipografia */
+.lp2-display {
+  font-size: var(--fs-display);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+}
+
+.lp2-h2 {
+  font-size: var(--fs-h2);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  font-weight: 800;
+}
+
+.lp2-h3 {
+  font-size: var(--fs-h3);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+
+.lp2-small {
+  font-size: var(--fs-small);
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.lp2-eyebrow {
+  font-size: var(--fs-small);
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.lp2-muted {
+  color: var(--tone-muted);
+}
+
+.lp2-kw {
+  color: var(--accent);
+}
+
+/* Cabeçalho de seção (título + lead opcional) */
+.lp2-sec-head {
+  max-width: 800px;
+  margin-bottom: 40px;
+}
+
+.lp2-sec-head .lp2-h2 {
+  margin-bottom: 16px;
+}
+
+.lp2-sec-head .lp2-h2:last-child {
+  margin-bottom: 0;
+}
+
+.lp2-sec-head__lead {
+  color: var(--tone-muted);
+}
+
+.lp2-sec-head__lead + .lp2-sec-head__lead {
+  margin-top: 12px;
+}
+
+@media (min-width: 800px) {
+  .lp2-sec-head {
+    margin-bottom: 56px;
+  }
+}
+
+/* Botões — nomes legados (.btn/.btn--primary/.btn--lg) de propósito: o LeadForm
+   emite exatamente essas classes; aqui elas ganham a cara do DS novo. */
+.lp2-root .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 8px 28px;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-family: var(--font);
+  font-size: var(--fs-body);
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  transition: transform 150ms ease, filter 150ms ease;
+}
+
+.lp2-root .btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+}
+
+.lp2-root .btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+  transform: none;
+}
+
+.lp2-root .btn--sm {
+  min-height: 44px;
+  padding: 6px 20px;
+}
+
+.lp2-root .btn--lg {
+  min-height: 56px;
+  padding: 12px 36px;
+}
+
+/* Reveal por scroll: fade + translateY(8px), 400ms, dispara uma vez (useReveal). */
+.lp2-root [data-reveal] {
+  opacity: 0;
+  transform: translateY(var(--reveal-offset));
+  transition: opacity var(--reveal-duration) ease-out,
+    transform var(--reveal-duration) ease-out;
+  transition-delay: calc(var(--reveal-i, 0) * var(--reveal-stagger));
+}
+
+.lp2-root .is-visible [data-reveal] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Foto em sangria + gradiente de legibilidade */
+.lp2-backdrop {
+  position: absolute;
+  inset: 0;
+  background-image: var(--media-bg);
+  background-size: cover;
+  background-position: center;
+}
+
+.lp2-backdrop__scrim {
+  position: absolute;
+  inset: 0;
+}
+
+/* Mobile: coluna única de texto — o scrim escurece verticalmente.
+   Desktop: o gradiente vira direcional, forte no lado do texto. */
+.lp2-backdrop__scrim--left,
+.lp2-backdrop__scrim--right {
+  background: linear-gradient(
+    180deg,
+    var(--scrim-strong) 0%,
+    var(--scrim-strong) 55%,
+    var(--scrim-weak) 100%
+  );
+}
+
+@media (min-width: 800px) {
+  .lp2-backdrop__scrim--left {
+    background: linear-gradient(90deg, var(--scrim-strong) 30%, var(--scrim-weak) 100%);
+  }
+
+  .lp2-backdrop__scrim--right {
+    background: linear-gradient(270deg, var(--scrim-strong) 30%, var(--scrim-weak) 100%);
+  }
+}
+
+.lp2-backdrop__scrim--center {
+  background: radial-gradient(
+    ellipse at center,
+    var(--scrim-strong) 0%,
+    var(--scrim-strong) 55%,
+    var(--scrim-weak) 100%
+  );
+}
+
+/* ============================ NAVBAR ====================================== */
+
+.lp2-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: var(--nav-h);
+  background: var(--nav-bg);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-dark);
+  color: var(--text-on-dark);
+}
+
+@supports not (backdrop-filter: blur(12px)) {
+  .lp2-nav {
+    background: var(--bg-dark);
+  }
+}
+
+.lp2-nav__inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.lp2-nav__logo {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.lp2-nav__logo img {
+  height: 26px;
+  width: auto;
+}
+
+.lp2-nav__links {
+  display: none;
+}
+
+@media (min-width: 800px) {
+  .lp2-nav__links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+.lp2-nav__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 16px;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-on-dark-muted);
+  transition: color 150ms ease;
+}
+
+.lp2-nav__link:hover {
+  color: var(--text-on-dark);
+}
+
+/* ============================= HERO ======================================= */
+
+.lp2-hero {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background: var(--bg-dark);
+  color: var(--text-on-dark);
+  --tone-muted: var(--text-on-dark-muted);
+  --tone-border: var(--border-dark);
+  --tone-accent: var(--accent);
+  padding: 64px 0 72px;
+}
+
+@media (min-width: 800px) {
+  .lp2-hero {
+    min-height: 90svh;
+    padding: 96px 0;
+  }
+}
+
+.lp2-hero .lp2-container {
+  position: relative;
+  z-index: 1;
+}
+
+.lp2-hero__content {
+  max-width: 820px;
+}
+
+@keyframes lp2-enter {
+  from {
+    opacity: 0;
+    transform: translateY(var(--reveal-offset));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.lp2-hero__content > * {
+  animation: lp2-enter var(--reveal-duration) ease-out both;
+}
+
+.lp2-hero__content > :nth-child(2) { animation-delay: calc(var(--reveal-stagger) * 1); }
+.lp2-hero__content > :nth-child(3) { animation-delay: calc(var(--reveal-stagger) * 2); }
+.lp2-hero__content > :nth-child(4) { animation-delay: calc(var(--reveal-stagger) * 3); }
+.lp2-hero__content > :nth-child(5) { animation-delay: calc(var(--reveal-stagger) * 4); }
+.lp2-hero__content > :nth-child(6) { animation-delay: calc(var(--reveal-stagger) * 5); }
+
+.lp2-hero__title {
+  margin-top: 16px;
+}
+
+.lp2-hero__subtitle {
+  margin-top: 24px;
+  max-width: 60ch;
+  color: var(--text-on-dark-muted);
+}
+
+.lp2-hero__audiences {
+  margin-top: 24px;
+  font-weight: 600;
+}
+
+.lp2-hero__cta {
+  margin-top: 32px;
+}
+
+.lp2-hero__meta {
+  margin-top: 24px;
+  font-size: var(--fs-small);
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--text-on-dark-muted);
+}
+
+/* ======================== TICKER DE PROVA ================================= */
+
+.lp2-section.lp2-ticker {
+  padding: 40px 0;
+  border-top: 1px solid var(--border-dark);
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.lp2-ticker__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px 16px;
+}
+
+@media (min-width: 800px) {
+  .lp2-ticker__list {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+}
+
+.lp2-ticker__item {
+  text-align: center;
+}
+
+.lp2-ticker__value {
+  display: block;
+  font-size: var(--fs-h2);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.lp2-ticker__label {
+  display: block;
+  margin-top: 8px;
+  font-size: var(--fs-small);
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--text-on-dark-muted);
+}
+
+/* ===================== PARA QUEM (tabs ↔ acordeão) ======================== */
+
+/* Mobile (base): acordeão — botão seguido do próprio painel, no fluxo.
+   Desktop (≥800px): o MESMO DOM vira barra de abas + painel via grid. */
+.lp2-audience {
+  border-top: 1px solid var(--tone-border);
+}
+
+.lp2-audience__tab {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  min-height: 56px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--tone-border);
+  font-size: var(--fs-h3);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+  text-align: left;
+  color: var(--tone-muted);
+  transition: color 150ms ease;
+}
+
+.lp2-audience__tab[aria-expanded="true"] {
+  color: var(--text-on-light);
+}
+
+.lp2-audience__tab-marker {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  transition: transform 200ms ease;
+}
+
+.lp2-audience__tab[aria-expanded="true"] .lp2-audience__tab-marker {
+  transform: rotate(180deg);
+}
+
+.lp2-audience__panel {
+  padding: 24px 0 32px;
+  border-bottom: 1px solid var(--tone-border);
+  color: var(--tone-muted);
+}
+
+.lp2-audience__panel[hidden] {
+  display: none;
+}
+
+@media (min-width: 800px) {
+  .lp2-audience {
+    display: grid;
+    /* --audience-tabs vem inline do componente (nº de grupos da config). */
+    grid-template-columns: repeat(var(--audience-tabs, 4), auto);
+    justify-content: start;
+    column-gap: 40px;
+    border-top: 0 solid transparent;
+  }
+
+  .lp2-audience__tab {
+    grid-row: 1;
+    width: auto;
+    min-height: 52px;
+    padding: 8px 4px 16px;
+    border-bottom: 2px solid transparent;
+    justify-content: flex-start;
+  }
+
+  .lp2-audience__tab[aria-expanded="true"] {
+    border-bottom-color: var(--accent);
+  }
+
+  .lp2-audience__tab-marker {
+    display: none;
+  }
+
+  .lp2-audience__panel {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    margin-top: 32px;
+    padding: 32px;
+    border-bottom: 0 solid transparent;
+    background: var(--bg-white);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    font-size: var(--fs-h3);
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+  }
+}
+
+.lp2-audience-closing {
+  margin-top: 32px;
+  color: var(--tone-muted);
+}
+
+/* ====================== O PROBLEMA (grid bento) =========================== */
+
+.lp2-bento {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .lp2-bento {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .lp2-bento > :first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 1000px) {
+  .lp2-bento {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .lp2-bento > :first-child {
+    grid-column: span 2;
+  }
+}
+
+.lp2-bento__item {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-dark);
+  border-radius: var(--radius-card);
+  padding: 24px;
+}
+
+@media (min-width: 800px) {
+  .lp2-bento__item {
+    padding: 32px;
+  }
+}
+
+.lp2-bento__num {
+  display: block;
+  font-size: var(--fs-small);
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.lp2-bento__title {
+  margin-top: 12px;
+}
+
+.lp2-bento__desc {
+  margin-top: 8px;
+  color: var(--text-on-dark-muted);
+}
+
+/* ====================== PROGRAMAÇÃO (timeline) ============================ */
+
+.lp2-timeline {
+  position: relative;
+}
+
+.lp2-timeline__item {
+  position: relative;
+  padding-left: 56px;
+  padding-bottom: 40px;
+}
+
+.lp2-timeline__item:last-child {
+  padding-bottom: 0;
+}
+
+/* Conectora vertical (mobile) */
+.lp2-timeline__item::before {
+  content: "";
+  position: absolute;
+  left: 19px;
+  top: 44px;
+  bottom: 4px;
+  width: 2px;
+  background: var(--tone-border);
+}
+
+.lp2-timeline__item:last-child::before {
+  content: none;
+}
+
+.lp2-timeline__node {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-pill);
+  background: var(--bg-light);
+  border: 2px solid var(--accent);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  z-index: 1;
+}
+
+.lp2-timeline__day {
+  display: block;
+  font-size: var(--fs-small);
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--tone-muted);
+  padding-top: 8px;
+}
+
+.lp2-timeline__hours {
+  margin-top: 8px;
+}
+
+.lp2-timeline__panels {
+  margin-top: 8px;
+  color: var(--tone-muted);
+}
+
+@media (min-width: 800px) {
+  .lp2-timeline {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  /* Conectora horizontal única; os nós opacos a mascaram. */
+  .lp2-timeline::before {
+    content: "";
+    position: absolute;
+    top: 19px;
+    left: 12%;
+    right: 12%;
+    height: 2px;
+    background: var(--tone-border);
+  }
+
+  .lp2-timeline__item {
+    padding-left: 0;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .lp2-timeline__item::before {
+    content: none;
+  }
+
+  .lp2-timeline__node {
+    position: relative;
+  }
+
+  .lp2-timeline__day {
+    padding-top: 16px;
+  }
+}
+
+/* ============================ CITAÇÃO ===================================== */
+
+.lp2-quote {
+  display: flex;
+  align-items: center;
+  min-height: 60svh;
+}
+
+@media (min-width: 800px) {
+  .lp2-quote {
+    min-height: 100vh;
+  }
+}
+
+.lp2-quote .lp2-container {
+  width: 100%;
+}
+
+.lp2-quote__figure {
+  max-width: 900px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.lp2-quote__mark {
+  display: block;
+  font-size: var(--fs-display);
+  line-height: 0.6;
+  font-weight: 800;
+  color: var(--text-on-dark-muted);
+  margin-bottom: 24px;
+}
+
+.lp2-quote__text {
+  font-size: var(--fs-h2);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  font-weight: 800;
+}
+
+.lp2-quote__support {
+  margin-top: 24px;
+  max-width: 60ch;
+  margin-inline: auto;
+  color: var(--text-on-dark-muted);
+}
+
+.lp2-quote__attribution {
+  margin-top: 24px;
+  font-size: var(--fs-small);
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--text-on-dark-muted);
+}
+
+/* ============================ BANCADA ===================================== */
+
+.lp2-speakers__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 600px) {
+  .lp2-speakers__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1000px) {
+  .lp2-speakers__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+}
+
+.lp2-speaker {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-dark);
+  border-radius: var(--radius-card);
+  padding: 20px;
+}
+
+.lp2-speaker__institution {
+  font-size: var(--fs-small);
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--accent);
+  min-height: calc(2 * 1.4em);
+}
+
+.lp2-speaker__photo {
+  margin-top: 16px;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-input);
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--bg-elevated), var(--bg-dark));
+}
+
+.lp2-speaker__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 20%;
+}
+
+.lp2-speaker__name {
+  margin-top: 16px;
+}
+
+.lp2-speaker__bio {
+  margin-top: 8px;
+  color: var(--text-on-dark-muted);
+}
+
+/* ================= EXPERIÊNCIA PRESENCIAL (galeria) ======================= */
+
+.lp2-gallery {
+  columns: 2;
+  column-gap: 16px;
+}
+
+@media (min-width: 800px) {
+  .lp2-gallery {
+    columns: 3;
+    column-gap: 20px;
+  }
+}
+
+.lp2-gallery__item {
+  break-inside: avoid;
+  margin-bottom: 16px;
+}
+
+.lp2-gallery__item img {
+  width: 100%;
+  border-radius: var(--radius-card);
+}
+
+.lp2-gallery__caption {
+  padding-top: 8px;
+  font-size: var(--fs-small);
+  line-height: 1.4;
+  font-weight: 600;
+  color: var(--tone-muted);
+}
+
+/* ============================= PLANOS ===================================== */
+
+.lp2-plans__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 700px) {
+  .lp2-plans__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1100px) {
+  .lp2-plans__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.lp2-plan {
+  position: relative;
+  background: var(--bg-white);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Destaque: exceção sancionada — borda accent 2px + etiqueta. */
+.lp2-plan--highlighted {
+  border: 2px solid var(--accent);
+}
+
+/* Mobile: o destacado vem primeiro na pilha; no grid largo, ordem natural. */
+.lp2-plan--highlighted {
+  order: -1;
+}
+
+@media (min-width: 700px) {
+  .lp2-plan--highlighted {
+    order: 0;
+  }
+}
+
+.lp2-plan__label {
+  position: absolute;
+  top: -14px;
+  left: 24px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 2px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: var(--fs-small);
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.lp2-plan__badge {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-light);
+  font-size: var(--fs-small);
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--text-on-light-muted);
+}
+
+.lp2-plan__name {
+  font-size: var(--fs-h3);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+
+.lp2-plan__price {
+  margin-top: 4px;
+  font-size: var(--fs-h2);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  font-weight: 800;
+}
+
+.lp2-plan__features {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lp2-plan__feature {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: var(--fs-body);
+  line-height: 1.45;
+}
+
+.lp2-plan__feature--off {
+  color: var(--text-on-light-muted);
+}
+
+.lp2-plan__mark {
+  flex: none;
+  width: 20px;
+  text-align: center;
+  font-weight: 800;
+  color: var(--tone-accent, var(--accent));
+}
+
+.lp2-plan__feature--off .lp2-plan__mark {
+  color: var(--text-on-light-muted);
+  font-weight: 400;
+}
+
+.lp2-plans__payment {
+  margin-top: 40px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.lp2-plans__batch {
+  margin-top: 12px;
+  text-align: center;
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  color: var(--tone-muted);
+}
+
+.lp2-plans__cta {
+  margin-top: 32px;
+  text-align: center;
+}
+
+/* =========================== AVALIAÇÕES =================================== */
+
+.lp2-reviews {
+  display: grid;
+  gap: 40px;
+}
+
+@media (min-width: 1000px) {
+  .lp2-reviews {
+    grid-template-columns: 280px 1fr;
+    align-items: start;
+  }
+}
+
+.lp2-reviews__rating {
+  font-size: var(--fs-display);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+}
+
+.lp2-reviews__stars {
+  margin-top: 12px;
+  position: relative;
+  display: inline-flex;
+}
+
+.lp2-reviews__stars-row {
+  display: flex;
+  gap: 4px;
+  color: var(--text-on-dark-muted);
+}
+
+.lp2-reviews__stars-row--filled {
+  position: absolute;
+  inset: 0;
+  color: var(--accent);
+  overflow: hidden;
+}
+
+.lp2-reviews__volume {
+  margin-top: 12px;
+  color: var(--text-on-dark-muted);
+}
+
+.lp2-reviews__source {
+  margin-top: 4px;
+  font-size: var(--fs-small);
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--text-on-dark-muted);
+}
+
+.lp2-reviews__cards {
+  display: grid;
+  gap: 16px;
+}
+
+@media (min-width: 800px) {
+  .lp2-reviews__cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.lp2-review {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-dark);
+  border-radius: var(--radius-card);
+  padding: 20px;
+}
+
+.lp2-review__author {
+  margin-top: 16px;
+  font-size: var(--fs-small);
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--text-on-dark-muted);
+}
+
+/* ====================== PRESENCIAL vs ONLINE ============================== */
+
+.lp2-compare {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Mobile: cada linha vira um mini-bloco; o nome da coluna vem de data-col. */
+.lp2-compare thead {
+  display: none;
+}
+
+.lp2-compare tbody,
+.lp2-compare tr,
+.lp2-compare th,
+.lp2-compare td {
+  display: block;
+  text-align: left;
+}
+
+.lp2-compare tr {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--tone-border);
+}
+
+.lp2-compare th[scope="row"] {
+  grid-column: 1 / -1;
+  font-size: var(--fs-body);
+  font-weight: 600;
+}
+
+.lp2-compare td::before {
+  content: attr(data-col);
+  display: block;
+  font-size: var(--fs-small);
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--tone-muted);
+  margin-bottom: 4px;
+}
+
+@media (min-width: 800px) {
+  .lp2-compare thead {
+    display: table-header-group;
+  }
+
+  .lp2-compare tbody {
+    display: table-row-group;
+  }
+
+  .lp2-compare tr {
+    display: table-row;
+    padding: 0;
+    border-bottom: 0 solid transparent;
+  }
+
+  .lp2-compare th,
+  .lp2-compare td {
+    display: table-cell;
+    padding: 16px;
+    border-bottom: 1px solid var(--tone-border);
+    vertical-align: middle;
+  }
+
+  .lp2-compare thead th {
+    font-size: var(--fs-small);
+    line-height: 1.4;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--tone-muted);
+    text-align: center;
+  }
+
+  .lp2-compare th[scope="row"] {
+    font-weight: 600;
+    text-align: left;
+    width: 50%;
+  }
+
+  .lp2-compare td {
+    text-align: center;
+  }
+
+  .lp2-compare td::before {
+    content: none;
+  }
+}
+
+.lp2-compare__mark {
+  font-weight: 800;
+  color: var(--tone-accent, var(--accent));
+}
+
+.lp2-compare__mark--off {
+  font-weight: 400;
+  color: var(--tone-muted);
+}
+
+/* ============================== FAQ ======================================= */
+
+.lp2-faq {
+  max-width: 800px;
+  margin-inline: auto;
+}
+
+.lp2-faq__item {
+  border-bottom: 1px solid var(--tone-border);
+}
+
+.lp2-faq__item:first-child {
+  border-top: 1px solid var(--tone-border);
+}
+
+.lp2-faq__q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 44px;
+  padding: 24px 0;
+  font-size: var(--fs-h3);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+  text-align: left;
+}
+
+.lp2-faq__chevron {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  transition: transform 200ms ease;
+}
+
+.lp2-faq__item.is-open .lp2-faq__chevron {
+  transform: rotate(180deg);
+}
+
+.lp2-faq__a {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 250ms ease;
+}
+
+.lp2-faq__item.is-open .lp2-faq__a {
+  grid-template-rows: 1fr;
+}
+
+.lp2-faq__a-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.lp2-faq__a-inner > * {
+  padding-bottom: 24px;
+  color: var(--tone-muted);
+  max-width: 60ch;
+}
+
+/* ========================= FORMULÁRIO ===================================== */
+
+.lp2-form-section .lp2-sec-head {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.lp2-form-section__meta {
+  margin-top: 16px;
+  font-size: var(--fs-small);
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--text-on-dark-muted);
+}
+
+.lp2-form-card {
+  max-width: 720px;
+  margin-inline: auto;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-dark);
+  border-radius: var(--radius-card);
+  padding: 24px 20px;
+}
+
+@media (min-width: 800px) {
+  .lp2-form-card {
+    padding: 40px;
+  }
+}
+
+/* Estilos para as classes emitidas pelo LeadForm (componente reusado como está) */
+.lp2-root .lp-form__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .lp2-root .lp-form__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .lp2-root .lp-form__field--full {
+    grid-column: 1 / -1;
+  }
+}
+
+.lp2-root .lp-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.lp2-root .lp-form__field label,
+.lp2-root .lp-form__toggle-label {
+  font-size: var(--fs-small);
+  line-height: 1.4;
+  font-weight: 600;
+  color: var(--text-on-dark);
+}
+
+.lp2-root .req {
+  color: var(--accent);
+}
+
+.lp2-root .lp-form__field input {
+  min-height: 48px;
+  padding: 8px 14px;
+  background: var(--bg-dark);
+  border: 1px solid var(--border-dark);
+  border-radius: var(--radius-input);
+  color: var(--text-on-dark);
+  font-family: var(--font);
+  /* --fs-body nunca fica abaixo de 17px — também evita o zoom do iOS (<16px). */
+  font-size: var(--fs-body);
+  line-height: 1.4;
+  width: 100%;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.lp2-root .lp-form__field input::placeholder {
+  color: var(--text-on-dark-muted);
+  opacity: 1;
+}
+
+.lp2-root .lp-form__field input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-ring);
+}
+
+.lp2-root .lp-form__field input:-webkit-autofill,
+.lp2-root .lp-form__field input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--text-on-dark);
+  -webkit-box-shadow: 0 0 0 1000px var(--bg-dark) inset;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+.lp2-root .lp-form__field.is-error input {
+  border-color: var(--error);
+}
+
+.lp2-root .lp-form__err {
+  font-size: var(--fs-small);
+  line-height: 1.4;
+  color: var(--error);
+}
+
+.lp2-root .lp-form__toggle-group {
+  display: flex;
+  gap: 8px;
+}
+
+.lp2-root .lp-form__toggle-btn {
+  flex: 1;
+  min-height: 48px;
+  padding: 8px 16px;
+  background: var(--bg-dark);
+  border: 1px solid var(--border-dark);
+  border-radius: var(--radius-input);
+  color: var(--text-on-dark-muted);
+  font-weight: 600;
+  transition: border-color 150ms ease, color 150ms ease, background 150ms ease;
+}
+
+.lp2-root .lp-form__toggle-btn.is-active {
+  border: 1px solid var(--accent);
+  background: var(--accent-tint);
+  color: var(--text-on-dark);
+}
+
+.lp2-root .lp-form__submit {
+  width: 100%;
+  margin-top: 24px;
+}
+
+/* ===================== STICKY CTA (mobile) ================================ */
+
+.lp2-sticky {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: var(--sticky-cta-h);
+  padding: 8px var(--gutter) calc(8px + env(safe-area-inset-bottom));
+  background: var(--bg-elevated);
+  border-top: 1px solid var(--border-dark);
+  color: var(--text-on-dark);
+  transform: translateY(100%);
+  transition: transform 250ms ease-out;
+  pointer-events: none;
+}
+
+.lp2-sticky.is-visible {
+  transform: none;
+  pointer-events: auto;
+}
+
+.lp2-sticky__price {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.lp2-sticky .btn {
+  white-space: nowrap;
+}
+
+@media (min-width: 800px) {
+  .lp2-sticky {
+    display: none;
+  }
+}
+
+/* ============================ RODAPÉ ====================================== */
+
+.lp2-footer {
+  background: var(--bg-dark);
+  color: var(--text-on-dark);
+  border-top: 1px solid var(--border-dark);
+  padding: 56px 0;
+}
+
+.lp2-footer__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  text-align: center;
+}
+
+.lp2-footer__logo img {
+  height: 28px;
+  width: auto;
+}
+
+.lp2-footer__partners-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.lp2-footer__partners-label {
+  font-size: var(--fs-small);
+  line-height: 1.4;
+  color: var(--text-on-dark-muted);
+}
+
+.lp2-footer__partners {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+.lp2-footer__partner-img {
+  height: 32px;
+  width: auto;
+  opacity: 0.85;
+}
+
+/* Converte logos coloridos/escuros em marca branca sobre o rodapé escuro. */
+.lp2-footer__partner-img--invert {
+  filter: brightness(0) invert(1);
+}
+
+.lp2-footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 24px;
+}
+
+.lp2-footer__legal a,
+.lp2-footer__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font-size: var(--fs-small);
+  line-height: 1.4;
+  font-weight: 600;
+  color: var(--text-on-dark-muted);
+  transition: color 150ms ease;
+}
+
+.lp2-footer__legal a:hover,
+.lp2-footer__link:hover {
+  color: var(--text-on-dark);
+}
+
+.lp2-footer__social {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 24px;
+}
+
+.lp2-footer__link svg {
+  fill: currentColor;
+}
+
+.lp2-footer__copy {
+  font-size: var(--fs-small);
+  line-height: 1.4;
+  color: var(--text-on-dark-muted);
+}
+
+/* ===================== MOVIMENTO REDUZIDO ================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .lp2-root *,
+  .lp2-root *::before,
+  .lp2-root *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
+  }
+}
