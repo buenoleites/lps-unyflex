@@ -54,7 +54,7 @@ export const comunicacaoContent: EventLpContent = {
       </>
     ),
     subtitle:
-      "Com protocolo, técnica e critério jurídico. Você sai com método — e com os checklists prontos.",
+      "Crises, fake news, período eleitoral e o limite entre informar e fazer promoção pessoal: 4 dias para tirar a comunicação do seu órgão do improviso, com protocolo, técnica e critério jurídico. Você sai com método — e com os checklists prontos.",
     audiences:
       "Assessoria de imprensa • social media • coordenação de comunicação • chefia de gabinete",
     cta: { label: "Garanta sua vaga" },
