@@ -36,16 +36,17 @@ export default function OgImage() {
         </div>
         <div
           style={{
-            fontSize: "60px",
+            fontSize: "54px",
             fontWeight: 800,
             color: "#ffffff",
-            lineHeight: 1.05,
+            lineHeight: 1.1,
             letterSpacing: "-1px",
             marginBottom: "28px",
-            maxWidth: "960px",
+            maxWidth: "1000px",
           }}
         >
-          Em ano de eleição, tire a comunicação do seu órgão do improviso.
+          Em ano de eleição, um post errado não se apaga. Alguém responde por
+          ele — e o nome é o seu.
         </div>
         <div
           style={{

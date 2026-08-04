@@ -4,9 +4,8 @@ import Kw from "@/components/lp2/Kw";
 /* TODA a copy e todos os paths de imagem desta LP vivem aqui — os componentes
    do template (components/lp2/) não têm texto próprio.
 
-   A copy veio fechada do briefing (não reescrever). Alguns trechos chegaram
-   truncados na transmissão e foram reconstruídos no mesmo tom — cada um está
-   marcado com "TODO [CONFIRMAR COPY]" e listado no relatório de entrega. */
+   A copy veio fechada do briefing (não reescrever) e os trechos que chegaram
+   truncados foram batidos com o original pelo Gustavo em 04/08/2026. */
 
 /* A ordem dos itens é a mesma nos 3 planos presenciais — as linhas se alinham
    visualmente entre os cards. Os arrays de booleans têm sempre o mesmo
@@ -48,13 +47,10 @@ export const comunicacaoContent: EventLpContent = {
 
   hero: {
     eyebrow: "CURSO PRESENCIAL E ONLINE · CURITIBA",
-    // TODO [CONFIRMAR COPY]: o headline chegou truncado no briefing ("...um
-    // posar a comunicação do seu órgão do improviso..."). Reconstrução fiel ao
-    // restante do período; a divisão título/subtítulo segue o padrão do template.
     title: (
       <>
-        Em ano de eleição, é hora de tirar a comunicação do seu órgão do{" "}
-        <Kw>improviso</Kw>.
+        Em ano de eleição, um post errado não se apaga. Alguém responde por
+        ele — <Kw>e o nome é o seu</Kw>.
       </>
     ),
     subtitle:
@@ -63,8 +59,9 @@ export const comunicacaoContent: EventLpContent = {
       "Assessoria de imprensa • social media • coordenação de comunicação • chefia de gabinete",
     cta: { label: "Garanta sua vaga" },
     meta: "4 dias · 17 horas · Curitiba-PR · 01 a 04 de setembro de 2026 · presencial e online ao vivo",
-    // TODO [ASSET]: foto real de evento Unyflex a fornecer; placeholder
-    // reaproveitado da LP reforma até a foto oficial chegar.
+    // Foto oficial Unyflex (planilha de fotos, "palestrante-e-plateia"):
+    // salão cheio com palestrante de costas — ninguém identificável como
+    // professor deste curso, cuja bancada ainda não foi confirmada.
     bgSrc: "/comunicacao/hero.jpg",
   },
 
@@ -87,13 +84,10 @@ export const comunicacaoContent: EventLpContent = {
           "assessores de comunicação · jornalistas de órgãos públicos · responsáveis por release, coletiva e relacionamento com a mídia",
       },
       {
-        // TODO [CONFIRMAR COPY]: a descrição desta aba chegou truncada no
-        // briefing ("social media institucional · quem cuida de ... campanhas
-        // digitais") — miolo reconstruído.
         id: "redes",
         label: "Redes e digital",
         description:
-          "social media institucional · quem cuida das redes e de campanhas digitais",
+          "social media institucional · atendimento em redes e campanhas digitais",
       },
       {
         id: "coordenacao",
@@ -127,10 +121,8 @@ export const comunicacaoContent: EventLpContent = {
         desc: "A linha entre caráter informativo e promoção pessoal é o Art. 37 da Constituição. Cruzá-la sem saber não protege ninguém.",
       },
       {
-        // TODO [CONFIRMAR COPY]: título truncado no briefing ("Período es...");
-        // reconstruído a partir do restante do card.
-        title: "Período eleitoral já começou",
-        desc: "As vedações de publicidade institucional já estão em vigor. O que não sair do ar no prazo tem nome, cargo e responsabilização.",
+        title: "Período eleitoral: o relógio já corre",
+        desc: "As vedações de publicidade institucional já estão em vigor desde julho. O que não sair do ar no prazo tem nome, cargo e responsabilização.",
       },
       {
         title: "Equipe que faz tudo — sem método",
@@ -175,15 +167,12 @@ export const comunicacaoContent: EventLpContent = {
         ),
       },
       {
-        // TODO [CONFIRMAR COPY]: o 2º módulo do dia chegou corrompido no
-        // briefing ("Conduta �caso reais)") — reconstruído a partir do card 07
-        // do problema (assédio, conduta e violência laboral).
         label: "Dia 3",
         hours: "03/09",
         panels: (
           <>
-            Mídias Sociais e Marketing Digital · Conduta, Assédio e Violência
-            Laboral <em>(análise de casos reais)</em>
+            Mídias Sociais e Marketing Digital · Conduta Ética, Assédio e
+            Violências Laborais <em>(estudos de caso reais)</em>
           </>
         ),
       },
@@ -271,9 +260,6 @@ export const comunicacaoContent: EventLpContent = {
         ]),
       },
       {
-        // TODO [CONFIRMAR COPY]: o briefing não lista coffee breaks no
-        // PremiumClass, mas o plano é superconjunto do MasterClass — mantido
-        // como incluso até confirmação.
         name: "PremiumClass",
         price: "R$ 3.800",
         features: planoFeatures("Capacitação prática em 4 dias", [
@@ -281,11 +267,8 @@ export const comunicacaoContent: EventLpContent = {
         ]),
       },
     ],
-    // TODO [CONFIRMAR COPY]: o fim da linha chegou truncado no briefing
-    // ("...conclusão do curso.ação."); reconstruído a partir da resposta do FAQ
-    // sobre nota de empenho.
     paymentNote:
-      "Aceitamos nota de empenho, cartão e PIX. Pagamento em até 7 dias após a conclusão do curso. Fornecemos toda a documentação para a contratação.",
+      "Aceitamos nota de empenho, cartão e PIX. Pagamento em até 7 dias após a conclusão do curso. Fornecemos toda a documentação necessária para a contratação.",
     // Não existe regra de lote neste evento (não inventar contagem regressiva).
     // O campo abaixo (small muted sob os cards) aloja a linha de certificação.
     batchNote:
@@ -346,11 +329,8 @@ export const comunicacaoContent: EventLpContent = {
         a: "Foco em comunicação pública institucional — imprensa, redes, crises e campanhas. Ouvidoria, jurídico e controle interno aproveitam os recortes de LGPD, conduta e período eleitoral como apoio à função.",
       },
       {
-        // TODO [CONFIRMAR COPY]: o miolo da resposta chegou truncado no
-        // briefing ("é inteiro sobre isso:, e você sai...") — reconstruído a
-        // partir do módulo do Dia 4.
         q: "O que exatamente vou aprender sobre o período eleitoral?",
-        a: "O módulo final é inteiro sobre isso: contratação, impulsionamento e as vedações de publicidade institucional em ano de eleição — e você sai com um checklist prático do que deve sair do ar antes do pleito.",
+        a: "O módulo final é inteiro sobre isso: o que pode e o que não pode ser publicado ou impulsionado, e você sai com um checklist prático do que deve sair do ar antes do pleito.",
       },
       {
         q: "Sou de prefeitura pequena, equipe de 1–2 pessoas. É para mim?",
@@ -376,8 +356,7 @@ export const comunicacaoContent: EventLpContent = {
   form: {
     title: "Garanta sua vaga no Comunicação Pública 360º",
     meta: "4 dias · 17 horas · Curitiba-PR · 01 a 04 de setembro de 2026 · presencial e online ao vivo",
-    // TODO [ASSET]: foto real de evento Unyflex a fornecer; placeholder
-    // reaproveitado da LP reforma até a foto oficial chegar.
+    // Foto oficial Unyflex (planilha de fotos, "IMG_5948"): plateia atenta.
     bgSrc: "/comunicacao/cta-final.jpg",
     // TODO na promoção a definitivo: trocar para "lp-comunicacao" para abrir a
     // série no CRM. O id -teste evita misturar leads de teste com produção.

@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Comunicação Pública 360º — Estratégias e Impacto | Unyflex",
     description:
-      "Em ano de eleição, tire a comunicação do seu órgão do improviso. 4 dias, 17 horas, Curitiba e online ao vivo, 01 a 04 de setembro de 2026.",
+      "Em ano de eleição, um post errado não se apaga — alguém responde por ele. 4 dias, 17 horas, Curitiba e online ao vivo, 01 a 04 de setembro de 2026.",
     url: "/comunicacao",
     siteName: "Unyflex",
     locale: "pt_BR",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Comunicação Pública 360º — Estratégias e Impacto | Unyflex",
     description:
-      "Em ano de eleição, tire a comunicação do seu órgão do improviso. 4 dias, 17 horas, Curitiba e online ao vivo, 01 a 04 de setembro de 2026.",
+      "Em ano de eleição, um post errado não se apaga — alguém responde por ele. 4 dias, 17 horas, Curitiba e online ao vivo, 01 a 04 de setembro de 2026.",
   },
 };
 
