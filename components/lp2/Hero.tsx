@@ -22,7 +22,7 @@ export default function Hero({ content }: { content: EventLpContent["hero"] }) {
 
           <a
             className="btn btn--primary btn--lg lp2-hero__cta"
-            href="#inscricao"
+            href={content.cta.href ?? "#inscricao"}
             onClick={handleAnchorClick}
           >
             {content.cta.label}

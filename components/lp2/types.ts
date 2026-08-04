@@ -30,7 +30,8 @@ export interface EventLpContent {
     subtitle: string;
     /** Linha de públicos, peso 600. */
     audiences: string;
-    cta: { label: string };
+    /** href opcional (âncora interna); sem ele o CTA vai para "#inscricao". */
+    cta: { label: string; href?: string };
     /** Linha de meta (dias, horas, cidade, datas) em small muted. */
     meta: string;
     bgSrc?: string;
