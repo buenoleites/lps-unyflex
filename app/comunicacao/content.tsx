@@ -57,7 +57,10 @@ export const comunicacaoContent: EventLpContent = {
       "Crises, fake news, período eleitoral e o limite entre informar e fazer promoção pessoal: 4 dias para tirar a comunicação do seu órgão do improviso, com protocolo, técnica e critério jurídico. Você sai com método — e com os checklists prontos.",
     audiences:
       "Assessoria de imprensa • social media • coordenação de comunicação • chefia de gabinete",
-    cta: { label: "Garanta sua vaga" },
+    // #planos, não #inscricao: o lead precisa ver o preço antes do formulário —
+    // quem preenche sem saber que custa R$ 2.980+ chega desqualificado ao
+    // comercial, que é o gargalo da operação.
+    cta: { label: "Garanta sua vaga", href: "#planos" },
     meta: "4 dias · 17 horas · Curitiba-PR · 01 a 04 de setembro de 2026 · presencial e online ao vivo",
     // Foto oficial Unyflex (planilha de fotos, "palestrante-e-plateia"):
     // salão cheio com palestrante de costas — ninguém identificável como
@@ -87,7 +90,7 @@ export const comunicacaoContent: EventLpContent = {
         id: "redes",
         label: "Redes e digital",
         description:
-          "social media institucional · atendimento em redes e campanhas digitais",
+          "social media institucional · responsáveis por posts, atendimento em redes, monitoramento e campanhas digitais",
       },
       {
         id: "coordenacao",
