@@ -1,0 +1,29 @@
+/* Tema da LP Comunicação Pública 360º — sobrescreve os tokens de COR DE AÇÃO
+   do lp2.css. Este é o ÚNICO bloco de cor da LP: nenhum literal de cor fora
+   daqui (exceção: opengraph-image.tsx, que não lê CSS — mesmo precedente do
+   licitaexpo-v2).
+
+   O seletor .lpc-theme (wrapper no layout da rota) vence o bloco default de
+   .lp2-root por especificidade, independente da ordem dos imports de CSS. */
+.lpc-theme .lp2-root {
+  --accent: #4faef7; /* azul Comunicação — 8,0:1 sobre --bg-dark */
+  --accent-ink: #071016; /* texto sobre accent — 8,0:1; branco reprovaria AA */
+  --accent-ring: rgba(79, 174, 247, 0.28);
+  --accent-tint: rgba(79, 174, 247, 0.12);
+  --accent-deep: #1769ab; /* accent p/ texto/foco em superfície clara — 5,8:1 no branco, 5,3:1 no --bg-light */
+}
+
+/* Navbar mais completa (nav.links foi de 3 para 5 itens): centraliza os links
+   entre logo e CTA no desktop. <800px o template já esconde os links
+   (.lp2-nav__links, app/lp2.css) — nada a centralizar lá. */
+@media (min-width: 800px) {
+  .lpc-theme .lp2-nav__inner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 16px;
+  }
+
+  .lpc-theme .lp2-nav__links {
+    justify-content: center;
+  }
+}
