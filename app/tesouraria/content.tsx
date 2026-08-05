@@ -385,8 +385,7 @@ export const tesourariaContent: EventLpContent = {
     // [ASSET PROVISÓRIO]: foto oficial Unyflex reaproveitada da /comunicacao
     // (plateia atenta). TODO: substituir quando o asset desta LP chegar.
     bgSrc: "/tesouraria/cta-final.jpg",
-    // TODO [PROMOÇÃO A DEFINITIVO]: trocar para "lp-tesouraria".
-    formId: "lp-tesouraria-teste",
+    formId: "lp-tesouraria",
     submitLabel: "Garanta sua vaga",
     thankYou: { url: "/obrigado", withPii: false },
   },

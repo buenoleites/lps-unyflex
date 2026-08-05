@@ -3,9 +3,7 @@ import Script from "next/script";
 import "../lp2.css";
 import "./theme.css";
 
-/* A Nova Era da Tesouraria e Contabilidade Municipal no template lp2.
-   ROTA EM TESTE: na promoção a definitivo, remover o `robots` de noindex e
-   trocar o formId em ./content.tsx para "lp-tesouraria". */
+/* A Nova Era da Tesouraria e Contabilidade Municipal no template lp2. */
 
 export const metadata: Metadata = {
   // O root layout define metadataBase com o path /licitacao embutido, o que
@@ -30,8 +28,6 @@ export const metadata: Metadata = {
     "encerramento de exercício",
     "IA na gestão pública",
   ],
-  // TODO [PROMOÇÃO A DEFINITIVO]: remover o noindex abaixo.
-  robots: { index: false, follow: false },
   alternates: {
     canonical: "/tesouraria",
   },
