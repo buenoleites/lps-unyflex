@@ -1,0 +1,39 @@
+/* Tema da LP A Nova Era da Tesouraria e Contabilidade Municipal — sobrescreve
+   os tokens de COR DE AÇÃO do lp2.css. Este é o ÚNICO bloco de cor da LP:
+   nenhum literal de cor fora daqui (exceção: opengraph-image.tsx, que não lê
+   CSS — mesmo precedente das outras instâncias lp2).
+
+   O seletor .lpt-theme (wrapper no layout da rota) vence o bloco default de
+   .lp2-root por especificidade, independente da ordem dos imports de CSS. */
+.lpt-theme .lp2-root {
+  --accent: #69acf1; /* azul Tesouraria — 8,1:1 sobre --bg-dark, 7,4:1 sobre --bg-elevated */
+  --accent-ink: #071016; /* texto sobre accent — 8,0:1; branco reprovaria AA (2,4:1) */
+  --accent-ring: rgba(105, 172, 241, 0.28);
+  --accent-tint: rgba(105, 172, 241, 0.12);
+  --accent-deep: #1165bb; /* accent p/ texto/foco em superfície clara — 5,8:1 no branco, 5,4:1 no --bg-light */
+}
+
+/* Bancada com só 2 professores: o template abre 3 colunas no desktop e o grid
+   ficaria esparso. Trava em 2 colunas centralizadas (o gap de 24px em >=1000px
+   do lp2.css continua valendo — esta regra não declara gap). */
+@media (min-width: 600px) {
+  .lpt-theme .lp2-speakers__grid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 720px;
+    margin-inline: auto;
+  }
+}
+
+/* Navbar com 5 links (mesmo caso da /comunicacao): centraliza os links entre
+   logo e CTA no desktop. <800px o template já esconde os links. */
+@media (min-width: 800px) {
+  .lpt-theme .lp2-nav__inner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 16px;
+  }
+
+  .lpt-theme .lp2-nav__links {
+    justify-content: center;
+  }
+}
