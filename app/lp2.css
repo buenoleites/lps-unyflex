@@ -1887,6 +1887,21 @@
   gap: 8px 24px;
 }
 
+/* O link com texto (o do Google) numa linha só dele até 800px: no mobile ele
+   sozinho ocupa mais de metade da fileira e empurrava o último ícone para uma
+   segunda linha, sobrando um ícone órfão. Assim a quebra é deliberada e não
+   depende do comprimento do rótulo. */
+.lp2-footer__link--labeled {
+  flex-basis: 100%;
+  justify-content: center;
+}
+
+@media (min-width: 800px) {
+  .lp2-footer__link--labeled {
+    flex-basis: auto;
+  }
+}
+
 .lp2-footer__link svg {
   fill: currentColor;
 }

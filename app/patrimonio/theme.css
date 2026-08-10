@@ -32,24 +32,6 @@
   }
 }
 
-/* Ticker com 3 métricas (o nº de avaliações do Google saiu por não estar
-   confirmado): o grid do template é fixo em 2 colunas no mobile e 4 no
-   desktop, o que deixaria uma célula vazia. No mobile o 3º ocupa a linha
-   inteira; no desktop, três colunas iguais. */
-.lpp-theme .lp2-ticker__item:last-child {
-  grid-column: 1 / -1;
-}
-
-@media (min-width: 800px) {
-  .lpp-theme .lp2-ticker__list {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .lpp-theme .lp2-ticker__item:last-child {
-    grid-column: auto;
-  }
-}
-
 /* Navbar com 5 links (mesmo caso da /comunicacao e /tesouraria): centraliza os
    links entre logo e CTA no desktop. <800px o template já esconde os links. */
 @media (min-width: 800px) {

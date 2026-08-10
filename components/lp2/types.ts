@@ -37,7 +37,17 @@ export interface EventLpContent {
     bgSrc?: string;
   };
 
-  /** 02 — ticker de prova: 4 métricas (número grande accent + label small). */
+  /**
+   * 02 — ticker de prova: 4 métricas (número grande accent + label small).
+   * São 4 e não "quantas quiser": o grid do template é fixo em 2 colunas no
+   * mobile e 4 no desktop, então 3 ou 5 deixam célula órfã.
+   *
+   * A métrica do Google é a mesma nas quatro instâncias:
+   * `{ value: "5,0", label: "no Google · +450 avaliações" }` — perfil verificado
+   * pelo Gustavo em 10/08/2026 (5,0 estrelas, 458 avaliações). O "+450" continua
+   * verdadeiro quando a contagem sobe; trocar por um número exato obriga a
+   * reescrever as quatro rotas a cada mês.
+   */
   ticker: {
     metrics: { value: string; label: string }[];
   };
@@ -180,7 +190,7 @@ export interface EventLpContent {
     social: {
       kind: "google" | "instagram" | "linkedin" | "youtube";
       href: string;
-      /** Texto visível ao lado do ícone (ex.: "400+ avaliações" no Google). */
+      /** Texto visível ao lado do ícone (no Google: "5,0 no Google · +450 avaliações"). */
       label?: string;
     }[];
     copyright: string;

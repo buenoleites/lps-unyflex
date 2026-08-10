@@ -82,13 +82,11 @@ export const patrimonioContent: EventLpContent = {
     bgSrc: "/patrimonio/hero.jpg",
   },
 
-  /* 3 métricas: o número de avaliações do Google saiu por não estar
-     confirmado (número não confirmado não entra na página, ainda que venha do
-     template clonado). O grid de 4 colunas é ajustado em theme.css. */
   ticker: {
     metrics: [
       { value: "49.000+", label: "alunos formados" },
       { value: "1.200+", label: "órgãos atendidos" },
+      { value: "5,0", label: "no Google · +450 avaliações" },
       { value: "17", label: "horas de capacitação" },
     ],
   },
@@ -387,9 +385,9 @@ export const patrimonioContent: EventLpContent = {
      O briefing pede o bloco de avaliações do Google; [PENDENTE] os prints das
      avaliações reais (pedido no relatório). Para ligar, preencha e descomente:
   reviews: {
-    rating: "[PENDENTE] 4,9",
-    ratingValue: 4.9,
-    volume: "[PENDENTE] nº de avaliações",
+    rating: "5,0",
+    ratingValue: 5.0,
+    volume: "+450 avaliações",
     sourceLabel: "Google",
     items: [
       { text: "[PENDENTE] Texto da avaliação real.", author: "[PENDENTE] Nome", role: "Cargo · Órgão" },
@@ -486,8 +484,7 @@ export const patrimonioContent: EventLpContent = {
       {
         kind: "google",
         href: "https://www.google.com/search?q=Unyflex",
-        // Sem número: a contagem de avaliações não está confirmada.
-        label: "Avaliações no Google",
+        label: "5,0 no Google · +450 avaliações",
       },
       { kind: "linkedin", href: "https://linkedin.com/company/unyflex" },
       { kind: "instagram", href: "https://instagram.com/unyflex" },

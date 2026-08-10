@@ -62,7 +62,7 @@ export const licitaexpoV2Content: EventLpContent = {
       { value: "270+", label: "inscritos desde 2023" },
       { value: "49.000+", label: "alunos formados" },
       { value: "1.200+", label: "órgãos atendidos" },
-      { value: "98", label: "municípios do PR e SC" },
+      { value: "5,0", label: "no Google · +450 avaliações" },
     ],
   },
 
@@ -292,9 +292,9 @@ export const licitaexpoV2Content: EventLpContent = {
      Google (nota, volume e 3 avaliações). NÃO publicar com dados inventados.
      Para ligar, preencha e descomente:
   reviews: {
-    rating: "[PLACEHOLDER] 4,9",
-    ratingValue: 4.9,
-    volume: "[PLACEHOLDER] 400+ avaliações",
+    rating: "5,0",
+    ratingValue: 5.0,
+    volume: "+450 avaliações",
     sourceLabel: "Google",
     items: [
       { text: "[PLACEHOLDER] Texto da avaliação real.", author: "[PLACEHOLDER] Nome", role: "Cargo · Órgão" },
@@ -378,7 +378,7 @@ export const licitaexpoV2Content: EventLpContent = {
       {
         kind: "google",
         href: "https://www.google.com/search?q=Unyflex",
-        label: "400+ avaliações",
+        label: "5,0 no Google · +450 avaliações",
       },
       { kind: "linkedin", href: "https://linkedin.com/company/unyflex" },
       { kind: "instagram", href: "https://instagram.com/unyflex" },
