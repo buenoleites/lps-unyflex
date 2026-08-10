@@ -41,6 +41,10 @@ export interface LeadForm {
   cargo: string;
   orgao: string;
   servidorPublico: string;
+  /** Só existe quando a LP configura o campo de modalidade (ex.: /patrimonio).
+   *  A presença da chave — não o valor — decide se Modalidade_Preferida entra
+   *  no payload; LPs sem o campo seguem enviando o payload de sempre. */
+  modalidade?: string;
 }
 
 export async function submitLead(form: LeadForm, formId: string): Promise<void> {
@@ -54,6 +58,9 @@ export async function submitLead(form: LeadForm, formId: string): Promise<void> 
     Cargo_Setor: form.cargo,
     Orgao_Municipio: form.orgao,
     Orgao_Publico: form.servidorPublico,
+    ...(form.modalidade !== undefined
+      ? { Modalidade_Preferida: form.modalidade }
+      : {}),
     Referral_Source: document.referrer || "",
     Dispositivo: getDevice(),
     URL: window.location.href,

@@ -9,7 +9,7 @@ import type { EventLpContent } from "./types";
 export default function Schedule({
   content,
 }: {
-  content: EventLpContent["schedule"];
+  content: NonNullable<EventLpContent["schedule"]>;
 }) {
   return (
     <Section id="programacao" tone="light" labelledBy="programacao-title">

@@ -2,12 +2,14 @@
 import { useEffect } from "react";
 import { trackEvent } from "@/lib/lp/meta";
 import type { EventLpContent } from "./types";
+import Lp2Root from "./Lp2Root";
 import Navbar from "./Navbar";
 import Hero from "./Hero";
 import ProofTicker from "./ProofTicker";
 import Audience from "./Audience";
 import ProblemGrid from "./ProblemGrid";
 import Schedule from "./Schedule";
+import Modules from "./Modules";
 import Quote from "./Quote";
 import Speakers from "./Speakers";
 import Gallery from "./Gallery";
@@ -21,20 +23,16 @@ import Footer from "./Footer";
 
 /**
  * Orquestrador do template. A ordem das seções é fixa (segue a hierarquia de
- * importância do briefing); as opcionais (quote, speakers, gallery, reviews,
- * compare) renderizam apenas se a chave existir na config.
+ * importância do briefing); as opcionais (schedule, modules, quote, speakers,
+ * gallery, reviews, compare) renderizam apenas se a chave existir na config.
  */
 export default function EventLp({ content }: { content: EventLpContent }) {
   useEffect(() => {
     trackEvent("PageView");
   }, []);
 
-  const accentOverride = content.theme?.accent
-    ? ({ "--accent": content.theme.accent } as React.CSSProperties)
-    : undefined;
-
   return (
-    <div className="lp2-root" style={accentOverride}>
+    <Lp2Root accent={content.theme?.accent}>
       <Navbar content={content.nav} />
 
       {/* id fixo: alvo do skip-link do root layout */}
@@ -43,7 +41,8 @@ export default function EventLp({ content }: { content: EventLpContent }) {
         <ProofTicker content={content.ticker} />
         <Audience content={content.audience} />
         <ProblemGrid content={content.problem} />
-        <Schedule content={content.schedule} />
+        {content.schedule ? <Schedule content={content.schedule} /> : null}
+        {content.modules ? <Modules content={content.modules} /> : null}
         {content.quote ? <Quote content={content.quote} /> : null}
         {content.speakers ? <Speakers content={content.speakers} /> : null}
         {content.gallery ? <Gallery content={content.gallery} /> : null}
@@ -56,6 +55,6 @@ export default function EventLp({ content }: { content: EventLpContent }) {
 
       <StickyCta content={content.stickyCta} />
       <Footer content={content.footer} />
-    </div>
+    </Lp2Root>
   );
 }
