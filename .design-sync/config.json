@@ -1,0 +1,48 @@
+{
+  "projectId": "f4cfda69-3909-4974-ac6e-83ebb8121f36",
+  "pkg": "lps-unyflex",
+  "globalName": "Lp2",
+  "shape": "package",
+  "entry": "./ds-entry.ts",
+  "buildCmd": "npx tsc -p .design-sync/tsconfig.dts.json",
+  "srcDir": "components/lp2",
+  "tsconfig": "tsconfig.json",
+  "componentSrcMap": {
+    "Lp2Root": null
+  },
+  "provider": {
+    "component": "Lp2Root",
+    "props": { "theme": "comunicacao" }
+  },
+  "extraFonts": [".design-sync/fonts/montserrat.css"],
+  "docsDir": ".design-sync/docs",
+  "guidelinesGlob": [".design-sync/guidelines/*.md"],
+  "readmeHeader": ".design-sync/conventions.md",
+  "dtsPropsFor": {
+    "Plans": "  content: {\n    title: React.ReactNode;\n    lead?: string;\n    note?: string;\n    /** 2 a 4 cards; destaque via `highlighted`. */\n    items: {\n      name: string;\n      price: string;\n      /** Selo informativo acima do nome (ex.: \"100% online · ao vivo\"). */\n      badge?: string;\n      highlighted?: boolean;\n      highlightLabel?: string;\n      features: { label: string; included: boolean }[];\n    }[];\n    /** Linha própria e legível abaixo dos cards (formas de pagamento). */\n    paymentNote: string;\n    /** Regra de virada de lote, em small muted. */\n    batchNote: string;\n    ctaLabel: string;\n  };",
+    "Footer": "  content: {\n    logoSrc: string;\n    logoAlt: string;\n    /** Legenda acima dos logos de parceiros (ex.: \"Uma iniciativa X, com Y e Z.\"). */\n    partnersLabel?: string;\n    partners: { src: string; alt: string; invert?: boolean }[];\n    legal: { href: string; label: string }[];\n    social: {\n      kind: \"google\" | \"instagram\" | \"linkedin\" | \"youtube\";\n      href: string;\n      /** Texto visível ao lado do ícone (ex.: \"400+ avaliações\" no Google). */\n      label?: string;\n    }[];\n    copyright: string;\n  };"
+  },
+  "overrides": {
+    "Hero": { "cardMode": "column", "viewport": "1280x900" },
+    "ProofTicker": { "cardMode": "column", "viewport": "1280x400" },
+    "Audience": { "cardMode": "column", "viewport": "1280x800" },
+    "ProblemGrid": { "cardMode": "column", "viewport": "1280x1700" },
+    "Schedule": { "cardMode": "column", "viewport": "1280x800" },
+    "Quote": { "cardMode": "single", "viewport": "1280x900", "primaryStory": "ManifestoSemAutor" },
+    "Speakers": { "cardMode": "column", "viewport": "1280x1750" },
+    "Gallery": { "cardMode": "column", "viewport": "1280x900" },
+    "Plans": { "cardMode": "column", "viewport": "1280x1200" },
+    "Reviews": { "cardMode": "column", "viewport": "1280x800" },
+    "Compare": { "cardMode": "column", "viewport": "1280x900" },
+    "Faq": { "cardMode": "column", "viewport": "1280x900" },
+    "FormSection": { "cardMode": "column", "viewport": "1280x1100" },
+    "Section": { "cardMode": "column", "viewport": "1280x600" },
+    "Navbar": { "cardMode": "column", "viewport": "1280x260" },
+    "Footer": { "cardMode": "column", "viewport": "1280x600" },
+    "LeadForm": { "cardMode": "column", "viewport": "900x820" },
+    "MediaBackdrop": { "cardMode": "column", "viewport": "1280x500" },
+    "Kw": { "viewport": "900x400" },
+    "EventLp": { "cardMode": "single", "viewport": "1280x2000" },
+    "StickyCta": { "cardMode": "single", "viewport": "390x760", "primaryStory": "BarraVisivel" }
+  }
+}

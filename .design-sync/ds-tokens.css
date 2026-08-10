@@ -1,0 +1,16 @@
+/* Tokens que o app Next fornece em runtime e que o bundle do design system
+   precisa fornecer sozinho.
+
+   `app/lp2.css` declara `--font: var(--font-montserrat), system-ui, …`, e
+   `--font-montserrat` vem do `next/font/google` no `app/layout.tsx`. Fora do
+   Next essa variável não existe — e `var()` sem fallback invalida a declaração
+   inteira, então TODA a tipografia cairia na fonte padrão do browser.
+
+   Os `@font-face` da família vivem em `.design-sync/fonts/montserrat.css`
+   (entram pelo `cfg.extraFonts` e viram `fonts/fonts.css` no bundle). Aqui só
+   se amarra o nome da família ao token.
+
+   Este arquivo só entra pelo `ds-entry.ts`, que o app Next não importa. */
+.lp2-root {
+  --font-montserrat: "Montserrat";
+}

@@ -46,6 +46,10 @@ export interface EventLpContent {
   audience: {
     title: ReactNode;
     lead?: string;
+    /** "tabs" (padrão) é o comportamento original; "grid" mostra os perfis em
+     *  cards estáticos, todos visíveis de uma vez (autoqualificação sem
+     *  clique). */
+    variant?: "tabs" | "grid";
     groups: { id: string; label: string; description: string }[];
     closing?: ReactNode;
   };
@@ -56,10 +60,26 @@ export interface EventLpContent {
     items: { title: string; desc: string }[];
   };
 
-  /** 05 — programação como jornada: timeline horizontal/vertical. */
-  schedule: {
+  /** 05 — programação como jornada: timeline horizontal/vertical
+   *  (OPCIONAL desde a /patrimonio, que usa `modules` no lugar). */
+  schedule?: {
     title: ReactNode;
     days: { label: string; hours: string; panels: ReactNode }[];
+  };
+
+  /** 05b — módulos "o que você leva" (OPCIONAL): cards em acordeão; fechado
+   *  mostra título + frase de resultado, aberto revela a lista de tópicos. */
+  modules?: {
+    title: ReactNode;
+    lead?: string;
+    items: {
+      title: string;
+      /** Frase de resultado, sempre visível com o card fechado. */
+      result: string;
+      /** Objetivo do módulo, no topo do corpo expansível (OPCIONAL). */
+      objective?: string;
+      topics: string[];
+    }[];
   };
 
   /** 06 — citação única sobre foto (OPCIONAL). `author` é opcional (manifesto
@@ -144,6 +164,10 @@ export interface EventLpContent {
     formId: string;
     submitLabel: string;
     thankYou: { url: string; withPii: boolean };
+    /** Escolha de modalidade (OPCIONAL). Quando presente, vira campo
+     *  obrigatório do formulário e entra no payload como Modalidade_Preferida;
+     *  ausente, o payload das demais LPs fica byte-idêntico ao atual. */
+    modalidade?: { label: string; options: [string, string] };
   };
 
   footer: {

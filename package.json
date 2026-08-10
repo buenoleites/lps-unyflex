@@ -2,6 +2,8 @@
   "name": "lps-unyflex",
   "version": "0.1.0",
   "private": true,
+  "comment:types": "Não é um pacote publicável. Este campo existe só para a skill design-sync: é o dirname dele que define a raiz de onde o conversor lê as declarações .d.ts. Gerado por `npx tsc -p .design-sync/tsconfig.dts.json`.",
+  "types": ".design-sync/dts/ds-entry.d.ts",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

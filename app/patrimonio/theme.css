@@ -1,0 +1,65 @@
+/* Tema da LP Patrimônio Público — sobrescreve os tokens de COR DE AÇÃO do
+   lp2.css. Este é o ÚNICO bloco de cor da LP: nenhum literal de cor fora daqui
+   (exceção: opengraph-image.tsx, que não lê CSS — mesmo precedente das outras
+   instâncias lp2).
+
+   O accent é o mesmo azul da /tesouraria por decisão do Gustavo (mesma
+   vertical contábil/financeira), mas o bloco é próprio — retunar a tesouraria
+   não pode restilizar esta LP em silêncio.
+
+   O seletor .lpp-theme (wrapper no layout da rota) vence o bloco default de
+   .lp2-root por especificidade, independente da ordem dos imports de CSS. */
+.lpp-theme .lp2-root {
+  --accent: #69acf1; /* azul vertical contábil — 8,1:1 sobre --bg-dark, 7,4:1 sobre --bg-elevated */
+  --accent-ink: #071016; /* texto sobre accent — 8,0:1; branco reprovaria AA (2,4:1) */
+  --accent-ring: rgba(105, 172, 241, 0.28);
+  --accent-tint: rgba(105, 172, 241, 0.12);
+  --accent-deep: #1165bb; /* accent p/ texto/foco em superfície clara — 5,8:1 no branco, 5,4:1 no --bg-light */
+}
+
+/* Problema com só 4 cards (citações do briefing): o template assume 6–10 e dá
+   largura dupla ao 1º card, o que aqui deixaria uma célula vazia no desktop.
+   Vira um 2×2 limpo em todos os breakpoints. */
+@media (min-width: 640px) {
+  .lpp-theme .lp2-bento > :first-child {
+    grid-column: auto;
+  }
+}
+
+@media (min-width: 1000px) {
+  .lpp-theme .lp2-bento {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Ticker com 3 métricas (o nº de avaliações do Google saiu por não estar
+   confirmado): o grid do template é fixo em 2 colunas no mobile e 4 no
+   desktop, o que deixaria uma célula vazia. No mobile o 3º ocupa a linha
+   inteira; no desktop, três colunas iguais. */
+.lpp-theme .lp2-ticker__item:last-child {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 800px) {
+  .lpp-theme .lp2-ticker__list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .lpp-theme .lp2-ticker__item:last-child {
+    grid-column: auto;
+  }
+}
+
+/* Navbar com 5 links (mesmo caso da /comunicacao e /tesouraria): centraliza os
+   links entre logo e CTA no desktop. <800px o template já esconde os links. */
+@media (min-width: 800px) {
+  .lpp-theme .lp2-nav__inner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 16px;
+  }
+
+  .lpp-theme .lp2-nav__links {
+    justify-content: center;
+  }
+}

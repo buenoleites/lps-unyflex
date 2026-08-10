@@ -31,6 +31,8 @@ function validateField(field: string, value: string): string {
       return value.trim() ? "" : "Informe o órgão ou município.";
     case "servidorPublico":
       return value ? "" : "Selecione uma opção.";
+    case "modalidade":
+      return value ? "" : "Selecione uma opção.";
     default:
       return "";
   }
@@ -110,10 +112,14 @@ export default function LeadForm({
   formId,
   submitLabel,
   thankYou,
+  modalidade,
 }: {
   formId: string;
   submitLabel: string;
   thankYou?: ThankYouOptions;
+  /** Campo opcional de modalidade (toggle). A chave `modalidade` só entra no
+   *  state — e portanto no payload — quando esta prop é passada. */
+  modalidade?: { label: string; options: [string, string] };
 }) {
   const [form, setForm] = useState<LeadFormValues>({
     nome: "",
@@ -122,6 +128,7 @@ export default function LeadForm({
     cargo: "",
     orgao: "",
     servidorPublico: "",
+    ...(modalidade ? { modalidade: "" } : {}),
   });
   const [errors, setErrors] = useState<Partial<Record<keyof LeadFormValues, string>>>({});
   const [submitting, setSubmitting] = useState(false);
@@ -137,7 +144,7 @@ export default function LeadForm({
 
   function handleBlur(field: keyof LeadFormValues) {
     return () => {
-      const err = validateField(field, form[field]);
+      const err = validateField(field, form[field] ?? "");
       setErrors((prev) => ({ ...prev, [field]: err || undefined }));
     };
   }
@@ -145,10 +152,16 @@ export default function LeadForm({
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const next: Partial<Record<keyof LeadFormValues, string>> = {};
-    (["nome", "email", "whatsapp", "orgao", "servidorPublico"] as Array<
-      keyof LeadFormValues
-    >).forEach((f) => {
-      const err = validateField(f, form[f]);
+    const required: Array<keyof LeadFormValues> = [
+      "nome",
+      "email",
+      "whatsapp",
+      "orgao",
+      "servidorPublico",
+      ...(modalidade ? (["modalidade"] as const) : []),
+    ];
+    required.forEach((f) => {
+      const err = validateField(f, form[f] ?? "");
       if (err) next[f] = err;
     });
     setErrors(next);
@@ -259,6 +272,46 @@ export default function LeadForm({
             <span className="lp-form__err">{errors.servidorPublico}</span>
           ) : null}
         </div>
+
+        {modalidade ? (
+          <div
+            className={`lp-form__field lp-form__field--full${
+              errors.modalidade ? " is-error" : ""
+            }`}
+          >
+            <span className="lp-form__toggle-label">
+              {modalidade.label}{" "}
+              <span className="req" aria-hidden="true">
+                *
+              </span>
+            </span>
+            <div
+              className="lp-form__toggle-group"
+              role="group"
+              aria-label={modalidade.label}
+            >
+              {modalidade.options.map((opt) => (
+                <button
+                  key={opt}
+                  type="button"
+                  className={`lp-form__toggle-btn${
+                    form.modalidade === opt ? " is-active" : ""
+                  }`}
+                  onClick={() => {
+                    setForm((f) => ({ ...f, modalidade: opt }));
+                    setErrors((prev) => ({ ...prev, modalidade: undefined }));
+                  }}
+                  aria-pressed={form.modalidade === opt}
+                >
+                  {opt}
+                </button>
+              ))}
+            </div>
+            {errors.modalidade ? (
+              <span className="lp-form__err">{errors.modalidade}</span>
+            ) : null}
+          </div>
+        ) : null}
       </div>
 
       <button

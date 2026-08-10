@@ -13,7 +13,14 @@ function trackBrowser(eventName: string, eventId: string) {
 }
 
 async function trackCapi(eventName: string, eventId: string) {
-  const token = process.env.NEXT_PUBLIC_META_ACCESS_TOKEN;
+  // `output: 'export'` inlina process.env no bundle do Next, mas fora dele
+  // (previews do design system, por exemplo) `process` não existe — sem o
+  // guard isso vira ReferenceError dentro de uma async, ou seja, unhandled
+  // rejection silenciosa.
+  const token =
+    typeof process !== "undefined"
+      ? process.env.NEXT_PUBLIC_META_ACCESS_TOKEN
+      : undefined;
   if (!token) return;
 
   const payload = {

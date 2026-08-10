@@ -43,6 +43,7 @@ export default function FormSection({
           formId={content.formId}
           submitLabel={content.submitLabel}
           thankYou={content.thankYou}
+          modalidade={content.modalidade}
         />
       </div>
     </Section>
