@@ -103,7 +103,13 @@ export default function Footer({
             {content.social.map((social) => (
               <a
                 key={social.kind}
-                className="lp2-footer__link"
+                /* --labeled: o link com texto tem largura própria e quebraria a
+                   fileira de ícones no mobile. O CSS o põe numa linha só dele. */
+                className={
+                  social.label
+                    ? "lp2-footer__link lp2-footer__link--labeled"
+                    : "lp2-footer__link"
+                }
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"

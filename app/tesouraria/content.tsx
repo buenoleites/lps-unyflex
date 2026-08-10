@@ -75,7 +75,7 @@ export const tesourariaContent: EventLpContent = {
     metrics: [
       { value: "49.000+", label: "alunos formados" },
       { value: "1.200+", label: "órgãos atendidos" },
-      { value: "465+", label: "avaliações no Google" },
+      { value: "5,0", label: "no Google · +450 avaliações" },
       { value: "17", label: "horas de capacitação" },
     ],
   },
@@ -312,9 +312,9 @@ export const tesourariaContent: EventLpContent = {
   /* reviews (seção 10, OPCIONAL): desligada pelo briefing. NÃO publicar com
      dados inventados. Para ligar, preencha e descomente:
   reviews: {
-    rating: "[PENDENTE] 4,9",
-    ratingValue: 4.9,
-    volume: "[PENDENTE] 465+ avaliações",
+    rating: "5,0",
+    ratingValue: 5.0,
+    volume: "+450 avaliações",
     sourceLabel: "Google",
     items: [
       { text: "[PENDENTE] Texto da avaliação real.", author: "[PENDENTE] Nome", role: "Cargo · Órgão" },
@@ -408,7 +408,7 @@ export const tesourariaContent: EventLpContent = {
       {
         kind: "google",
         href: "https://www.google.com/search?q=Unyflex",
-        label: "465+ avaliações",
+        label: "5,0 no Google · +450 avaliações",
       },
       { kind: "linkedin", href: "https://linkedin.com/company/unyflex" },
       { kind: "instagram", href: "https://instagram.com/unyflex" },

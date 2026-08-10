@@ -35,6 +35,13 @@
   --border-light: rgba(10, 14, 20, 0.1);
   --scrim-strong: rgba(10, 14, 20, 0.85);
   --scrim-weak: rgba(10, 14, 20, 0.25);
+  /* Piso do scrim do HERO. Próprio, e não --scrim-weak: aquele também alimenta o
+     gradiente radial do --center (citação e CTA final), que não tem texto longo
+     em cima de foto clara e não deve escurecer junto. Ver o bloco do
+     .lp2-backdrop__scrim--left para o porquê dos valores.
+     -y: pé do gradiente vertical (mobile). -x: borda longe do texto (>=800px). */
+  --scrim-hero-fade-y: rgba(10, 14, 20, 0.68);
+  --scrim-hero-fade-x: rgba(10, 14, 20, 0.4);
   --nav-bg: rgba(10, 14, 20, 0.78);
   --error: #f87171;
 
@@ -70,6 +77,7 @@
   --section-y: 80px;
   --container: 1200px;
   --gutter: 20px;
+  --hero-content-w: 820px; /* coluna de texto do hero — o scrim depende dela */
   --radius-card: 14px;
   --radius-input: 8px;
   --radius-pill: 999px;
@@ -357,14 +365,38 @@
 }
 
 /* Mobile: coluna única de texto — o scrim escurece verticalmente.
-   Desktop: o gradiente vira direcional, forte no lado do texto. */
+   Desktop: o gradiente vira direcional, forte no lado do texto.
+
+   --left/--right são o scrim do HERO: Hero.tsx é o único a pedir textSide="left",
+   e as duas outras seções com foto (Quote, FormSection) usam --center, que fica
+   como está.
+
+   Por que o platô vai até a borda da coluna de texto, e não até 30%: `.lp2-hero`
+   é display:flex, então o `.lp2-container` dele é item flex — encolhe até o
+   conteúdo e fica CENTRALIZADO. A 1440px o texto ocupa de 21% a 79% da largura,
+   enquanto o platô cobria só até 30%: metade do texto caía na parte já esmaecida
+   do gradiente. Sobre foto com parede/teto claros (luma 190+, o caso das quatro
+   rotas) isso reprova AA no eyebrow, no subtítulo e na linha de meta.
+
+   `50% + --hero-content-w / 2` é a borda direita do bloco centralizado em
+   qualquer largura, e é limite SUPERIOR: se a copy da rota for mais curta, o item
+   flex encolhe mais e o platô sobra. Abaixo de ~840px de viewport o valor passa
+   de 100% e o hero inteiro fica no platô — a degradação segura. Percentual fixo
+   não serviria: entre 800px e ~1400px a coluna ocupa uma fração cada vez menor da
+   largura.
+
+   A intensidade do platô continua em --scrim-strong (0.85); o que mudou foi até
+   onde ele vai, mais um piso próprio do hero para a foto não voltar a clarear em
+   cima do texto. Medido no build de produção, contraste da cor especificada
+   contra o fundo real sob CADA pixel de glifo — a média esconde as manchas claras
+   da foto, e a média da cor dos glifos inventa defeito por antialiasing. */
 .lp2-backdrop__scrim--left,
 .lp2-backdrop__scrim--right {
   background: linear-gradient(
     180deg,
     var(--scrim-strong) 0%,
-    var(--scrim-strong) 55%,
-    var(--scrim-weak) 100%
+    var(--scrim-strong) 80%,
+    var(--scrim-hero-fade-y) 100%
   );
 }
 
@@ -372,16 +404,18 @@
   .lp2-backdrop__scrim--left {
     background: linear-gradient(
       90deg,
-      var(--scrim-strong) 30%,
-      var(--scrim-weak) 100%
+      var(--scrim-strong) 0,
+      var(--scrim-strong) calc(50% + var(--hero-content-w) / 2 + 10px),
+      var(--scrim-hero-fade-x) 100%
     );
   }
 
   .lp2-backdrop__scrim--right {
     background: linear-gradient(
       270deg,
-      var(--scrim-strong) 30%,
-      var(--scrim-weak) 100%
+      var(--scrim-strong) 0,
+      var(--scrim-strong) calc(50% + var(--hero-content-w) / 2 + 10px),
+      var(--scrim-hero-fade-x) 100%
     );
   }
 }
@@ -490,7 +524,9 @@
 }
 
 .lp2-hero__content {
-  max-width: 820px;
+  /* o platô do scrim é calculado a partir desta largura — mudar aqui move o
+     gradiente junto, que é exatamente o acoplamento que faltava */
+  max-width: var(--hero-content-w);
 }
 
 @keyframes lp2-enter {
@@ -1849,6 +1885,21 @@
   align-items: center;
   justify-content: center;
   gap: 8px 24px;
+}
+
+/* O link com texto (o do Google) numa linha só dele até 800px: no mobile ele
+   sozinho ocupa mais de metade da fileira e empurrava o último ícone para uma
+   segunda linha, sobrando um ícone órfão. Assim a quebra é deliberada e não
+   depende do comprimento do rótulo. */
+.lp2-footer__link--labeled {
+  flex-basis: 100%;
+  justify-content: center;
+}
+
+@media (min-width: 800px) {
+  .lp2-footer__link--labeled {
+    flex-basis: auto;
+  }
 }
 
 .lp2-footer__link svg {
