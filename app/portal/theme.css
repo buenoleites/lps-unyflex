@@ -1,0 +1,36 @@
+/* Tema da LP Portal, LGPD, e-SIC e Ouvidoria — o ÚNICO bloco de cor da LP:
+   nenhum literal de cor fora daqui (exceção: opengraph-image.tsx, que não lê
+   CSS — mesmo precedente das outras instâncias lp2).
+
+   O curso pertence à vertical Licitações/Gestão, então o accent é o mesmo
+   ciano da /licitacao (#00aeef), que hoje coincide com o default do lp2.css —
+   os tokens são fixados aqui mesmo assim: um retune futuro do default do
+   template não pode restilizar em silêncio uma rota com tráfego pago.
+
+   O seletor .lppo-theme (wrapper no layout da rota) vence o bloco default de
+   .lp2-root por especificidade, independente da ordem dos imports de CSS.
+   (.lpp- já é o prefixo da /patrimonio — daí o .lppo-.) */
+.lppo-theme .lp2-root {
+  --accent: #00aeef; /* ciano vertical Licitações — mesmo valor do default do lp2 */
+  --accent-ink: #071016; /* texto sobre accent — branco sobre #00aeef reprova AA */
+  --accent-ring: rgba(0, 174, 239, 0.28);
+  --accent-tint: rgba(0, 174, 239, 0.12);
+  --accent-deep: #006b93; /* accent p/ texto/foco em superfície clara — 5,9:1 no branco */
+}
+
+/* Sem patch do .lp2-bento aqui: são 5 cards de problema e o template dá
+   largura dupla ao 1º — 6 células, duas linhas exatas no grid de 3 colunas. */
+
+/* Navbar com 4 links + CTA (mesmo caso da /licitacao): centraliza os links
+   entre logo e CTA no desktop. <800px o template já esconde os links. */
+@media (min-width: 800px) {
+  .lppo-theme .lp2-nav__inner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 16px;
+  }
+
+  .lppo-theme .lp2-nav__links {
+    justify-content: center;
+  }
+}
