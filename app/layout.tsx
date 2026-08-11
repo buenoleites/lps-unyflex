@@ -53,37 +53,6 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "EducationEvent",
-  name: "Licitações com Inteligência Artificial",
-  description:
-    "Curso presencial para servidores públicos que precisam usar IA em DFD, ETP, TR e mapa de riscos na fase preparatória da Lei 14.133.",
-  url: siteUrl,
-  startDate: "2025-08-25",
-  endDate: "2025-08-28",
-  eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-  eventStatus: "https://schema.org/EventScheduled",
-  location: {
-    "@type": "Place",
-    name: "Unyflex",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Curitiba",
-      addressRegion: "PR",
-      addressCountry: "BR",
-    },
-  },
-  organizer: {
-    "@type": "Organization",
-    name: "Unyflex",
-    url: "https://unyflex.com.br",
-  },
-  educationalLevel: "Professional",
-  teaches:
-    "Uso de inteligência artificial em documentos da fase preparatória de licitações: DFD, ETP, TR e mapa de riscos conforme Lei 14.133.",
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -98,12 +67,6 @@ export default function RootLayout({
         >
           Pular para o conteúdo
         </a>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
-          }}
-        />
         {children}
       </body>
     </html>

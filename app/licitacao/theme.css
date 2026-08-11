@@ -1,0 +1,46 @@
+/* Tema da LP Licitações com IA — o ÚNICO bloco de cor da LP: nenhum literal
+   de cor fora daqui (exceção: opengraph-image.tsx, que não lê CSS — mesmo
+   precedente das outras instâncias lp2).
+
+   O accent é o ciano da vertical Licitações (#00aeef), que hoje coincide com
+   o default do lp2.css — os tokens são fixados aqui mesmo assim: um retune
+   futuro do default do template não pode restilizar em silêncio uma rota com
+   tráfego pago.
+
+   O seletor .lpl-theme (wrapper no layout da rota) vence o bloco default de
+   .lp2-root por especificidade, independente da ordem dos imports de CSS. */
+.lpl-theme .lp2-root {
+  --accent: #00aeef; /* ciano vertical Licitações — mesmo valor do default do lp2 */
+  --accent-ink: #071016; /* texto sobre accent — branco sobre #00aeef reprova AA */
+  --accent-ring: rgba(0, 174, 239, 0.28);
+  --accent-tint: rgba(0, 174, 239, 0.12);
+  --accent-deep: #006b93; /* accent p/ texto/foco em superfície clara — 5,9:1 no branco */
+}
+
+/* Problema com só 3 cards (citações do briefing): o template assume 6–10 e no
+   desktop dá largura dupla ao 1º card em grid de 3 colunas, o que deixaria uma
+   célula órfã. Aqui: 1º card em toda a largura, os outros dois lado a lado. */
+@media (min-width: 1000px) {
+  .lpl-theme .lp2-bento {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .lpl-theme .lp2-bento > :first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Navbar com 5 links (mesmo caso da /comunicacao, /tesouraria e /patrimonio):
+   centraliza os links entre logo e CTA no desktop. <800px o template já
+   esconde os links. */
+@media (min-width: 800px) {
+  .lpl-theme .lp2-nav__inner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 16px;
+  }
+
+  .lpl-theme .lp2-nav__links {
+    justify-content: center;
+  }
+}

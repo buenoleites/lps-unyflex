@@ -1,6 +1,7 @@
-import LpPage from "@/components/lp/LpPage";
+"use client";
+import EventLp from "@/components/lp2/EventLp";
 import { licitacaoContent } from "./content";
 
 export default function LicitacaoPage() {
-  return <LpPage content={licitacaoContent} track />;
+  return <EventLp content={licitacaoContent} />;
 }

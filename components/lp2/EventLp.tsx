@@ -14,6 +14,7 @@ import Quote from "./Quote";
 import Speakers from "./Speakers";
 import Gallery from "./Gallery";
 import Plans from "./Plans";
+import PricingCombo from "./PricingCombo";
 import Reviews from "./Reviews";
 import Compare from "./Compare";
 import Faq from "./Faq";
@@ -46,7 +47,10 @@ export default function EventLp({ content }: { content: EventLpContent }) {
         {content.quote ? <Quote content={content.quote} /> : null}
         {content.speakers ? <Speakers content={content.speakers} /> : null}
         {content.gallery ? <Gallery content={content.gallery} /> : null}
-        <Plans content={content.plans} />
+        {content.plans ? <Plans content={content.plans} /> : null}
+        {content.pricingCombo ? (
+          <PricingCombo content={content.pricingCombo} />
+        ) : null}
         {content.reviews ? <Reviews content={content.reviews} /> : null}
         {content.compare ? <Compare content={content.compare} /> : null}
         <Faq content={content.faq} />

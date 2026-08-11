@@ -9,7 +9,11 @@ import type { EventLpContent } from "./types";
  * Abaixo dos cards, em linha própria e legível: formas de pagamento; depois a
  * regra de lote em small muted.
  */
-export default function Plans({ content }: { content: EventLpContent["plans"] }) {
+export default function Plans({
+  content,
+}: {
+  content: NonNullable<EventLpContent["plans"]>;
+}) {
   return (
     <Section id="planos" tone="light" labelledBy="planos-title">
       <div

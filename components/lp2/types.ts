@@ -121,8 +121,10 @@ export interface EventLpContent {
     photos: { src: string; alt: string; caption?: string }[];
   };
 
-  /** 09 — planos: 2 a 4 cards; destaque via `highlighted`. */
-  plans: {
+  /** 09 — planos: 2 a 4 cards; destaque via `highlighted`. OPCIONAL desde a
+   *  /licitacao, que usa `pricingCombo` no lugar — toda instância precisa de
+   *  exatamente UMA das duas seções de preço (mesma âncora #planos). */
+  plans?: {
     title: ReactNode;
     lead?: string;
     note?: string;
@@ -140,6 +142,48 @@ export interface EventLpContent {
     /** Regra de virada de lote, em small muted. */
     batchNote: string;
     ctaLabel: string;
+  };
+
+  /** 09b — pricing "combo" (OPCIONAL, criado para a /licitacao): 3 produtos
+   *  avulsos com preço de combo, card destacado do combo, tabela comparativa,
+   *  card do online e o bloco de pagamento. Quando presente, entra no lugar de
+   *  `plans` (mesma posição e mesma âncora #planos). */
+  pricingCombo?: {
+    title: ReactNode;
+    lead?: string;
+    /** Os produtos avulsos (3 cards): preço cheio + preço dentro do combo. */
+    products: {
+      name: string;
+      desc: string;
+      price: string;
+      comboPrice: string;
+      /** Selo de desconto no combo (ex.: "−39%"). */
+      discount: string;
+    }[];
+    /** Card central destacado (borda accent + etiqueta, como o plano
+     *  destacado do `plans`). */
+    combo: {
+      highlightLabel: string;
+      name: string;
+      /** Preço "de" (soma dos avulsos), riscado. */
+      from: string;
+      price: string;
+      savings: string;
+      ctaPrimary: { href: string; label: string };
+      ctaSecondary: { href: string; label: string };
+    };
+    /** Tabela comparativa: célula boolean vira ✓/—; string entra como texto
+     *  (linha de valores). OPCIONAL: só renderiza quando os dados reais
+     *  existirem — nenhuma célula pode ser inventada. */
+    comparison?: {
+      /** Cabeçalho da coluna de itens (ex.: "O que está incluído"). */
+      itemsLabel?: string;
+      columns: string[];
+      rows: { label: string; cells: (boolean | string)[] }[];
+    };
+    /** Card da modalidade online, abaixo da tabela. */
+    online: { name: string; price: string; desc: string };
+    paymentNote: string;
   };
 
   /** 10 — avaliações (OPCIONAL até existirem dados reais). */
