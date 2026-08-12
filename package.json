@@ -4,11 +4,13 @@
   "private": true,
   "comment:types": "Não é um pacote publicável. Este campo existe só para a skill design-sync: é o dirname dele que define a raiz de onde o conversor lê as declarações .d.ts. Gerado por `npx tsc -p .design-sync/tsconfig.dts.json`.",
   "types": ".design-sync/dts/ds-entry.d.ts",
+  "comment:clean:out": "Rode `npm run clean:out` imediatamente ANTES de subir o out/ para o nginx — nunca como postbuild. As pastas `* 2` são cópias que o sync do ~/Documents cria depois que o export termina de apagar e reescrever cada diretório, então um postbuild rodaria cedo demais. Só apaga casca vazia: se uma `* 2` tiver conteúdo, ela sobra na listagem final para você olhar. Saída vazia = out/ limpo.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "clean:out": "find out \\( -name .DS_Store -o \\( -type d -name '* 2' -empty \\) \\) -exec rm -rf {} + && find out \\( -name .DS_Store -o -type d -name '* 2' \\) -print"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
