@@ -118,7 +118,15 @@ export interface EventLpContent {
   /** 08 — experiência presencial (OPCIONAL): colagem de fotos com legendas. */
   gallery?: {
     title: ReactNode;
-    photos: { src: string; alt: string; caption?: string }[];
+    /** `width`/`height` são as dimensões intrínsecas do arquivo: sem elas a
+     *  colagem (CSS columns, sem aspect-ratio) reflui quando as fotos chegam. */
+    photos: {
+      src: string;
+      alt: string;
+      caption?: string;
+      width: number;
+      height: number;
+    }[];
   };
 
   /** 09 — planos: 2 a 4 cards; destaque via `highlighted`. OPCIONAL desde a

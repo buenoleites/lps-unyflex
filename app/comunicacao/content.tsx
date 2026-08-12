@@ -223,8 +223,10 @@ export const comunicacaoContent: EventLpContent = {
   gallery: {
     title: "A experiência presencial",
     photos: [
-      { src: "/comunicacao/galeria/foto-1.jpg", alt: "...", caption: "..." },
-      { src: "/comunicacao/galeria/foto-2.jpg", alt: "..." },
+      { src: "/comunicacao/galeria/foto-1.jpg", alt: "...", caption: "...",
+        width: 1000, height: 750 },
+      { src: "/comunicacao/galeria/foto-2.jpg", alt: "...",
+        width: 1000, height: 750 },
     ],
   },
   */
