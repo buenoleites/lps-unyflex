@@ -245,8 +245,10 @@ export const tesourariaContent: EventLpContent = {
   gallery: {
     title: "A experiência presencial",
     photos: [
-      { src: "/tesouraria/galeria/foto-1.jpg", alt: "...", caption: "..." },
-      { src: "/tesouraria/galeria/foto-2.jpg", alt: "..." },
+      { src: "/tesouraria/galeria/foto-1.jpg", alt: "...", caption: "...",
+        width: 1000, height: 750 },
+      { src: "/tesouraria/galeria/foto-2.jpg", alt: "...",
+        width: 1000, height: 750 },
     ],
   },
   */

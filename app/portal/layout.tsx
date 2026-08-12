@@ -97,11 +97,15 @@ export default function PortalLayout({
   return (
     // .lppo-theme: os tokens de cor da LP (theme.css) valem só sob este wrapper.
     <div className="lppo-theme">
-      {/* TODO: quando a foto do hero chegar (public/portal/hero.jpg +
-          hero.bgSrc no content), adicionar aqui o preload — o hero é
-          background-image em CSS e o preload derruba o LCP mobile:
-          <link rel="preload" as="image" href="/portal/hero.jpg" fetchPriority="high" />
-          Sem o arquivo, o preload seria um request 404 em toda visita. */}
+      {/* O hero é background-image em CSS (MediaBackdrop) e o browser só o
+          descobre tarde — preload derruba o LCP mobile. React hoisteia o
+          <link> para o <head>. */}
+      <link
+        rel="preload"
+        as="image"
+        href="/portal/hero.jpg"
+        fetchPriority="high"
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

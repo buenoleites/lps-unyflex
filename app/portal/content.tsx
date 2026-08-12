@@ -13,9 +13,10 @@ import Kw from "@/components/lp2/Kw";
 
    Correções do briefing aplicadas em 11/08/2026: professores (4, bios
    verbatim), investimento (mesmos valores da /licitacao), 3 perguntas de FAQ
-   e carga horária de 17 horas. Ainda pendente (não bloqueia): fotos reais
-   (hero, CTA, professores, galeria) e textos de avaliação — gallery e reviews
-   seguem DESLIGADAS por ausência da chave. */
+   e carga horária de 17 horas. Fotos do hero, do CTA e da galeria escolhidas
+   em 11/08/2026 no catálogo Unyflex. Ainda pendente (não bloqueia): fotos dos
+   professores (os 4 seguem no monograma) e textos de avaliação — reviews
+   segue DESLIGADA por ausência da chave. */
 
 /* Conferência aritmética obrigatória do briefing — se qualquer número do
    design divergir destas contas, parar e reportar em vez de ajustar:
@@ -71,8 +72,11 @@ export const portalContent: EventLpContent = {
     // Sem href ⇒ o CTA vai para #inscricao.
     cta: { label: "Quero receber proposta com nota de empenho" },
     meta: "Rua Voluntários da Pátria, 547 — Centro, Curitiba/PR · Certificado emitido após a conclusão por instituição reconhecida pelo MEC · Também disponível online ao vivo",
-    // Sem bgSrc: a foto do hero ainda não chegou — o template cai no
-    // gradiente escuro de fallback. TODO: /portal/hero.jpg + preload no layout.
+    // Foto do catálogo Unyflex (produtos/auditorio-01.jpg): aula em plenário
+    // institucional. Original é retrato 2858×3812; aqui entra a banda central
+    // recortada em 3:2 (1600×1066), que preserva o professor, o banner e as
+    // poltronas. O preload correspondente está no layout da rota.
+    bgSrc: "/portal/hero.jpg",
   },
 
   ticker: {
@@ -325,7 +329,34 @@ export const portalContent: EventLpContent = {
     ],
   },
 
-  /* gallery (seção opcional): DESLIGADA até as fotos chegarem. */
+  /* Fotos do catálogo Unyflex, linha "curso" (sala de aula e plenário) — as
+     fotos de salão/palco do catálogo são da LicitaExpo e prometeriam uma
+     experiência de evento que este curso não entrega. `alt` é a descrição do
+     próprio catálogo; sem `caption`, porque local e data não estão
+     confirmados. */
+  gallery: {
+    title: "A experiência presencial",
+    photos: [
+      {
+        src: "/portal/galeria/aula-01.jpg",
+        alt: "Plateia durante a palestra",
+        width: 1000,
+        height: 750,
+      },
+      {
+        src: "/portal/galeria/professor-01.jpg",
+        alt: "Palestrante durante a aula",
+        width: 1000,
+        height: 750,
+      },
+      {
+        src: "/portal/galeria/debate-01.jpg",
+        alt: "Participantes em debate durante o curso",
+        width: 1000,
+        height: 750,
+      },
+    ],
+  },
 
   /* Pricing "combo" com os mesmos valores da /licitacao (briefing). Valores
      conferidos pela checagem aritmética no topo do arquivo; tabela
@@ -480,9 +511,9 @@ export const portalContent: EventLpContent = {
     title: "Garanta sua participação",
     // Urgência factual, sem escassez fabricada.
     meta: "Turma de 15 a 18/09, em Curitiba. Empenho leva tempo no seu órgão — comece o processo agora.",
-    // [ASSET PROVISÓRIO]: foto oficial Unyflex copiada da /licitacao (que já
-    // era reuso da /patrimonio ← /comunicacao). TODO: substituir o arquivo
-    // public/portal/cta-final.jpg quando a foto desta turma chegar.
+    // Foto do catálogo Unyflex (produtos/grupo-oficial-plenario-01.jpg): a
+    // turma inteira no plenário. Substituiu a provisória que vinha da
+    // /licitacao — o arquivo agora é próprio da rota.
     bgSrc: "/portal/cta-final.jpg",
     // Novo slug desta LP — precisa ser mapeado no n8n ANTES de rodar mídia.
     formId: "lp-portal-lgpd",

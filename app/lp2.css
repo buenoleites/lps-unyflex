@@ -1208,6 +1208,9 @@
 
 .lp2-gallery__item img {
   width: 100%;
+  /* O <img> declara width/height intrínsecos (reserva de espaço, sem CLS);
+     `height: auto` impede que o atributo vire altura fixa e distorça a foto. */
+  height: auto;
   border-radius: var(--radius-card);
 }
 

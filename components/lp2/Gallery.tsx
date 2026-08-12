@@ -30,8 +30,17 @@ export default function Gallery({
       >
         {content.photos.map((photo) => (
           <figure key={photo.src} className="lp2-gallery__item">
+            {/* A galeria fica abaixo da dobra: `lazy` evita que ela dispute
+                banda com o hero, que é o LCP da página. */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={photo.src} alt={photo.alt} />
+            <img
+              src={photo.src}
+              alt={photo.alt}
+              width={photo.width}
+              height={photo.height}
+              loading="lazy"
+              decoding="async"
+            />
             {photo.caption ? (
               <figcaption className="lp2-gallery__caption">
                 {photo.caption}

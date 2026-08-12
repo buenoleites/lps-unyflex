@@ -230,9 +230,12 @@ export const licitaexpoV2Content: EventLpContent = {
   gallery: {
     title: "A experiência presencial",
     photos: [
-      { src: "/licitaexpo/galeria/foto-1.jpg", alt: "...", caption: "..." },
-      { src: "/licitaexpo/galeria/foto-2.jpg", alt: "..." },
-      { src: "/licitaexpo/galeria/foto-3.jpg", alt: "...", caption: "..." },
+      { src: "/licitaexpo/galeria/foto-1.jpg", alt: "...", caption: "...",
+        width: 1000, height: 750 },
+      { src: "/licitaexpo/galeria/foto-2.jpg", alt: "...",
+        width: 1000, height: 750 },
+      { src: "/licitaexpo/galeria/foto-3.jpg", alt: "...", caption: "...",
+        width: 1000, height: 750 },
     ],
   },
   */
