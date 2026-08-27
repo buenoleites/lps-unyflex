@@ -31,6 +31,8 @@ function validateField(field: string, value: string): string {
       return value.trim() ? "" : "Informe o órgão ou município.";
     case "servidorPublico":
       return value ? "" : "Selecione uma opção.";
+    case "vinculo":
+      return value ? "" : "Selecione uma opção.";
     case "modalidade":
       return value ? "" : "Selecione uma opção.";
     default:
@@ -108,11 +110,88 @@ function Field({
   );
 }
 
+interface SelectFieldProps {
+  id: string;
+  label: string;
+  value: string;
+  options: { value: string; label: string }[];
+  placeholder: string;
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onBlur?: () => void;
+  error?: string;
+}
+
+/** Select nativo (o dropdown do sistema é o que melhor funciona no celular),
+ *  com a mesma casca visual dos inputs. O wrapper .lp-form__select carrega a
+ *  seta custom (::after); .is-placeholder pinta o "Selecione…" em muted, já
+ *  que CSS não estiliza o texto exibido de um <select> por <option>. */
+function SelectField({
+  id,
+  label,
+  value,
+  options,
+  placeholder,
+  onChange,
+  onBlur,
+  error,
+}: SelectFieldProps) {
+  return (
+    <div
+      className={`lp-form__field lp-form__field--full${
+        error ? " is-error" : ""
+      }`}
+    >
+      <label htmlFor={`f-${id}`}>
+        {label}
+        <span className="req" aria-hidden="true">
+          {" "}
+          *
+        </span>
+      </label>
+      <div className="lp-form__select">
+        <select
+          id={`f-${id}`}
+          name={id}
+          value={value}
+          onChange={onChange}
+          onBlur={onBlur}
+          required
+          className={value === "" ? "is-placeholder" : undefined}
+          aria-invalid={error ? "true" : undefined}
+          aria-describedby={error ? `err-${id}` : undefined}
+        >
+          <option value="" disabled>
+            {placeholder}
+          </option>
+          {options.map((opt) => (
+            <option key={opt.value} value={opt.value}>
+              {opt.label}
+            </option>
+          ))}
+        </select>
+      </div>
+      {error ? (
+        <span className="lp-form__err" id={`err-${id}`}>
+          {error}
+        </span>
+      ) : null}
+    </div>
+  );
+}
+
+export interface VinculoConfig {
+  label: string;
+  options: { value: string; label: string }[];
+}
+
 export default function LeadForm({
   formId,
   submitLabel,
   thankYou,
   modalidade,
+  vinculo,
+  produto,
+  paginaOrigem,
 }: {
   formId: string;
   submitLabel: string;
@@ -120,6 +199,13 @@ export default function LeadForm({
   /** Campo opcional de modalidade (toggle). A chave `modalidade` só entra no
    *  state — e portanto no payload — quando esta prop é passada. */
   modalidade?: { label: string; options: [string, string] };
+  /** Substitui o toggle "É servidor público?" por um <select>. Quando presente,
+   *  o state tem `vinculo` (e não `servidorPublico`), então o payload manda
+   *  `vinculo` e NÃO manda Orgao_Publico. */
+  vinculo?: VinculoConfig;
+  /** Vão para o payload como `produto` e `pagina_origem` (só quando definidos). */
+  produto?: string;
+  paginaOrigem?: string;
 }) {
   const [form, setForm] = useState<LeadFormValues>({
     nome: "",
@@ -127,18 +213,22 @@ export default function LeadForm({
     whatsapp: "",
     cargo: "",
     orgao: "",
-    servidorPublico: "",
+    ...(vinculo ? { vinculo: "" } : { servidorPublico: "" }),
     ...(modalidade ? { modalidade: "" } : {}),
   });
-  const [errors, setErrors] = useState<Partial<Record<keyof LeadFormValues, string>>>({});
+  const [errors, setErrors] = useState<
+    Partial<Record<keyof LeadFormValues, string>>
+  >({});
   const [submitting, setSubmitting] = useState(false);
 
   function update(field: keyof LeadFormValues) {
-    return (e: React.ChangeEvent<HTMLInputElement>) => {
+    return (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
       const raw = e.target.value;
       const value = field === "whatsapp" ? formatWhatsapp(raw) : raw;
       setForm((f) => ({ ...f, [field]: value }));
-      setErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev));
+      setErrors((prev) =>
+        prev[field] ? { ...prev, [field]: undefined } : prev,
+      );
     };
   }
 
@@ -157,7 +247,7 @@ export default function LeadForm({
       "email",
       "whatsapp",
       "orgao",
-      "servidorPublico",
+      vinculo ? "vinculo" : "servidorPublico",
       ...(modalidade ? (["modalidade"] as const) : []),
     ];
     required.forEach((f) => {
@@ -169,7 +259,7 @@ export default function LeadForm({
 
     setSubmitting(true);
     try {
-      await submitLead(form, formId);
+      await submitLead(form, formId, { produto, paginaOrigem });
     } catch (err) {
       console.error("Falha ao enviar lead:", err);
     } finally {
@@ -235,43 +325,59 @@ export default function LeadForm({
           error={errors.orgao}
         />
 
-        <div
-          className={`lp-form__field lp-form__field--full${
-            errors.servidorPublico ? " is-error" : ""
-          }`}
-        >
-          <span className="lp-form__toggle-label">
-            É servidor público?{" "}
-            <span className="req" aria-hidden="true">
-              *
-            </span>
-          </span>
+        {vinculo ? (
+          <SelectField
+            id="vinculo"
+            label={vinculo.label}
+            placeholder="Selecione…"
+            value={form.vinculo ?? ""}
+            options={vinculo.options}
+            onChange={update("vinculo")}
+            onBlur={handleBlur("vinculo")}
+            error={errors.vinculo}
+          />
+        ) : (
           <div
-            className="lp-form__toggle-group"
-            role="group"
-            aria-label="É servidor público?"
+            className={`lp-form__field lp-form__field--full${
+              errors.servidorPublico ? " is-error" : ""
+            }`}
           >
-            {["Sim", "Não"].map((opt) => (
-              <button
-                key={opt}
-                type="button"
-                className={`lp-form__toggle-btn${
-                  form.servidorPublico === opt ? " is-active" : ""
-                }`}
-                onClick={() => {
-                  setForm((f) => ({ ...f, servidorPublico: opt }));
-                  setErrors((prev) => ({ ...prev, servidorPublico: undefined }));
-                }}
-                aria-pressed={form.servidorPublico === opt}
-              >
-                {opt}
-              </button>
-            ))}
+            <span className="lp-form__toggle-label">
+              É servidor público?{" "}
+              <span className="req" aria-hidden="true">
+                *
+              </span>
+            </span>
+            <div
+              className="lp-form__toggle-group"
+              role="group"
+              aria-label="É servidor público?"
+            >
+              {["Sim", "Não"].map((opt) => (
+                <button
+                  key={opt}
+                  type="button"
+                  className={`lp-form__toggle-btn${
+                    form.servidorPublico === opt ? " is-active" : ""
+                  }`}
+                  onClick={() => {
+                    setForm((f) => ({ ...f, servidorPublico: opt }));
+                    setErrors((prev) => ({
+                      ...prev,
+                      servidorPublico: undefined,
+                    }));
+                  }}
+                  aria-pressed={form.servidorPublico === opt}
+                >
+                  {opt}
+                </button>
+              ))}
+            </div>
+            {errors.servidorPublico ? (
+              <span className="lp-form__err">{errors.servidorPublico}</span>
+            ) : null}
           </div>
-          {errors.servidorPublico ? (
-            <span className="lp-form__err">{errors.servidorPublico}</span>
-          ) : null}
-        </div>
+        )}
 
         {modalidade ? (
           <div

@@ -1,6 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { trackEvent } from "@/lib/lp/meta";
+import { captureTracking } from "@/lib/lp/utm";
 import Navbar from "./Navbar";
 import Hero from "./Hero";
 import ParaQuem from "./ParaQuem";
@@ -23,6 +24,7 @@ export default function LpPage({
   track?: boolean;
 }) {
   useEffect(() => {
+    captureTracking();
     if (track) trackEvent("PageView");
   }, [track]);
 
