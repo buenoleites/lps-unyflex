@@ -88,14 +88,26 @@ Não existe componente `<Button>`: use as classes `btn btn--primary btn--sm|md|l
 Tudo em `lib/lp/lead.ts`.
 
 - **Campos:** nome, email, whatsapp (máscara `00 00000-0000`, exige 11 dígitos), cargo
-  (único opcional), órgão, servidorPublico (toggle Sim/Não).
+  (único opcional), órgão, servidorPublico (toggle Sim/Não). Opcionais por LP, via props do
+  `LeadForm` (no lp2, vêm de `content.form`): `modalidade` (toggle → `Modalidade_Preferida`)
+  e **`vinculo`** (select "Seu vínculo" → `vinculo`; quando presente **substitui** o toggle e
+  `Orgao_Publico` sai do payload — o n8n fechava lead qualificado como "Perdido" por causa do
+  "Não"). Hoje só `/licitacao` e `/licitacao-out26` usam `vinculo`.
 - **Destino:** POST direto do browser para o webhook n8n
   (`https://n8n.unyflex.com.br/webhook/lp-leads-unyflex`). Hardcoded, sem env var.
-- **Payload:** campos + geo (via `ipwho.is`) + dispositivo + `Id_do_formulario` + as 6
-  UTMs. As UTMs são lidas de `window.location.search` **no momento do submit** — não há
-  persistência em cookie/localStorage, então **não quebre a query string** com redirects.
-- **`formId`:** dê um novo a cada LP (`lp-licitacao-ia`, `lp-reforma-tributaria`,
-  `lp-licitaexpo`). É como o n8n distingue a origem do lead.
+- **Payload:** campos + geo (via `ipwho.is`) + dispositivo + `Id_do_formulario` + tracking.
+  O tracking (`lib/lp/utm.ts`) captura `utm_source/medium/campaign/content/term/id`, `fbclid`
+  e `gclid` da query **na carga da página** (`captureTracking()` em `EventLp`, `LpPage` e
+  `/licitaexpo`) e persiste em `sessionStorage`; no submit lê a query atual com fallback no
+  storage. Vão no payload com esses nomes minúsculos **e** nas chaves legadas `UTM_*` (o n8n
+  mapeia as legadas). Ainda assim, **não quebre a query string** com redirects — o
+  `app/page.tsx` já perde as UTMs de quem cai na raiz.
+- **`produto` / `pagina_origem`:** opcionais (`content.form.produto` / `paginaOrigem`), só
+  entram quando definidos. `produto` é a chave do mapa de cursos do n8n (`licitacao`,
+  `licitacao-out26`) — **um slug novo precisa ser cadastrado no n8n antes de a LP receber
+  tráfego**, senão o lead entra como "Curso não identificado".
+- **`formId`:** dê um novo a cada LP (`lp-licitacao-ia`, `lp-licitacao-out26`,
+  `lp-reforma-tributaria`, `lp-licitaexpo`). É como o n8n distingue a origem do lead.
 - **Pós-submit:** `redirectToThankYou()` — o redirect está no `finally`, ou seja,
   **acontece mesmo se o webhook falhar** (o lead se perde, mas o usuário não trava).
 

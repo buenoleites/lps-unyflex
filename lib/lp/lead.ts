@@ -1,3 +1,5 @@
+import { getTracking } from "./utm";
+
 const WEBHOOK_URL = "https://n8n.unyflex.com.br/webhook/lp-leads-unyflex";
 const REDIRECT_URL = "/obrigado";
 
@@ -40,15 +42,36 @@ export interface LeadForm {
   whatsapp: string;
   cargo: string;
   orgao: string;
-  servidorPublico: string;
+  /** Toggle "É servidor público?" (Sim/Não). Existe em todas as LPs que NÃO
+   *  configuram o campo `vinculo`; vira Orgao_Publico no payload. */
+  servidorPublico?: string;
+  /** Select "Seu vínculo" (servidor/terceirizado/fornecedor/outro). Só existe
+   *  quando a LP configura o campo — e aí SUBSTITUI servidorPublico: o payload
+   *  manda `vinculo` e não manda Orgao_Publico (o n8n fechava como "Perdido"
+   *  quem marcava "Não" no toggle, inclusive lead qualificado). */
+  vinculo?: string;
   /** Só existe quando a LP configura o campo de modalidade (ex.: /patrimonio).
    *  A presença da chave — não o valor — decide se Modalidade_Preferida entra
    *  no payload; LPs sem o campo seguem enviando o payload de sempre. */
   modalidade?: string;
 }
 
-export async function submitLead(form: LeadForm, formId: string): Promise<void> {
-  const q = new URLSearchParams(window.location.search);
+export interface SubmitOptions {
+  /** Slug do curso/turma no mapa de cursos do n8n (ex.: "licitacao-out26").
+   *  Entra no payload como `produto` só quando definido. */
+  produto?: string;
+  /** Slug da página de origem; entra como `pagina_origem` só quando definido. */
+  paginaOrigem?: string;
+}
+
+export async function submitLead(
+  form: LeadForm,
+  formId: string,
+  opts: SubmitOptions = {}
+): Promise<void> {
+  // Query atual com fallback no sessionStorage (lib/lp/utm.ts): a atribuição
+  // sobrevive à navegação entre páginas antes da conversão.
+  const t = getTracking();
   const geo = await getGeo();
 
   const payload = {
@@ -57,10 +80,14 @@ export async function submitLead(form: LeadForm, formId: string): Promise<void> 
     WhatsApp: form.whatsapp,
     Cargo_Setor: form.cargo,
     Orgao_Municipio: form.orgao,
-    Orgao_Publico: form.servidorPublico,
+    ...(form.vinculo !== undefined
+      ? { vinculo: form.vinculo }
+      : { Orgao_Publico: form.servidorPublico ?? "" }),
     ...(form.modalidade !== undefined
       ? { Modalidade_Preferida: form.modalidade }
       : {}),
+    ...(opts.produto ? { produto: opts.produto } : {}),
+    ...(opts.paginaOrigem ? { pagina_origem: opts.paginaOrigem } : {}),
     Referral_Source: document.referrer || "",
     Dispositivo: getDevice(),
     URL: window.location.href,
@@ -70,12 +97,23 @@ export async function submitLead(form: LeadForm, formId: string): Promise<void> 
     Pais_do_usuario: geo.country_code || "",
     Regiao_do_usuario: geo.region || "",
     Cidade_do_usuario: geo.city || "",
-    UTM_Source: q.get("utm_source") || "",
-    UTM_Medium: q.get("utm_medium") || "",
-    UTM_Campaign: q.get("utm_campaign") || "",
-    UTM_Id: q.get("utm_id") || "",
-    UTM_Term: q.get("utm_term") || "",
-    UTM_Content: q.get("utm_content") || "",
+    // Chaves legadas (o n8n atual mapeia estas) — agora com fallback de sessão.
+    UTM_Source: t.utm_source ?? "",
+    UTM_Medium: t.utm_medium ?? "",
+    UTM_Campaign: t.utm_campaign ?? "",
+    UTM_Id: t.utm_id ?? "",
+    UTM_Term: t.utm_term ?? "",
+    UTM_Content: t.utm_content ?? "",
+    // Mesmos nomes da query string, para atribuição por criativo sem depender
+    // do relatório do Meta.
+    utm_source: t.utm_source ?? "",
+    utm_medium: t.utm_medium ?? "",
+    utm_campaign: t.utm_campaign ?? "",
+    utm_content: t.utm_content ?? "",
+    utm_term: t.utm_term ?? "",
+    utm_id: t.utm_id ?? "",
+    fbclid: t.fbclid ?? "",
+    gclid: t.gclid ?? "",
   };
 
   await fetch(WEBHOOK_URL, {

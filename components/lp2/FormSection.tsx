@@ -44,6 +44,9 @@ export default function FormSection({
           submitLabel={content.submitLabel}
           thankYou={content.thankYou}
           modalidade={content.modalidade}
+          vinculo={content.vinculo}
+          produto={content.produto}
+          paginaOrigem={content.paginaOrigem}
         />
       </div>
     </Section>

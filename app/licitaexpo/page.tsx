@@ -1,6 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { trackEvent } from "@/lib/lp/meta";
+import { captureTracking } from "@/lib/lp/utm";
 import { handleAnchorClick } from "@/lib/lp/scroll";
 import { useReveal } from "@/lib/lp/useReveal";
 import LeadForm from "@/components/lp/LeadForm";
@@ -98,6 +99,7 @@ const PALESTRANTES: {
 
 export default function LicitaexpoPage() {
   useEffect(() => {
+    captureTracking();
     trackEvent("PageView");
   }, []);
 

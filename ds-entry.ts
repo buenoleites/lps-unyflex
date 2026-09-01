@@ -43,7 +43,9 @@ export { default as Speakers } from "./components/lp2/Speakers";
 export { default as Gallery } from "./components/lp2/Gallery";
 export { default as Plans } from "./components/lp2/Plans";
 export { default as Reviews } from "./components/lp2/Reviews";
+export { default as PricingCombo } from "./components/lp2/PricingCombo";
 export { default as Compare } from "./components/lp2/Compare";
+export { default as Procurement } from "./components/lp2/Procurement";
 export { default as Faq } from "./components/lp2/Faq";
 export { default as FormSection } from "./components/lp2/FormSection";
 

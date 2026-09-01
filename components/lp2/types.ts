@@ -7,8 +7,8 @@ import type { ReactNode } from "react";
  * - accent é EXCLUSIVO para ação (botões, links, destaque de plano) e para UMA
  *   palavra-chave por headline (via <Kw>). Nunca como fundo de seção.
  * - Todo texto visível vive na config — componentes não têm copy própria.
- * - Seções opcionais (quote, speakers, gallery, reviews, compare) ligam pela
- *   presença da chave.
+ * - Seções opcionais (quote, speakers, gallery, procurement, reviews, compare)
+ *   ligam pela presença da chave.
  * - A ordem das seções é fixa no template (EventLp), não configurável.
  */
 export interface EventLpContent {
@@ -194,6 +194,17 @@ export interface EventLpContent {
     paymentNote: string;
   };
 
+  /** 09c — "Como seu órgão contrata" (OPCIONAL): cards claros com o que o lead
+   *  recebe para levar ao gestor (proposta, empenho, documentação,
+   *  certificado) e um CTA para o formulário. Renderiza logo antes do FAQ. */
+  procurement?: {
+    title: ReactNode;
+    lead?: string;
+    items: { title: string; desc: string }[];
+    /** Sem href, o CTA rola até "#inscricao". */
+    cta: { label: string; href?: string };
+  };
+
   /** 10 — avaliações (OPCIONAL até existirem dados reais). */
   reviews?: {
     /** Ex.: "4,9" — exibida em display. */
@@ -230,6 +241,16 @@ export interface EventLpContent {
      *  obrigatório do formulário e entra no payload como Modalidade_Preferida;
      *  ausente, o payload das demais LPs fica byte-idêntico ao atual. */
     modalidade?: { label: string; options: [string, string] };
+    /** Campo "Seu vínculo" (OPCIONAL): select que SUBSTITUI o toggle "É
+     *  servidor público?". Presente, o payload manda `vinculo` (value da
+     *  opção) e não manda Orgao_Publico; ausente, nada muda. */
+    vinculo?: { label: string; options: { value: string; label: string }[] };
+    /** Slug do curso/turma no mapa de cursos do n8n — vai como `produto`
+     *  (OPCIONAL; só entra no payload quando definido). Precisa estar
+     *  cadastrado no n8n ANTES de a rota receber tráfego. */
+    produto?: string;
+    /** Slug da página — vai como `pagina_origem` (OPCIONAL, idem). */
+    paginaOrigem?: string;
   };
 
   footer: {

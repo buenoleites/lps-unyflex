@@ -1,6 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { trackEvent } from "@/lib/lp/meta";
+import { captureTracking } from "@/lib/lp/utm";
 import type { EventLpContent } from "./types";
 import Lp2Root from "./Lp2Root";
 import Navbar from "./Navbar";
@@ -15,6 +16,7 @@ import Speakers from "./Speakers";
 import Gallery from "./Gallery";
 import Plans from "./Plans";
 import PricingCombo from "./PricingCombo";
+import Procurement from "./Procurement";
 import Reviews from "./Reviews";
 import Compare from "./Compare";
 import Faq from "./Faq";
@@ -25,10 +27,14 @@ import Footer from "./Footer";
 /**
  * Orquestrador do template. A ordem das seções é fixa (segue a hierarquia de
  * importância do briefing); as opcionais (schedule, modules, quote, speakers,
- * gallery, reviews, compare) renderizam apenas se a chave existir na config.
+ * gallery, procurement, reviews, compare) renderizam apenas se a chave existir
+ * na config.
  */
 export default function EventLp({ content }: { content: EventLpContent }) {
   useEffect(() => {
+    // Persiste UTMs/fbclid/gclid da query na sessão antes de qualquer
+    // navegação — o submit lê daqui quando a query já se perdeu.
+    captureTracking();
     trackEvent("PageView");
   }, []);
 
@@ -53,6 +59,9 @@ export default function EventLp({ content }: { content: EventLpContent }) {
         ) : null}
         {content.reviews ? <Reviews content={content.reviews} /> : null}
         {content.compare ? <Compare content={content.compare} /> : null}
+        {content.procurement ? (
+          <Procurement content={content.procurement} />
+        ) : null}
         <Faq content={content.faq} />
         <FormSection content={content.form} />
       </main>

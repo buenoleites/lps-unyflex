@@ -4,8 +4,10 @@ import Kw from "@/components/lp2/Kw";
 /* TODA a copy e todos os paths de imagem desta LP vivem aqui — os componentes
    do template (components/lp2/) não têm texto próprio.
 
-   Turma de 15 a 18/09/2026. Reconstrução da rota no template lp2 (antes era o
-   template v1), a partir do briefing do cliente de 11/08/2026. O conteúdo
+   Turma de 27 a 30/10/2026 (/licitacao-out26). Duplicação da /licitacao
+   (turma de 15 a 18/09) a partir do briefing de 27/08/2026: layout, ordem e
+   copy idênticos, exceto datas, bancada (Igor no lugar do Rafael), campo de
+   vínculo, bloco "Como seu órgão contrata" e rastreamento. O conteúdo
    programático dos 6 módulos é VERBATIM do programa do cliente; as frases de
    resultado (`result`) vieram prontas do briefing. Copy derivada (marcada nos
    comentários): micro-títulos do problema, título da seção de módulos, linhas
@@ -34,7 +36,18 @@ if (
   );
 }
 
-export const licitacaoContent: EventLpContent = {
+/* Escassez do hero (briefing): só entra se for o número REAL de vagas da
+   sala. null ⇒ não renderiza nada. Sem "últimas vagas" nem contador. O `as`
+   preserva a união — com anotação de tipo o TS estreita para null e o ramo
+   do template vira `never`. */
+const VAGAS = null as number | null;
+
+// O CSS do eyebrow (.lp2-eyebrow) já aplica uppercase.
+const HERO_EYEBROW = `Curso presencial em Curitiba · 27 a 30/10 · 17 horas${
+  VAGAS !== null ? ` · Turma limitada a ${VAGAS} vagas` : ""
+}`;
+
+export const licitacaoOut26Content: EventLpContent = {
   /* O accent (#00aeef, ciano da vertical Licitações) NÃO é definido aqui:
      todos os tokens de cor da LP vivem em um único bloco em ./theme.css. */
 
@@ -52,7 +65,7 @@ export const licitacaoContent: EventLpContent = {
   },
 
   hero: {
-    eyebrow: "Curso presencial em Curitiba · 15 a 18/09 · 17 horas",
+    eyebrow: HERO_EYEBROW,
     title: (
       <>
         DFD, ETP, TR e Mapa de Riscos com <Kw>Inteligência Artificial</Kw>
@@ -69,7 +82,7 @@ export const licitacaoContent: EventLpContent = {
     // Os 3 badges do briefing na linha de meta (small muted) — o template não
     // tem slot próprio de badges (mesma solução da /patrimonio).
     meta: "Rua Voluntários da Pátria, 547 — Centro, Curitiba/PR · Certificado emitido após a conclusão por instituição reconhecida pelo MEC · Também disponível online ao vivo",
-    bgSrc: "/licitacao/hero.jpg",
+    bgSrc: "/licitacao-out26/hero.jpg",
   },
 
   ticker: {
@@ -141,7 +154,7 @@ export const licitacaoContent: EventLpContent = {
   /* schedule (timeline por dia) desligada nesta LP: o briefing pede o
      conteúdo programático em accordion — seção `modules`. */
 
-  /* Conteúdo programático VERBATIM do programa do cliente (turma 15 a 18/09).
+  /* Conteúdo programático VERBATIM do programa do cliente (mesmo programa da turma de setembro).
      As frases de `result` (visíveis com o card fechado) vieram prontas do
      briefing. Convenção dos sub-itens: cada item lettrado (a, b, c…) é uma
      string própria em `topics`, com a letra preservada; o tópico-pai termina
@@ -304,34 +317,33 @@ export const licitacaoContent: EventLpContent = {
 
   /* quote (seção opcional): não pedida pelo briefing — desligada. */
 
-  /* 3 professores = grid default do template, sem patch de layout. Ordem
-     proposital do briefing: os dois juristas primeiro — a maior objeção do
-     público é jurídica, e a autoridade que a neutraliza é quem padroniza
-     minuta de edital na PGE. Bios verbatim do briefing; as linhas de
-     instituição (small uppercase antes do nome) são derivadas das bios.
-     Fotos: Rafael e Gabriela em 400×400 (mesmos assets da /licitaexpo-v2 — o
-     template recorta em 4:5 via CSS); a do Marcus é o upscale 640×800 já
-     aceito na /patrimonio. */
+  /* 3 professores = grid default do template, sem patch de layout. Turma de
+     outubro (briefing de 27/08): Igor Pires Gomes da Costa entra no lugar do
+     Rafael Costa Santos; Marcus e Gabriela são os cards da /licitacao, sem
+     alteração. Ordem numerada do briefing: Marcus, Gabriela, Igor. Rótulo do
+     Igor e bio verbatim do briefing (sem ampliar). Fotos: Igor e Gabriela em
+     400×400 (mesmos assets da /licitaexpo-v2 — o template recorta em 4:5 via
+     CSS); a do Marcus é o upscale 640×800 já aceito na /patrimonio. */
   speakers: {
     title: "Quem ensina responde por isso na prática",
     items: [
       {
-        name: "Rafael Costa Santos",
-        institution: "PROCURADOR-CHEFE · PGE-PR",
-        photoSrc: "/licitacao/palestrantes/rafael-costa-santos.jpg",
-        bio: "Procurador-Chefe da Procuradoria Consultiva de Obras e Serviços de Engenharia da PGE-PR há mais de oito anos. Doutorando e mestre em Direito pela UFPR. Presidiu os grupos de trabalho do regulamento paranaense da Lei nº 14.133/2021 e é membro fixo da comissão de padronização de minutas de editais da PGE-PR. Autor de “Convênios Administrativos” e coautor de “Contrato Público Built to Suit” (Editora Fórum).",
+        name: "Marcus Gualberto Ganter",
+        institution: "CÂMARA MUNICIPAL DE CURITIBA · IA APLICADA",
+        photoSrc: "/licitacao-out26/palestrantes/marcus-gualberto-ganter.jpg",
+        bio: "Engenheiro pelo ITA, mestre em Políticas Públicas (UFPR) e em Administração Pública (LSE). Chefe de Gabinete na Câmara Municipal de Curitiba, ex-Diretor de Projetos no Governo do Estado do Paraná. Responsável pelo eixo de IA.",
       },
       {
         name: "Gabriela Lira Borges",
         institution: "CONSULTORA JURÍDICA · PARECERISTA",
-        photoSrc: "/licitacao/palestrantes/gabriela-lira-borges.jpg",
+        photoSrc: "/licitacao-out26/palestrantes/gabriela-lira-borges.jpg",
         bio: "Consultora jurídica e parecerista. Mestre em Governança e Planejamento Público pela UTFPR. Ex-Procuradora do Estado do Acre, ex-consultora jurídica da Zênite. Coautora de “Horizontes e Perspectivas da Lei nº 14.133/2021” (Lumen Juris, 2022).",
       },
       {
-        name: "Marcus Gualberto Ganter",
-        institution: "CÂMARA MUNICIPAL DE CURITIBA · IA APLICADA",
-        photoSrc: "/licitacao/palestrantes/marcus-gualberto-ganter.jpg",
-        bio: "Engenheiro pelo ITA, mestre em Políticas Públicas (UFPR) e em Administração Pública (LSE). Chefe de Gabinete na Câmara Municipal de Curitiba, ex-Diretor de Projetos no Governo do Estado do Paraná. Responsável pelo eixo de IA.",
+        name: "Igor Pires Gomes da Costa",
+        institution: "PROCURADOR DO ESTADO DO PARANÁ",
+        photoSrc: "/licitacao-out26/palestrantes/igor-pires-gomes-da-costa.jpg",
+        bio: "Mestre em Direito Público pela Universidade de Nantes (França) e Mestre em Direito do Estado pela UFPR. Procurador do Estado do Paraná em dedicação exclusiva e membro do Grupo Permanente de Trabalho de Direitos Humanos da PGE. Autor de artigos sobre governança pública, responsabilidade fiscal e gestão de riscos na nova Lei de Licitações.",
       },
     ],
   },
@@ -521,12 +533,14 @@ export const licitacaoContent: EventLpContent = {
   form: {
     title: "Garanta sua participação",
     // Urgência factual, sem escassez fabricada (vetada pelo briefing).
-    meta: "Turma de 15 a 18/09, em Curitiba. Empenho leva tempo no seu órgão — comece o processo agora.",
+    meta: "Turma de 27 a 30/10, em Curitiba. Empenho leva tempo no seu órgão — comece o processo agora.",
     // [ASSET PROVISÓRIO]: foto oficial Unyflex reaproveitada da /patrimonio
     // (que por sua vez veio da /comunicacao). TODO: substituir quando chegar.
-    bgSrc: "/licitacao/cta-final.jpg",
-    // NÃO ALTERAR: slug mapeado no n8n, campanha no ar (briefing).
-    formId: "lp-licitacao-ia",
+    bgSrc: "/licitacao-out26/cta-final.jpg",
+    // Novo formId desta turma. BLOQUEIO DE PUBLICAÇÃO: o slug `licitacao-out26`
+    // (campo `produto` abaixo) precisa estar no mapa de cursos do n8n antes de
+    // a página receber tráfego, senão o lead entra como "Curso não identificado".
+    formId: "lp-licitacao-out26",
     submitLabel: "Receber proposta",
     thankYou: { url: "/obrigado", withPii: false },
     modalidade: {
@@ -549,8 +563,8 @@ export const licitacaoContent: EventLpContent = {
     },
     // Chave pela qual o mapa de cursos do n8n identifica a turma (cCodIntOp
     // no CRM) — distinta entre as turmas de setembro e outubro.
-    produto: "licitacao",
-    paginaOrigem: "licitacao",
+    produto: "licitacao-out26",
+    paginaOrigem: "licitacao-out26",
   },
 
   /* Rodapé replicado da /patrimonio (mesma parceira e mesmas redes). */
@@ -560,7 +574,7 @@ export const licitacaoContent: EventLpContent = {
     partners: [
       // invert: o logo original é escuro — em marca branca sobre o rodapé.
       {
-        src: "/licitacao/parceiros/faculdade-unypublica.png",
+        src: "/licitacao-out26/parceiros/faculdade-unypublica.png",
         alt: "Faculdade Unypública",
         invert: true,
       },
