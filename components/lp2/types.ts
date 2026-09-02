@@ -233,10 +233,14 @@ export interface EventLpContent {
   form: {
     title: ReactNode;
     meta?: string;
-    bgSrc: string;
+    /** Sem imagem, a seção fica no fundo escuro de fallback do tone photo. */
+    bgSrc?: string;
     formId: string;
     submitLabel: string;
     thankYou: { url: string; withPii: boolean };
+    /** Órgão/Município deixa de ser obrigatório quando `false`. Ausente ⇒
+     *  obrigatório (comportamento atual de todas as rotas). */
+    orgaoRequired?: boolean;
     /** Escolha de modalidade (OPCIONAL). Quando presente, vira campo
      *  obrigatório do formulário e entra no payload como Modalidade_Preferida;
      *  ausente, o payload das demais LPs fica byte-idêntico ao atual. */

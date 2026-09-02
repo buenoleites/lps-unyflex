@@ -19,7 +19,11 @@ export default function FormSection({
       tone="photo"
       className="lp2-form-section"
       labelledBy="inscricao-title"
-      media={<MediaBackdrop src={content.bgSrc} textSide="center" />}
+      media={
+        content.bgSrc ? (
+          <MediaBackdrop src={content.bgSrc} textSide="center" />
+        ) : undefined
+      }
     >
       <div
         className="lp2-sec-head"
@@ -47,6 +51,7 @@ export default function FormSection({
           vinculo={content.vinculo}
           produto={content.produto}
           paginaOrigem={content.paginaOrigem}
+          orgaoRequired={content.orgaoRequired}
         />
       </div>
     </Section>
