@@ -44,6 +44,20 @@
   }
 }
 
+/* Galeria com UMA foto: o template monta uma colagem em CSS columns (2 no
+   mobile, 3 acima de 800px), e uma foto sozinha cairia numa coluna de 1/3 da
+   largura no desktop — lê como bug de layout. Coluna única e contida: na
+   largura do container a foto viraria um bloco de 800px de altura E o slide
+   do telão ficaria legível — ele é de outro curso (PCASP/Ativo Imobilizado),
+   e numa LP de engenharia isso lê como foto emprestada. A 760px o slide não
+   se lê. Se entrarem 2 ou 3 fotos de sala, apagar este bloco: a colagem
+   original do template passa a valer. */
+.lpe-theme .lp2-gallery {
+  columns: 1;
+  max-width: 760px;
+  margin-inline: auto;
+}
+
 /* Navbar com 5 links (mesmo caso da /comunicacao, /tesouraria, /patrimonio e
    /licitacao-out26): centraliza os links entre logo e CTA no desktop. <800px
    o template já esconde os links. */

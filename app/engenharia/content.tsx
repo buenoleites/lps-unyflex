@@ -235,31 +235,52 @@ export const engenhariaContent: EventLpContent = {
 
   /* quote (seção opcional): não pedida pelo briefing — desligada. */
 
-  /* Bancada com 2 professores. SEM FOTOS por ora (não existem no acervo;
-     decisão do Gustavo, 02/09/2026): photoSrc null ⇒ monograma, mesma regra
-     da /portal. TODO: fotos em /engenharia/palestrantes/ quando chegarem.
-     O grid de 3 colunas vira 2 via theme.css. Título e bios verbatim do
-     briefing (o negrito do briefing vira texto plano — `bio` é string). */
+  /* Bancada com 2 professores; fotos fornecidas pelo Gustavo em 02/09/2026.
+     O template recorta em 4:5 com object-position 50% 20% (enviesado para o
+     topo), então a foto vertical da Jaqueline (576×844) perde só a margem
+     acima do cabelo. O grid de 3 colunas vira 2 via theme.css. Título e bios
+     verbatim do briefing (o negrito do briefing vira texto plano — `bio` é
+     string). */
   speakers: {
     title: "Quem ensina já assinou o que você assina",
     items: [
       {
         name: "Silvio Cesar Riechi",
         institution: "EX-SECRETÁRIO DE URBANISMO · ARQUITETO E URBANISTA",
-        photoSrc: null,
+        photoSrc: "/engenharia/palestrantes/silvio-cesar-riechi.jpg",
         bio: "Arquiteto e urbanista pela PUCPR, especialista em Habitação e Cidade pela Escola da Cidade (SP). Foi diretor técnico, assessor de assuntos metropolitanos e secretário municipal de urbanismo em Piraquara, onde coordenou o Plano Municipal de Regularização Fundiária e a legislação de diretrizes viárias e parcelamento do solo. Sócio da Riechi Urbanismo e Arquitetura.",
       },
       {
         name: "Jaqueline Martinez de Oliveira",
         institution: "SERVIDORA PÚBLICA · LICITAÇÕES E CONTRATOS",
-        photoSrc: null,
+        photoSrc:
+          "/engenharia/palestrantes/jaqueline-martinez-de-oliveira.jpg",
         bio: "Graduada em Gestão Pública, especialista em Políticas Públicas, MBA em Administração Pública e Gerência de Cidades, mestranda em Desenvolvimento Regional. Servidora pública com experiência direta em licitações e contratos.",
       },
     ],
   },
 
-  /* gallery (seção opcional): desligada — a foto de turma em sala pedida pelo
-     briefing fica pendente junto com as demais fotos da vertical. */
+  /* Foto de turma em sala (briefing §11), fornecida pelo Gustavo em
+     02/09/2026. O componente de avaliações não tem slot de imagem, e
+     `gallery` renderiza IMEDIATAMENTE ANTES de `reviews` no EventLp — é a
+     adjacência que o briefing pede ("foto: turma em sala"), sem alterar
+     componente compartilhado. width/height são as dimensões intrínsecas do
+     arquivo: reservam o espaço e evitam CLS. Título é copy derivada (o
+     briefing não traz título para a seção) — validar com o Gustavo.
+     Com uma foto só, a colagem em CSS columns vira coluna única no
+     theme.css; mandando 2 ou 3 fotos, aquele override sai e a colagem
+     original volta a valer. */
+  gallery: {
+    title: "A sala de aula",
+    photos: [
+      {
+        src: "/engenharia/galeria/turma-01.jpg",
+        alt: "Turma em aula presencial da Unyflex: professor à frente, com microfone, e alunos acompanhando a apresentação no telão.",
+        width: 1600,
+        height: 1066,
+      },
+    ],
+  },
 
   /* Avaliações públicas do Google, texto integral e nomes como publicados
      (briefing §11). Renderiza entre Professores e Investimento — o slot de
