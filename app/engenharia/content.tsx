@@ -10,8 +10,14 @@ import Kw from "@/components/lp2/Kw";
    fala de EVENTOS CLIMÁTICOS e CONTRATAÇÃO EMERGENCIAL — a página abre com
    isso e o módulo climático é o PRIMEIRO da programação (era o 6º no site;
    regra do briefing que não pode quebrar). Copy verbatim do briefing, sem
-   "melhorar" frases jurídicas. Copy derivada (marcada nos comentários): as
-   frases de `result` dos módulos — o briefing não as traz e o tipo exige.
+   "melhorar" frases jurídicas.
+
+   NENHUMA STRING VISÍVEL DESTA PÁGINA É DE AUTORIA DO AGENTE (auditado contra
+   o briefing em 03/09/2026, por ordem do Gustavo): ou está no briefing, ou é
+   cópia byte a byte da /licitacao-out26 (Investimento, rodapé, botão fixo),
+   ou é rótulo de menu por convenção das outras LPs. Ao editar, manter a regra:
+   texto novo só entra com fonte. A exceção declarada é o `alt` da foto de
+   turma — acessibilidade, invisível na tela.
 
    PRODUTO NO OMIE (grafia exata): "Soluções práticas de engenharia e
    Urbanismo". O payload manda o slug `engenharia` (padrão das outras LPs);
@@ -164,16 +170,15 @@ export const engenhariaContent: EventLpContent = {
      pode quebrar (o anúncio fala de eventos climáticos e contratação
      emergencial). Título da seção veio pronto do briefing. Cada tópico
      separado por "·" no briefing é uma string própria em `topics`.
-     As frases de `result` (visíveis com o card fechado) são COPY DERIVADA —
-     o tipo exige e o briefing não traz; validar com o Gustavo. */
+     SEM `result`: a frase que o card mostra fechado era escrita por mim (o
+     briefing não traz) e o Gustavo mandou tirar em 03/09/2026 — a página não
+     tem nenhuma palavra de autoria do agente. O campo virou opcional no
+     contrato do lp2 por causa disso; não repor. */
   modules: {
     title: "Em 17 horas, do risco climático ao recebimento da obra",
     items: [
       {
         title: "Contratações Planejadas em Eventos Climáticos",
-        // result derivado.
-        result:
-          "Ata preventiva, especificação pronta e prestação de contas: o plano que a Lei 14.133 cobra antes do evento",
         topics: [
           "Cenário de riscos climáticos e a Lei 14.133",
           "Planejamento e gestão de riscos na fase preparatória",
@@ -185,9 +190,6 @@ export const engenhariaContent: EventLpContent = {
       },
       {
         title: "Planejamento e Orçamentação de Obras na Nova Lei",
-        // result derivado.
-        result:
-          "TR, edital e orçamento de obra sem apontamento de sobrepreço — e a preparação para a exigência do BIM",
         topics: [
           "TR e edital de engenharia blindados contra erro sob a 14.133",
           "Orçamentação sem sobrepreço com SINAPI e SICRO",
@@ -196,9 +198,6 @@ export const engenhariaContent: EventLpContent = {
       },
       {
         title: "Fiscalização de Obras Públicas, Tecnologia e Apps",
-        // result derivado.
-        result:
-          "Do diário de obra digital ao recebimento definitivo, com drone e satélite auditando o avanço",
         topics: [
           "Rotina do fiscal, diário de obra digital, recebimento provisório e definitivo",
           "Drones de baixo custo e imagem de satélite para auditar avanço",
@@ -207,9 +206,6 @@ export const engenhariaContent: EventLpContent = {
       },
       {
         title: "Inteligência Artificial Aplicada à Engenharia e Arquitetura",
-        // result derivado.
-        result:
-          "IA de uso direto no projeto: estudo preliminar, memorial descritivo e renderização para captar recurso",
         topics: [
           "IA generativa para estudo preliminar e maquete de prédio público",
           "Automatização de memorial descritivo, especificação e revisão de orçamento",
@@ -218,9 +214,6 @@ export const engenhariaContent: EventLpContent = {
       },
       {
         title: "O Novo Cenário do Urbanismo e Cidades Inteligentes",
-        // result derivado.
-        result:
-          "Plano Diretor, zoneamento e mobilidade que cabem no município pequeno e médio",
         topics: [
           "Smart cities em município pequeno e médio",
           "Revisão de Plano Diretor e zoneamento para atrair investimento",
@@ -229,9 +222,6 @@ export const engenhariaContent: EventLpContent = {
       },
       {
         title: "Ideias: Projetos de Engenharia e Urbanismo pelo Brasil",
-        // result derivado.
-        result:
-          "Projetos replicáveis de rápido impacto — do placemaking ao Alvará Fácil",
         topics: [
           "Revitalização de espaço público de rápido impacto (placemaking)",
           "Drenagem sustentável, pavimentação ecológica e LED",
@@ -284,8 +274,9 @@ export const engenhariaContent: EventLpContent = {
      curso de patrimônio — numa faixa larga voltaria a ficar legível e leria
      como foto emprestada. Não reenquadrar para incluir o telão de novo.
 
-     `caption` é COPY DERIVADA (o briefing não traz legenda) — validar com o
-     Gustavo, junto das frases de `result` dos módulos. */
+     A foto NÃO leva `caption`: a legenda era escrita por mim e saiu junto com
+     as frases de `result` (03/09/2026). O `alt` fica — é acessibilidade, não
+     copy da página, e nenhum briefing descreve foto. */
   reviews: {
     rating: "5,0",
     ratingValue: 5,
@@ -294,7 +285,6 @@ export const engenhariaContent: EventLpContent = {
     photo: {
       src: "/engenharia/turma.jpg",
       alt: "Turma em aula presencial da Unyflex: professor à frente, com microfone, e alunos acompanhando a apresentação.",
-      caption: "Turma presencial na sede da Unyflex, em Curitiba.",
       width: 1280,
       height: 720,
     },

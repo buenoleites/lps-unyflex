@@ -5,9 +5,9 @@ import type { EventLpContent } from "./types";
 
 /**
  * Módulos "o que você leva": cards em acordeão, um aberto por vez, todos
- * fechados no load. Fechado, o card mostra número + título + frase de
- * resultado; aberto, revela o objetivo (opcional) e a lista de tópicos do
- * módulo. Mecânica de
+ * fechados no load. Fechado, o card mostra número + título + a frase de
+ * resultado quando a rota tem uma; aberto, revela o objetivo (opcional) e a
+ * lista de tópicos do módulo. Mecânica de
  * colapso/ARIA idêntica à do Faq (o painel anima via grid-template-rows e
  * permanece no DOM, por isso aria-hidden em vez de hidden).
  */
@@ -57,7 +57,11 @@ export default function Modules({
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span className="lp2-modules__title">{item.title}</span>
-                    <span className="lp2-modules__result">{item.result}</span>
+                    {item.result ? (
+                      <span className="lp2-modules__result">
+                        {item.result}
+                      </span>
+                    ) : null}
                   </span>
                   <svg
                     className="lp2-modules__chevron"

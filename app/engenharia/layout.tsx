@@ -6,33 +6,45 @@ import "./theme.css";
 /* Soluções Práticas de Engenharia e Urbanismo, no template lp2
    (turma de 22 a 25/09/2026 — rota /engenharia). */
 
+/* Subtítulo do hero, VERBATIM do briefing §1. É a única descrição desta rota:
+   metadata, Open Graph, Twitter e JSON-LD apontam todos para cá, para que não
+   exista na página nenhum texto escrito pelo agente. Se o briefing mudar, muda
+   aqui e em app/engenharia/content.tsx (hero.subtitle) — as duas cópias são
+   propositais: uma é a página, a outra é o que os buscadores leem. */
+const BRIEFING_SUBTITULO =
+  "Ata de registro de preços preventiva, especificações técnicas, contratação emergencial e fiscalização pós-evento na Lei 14.133 — mais BIM, drones, orçamentação SINAPI/SICRO e IA aplicada ao projeto. Para quem responde por obras, urbanismo e infraestrutura no município.";
+
 export const metadata: Metadata = {
   // O root layout define metadataBase com o path /licitacao embutido, o que
   // faria o canonical e a OG desta rota resolverem errado. Aqui a base é a
   // origem, como deveria ser.
   metadataBase: new URL("https://mkt.unyflex.com.br"),
   title: "Soluções Práticas de Engenharia e Urbanismo | Unyflex",
-  description:
-    "17 horas em Curitiba (e online ao vivo): contratação emergencial e atas preventivas para eventos climáticos na Lei 14.133 — mais BIM, drones, orçamentação SINAPI/SICRO e IA aplicada ao projeto. 22 a 25 de setembro de 2026. Aceitamos nota de empenho.",
+  // Todas as descrições desta rota (aqui, OG, twitter e JSON-LD) são o
+  // SUBTÍTULO DO HERO, verbatim do briefing §1 — a página não carrega texto de
+  // autoria do agente (regra do Gustavo, 03/09/2026). Uso o subtítulo inteiro
+  // de propósito: escolher onde cortar já seria decisão editorial. O Google
+  // trunca no que couber.
+  description: BRIEFING_SUBTITULO,
+  // Termos levantados literalmente do briefing, não frases compostas.
   keywords: [
-    "engenharia e urbanismo na gestão pública",
-    "contratação emergencial Lei 14.133",
-    "eventos climáticos contratação pública",
+    "Lei 14.133",
+    "contratação emergencial",
+    "eventos climáticos",
     "ata de registro de preços preventiva",
-    "orçamentação SINAPI SICRO",
+    "SINAPI",
+    "SICRO",
+    "BIM",
     "fiscalização de obras públicas",
-    "BIM na prefeitura",
-    "drones em obras públicas",
-    "IA aplicada à engenharia",
-    "plano diretor cidades inteligentes",
+    "Plano Diretor",
+    "cidades inteligentes",
   ],
   alternates: {
     canonical: "/engenharia",
   },
   openGraph: {
     title: "Soluções Práticas de Engenharia e Urbanismo | Unyflex",
-    description:
-      "Contratação emergencial, ata preventiva e fiscalização pós-evento na Lei 14.133 — mais BIM, drones, SINAPI/SICRO e IA aplicada ao projeto. 17 horas, Curitiba e online ao vivo, 22 a 25 de setembro de 2026.",
+    description: BRIEFING_SUBTITULO,
     url: "/engenharia",
     siteName: "Unyflex",
     locale: "pt_BR",
@@ -41,8 +53,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Soluções Práticas de Engenharia e Urbanismo | Unyflex",
-    description:
-      "Contratação emergencial, ata preventiva e fiscalização pós-evento na Lei 14.133 — mais BIM, drones, SINAPI/SICRO e IA aplicada ao projeto. 17 horas, Curitiba e online ao vivo, 22 a 25 de setembro de 2026.",
+    description: BRIEFING_SUBTITULO,
   },
 };
 
@@ -50,8 +61,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "EducationEvent",
   name: "Soluções Práticas de Engenharia e Urbanismo",
-  description:
-    "Curso de engenharia e urbanismo para a gestão municipal na Lei 14.133: contratação emergencial e atas preventivas para eventos climáticos, orçamentação SINAPI/SICRO, fiscalização de obras, BIM, drones e IA aplicada ao projeto. 17 horas, presencial em Curitiba e online ao vivo.",
+  description: BRIEFING_SUBTITULO,
   url: "https://mkt.unyflex.com.br/engenharia",
   startDate: "2026-09-22",
   endDate: "2026-09-25",

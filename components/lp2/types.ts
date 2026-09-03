@@ -84,8 +84,10 @@ export interface EventLpContent {
     lead?: string;
     items: {
       title: string;
-      /** Frase de resultado, sempre visível com o card fechado. */
-      result: string;
+      /** Frase de resultado, visível com o card fechado (OPCIONAL). Sem ela o
+       *  card fechado mostra só número + título — é o caso da /engenharia, cujo
+       *  briefing não traz a frase e proíbe texto de outra fonte. */
+      result?: string;
       /** Objetivo do módulo, no topo do corpo expansível (OPCIONAL). */
       objective?: string;
       topics: string[];
