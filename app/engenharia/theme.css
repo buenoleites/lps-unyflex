@@ -1,0 +1,71 @@
+/* Tema da LP Soluções Práticas de Engenharia e Urbanismo — turma de 22 a
+   25/09/2026 (/engenharia). É o ÚNICO bloco de cor desta LP: nenhum literal
+   de cor fora daqui (exceção: opengraph-image.tsx, que não lê CSS — mesmo
+   precedente das outras instâncias lp2).
+
+   O accent é o ciano #00aeef por decisão do Gustavo (02/09/2026), que hoje
+   coincide com o default do lp2.css — os tokens são fixados aqui mesmo assim:
+   um retune futuro do default do template não pode restilizar em silêncio uma
+   rota com tráfego pago. Cópia (não import) do theme.css da /licitacao-out26,
+   pelo mesmo motivo de isolamento entre rotas.
+
+   O seletor .lpe-theme (wrapper no layout da rota) vence o bloco default de
+   .lp2-root por especificidade, independente da ordem dos imports de CSS. */
+.lpe-theme .lp2-root {
+  --accent: #00aeef; /* ciano — mesmo valor do default do lp2 */
+  --accent-ink: #071016; /* texto sobre accent — branco sobre #00aeef reprova AA */
+  --accent-ring: rgba(0, 174, 239, 0.28);
+  --accent-tint: rgba(0, 174, 239, 0.12);
+  --accent-deep: #006b93; /* accent p/ texto/foco em superfície clara — 5,9:1 no branco */
+}
+
+/* Problema com só 4 cards (frases do briefing): o template assume 6–10 e dá
+   largura dupla ao 1º card, o que aqui deixaria uma célula vazia no desktop.
+   Vira um 2×2 limpo — mesma solução da /patrimonio. */
+@media (min-width: 640px) {
+  .lpe-theme .lp2-bento > :first-child {
+    grid-column: auto;
+  }
+}
+
+@media (min-width: 1000px) {
+  .lpe-theme .lp2-bento {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Bancada com só 2 professores: o grid default de 3 colunas no desktop
+   deixaria uma célula órfã. Duas colunas com largura contida e centradas. */
+@media (min-width: 1000px) {
+  .lpe-theme .lp2-speakers__grid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 860px;
+    margin-inline: auto;
+  }
+}
+
+/* Navbar (mesmo caso da /comunicacao, /tesouraria, /patrimonio e
+   /licitacao-out26): centraliza os links entre logo e CTA no desktop. <800px
+   o template já esconde os links. */
+@media (min-width: 800px) {
+  .lpe-theme .lp2-nav__inner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 16px;
+  }
+
+  .lpe-theme .lp2-nav__links {
+    justify-content: center;
+  }
+}
+
+/* Esta rota tem SEIS links (as outras têm 5): com o padding padrão de 16px a
+   linha mede 622px e transborda 14px na largura exata de 800px, onde o
+   template acabou de mostrar os links. De 840px para cima já sobra espaço.
+   Apertar o padding só nessa janela devolve 48px — mais que suficiente — e
+   não mexe no alvo de toque, que vem do min-height de 44px. */
+@media (min-width: 800px) and (max-width: 839px) {
+  .lpe-theme .lp2-nav__link {
+    padding: 0 12px;
+  }
+}

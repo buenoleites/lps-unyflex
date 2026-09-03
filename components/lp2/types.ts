@@ -84,8 +84,10 @@ export interface EventLpContent {
     lead?: string;
     items: {
       title: string;
-      /** Frase de resultado, sempre visível com o card fechado. */
-      result: string;
+      /** Frase de resultado, visível com o card fechado (OPCIONAL). Sem ela o
+       *  card fechado mostra só número + título — é o caso da /engenharia, cujo
+       *  briefing não traz a frase e proíbe texto de outra fonte. */
+      result?: string;
       /** Objetivo do módulo, no topo do corpo expansível (OPCIONAL). */
       objective?: string;
       topics: string[];
@@ -214,6 +216,16 @@ export interface EventLpContent {
     volume: string;
     sourceLabel: string;
     items: { text: string; author: string; role?: string }[];
+    /** Foto OPCIONAL ao lado do bloco de nota: prova visual na mesma faixa da
+     *  escrita, em vez de uma seção `gallery` só para ela. `width`/`height` são
+     *  as dimensões intrínsecas do arquivo (reserva de espaço, evita CLS). */
+    photo?: {
+      src: string;
+      alt: string;
+      caption?: string;
+      width: number;
+      height: number;
+    };
   };
 
   /** 11 — presencial vs online (OPCIONAL): 2 colunas com check/traço. */
@@ -233,10 +245,14 @@ export interface EventLpContent {
   form: {
     title: ReactNode;
     meta?: string;
-    bgSrc: string;
+    /** Sem imagem, a seção fica no fundo escuro de fallback do tone photo. */
+    bgSrc?: string;
     formId: string;
     submitLabel: string;
     thankYou: { url: string; withPii: boolean };
+    /** Órgão/Município deixa de ser obrigatório quando `false`. Ausente ⇒
+     *  obrigatório (comportamento atual de todas as rotas). */
+    orgaoRequired?: boolean;
     /** Escolha de modalidade (OPCIONAL). Quando presente, vira campo
      *  obrigatório do formulário e entra no payload como Modalidade_Preferida;
      *  ausente, o payload das demais LPs fica byte-idêntico ao atual. */

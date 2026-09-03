@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   submitLead,
   redirectToThankYou,
@@ -192,6 +192,7 @@ export default function LeadForm({
   vinculo,
   produto,
   paginaOrigem,
+  orgaoRequired = true,
 }: {
   formId: string;
   submitLabel: string;
@@ -206,6 +207,9 @@ export default function LeadForm({
   /** Vão para o payload como `produto` e `pagina_origem` (só quando definidos). */
   produto?: string;
   paginaOrigem?: string;
+  /** Órgão/Município deixa de ser obrigatório quando `false` (o campo continua
+   *  no payload, vazio se não preenchido — como o cargo). */
+  orgaoRequired?: boolean;
 }) {
   const [form, setForm] = useState<LeadFormValues>({
     nome: "",
@@ -220,6 +224,10 @@ export default function LeadForm({
     Partial<Record<keyof LeadFormValues, string>>
   >({});
   const [submitting, setSubmitting] = useState(false);
+  // Guarda reentrante do submit: o estado `submitting` só desabilita o botão
+  // após o re-render, então um duplo-clique rápido dispararia dois POSTs (lead
+  // duplicado no n8n). O ref é síncrono e fecha essa janela.
+  const submittingRef = useRef(false);
 
   function update(field: keyof LeadFormValues) {
     return (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -241,12 +249,13 @@ export default function LeadForm({
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (submittingRef.current) return;
     const next: Partial<Record<keyof LeadFormValues, string>> = {};
     const required: Array<keyof LeadFormValues> = [
       "nome",
       "email",
       "whatsapp",
-      "orgao",
+      ...(orgaoRequired ? (["orgao"] as const) : []),
       vinculo ? "vinculo" : "servidorPublico",
       ...(modalidade ? (["modalidade"] as const) : []),
     ];
@@ -257,6 +266,7 @@ export default function LeadForm({
     setErrors(next);
     if (Object.keys(next).length > 0) return;
 
+    submittingRef.current = true;
     setSubmitting(true);
     try {
       await submitLead(form, formId, { produto, paginaOrigem });
@@ -317,11 +327,11 @@ export default function LeadForm({
         <Field
           id="orgao"
           label="Órgão / Município"
-          required
+          required={orgaoRequired}
           full
           value={form.orgao}
           onChange={update("orgao")}
-          onBlur={handleBlur("orgao")}
+          onBlur={orgaoRequired ? handleBlur("orgao") : undefined}
           error={errors.orgao}
         />
 

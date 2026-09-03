@@ -53,11 +53,14 @@ export default function EventLp({ content }: { content: EventLpContent }) {
         {content.quote ? <Quote content={content.quote} /> : null}
         {content.speakers ? <Speakers content={content.speakers} /> : null}
         {content.gallery ? <Gallery content={content.gallery} /> : null}
+        {/* reviews vem ANTES do bloco de preço (briefing da /engenharia: prova
+            social entre Professores e Investimento). Nenhuma rota anterior
+            renderizava reviews, então a mudança de posição não afetou ninguém. */}
+        {content.reviews ? <Reviews content={content.reviews} /> : null}
         {content.plans ? <Plans content={content.plans} /> : null}
         {content.pricingCombo ? (
           <PricingCombo content={content.pricingCombo} />
         ) : null}
-        {content.reviews ? <Reviews content={content.reviews} /> : null}
         {content.compare ? <Compare content={content.compare} /> : null}
         {content.procurement ? (
           <Procurement content={content.procurement} />
