@@ -55,6 +55,9 @@ export const engenhariaContent: EventLpContent = {
       { href: "#problema", label: "Desafios" },
       { href: "#modulos", label: "Programação" },
       { href: "#planos", label: "Investimento" },
+      // Âncora do bloco de Procurement (components/lp2/Procurement.tsx):
+      // é o que destrava o empenho e não tinha atalho no menu.
+      { href: "#como-contratar", label: "Como contratar" },
       { href: "#faq", label: "FAQ" },
     ],
     cta: { href: "#inscricao", label: "Receber proposta" },
@@ -265,37 +268,36 @@ export const engenhariaContent: EventLpContent = {
     ],
   },
 
-  /* Foto de turma em sala (briefing §11), fornecida pelo Gustavo em
-     02/09/2026. O componente de avaliações não tem slot de imagem, e
-     `gallery` renderiza IMEDIATAMENTE ANTES de `reviews` no EventLp — é a
-     adjacência que o briefing pede ("foto: turma em sala"), sem alterar
-     componente compartilhado. width/height são as dimensões intrínsecas do
-     arquivo: reservam o espaço e evitam CLS. Título é copy derivada (o
-     briefing não traz título para a seção) — validar com o Gustavo.
-     Com uma foto só, a colagem em CSS columns vira coluna única no
-     theme.css; mandando 2 ou 3 fotos, aquele override sai e a colagem
-     original volta a valer. */
-  gallery: {
-    title: "A sala de aula",
-    photos: [
-      {
-        src: "/engenharia/galeria/turma-01.jpg",
-        alt: "Turma em aula presencial da Unyflex: professor à frente, com microfone, e alunos acompanhando a apresentação no telão.",
-        width: 1600,
-        height: 1066,
-      },
-    ],
-  },
-
   /* Avaliações públicas do Google, texto integral e nomes como publicados
      (briefing §11). Renderiza entre Professores e Investimento — o slot de
      reviews no EventLp foi movido para isso. Números coerentes com o ticker
-     (perfil verificado: 5,0 · 458 avaliações). */
+     (perfil verificado: 5,0 · 458 avaliações).
+
+     A foto de turma (briefing §11, fornecida pelo Gustavo em 02/09/2026) entra
+     AQUI, não numa seção própria: sozinha numa faixa branca ela lia como
+     placeholder (decisão do Gustavo em 03/09/2026). Junto do 5,0, prova visual
+     e prova escrita ficam no mesmo bloco. O campo `reviews.photo` foi criado no
+     contrato para isso.
+
+     O arquivo é um RECORTE 16:9 da foto original, em x=250/y=200: o corte tira
+     o telão do quadro. Ele exibia "Ativo Imobilizado / PCASP", conteúdo do
+     curso de patrimônio — numa faixa larga voltaria a ficar legível e leria
+     como foto emprestada. Não reenquadrar para incluir o telão de novo.
+
+     `caption` é COPY DERIVADA (o briefing não traz legenda) — validar com o
+     Gustavo, junto das frases de `result` dos módulos. */
   reviews: {
     rating: "5,0",
     ratingValue: 5,
     volume: "+450 avaliações",
     sourceLabel: "Google",
+    photo: {
+      src: "/engenharia/turma.jpg",
+      alt: "Turma em aula presencial da Unyflex: professor à frente, com microfone, e alunos acompanhando a apresentação.",
+      caption: "Turma presencial na sede da Unyflex, em Curitiba.",
+      width: 1280,
+      height: 720,
+    },
     items: [
       {
         text: "“Conteúdo prático, atualizado e muito aplicável na rotina. A didática dos professores é excelente e alinhada com entendimento da legislação e parecer dos tribunais.”",

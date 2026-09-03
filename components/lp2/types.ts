@@ -214,6 +214,16 @@ export interface EventLpContent {
     volume: string;
     sourceLabel: string;
     items: { text: string; author: string; role?: string }[];
+    /** Foto OPCIONAL ao lado do bloco de nota: prova visual na mesma faixa da
+     *  escrita, em vez de uma seção `gallery` só para ela. `width`/`height` são
+     *  as dimensões intrínsecas do arquivo (reserva de espaço, evita CLS). */
+    photo?: {
+      src: string;
+      alt: string;
+      caption?: string;
+      width: number;
+      height: number;
+    };
   };
 
   /** 11 — presencial vs online (OPCIONAL): 2 colunas com check/traço. */

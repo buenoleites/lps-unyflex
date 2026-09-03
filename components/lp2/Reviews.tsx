@@ -36,6 +36,11 @@ function Stars({ value }: { value: number }) {
 /**
  * Avaliações (opcional): faixa com nota em display + estrelas + volume + fonte,
  * ao lado de 3 avaliações curtas em cards com borda.
+ *
+ * Com `content.photo`, a faixa vira duas linhas no desktop — nota e foto em
+ * cima, os depoimentos embaixo — para a prova visual e a escrita ficarem no
+ * mesmo bloco. A foto vem DEPOIS do score no DOM porque no mobile a coluna
+ * única segue essa ordem, e a nota é a abertura da seção (que não tem h2).
  */
 export default function Reviews({
   content,
@@ -44,7 +49,9 @@ export default function Reviews({
 }) {
   return (
     <Section id="avaliacoes" tone="dark">
-      <div className="lp2-reviews">
+      <div
+        className={`lp2-reviews${content.photo ? " lp2-reviews--photo" : ""}`}
+      >
         <div
           className="lp2-reviews__score"
           data-reveal
@@ -67,13 +74,39 @@ export default function Reviews({
           </p>
         </div>
 
+        {content.photo ? (
+          <figure
+            className="lp2-reviews__photo"
+            data-reveal
+            style={{ "--reveal-i": 1 } as React.CSSProperties}
+          >
+            {/* Abaixo da dobra: `lazy` para não disputar banda com o hero. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={content.photo.src}
+              alt={content.photo.alt}
+              width={content.photo.width}
+              height={content.photo.height}
+              loading="lazy"
+              decoding="async"
+            />
+            {content.photo.caption ? (
+              <figcaption>{content.photo.caption}</figcaption>
+            ) : null}
+          </figure>
+        ) : null}
+
         <ul className="lp2-reviews__cards">
           {content.items.map((review, i) => (
             <li
               key={review.author}
               className="lp2-review"
               data-reveal
-              style={{ "--reveal-i": i + 1 } as React.CSSProperties}
+              style={
+                {
+                  "--reveal-i": i + (content.photo ? 2 : 1),
+                } as React.CSSProperties
+              }
             >
               <p className="lp2-review__text">{review.text}</p>
               <p className="lp2-review__author">

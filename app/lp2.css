@@ -1413,12 +1413,69 @@
 }
 
 .lp2-reviews__source {
+  /* O preflight do Tailwind (globals.css, carregado no layout raiz) põe
+     `svg { display: block }`, então o ícone do Google caía numa linha só dele e
+     a fonte lia como texto quebrado. Flex resolve sem depender de reset. */
+  display: flex;
+  align-items: center;
+  gap: 6px;
   margin-top: 4px;
   font-size: var(--fs-small);
   line-height: 1.4;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 600;
+  color: var(--text-on-dark-muted);
+}
+
+/* Variante com foto (reviews.photo): duas linhas no desktop — nota + foto em
+   cima, os 3 depoimentos ocupando a largura toda embaixo. É o que dá largura de
+   verdade à foto; dentro da coluna de 280px ela viraria uma miniatura. No
+   mobile a seção continua em coluna única e a ordem sai do DOM. */
+@media (min-width: 1000px) {
+  .lp2-reviews--photo {
+    grid-template-areas:
+      "score photo"
+      "cards cards";
+    column-gap: 40px;
+  }
+
+  .lp2-reviews--photo .lp2-reviews__score {
+    grid-area: score;
+    /* A foto é bem mais alta que o bloco de nota; centrar evita o vão. */
+    align-self: center;
+  }
+
+  .lp2-reviews--photo .lp2-reviews__photo {
+    grid-area: photo;
+  }
+
+  .lp2-reviews--photo .lp2-reviews__cards {
+    grid-area: cards;
+  }
+}
+
+.lp2-reviews__photo {
+  margin: 0;
+}
+
+.lp2-reviews__photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Recorte fixo: a faixa não pode mudar de altura conforme a proporção do
+     arquivo que a rota escolher. */
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--radius-card);
+  /* Sem a borda, foto escura sobre fundo escuro não tem onde terminar. */
+  border: 1px solid var(--border-dark);
+}
+
+.lp2-reviews__photo figcaption {
+  margin-top: 12px;
+  font-size: var(--fs-small);
+  line-height: 1.4;
   color: var(--text-on-dark-muted);
 }
 
