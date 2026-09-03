@@ -1,0 +1,60 @@
+/* Tema da LP Passo a Passo da Reforma Tributária — turma de 13 a 16/10/2026
+   (/reforma-tributaria). É o ÚNICO bloco de cor desta LP: nenhum literal de
+   cor fora daqui (exceção: opengraph-image.tsx, que não lê CSS — mesmo
+   precedente das outras instâncias lp2).
+
+   O accent é o ciano #00aeef por decisão do Gustavo (03/09/2026) — mesma cor
+   de Licitações/Portal/Engenharia. Tokens copiados (não import) de
+   app/engenharia/theme.css, pelo mesmo motivo de isolamento entre rotas: um
+   retune futuro do default do template não pode restilizar em silêncio uma
+   rota com tráfego pago.
+
+   O seletor .lprt-theme (wrapper no layout da rota) vence o bloco default de
+   .lp2-root por especificidade, independente da ordem dos imports de CSS. */
+.lprt-theme .lp2-root {
+  --accent: #00aeef; /* ciano — mesmo valor do default do lp2 */
+  --accent-ink: #071016; /* texto sobre accent — branco sobre #00aeef reprova AA */
+  --accent-ring: rgba(0, 174, 239, 0.28);
+  --accent-tint: rgba(0, 174, 239, 0.12);
+  --accent-deep: #006b93; /* accent p/ texto/foco em superfície clara — 5,9:1 no branco */
+}
+
+/* Problema com só 4 cards (frases do briefing): o template assume 6–10 e dá
+   largura dupla ao 1º card, o que aqui deixaria uma célula vazia no desktop.
+   Vira um 2×2 limpo — mesma solução da /engenharia e da /patrimonio. */
+@media (min-width: 640px) {
+  .lprt-theme .lp2-bento > :first-child {
+    grid-column: auto;
+  }
+}
+
+@media (min-width: 1000px) {
+  .lprt-theme .lp2-bento {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Navbar: centraliza os links entre logo e CTA no desktop (mesmo caso da
+   /comunicacao, /tesouraria, /patrimonio, /licitacao-out26 e /engenharia).
+   <800px o template já esconde os links. */
+@media (min-width: 800px) {
+  .lprt-theme .lp2-nav__inner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 16px;
+  }
+
+  .lprt-theme .lp2-nav__links {
+    justify-content: center;
+  }
+}
+
+/* Esta rota tem SEIS links (como a /engenharia, e uma a mais que o padrão de
+   5): com o padding padrão de 16px a linha transborda perto de 800px, onde o
+   template acabou de mostrar os links. Apertar o padding só nessa janela
+   devolve espaço suficiente e não mexe no alvo de toque (min-height 44px). */
+@media (min-width: 800px) and (max-width: 839px) {
+  .lprt-theme .lp2-nav__link {
+    padding: 0 12px;
+  }
+}
