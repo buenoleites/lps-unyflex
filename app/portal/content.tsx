@@ -18,9 +18,10 @@ import Kw from "@/components/lp2/Kw";
 
    Correções do briefing aplicadas em 11/08/2026: investimento (mesmos
    valores da /licitacao) e carga horária de 17 horas. Fotos do hero, do CTA e
-   da galeria escolhidas em 11/08/2026 no catálogo Unyflex. Ainda pendente
-   (não bloqueia): fotos dos 3 professores (seguem no monograma) e textos de
-   avaliação — reviews segue DESLIGADA por ausência da chave. */
+   da galeria escolhidas em 11/08/2026 no catálogo Unyflex; retratos dos 3
+   professores em 03/09/2026 (ver o bloco de `speakers`). Ainda pendente (não
+   bloqueia): textos de avaliação — reviews segue DESLIGADA por ausência da
+   chave. */
 
 /* Conferência aritmética obrigatória do briefing — se qualquer número do
    design divergir destas contas, parar e reportar em vez de ajustar:
@@ -317,30 +318,36 @@ export const portalContent: EventLpContent = {
      "módulo de IA" como pede o briefing; Mayara mantém a bio de agosto. As
      linhas de instituição (small uppercase antes do nome) vêm do briefing
      (a da Mayara mudou para "ADVOGADA").
-     REGRA DO MONOGRAMA: enquanto os três não tiverem foto, os TRÊS usam
-     monograma (photoSrc: null) — nunca card misto. Nilson e Marcus já têm
-     foto em public/patrimonio/palestrantes/; quando a da Mayara chegar (a
-     Emily envia), copiar as 3 para public/portal/palestrantes/ e preencher os
-     3 paths de uma vez. */
+     FOTOS (03/09/2026): a regra do monograma foi cumprida — as três chegaram
+     juntas e entraram de uma vez, sem card misto em nenhum momento. Todas em
+     4:5, 640×800, o padrão dos retratos do repo. As de Nilson e Marcus são
+     cópia byte a byte dos recortes da /patrimonio (mesma foto de origem; os
+     assets são namespaced por LP, então copiar é o certo, não referenciar a
+     pasta de outra rota). A da Mayara é INÉDITA e veio em 150×150: é um
+     recorte 4:5 (96×120 em x=36) ampliado 6,7× — fica visivelmente mais mole
+     que as outras duas, e o enquadramento foi fechado no rosto para casar com
+     a escala dos outros dois cards. Entrar assim foi decisão do Gustavo.
+     TROCAR quando a Emily mandar um arquivo maior: mesmo nome de arquivo,
+     nenhuma mudança de código. */
   speakers: {
     title: "Quem ensina responde por isso na prática",
     items: [
       {
         name: "Mayara Magda da Silva Pastor",
         institution: "ESPECIALISTA EM LGPD · ADVOGADA",
-        photoSrc: null,
+        photoSrc: "/portal/palestrantes/mayara-magda-da-silva-pastor.jpg",
         bio: "Especialista em LGPD (ESMAFE-PR) e Lead Implementer em Gestão da Privacidade da Informação (ISO/IEC 27701). Membro do Comitê Brasileiro de Segurança da Informação e Proteção da Privacidade (ABNT). Advogada, sócia e coordenadora de projetos da Égide Pro, onde implementa programas de compliance com LGPD e ISO 27001/27701, elabora relatórios de impacto e planos de resposta a incidentes.",
       },
       {
         name: "Nilson Francisco Tognato",
         institution: "CONTADOR PÚBLICO · 33 ANOS",
-        photoSrc: null,
+        photoSrc: "/portal/palestrantes/nilson-francisco-tognato.jpg",
         bio: "Contador público por 33 anos. MBA em Gestão Pública e Inovação (UNICENTRO), especialista em Contabilidade Gerencial. Ex-professor de Ciências Contábeis na UNESPAR. Instrutor da Unyflex desde 2020, com ênfase em contabilidade, patrimônio, finanças, orçamento e planejamento municipal.",
       },
       {
         name: "Marcus Gualberto Ganter",
         institution: "CÂMARA MUNICIPAL DE CURITIBA · IA APLICADA",
-        photoSrc: null,
+        photoSrc: "/portal/palestrantes/marcus-gualberto-ganter.jpg",
         bio: "Engenheiro pelo ITA, mestre em Políticas Públicas (UFPR) e em Administração Pública (LSE). Chefe de Gabinete na Câmara Municipal de Curitiba, ex-Diretor de Projetos no Governo do Estado do Paraná. Responsável pelo módulo de IA.",
       },
     ],
