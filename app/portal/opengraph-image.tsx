@@ -67,7 +67,7 @@ export default function OgImage() {
             fontWeight: 700,
           }}
         >
-          17 horas · Curitiba-PR · 15 a 18/09 de 2026
+          17 horas · Curitiba-PR · 20 a 23/10 de 2026
         </div>
       </div>
     ),

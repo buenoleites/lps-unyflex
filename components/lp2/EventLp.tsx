@@ -7,6 +7,7 @@ import Lp2Root from "./Lp2Root";
 import Navbar from "./Navbar";
 import Hero from "./Hero";
 import ProofTicker from "./ProofTicker";
+import Banner from "./Banner";
 import Audience from "./Audience";
 import ProblemGrid from "./ProblemGrid";
 import Schedule from "./Schedule";
@@ -26,9 +27,9 @@ import Footer from "./Footer";
 
 /**
  * Orquestrador do template. A ordem das seções é fixa (segue a hierarquia de
- * importância do briefing); as opcionais (schedule, modules, quote, speakers,
- * gallery, procurement, reviews, compare) renderizam apenas se a chave existir
- * na config.
+ * importância do briefing); as opcionais (banner, schedule, modules, quote,
+ * speakers, gallery, procurement, reviews, compare) renderizam apenas se a
+ * chave existir na config.
  */
 export default function EventLp({ content }: { content: EventLpContent }) {
   useEffect(() => {
@@ -46,6 +47,7 @@ export default function EventLp({ content }: { content: EventLpContent }) {
       <main id="conteudo-principal">
         <Hero content={content.hero} />
         <ProofTicker content={content.ticker} />
+        {content.banner ? <Banner content={content.banner} /> : null}
         <Audience content={content.audience} />
         <ProblemGrid content={content.problem} />
         {content.schedule ? <Schedule content={content.schedule} /> : null}

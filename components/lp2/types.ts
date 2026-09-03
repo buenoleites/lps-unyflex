@@ -7,8 +7,8 @@ import type { ReactNode } from "react";
  * - accent é EXCLUSIVO para ação (botões, links, destaque de plano) e para UMA
  *   palavra-chave por headline (via <Kw>). Nunca como fundo de seção.
  * - Todo texto visível vive na config — componentes não têm copy própria.
- * - Seções opcionais (quote, speakers, gallery, procurement, reviews, compare)
- *   ligam pela presença da chave.
+ * - Seções opcionais (banner, quote, speakers, gallery, procurement, reviews,
+ *   compare) ligam pela presença da chave.
  * - A ordem das seções é fixa no template (EventLp), não configurável.
  */
 export interface EventLpContent {
@@ -50,6 +50,13 @@ export interface EventLpContent {
    */
   ticker: {
     metrics: { value: string; label: string }[];
+  };
+
+  /** 02b — faixa de aviso (OPCIONAL): uma única linha sobre fundo azul
+   *  (--accent-deep, não o accent), logo abaixo do ticker. Criada para a
+   *  /portal de outubro/2026 (remarketing da turma que não aconteceu). */
+  banner?: {
+    text: ReactNode;
   };
 
   /** 03 — para quem: abas no desktop, acordeão no mobile. */

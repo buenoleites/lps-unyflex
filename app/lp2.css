@@ -634,6 +634,29 @@
   color: var(--text-on-dark-muted);
 }
 
+/* ======================= FAIXA DE AVISO (Banner) ========================== */
+/* Uma linha, logo abaixo do ticker. Fundo em --accent-deep (azul escuro,
+   branco em cima dá 5,9:1) e NÃO em --accent: o design system reserva o
+   accent para ação e para a <Kw> da headline — nunca para fundo de seção.
+   O ticker acima já traz border-bottom; aqui só a de baixo, para não dobrar
+   a linha. `.lp2-section.lp2-banner` vence `.lp2-section--dark` por
+   especificidade, então o fundo do tone é sobrescrito sem !important. */
+
+.lp2-section.lp2-banner {
+  padding: 20px 0;
+  background: var(--accent-deep);
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.lp2-banner__text {
+  margin: 0;
+  text-align: center;
+  font-size: var(--fs-body);
+  line-height: 1.4;
+  font-weight: 600;
+  color: var(--text-on-dark);
+}
+
 /* ===================== PARA QUEM (tabs ↔ acordeão) ======================== */
 
 /* Mobile (base): acordeão — botão seguido do próprio painel, no fluxo.

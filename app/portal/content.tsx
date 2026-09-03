@@ -4,19 +4,24 @@ import Kw from "@/components/lp2/Kw";
 /* TODA a copy e todos os paths de imagem desta LP vivem aqui — os componentes
    do template (components/lp2/) não têm texto próprio.
 
-   Turma de 15 a 18/09/2026 (mesmas datas da /licitacao). O conteúdo
+   Turma de 20 a 23/10/2026 — a de setembro não aconteceu e esta página
+   passou a vendê-la em 03/09/2026 (briefing Prompt_ClaudeCode_LP_Portal_out26:
+   mesmo slug, mesmo formId; hero, faixa de remarketing, card 02 de problema,
+   fechamento do "para quem", 3 perguntas novas de FAQ, linha do formulário,
+   bloco "Como seu órgão contrata" e órgão opcional vieram dele). O conteúdo
    programático dos 6 módulos é VERBATIM do programa do cliente
-   (conteudo-modulos-portal.md, recebido em 11/08/2026); o Módulo 6 é
-   byte-idêntico ao Módulo 6 da /licitacao. Copy derivada (marcada nos
-   comentários): frases de `result`, título da seção de módulos, subtitle do
-   hero, cards de problema e FAQ — o briefing só trouxe o programa.
+   (conteudo-modulos-portal.md, recebido em 11/08/2026); o Módulo 6 tem os
+   tópicos do Módulo 6 da /licitacao com o título do briefing de outubro.
+   Copy derivada (marcada nos comentários): frases de `result`, título da
+   seção de módulos, cards 01 e 03-05 de problema e as 9 FAQs antigas — o
+   briefing original só trouxe o programa.
 
-   Correções do briefing aplicadas em 11/08/2026: professores (4, bios
-   verbatim), investimento (mesmos valores da /licitacao), 3 perguntas de FAQ
-   e carga horária de 17 horas. Fotos do hero, do CTA e da galeria escolhidas
-   em 11/08/2026 no catálogo Unyflex. Ainda pendente (não bloqueia): fotos dos
-   professores (os 4 seguem no monograma) e textos de avaliação — reviews
-   segue DESLIGADA por ausência da chave. */
+   Correções do briefing aplicadas em 11/08/2026: investimento (mesmos
+   valores da /licitacao) e carga horária de 17 horas. Fotos do hero, do CTA e
+   da galeria escolhidas em 11/08/2026 no catálogo Unyflex; retratos dos 3
+   professores em 03/09/2026 (ver o bloco de `speakers`). Ainda pendente (não
+   bloqueia): textos de avaliação — reviews segue DESLIGADA por ausência da
+   chave. */
 
 /* Conferência aritmética obrigatória do briefing — se qualquer número do
    design divergir destas contas, parar e reportar em vez de ajustar:
@@ -52,25 +57,29 @@ export const portalContent: EventLpContent = {
       { href: "#problema", label: "Desafios" },
       { href: "#modulos", label: "Módulos" },
       { href: "#planos", label: "Investimento" },
+      { href: "#como-contratar", label: "Como contratar" },
       { href: "#faq", label: "FAQ" },
     ],
     cta: { href: "#inscricao", label: "Receber proposta" },
   },
 
   hero: {
-    eyebrow: "Curso presencial em Curitiba · 15 a 18/09 · 17 horas",
+    // O CSS do eyebrow (.lp2-eyebrow) já aplica uppercase.
+    eyebrow: "Curso presencial em Curitiba · 20 a 23/10 · 17 horas",
+    // Título do único anúncio de Portal que se pagou (briefing de outubro):
+    // anúncio e página dizem a mesma coisa.
     title: (
       <>
-        Portal, <Kw>LGPD</Kw>, e-SIC e Ouvidoria
+        A LAI manda publicar. A LGPD manda <Kw>proteger</Kw>. Quem decide é
+        você.
       </>
     ),
-    // Copy derivada do programa: o conflito LAI × LGPD é o Módulo 3 inteiro.
     subtitle:
-      "O portal manda publicar; a LGPD manda proteger. Em 17 horas, o caminho para cumprir a LAI e a Lei nº 13.709 ao mesmo tempo — portal, e-SIC, ouvidoria e adequação de dados, na prática do município e da Câmara.",
+      "Portal da Transparência, e-SIC, Ouvidoria e LGPD em um curso só — com o módulo de IA aplicada ao setor público. 17 horas para sair com o portal em conformidade, a ouvidoria estruturada e o RIPD encaminhado.",
     audiences:
-      "Ouvidores · controle interno · encarregado de dados (DPO) · TI · gestão da transparência · Câmaras Municipais",
+      "Ouvidor · encarregado de dados (DPO) · controle interno · TI e gestão da informação · assessoria de comunicação · procuradoria · câmaras municipais",
     // Sem href ⇒ o CTA vai para #inscricao.
-    cta: { label: "Quero receber proposta com nota de empenho" },
+    cta: { label: "Quero receber a programação com nota de empenho" },
     meta: "Rua Voluntários da Pátria, 547 — Centro, Curitiba/PR · Certificado emitido após a conclusão por instituição reconhecida pelo MEC · Também disponível online ao vivo",
     // Foto do catálogo Unyflex (produtos/auditorio-01.jpg): aula em plenário
     // institucional. Original é retrato 2858×3812; aqui entra a banda central
@@ -86,6 +95,13 @@ export const portalContent: EventLpContent = {
       { value: "5,0", label: "no Google · +450 avaliações" },
       { value: "17", label: "horas de capacitação" },
     ],
+  },
+
+  /* Faixa de remarketing (briefing de outubro, verbatim): a página recebe o
+     tráfego das negociações abertas da turma de setembro — é a única menção
+     legítima a "setembro" na LP, junto com a 1ª pergunta do FAQ. */
+  banner: {
+    text: "Não deu em setembro? A mesma turma, com a mesma programação, em 20 a 23 de outubro. Tempo de sobra para o empenho.",
   },
 
   /* variant "grid": os perfis visíveis de uma vez, como filtro de
@@ -133,13 +149,15 @@ export const portalContent: EventLpContent = {
           "Mesas diretoras, controladores e servidores do Legislativo: as mesmas obrigações de portal, e-SIC e LGPD do Executivo — com equipe menor.",
       },
     ],
+    // Verbatim do briefing de outubro (objeção real: "eu só queria e-SIC e portal").
     closing:
-      "Se o seu nome está na resposta do e-SIC, no portal ou no RIPD — o curso é seu.",
+      "Serve também para quem responde só por uma das pontas — só e-SIC, só portal, só LGPD. O curso é modular: cada painel fecha um tema.",
   },
 
-  /* 5 cards (copy derivada do programa — o briefing não trouxe seção de
-     dores): o template dá largura dupla ao 1º card, fechando duas linhas
-     exatas no grid de 3 colunas, sem patch CSS. Sem números inventados. */
+  /* 5 cards: o template dá largura dupla ao 1º card, fechando duas linhas
+     exatas no grid de 3 colunas, sem patch CSS. O card 02 é verbatim do
+     briefing de outubro; os demais são copy derivada do programa (o briefing
+     original não trouxe seção de dores). Sem números inventados. */
   problem: {
     title: "A linha entre publicar e proteger passa pela sua mesa",
     items: [
@@ -148,8 +166,8 @@ export const portalContent: EventLpContent = {
         desc: "Publicar demais expõe dados pessoais e vira incidente; publicar de menos derruba o índice de transparência e vira apontamento. Ninguém disse ao município onde passa a linha.",
       },
       {
-        title: "O e-SIC com o prazo correndo",
-        desc: "Pedidos de acesso acumulando, prazos da LAI vencendo e o recurso batendo na porta da autoridade de monitoramento.",
+        title: "O e-SIC com o prazo correndo — e a licitação no portal",
+        desc: "Pedido de acesso acumulado, prazo da LAI vencendo, e ninguém sabe o que pode ir para o portal quando o documento de licitação tem dado pessoal.",
       },
       {
         title: "A ouvidoria como enxugadeira de gelo",
@@ -169,7 +187,9 @@ export const portalContent: EventLpContent = {
   /* schedule (timeline por dia) desligada nesta LP: conteúdo programático em
      accordion — seção `modules`. */
 
-  /* Conteúdo programático VERBATIM do programa do cliente (turma 15 a 18/09).
+  /* Conteúdo programático VERBATIM do programa do cliente (mesmo programa da
+     turma de setembro, confirmado pelo briefing de outubro: "a mesma turma,
+     com a mesma programação").
      Convenção dos sub-itens: cada item lettrado (a, b, c…) é uma string
      própria em `topics`, com a letra preservada; o tópico-pai termina em
      dois-pontos. As frases de `result` são derivadas (o programa não as traz);
@@ -265,8 +285,9 @@ export const portalContent: EventLpContent = {
         ],
       },
       {
-        // Módulo idêntico ao Módulo 6 da /licitacao (título, result e topics).
-        title: "Ferramentas e Tecnologias de IA para Municípios",
+        // Título do briefing de outubro (lista oficial dos 6 módulos); result
+        // e topics são os do Módulo 6 da /licitacao, cujo conteúdo é idêntico.
+        title: "Inteligência Artificial no Setor Público",
         result:
           "Da análise de documentos ao antifraude: o panorama das ferramentas aplicáveis à realidade municipal",
         topics: [
@@ -289,42 +310,45 @@ export const portalContent: EventLpContent = {
 
   /* quote (seção opcional): sem material — desligada. */
 
-  /* Os 4 professores do briefing, na ordem pedida. Bios verbatim; a do
-     Nilson é byte-idêntica à da /patrimonio (fonte decretada pelo Gustavo —
-     o próprio briefing chegou sem "especialista em Contabilidade Gerencial").
-     As linhas de instituição (small uppercase antes do nome) são derivadas
-     das bios.
-     REGRA DO MONOGRAMA (ordem do briefing): enquanto os quatro não tiverem
-     foto, os QUATRO usam monograma (photoSrc: null) — nunca card misto.
-     Nilson e Marcus já têm foto em public/patrimonio/palestrantes/; quando as
-     de Mayara e José Augusto chegarem, copiar as 4 para
-     public/portal/palestrantes/ e preencher os 4 paths de uma vez. */
+  /* Os 3 professores da turma de outubro, na ordem do briefing (José Augusto
+     Alexandria Alves saiu — não está nesta turma). Bios: Nilson e Marcus
+     byte-idênticos à /patrimonio (fonte canônica decretada pelo Gustavo; o
+     briefing de outubro trouxe versões divergentes e ele decidiu em
+     03/09/2026 manter as atuais), com a frase final do Marcus ajustada para
+     "módulo de IA" como pede o briefing; Mayara mantém a bio de agosto. As
+     linhas de instituição (small uppercase antes do nome) vêm do briefing
+     (a da Mayara mudou para "ADVOGADA").
+     FOTOS (03/09/2026): a regra do monograma foi cumprida — as três chegaram
+     juntas e entraram de uma vez, sem card misto em nenhum momento. Todas em
+     4:5, 640×800, o padrão dos retratos do repo. As de Nilson e Marcus são
+     cópia byte a byte dos recortes da /patrimonio (mesma foto de origem; os
+     assets são namespaced por LP, então copiar é o certo, não referenciar a
+     pasta de outra rota). A da Mayara é INÉDITA e veio em 150×150: é um
+     recorte 4:5 (96×120 em x=36) ampliado 6,7× — fica visivelmente mais mole
+     que as outras duas, e o enquadramento foi fechado no rosto para casar com
+     a escala dos outros dois cards. Entrar assim foi decisão do Gustavo.
+     TROCAR quando a Emily mandar um arquivo maior: mesmo nome de arquivo,
+     nenhuma mudança de código. */
   speakers: {
     title: "Quem ensina responde por isso na prática",
     items: [
       {
         name: "Mayara Magda da Silva Pastor",
-        institution: "ESPECIALISTA EM LGPD · ÉGIDE PRO",
-        photoSrc: null,
+        institution: "ESPECIALISTA EM LGPD · ADVOGADA",
+        photoSrc: "/portal/palestrantes/mayara-magda-da-silva-pastor.jpg",
         bio: "Especialista em LGPD (ESMAFE-PR) e Lead Implementer em Gestão da Privacidade da Informação (ISO/IEC 27701). Membro do Comitê Brasileiro de Segurança da Informação e Proteção da Privacidade (ABNT). Advogada, sócia e coordenadora de projetos da Égide Pro, onde implementa programas de compliance com LGPD e ISO 27001/27701, elabora relatórios de impacto e planos de resposta a incidentes.",
-      },
-      {
-        name: "José Augusto Alexandria Alves",
-        institution: "PROCURADOR · CÂMARA MUNICIPAL DE CURITIBA",
-        photoSrc: null,
-        bio: "Procurador efetivo da Câmara Municipal de Curitiba, com atuação em Licitações e Contratos Administrativos. Pós-graduado em Direito Público, Direito do Trabalho e Previdenciário.",
       },
       {
         name: "Nilson Francisco Tognato",
         institution: "CONTADOR PÚBLICO · 33 ANOS",
-        photoSrc: null,
+        photoSrc: "/portal/palestrantes/nilson-francisco-tognato.jpg",
         bio: "Contador público por 33 anos. MBA em Gestão Pública e Inovação (UNICENTRO), especialista em Contabilidade Gerencial. Ex-professor de Ciências Contábeis na UNESPAR. Instrutor da Unyflex desde 2020, com ênfase em contabilidade, patrimônio, finanças, orçamento e planejamento municipal.",
       },
       {
         name: "Marcus Gualberto Ganter",
         institution: "CÂMARA MUNICIPAL DE CURITIBA · IA APLICADA",
-        photoSrc: null,
-        bio: "Engenheiro pelo ITA, mestre em Políticas Públicas (UFPR) e em Administração Pública (LSE). Chefe de Gabinete na Câmara Municipal de Curitiba, ex-Diretor de Projetos no Governo do Estado do Paraná. Responsável pelo eixo de IA.",
+        photoSrc: "/portal/palestrantes/marcus-gualberto-ganter.jpg",
+        bio: "Engenheiro pelo ITA, mestre em Políticas Públicas (UFPR) e em Administração Pública (LSE). Chefe de Gabinete na Câmara Municipal de Curitiba, ex-Diretor de Projetos no Governo do Estado do Paraná. Responsável pelo módulo de IA.",
       },
     ],
   },
@@ -456,17 +480,57 @@ export const portalContent: EventLpContent = {
       "Aceitamos nota de empenho, com prazo de pagamento de 7 dias após a finalização do curso. Fornecemos toda a documentação necessária para a contratação pelo seu órgão. Pessoa física pode se inscrever por qualquer forma de pagamento.",
   },
 
+  /* "Como seu órgão contrata" — pedido pelo briefing de outubro (§9), que
+     descreve o card de documentação exatamente como o da /engenharia; os 4
+     cards e o CTA são cópia byte a byte de app/engenharia/content.tsx
+     (decisão do Gustavo em 03/09/2026). Renderiza antes do FAQ. */
+  procurement: {
+    title: "Como seu órgão contrata",
+    items: [
+      {
+        title: "Proposta formal",
+        desc: "Em nome do seu órgão, com valores, condições e prazo — feita sob medida pelo consultor.",
+      },
+      {
+        title: "Nota de empenho",
+        desc: "Pagamento em até 7 dias após a conclusão do curso.",
+      },
+      {
+        title: "Documentação para contratação direta",
+        desc: "CNPJ, declaração de notória especialização e singularidade (art. 74, III, “f”, da Lei 14.133), escopo de Termo de Referência para inexigibilidade e atestado de capacidade técnica — enviados no primeiro contato.",
+      },
+      {
+        title: "Certificado reconhecido",
+        desc: "Emitido pela Faculdade Unypública, IES credenciada no MEC.",
+      },
+    ],
+    cta: { label: "Quero receber a proposta" },
+  },
+
   /* reviews (seção opcional): desligada — sem textos reais de avaliação. */
 
   /* compare (seção opcional): não pedida — o online aparece no hero, no card
      do pricing e no campo de modalidade. */
 
-  /* FAQ derivado do programa: cada resposta ancorada em tópico verbatim, sem
-     prometer o que não está no programa. A resposta de empenho é a mesma
-     resposta B2G verbatim das outras LPs. */
+  /* As 3 primeiras perguntas são verbatim do briefing de outubro (§7, "no
+     topo da lista"). As 9 seguintes são as de agosto, derivadas do programa:
+     cada resposta ancorada em tópico verbatim, sem prometer o que não está no
+     programa; a de empenho é a resposta B2G verbatim das outras LPs. */
   faq: {
     title: "Perguntas frequentes",
     items: [
+      {
+        q: "Não consegui ir em setembro. É a mesma turma?",
+        a: "Mesma programação, mesmos professores, 20 a 23 de outubro. Com 45 dias de antecedência, dá tempo de empenhar.",
+      },
+      {
+        q: "Só preciso da parte de e-SIC e Portal. Vale a pena?",
+        a: "Vale — são dois painéis inteiros. E os demais respondem à pergunta que sempre aparece depois: o que pode ou não ir para o portal quando há dado pessoal.",
+      },
+      {
+        q: "Meu setor de compras pediu o programa e a documentação da empresa para a inexigibilidade. Vocês mandam?",
+        a: "Sim, no primeiro contato: programação completa, CNPJ, declaração de notória especialização (art. 74, III, \"f\", da Lei 14.133), escopo de TR e atestado de capacidade técnica. A proposta vem sob medida pelo consultor.",
+      },
       {
         q: "É curso jurídico? Preciso ser da área do Direito?",
         a: "Não. O curso é operacional, para quem executa: portal, e-SIC, ouvidoria e adequação à LGPD. A base legal (LAI, Lei nº 13.709) é ensinada a partir da rotina do órgão, não do contencioso.",
@@ -509,8 +573,9 @@ export const portalContent: EventLpContent = {
 
   form: {
     title: "Garanta sua participação",
-    // Urgência factual, sem escassez fabricada.
-    meta: "Turma de 15 a 18/09, em Curitiba. Empenho leva tempo no seu órgão — comece o processo agora.",
+    // Verbatim do briefing de outubro; o CSS (.lp2-form-section__meta) já
+    // aplica uppercase.
+    meta: "Turma de 20 a 23/10 em Curitiba ou online ao vivo · Empenho leva tempo no seu órgão — comece o processo agora.",
     // Foto do catálogo Unyflex (produtos/grupo-oficial-plenario-01.jpg): a
     // turma inteira no plenário. Substituiu a provisória que vinha da
     // /licitacao — o arquivo agora é próprio da rota.
@@ -519,6 +584,9 @@ export const portalContent: EventLpContent = {
     formId: "lp-portal-lgpd",
     submitLabel: "Receber proposta",
     thankYou: { url: "/obrigado", withPii: false },
+    // Briefing de outubro: órgão NÃO é obrigatório nesta LP (o default do
+    // LeadForm segue true nas demais rotas).
+    orgaoRequired: false,
     modalidade: {
       label: "Modalidade preferida",
       options: ["Presencial em Curitiba", "Online ao vivo"],
