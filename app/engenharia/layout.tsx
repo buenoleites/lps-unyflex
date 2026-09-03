@@ -94,8 +94,16 @@ export default function EngenhariaLayout({
 }) {
   return (
     // .lpe-theme: os tokens de cor da LP (theme.css) valem só sob este wrapper.
-    // Sem preload de hero: esta LP ainda não tem imagem (fallback de gradiente).
     <div className="lpe-theme">
+      {/* O hero é background-image em CSS (MediaBackdrop) e o browser só o
+          descobre tarde — preload derruba o LCP mobile. React hoisteia o
+          <link> para o <head>. */}
+      <link
+        rel="preload"
+        as="image"
+        href="/engenharia/hero.jpg"
+        fetchPriority="high"
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

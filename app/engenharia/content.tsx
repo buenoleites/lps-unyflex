@@ -76,8 +76,13 @@ export const engenhariaContent: EventLpContent = {
     // Sem href ⇒ o CTA vai para #inscricao.
     cta: { label: "Quero receber a programação com nota de empenho" },
     meta: "Rua Voluntários da Pátria, 547 · Centro, Curitiba/PR · Certificado emitido pela Faculdade Unypública, IES credenciada no MEC · Também disponível online ao vivo",
-    // Sem bgSrc (decisão do Gustavo, 02/09/2026): gradiente escuro de fallback
-    // até chegar foto da vertical. TODO: adicionar /engenharia/hero.jpg.
+    // Sala de aula da sede em Curitiba. É o LCP da página — o layout da rota
+    // faz o preload dela. O original estava subexposto (luma média 45 contra
+    // 67 do hero da /licitacao-out26) e, sob o scrim, a seção ficava
+    // indistinguível do gradiente de fallback; o arquivo aqui leva um
+    // `eq=gamma=1.30` que a põe em 62. Regerar do original SEM esse ganho
+    // devolve a página preta.
+    bgSrc: "/engenharia/hero.jpg",
   },
 
   ticker: {
@@ -481,8 +486,7 @@ export const engenhariaContent: EventLpContent = {
     // O CSS do meta (.lp2-form-section__meta) já aplica a caixa alta que o
     // briefing pede.
     meta: "Turma de 22 a 25/09 em Curitiba · Empenho leva tempo no seu órgão — comece o processo agora.",
-    // Sem bgSrc (sem foto por ora): fundo escuro de fallback do tone photo.
-    // TODO: adicionar /engenharia/cta-final.jpg quando chegar.
+    bgSrc: "/engenharia/cta-final.jpg",
     // BLOQUEIO DE PUBLICAÇÃO: o slug `engenharia` (campo `produto` abaixo)
     // precisa estar no mapa de cursos do n8n antes de a página receber
     // tráfego, senão o lead entra como "Curso não identificado".
