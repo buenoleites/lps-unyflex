@@ -1,4 +1,4 @@
-import { getTracking } from "./utm";
+import { getTracking, type TrackingParams } from "./utm";
 
 const WEBHOOK_URL = "https://n8n.unyflex.com.br/webhook/lp-leads-unyflex";
 const REDIRECT_URL = "/obrigado";
@@ -62,6 +62,23 @@ export interface SubmitOptions {
   produto?: string;
   /** Slug da página de origem; entra como `pagina_origem` só quando definido. */
   paginaOrigem?: string;
+  /** Token do produto/vertical no `titulo` do lead (ex.: "engenharia"). Sem
+   *  ele o título cai em `produto` → `paginaOrigem` → `formId`. */
+  tituloProduto?: string;
+}
+
+/* Título do lead, no padrão que a campanha usa para ler origem sem depender do
+ * relatório do Meta: LP|<produto>|s=<utm_source>|c=<utm_campaign>|x=<utm_content>|f=<formId>.
+ * Cada chave SEMPRE aparece: UTM ausente vira "-" (nunca vazia, nunca omitida) —
+ * é o que permite filtrar "sem campanha" no CRM. Lê o tracking cru (undefined
+ * para ausente), não os campos do payload, que já foram coagidos a "". */
+export function buildLeadTitle(
+  t: TrackingParams,
+  produtoToken: string,
+  formId: string
+): string {
+  const v = (x: string | undefined) => (x && x.trim() ? x.trim() : "-");
+  return `LP|${produtoToken}|s=${v(t.utm_source)}|c=${v(t.utm_campaign)}|x=${v(t.utm_content)}|f=${formId}`;
 }
 
 export async function submitLead(
@@ -88,6 +105,13 @@ export async function submitLead(
       : {}),
     ...(opts.produto ? { produto: opts.produto } : {}),
     ...(opts.paginaOrigem ? { pagina_origem: opts.paginaOrigem } : {}),
+    // Sempre presente (ver buildLeadTitle). O n8n mapeia `titulo` para o título
+    // do lead no CRM.
+    titulo: buildLeadTitle(
+      t,
+      opts.tituloProduto ?? opts.produto ?? opts.paginaOrigem ?? formId,
+      formId
+    ),
     Referral_Source: document.referrer || "",
     Dispositivo: getDevice(),
     URL: window.location.href,

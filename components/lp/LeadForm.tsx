@@ -192,6 +192,7 @@ export default function LeadForm({
   vinculo,
   produto,
   paginaOrigem,
+  tituloProduto,
   orgaoRequired = true,
 }: {
   formId: string;
@@ -207,6 +208,8 @@ export default function LeadForm({
   /** Vão para o payload como `produto` e `pagina_origem` (só quando definidos). */
   produto?: string;
   paginaOrigem?: string;
+  /** Token do produto no `titulo` do lead (lib/lp/lead.ts → buildLeadTitle). */
+  tituloProduto?: string;
   /** Órgão/Município deixa de ser obrigatório quando `false` (o campo continua
    *  no payload, vazio se não preenchido — como o cargo). */
   orgaoRequired?: boolean;
@@ -269,7 +272,7 @@ export default function LeadForm({
     submittingRef.current = true;
     setSubmitting(true);
     try {
-      await submitLead(form, formId, { produto, paginaOrigem });
+      await submitLead(form, formId, { produto, paginaOrigem, tituloProduto });
     } catch (err) {
       console.error("Falha ao enviar lead:", err);
     } finally {
