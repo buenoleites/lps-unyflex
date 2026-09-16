@@ -74,14 +74,15 @@ export const dispensaOut26Content: EventLpContent = {
   hero: {
     // O CSS do eyebrow (.lp2-eyebrow) já aplica uppercase.
     eyebrow: "Curso presencial em Curitiba · 13 a 16/10 · 17 horas",
+    // Headline em 2 linhas e subheadline em 3 a >=1440px (regra de 16/09; medido
+    // no preview com o texto injetado no h1, nao estimado por contagem).
     title: (
       <>
-        A IN 52/2025 e o SICX mudaram a compra direta. Quem seguir o roteiro
-        antigo <Kw>erra o processo</Kw> — e assina embaixo.
+        Compra direta mudou. <Kw>Quem erra, assina.</Kw>
       </>
     ),
     subtitle:
-      "Contrata+Brasil, credenciamento de MEI, dispensa e inexigibilidade eletrônicas na Lei 14.133 e a estrutura do SICX (Lei 15.266/2025): o roteiro formal da compra direta, passo a passo, em 4 dias, com quem emite o parecer e opera a plataforma.",
+      "Contrata+Brasil, MEI por credenciamento, dispensa e inexigibilidade eletrônicas e o SICX (Lei 15.266/2025): o roteiro formal da compra direta, passo a passo, em 4 dias.",
     audiences:
       "Pregoeiro e agente de contratação · analista de licitações e contratos · procurador e assessor jurídico · controle interno e auditoria · fiscal e gestor de contrato · chefia de compras",
     // Sem href ⇒ o CTA vai para #inscricao.
