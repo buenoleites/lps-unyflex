@@ -32,6 +32,10 @@ import Footer from "./Footer";
  * chave existir na config.
  */
 export default function EventLp({ content }: { content: EventLpContent }) {
+  // Bancada antes da programação (seminário) ou na posição de sempre — nunca
+  // nos dois lugares.
+  const speakersFirst = content.speakers?.placement === "before-program";
+
   useEffect(() => {
     // Persiste UTMs/fbclid/gclid da query na sessão antes de qualquer
     // navegação — o submit lê daqui quando a query já se perdeu.
@@ -50,10 +54,15 @@ export default function EventLp({ content }: { content: EventLpContent }) {
         {content.banner ? <Banner content={content.banner} /> : null}
         <Audience content={content.audience} />
         <ProblemGrid content={content.problem} />
+        {speakersFirst && content.speakers ? (
+          <Speakers content={content.speakers} />
+        ) : null}
         {content.schedule ? <Schedule content={content.schedule} /> : null}
         {content.modules ? <Modules content={content.modules} /> : null}
         {content.quote ? <Quote content={content.quote} /> : null}
-        {content.speakers ? <Speakers content={content.speakers} /> : null}
+        {!speakersFirst && content.speakers ? (
+          <Speakers content={content.speakers} />
+        ) : null}
         {content.gallery ? <Gallery content={content.gallery} /> : null}
         {/* reviews vem ANTES do bloco de preço (briefing da /engenharia: prova
             social entre Professores e Investimento). Nenhuma rota anterior

@@ -2412,3 +2412,24 @@
 .lp2-combo__th--highlighted {
   color: var(--accent-deep);
 }
+
+/* ================= HERO: selo opcional (hero.badge) ======================= */
+/* Pílula curta ANTES do texto do eyebrow, na mesma linha (ex.: "2ª edição").
+   Criada para o seminário /comunicacao-out26; renderiza só quando a rota
+   define `hero.badge` — as demais instâncias não mudam. Vive dentro do
+   <p class="lp2-eyebrow"> de propósito: o stagger do hero conta filhos. */
+.lp2-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 12px;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: var(--fs-small);
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  vertical-align: middle;
+}

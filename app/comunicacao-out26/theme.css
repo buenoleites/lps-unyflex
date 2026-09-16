@@ -1,0 +1,91 @@
+/* Tema do Seminário Comunicação Pública e Mídias Sociais — 2ª edição, 27 a
+   30/10/2026 (/comunicacao-out26). É o ÚNICO bloco de cor desta LP: nenhum
+   literal de cor fora daqui (exceção: opengraph-image.tsx, que não lê CSS —
+   mesmo precedente das outras instâncias lp2).
+
+   Accent #4faef7 — o azul da vertical Comunicação, os mesmos tokens de
+   app/comunicacao/theme.css (1ª edição). Cópia, não import: as rotas não
+   compartilham CSS.
+
+   Identidade "um pouco mais própria" do seminário (briefing de 16/09/2026),
+   sem segundo template: só o display do hero um pouco maior e mais fechado
+   e o eyebrow mais aberto — tudo sob o wrapper .lpco-theme, com os mesmos
+   tokens do template.
+
+   O seletor .lpco-theme (wrapper no layout da rota) vence o bloco default de
+   .lp2-root por especificidade, independente da ordem dos imports de CSS. */
+.lpco-theme .lp2-root {
+  --accent: #4faef7; /* azul Comunicação — 8,0:1 sobre --bg-dark */
+  --accent-ink: #071016; /* texto sobre accent — 8,0:1; branco reprovaria AA */
+  --accent-ring: rgba(79, 174, 247, 0.28);
+  --accent-tint: rgba(79, 174, 247, 0.12);
+  --accent-deep: #1769ab; /* accent p/ texto/foco em superfície clara — 5,8:1 no branco */
+
+  /* Tipografia do hero: display ~8% maior que o default (36→39px no mobile,
+     68→74px no desktop), com o tracking mais fechado aplicado abaixo. */
+  --fs-display: clamp(39px, calc(26.6px + 3.3vw), 74px);
+}
+
+.lpco-theme .lp2-hero__title {
+  letter-spacing: -0.03em;
+}
+
+.lpco-theme .lp2-hero .lp2-eyebrow {
+  letter-spacing: 0.14em;
+}
+
+/* Problema com só 4 cards: o template assume 6–10 e dá largura dupla ao 1º
+   card, o que aqui deixaria uma célula vazia no desktop. Vira um 2×2 limpo. */
+@media (min-width: 640px) {
+  .lpco-theme .lp2-bento > :first-child {
+    grid-column: auto;
+  }
+}
+
+@media (min-width: 1000px) {
+  .lpco-theme .lp2-bento {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Palestrantes ANTES da programação (speakers.placement): a bancada (dark)
+   vem logo depois dos desafios (dark), e a agenda (light) logo antes dos
+   painéis (light). O template não separa seções vizinhas do mesmo tom — uma
+   linha fina em cada fronteira, só nesta rota. */
+.lpco-theme .lp2-section#bancada {
+  border-top: 1px solid var(--border-dark);
+}
+
+.lpco-theme .lp2-section#modulos {
+  border-top: 1px solid var(--border-light);
+}
+
+/* Navbar: centraliza os links entre logo e CTA no desktop. <800px o template
+   já esconde os links. */
+@media (min-width: 800px) {
+  .lpco-theme .lp2-nav__inner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 16px;
+  }
+
+  .lpco-theme .lp2-nav__links {
+    justify-content: center;
+  }
+}
+
+/* Seis links no menu: com o padding padrão de 16px a linha transborda na
+   janela 800–839px, onde o template acabou de mostrar os links. */
+@media (min-width: 800px) and (max-width: 839px) {
+  .lpco-theme .lp2-nav__link {
+    padding: 0 12px;
+  }
+}
+
+/* Investimento com TRÊS planos: o grid default abre 4 colunas a partir de
+   1100px e deixaria a quarta vazia (e "R$ 2.980,00" quebrando em duas linhas). */
+@media (min-width: 1100px) {
+  .lpco-theme .lp2-plans__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
