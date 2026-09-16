@@ -73,9 +73,9 @@ const jsonLd = {
     },
   },
   offers: [
-    { name: "Combo: os três produtos de ensino", price: "2980" },
-    { name: "Curso avulso", price: "2900" },
-    { name: "Online ao vivo", price: "2000" },
+    { name: "BasicClass", price: "2980" },
+    { name: "MasterClass", price: "3200" },
+    { name: "PremiumClass", price: "3980" },
   ].map((plano) => ({
     "@type": "Offer",
     name: plano.name,
@@ -105,7 +105,7 @@ export default function ReformaTributariaLayout({
       <link
         rel="preload"
         as="image"
-        href="/reforma/hero-bg.jpg"
+        href="/reforma/hero-sede.jpg"
         fetchPriority="high"
       />
       <script
