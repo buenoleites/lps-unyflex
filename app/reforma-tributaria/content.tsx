@@ -87,14 +87,15 @@ export const reformaTributariaContent: EventLpContent = {
 
   hero: {
     eyebrow: "Curso presencial em Curitiba · 13 a 16/10 · 17 horas",
+    // Headline em 2 linhas e subheadline em 3 a >=1440px (regra de 16/09; medido
+    // no preview com o texto injetado no h1, nao estimado por contagem).
     title: (
       <>
-        O ISS vai acabar. Quem vai explicar ao prefeito como o município{" "}
-        <Kw>arrecada</Kw> depois?
+        O ISS vai acabar. <Kw>Quem explica ao prefeito?</Kw>
       </>
     ),
     subtitle:
-      "A transição da Reforma Tributária começa em 2026 e vai até 2033. IBS, CBS, Imposto Seletivo, split payment, Comitê Gestor, Cadastro Nacional — o que muda na arrecadação do seu município, painel por painel, e o que fazer agora para não perder receita no caminho.",
+      "A transição vai de 2026 a 2033. IBS, CBS, Imposto Seletivo, split payment e Comitê Gestor: o que muda na arrecadação do seu município e o que fazer agora para não perder receita.",
     audiences:
       "Secretário de Fazenda · diretor de tributação · contador público · fiscal de tributos · procuradoria · controle interno",
     cta: { label: "Quero receber a programação com nota de empenho" },
