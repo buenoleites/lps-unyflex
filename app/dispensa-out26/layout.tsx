@@ -11,7 +11,7 @@ import "./theme.css";
    app/dispensa-out26/content.tsx (hero.subtitle) — as duas cópias são
    propositais: uma é a página, a outra é o que os buscadores leem. */
 const SUBTITULO =
-  "Contrata+Brasil, MEI por credenciamento, dispensa e inexigibilidade eletrônicas e o SICX (Lei 15.266/2025): o roteiro formal da compra direta, passo a passo, em 4 dias.";
+  "Contrata+Brasil, MEI por credenciamento, dispensa e inexigibilidade eletrônicas e o SICX (Lei 15.266/2025): o roteiro formal da compra direta, passo a passo, com quem opera a plataforma.";
 
 const TITULO = "Dispensa e Inexigibilidade Eletrônicas | Unyflex";
 

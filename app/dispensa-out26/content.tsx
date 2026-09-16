@@ -82,7 +82,7 @@ export const dispensaOut26Content: EventLpContent = {
       </>
     ),
     subtitle:
-      "Contrata+Brasil, MEI por credenciamento, dispensa e inexigibilidade eletrônicas e o SICX (Lei 15.266/2025): o roteiro formal da compra direta, passo a passo, em 4 dias.",
+      "Contrata+Brasil, MEI por credenciamento, dispensa e inexigibilidade eletrônicas e o SICX (Lei 15.266/2025): o roteiro formal da compra direta, passo a passo, com quem opera a plataforma.",
     audiences:
       "Pregoeiro e agente de contratação · analista de licitações e contratos · procurador e assessor jurídico · controle interno e auditoria · fiscal e gestor de contrato · chefia de compras",
     // Sem href ⇒ o CTA vai para #inscricao.
