@@ -79,12 +79,14 @@ export const portalContent: EventLpContent = {
   hero: {
     // O CSS do eyebrow (.lp2-eyebrow) já aplica uppercase.
     eyebrow: "Curso presencial em Curitiba · 20 a 23/10 · 17 horas",
-    // Título do único anúncio de Portal que se pagou (briefing de outubro):
-    // anúncio e página dizem a mesma coisa.
+    // Headline reformulada em 16/09 (decisão do Gustavo: "nós não respondemos
+    // à LAI"). A anterior era o título do anúncio de Portal que se pagou
+    // ("A LAI manda publicar. A LGPD manda proteger. Quem decide é você."):
+    // anúncio e página deixam de dizer a mesma coisa até o anúncio ser
+    // atualizado. 2 linhas a >=1440px, medido no preview.
     title: (
       <>
-        A LAI manda publicar. A LGPD manda <Kw>proteger</Kw>. Quem decide é
-        você.
+        Publicar ou proteger? <Kw>Quem decide é você.</Kw>
       </>
     ),
     subtitle:
