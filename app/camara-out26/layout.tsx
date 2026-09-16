@@ -11,7 +11,7 @@ import "./theme.css";
    app/camara-out26/content.tsx (hero.subtitle) — as duas cópias são
    propositais: uma é a página, a outra é o que os buscadores leem. */
 const SUBTITULO =
-  "Ciclo orçamentário, leitura crítica do projeto do Executivo, riscos de superestimativa de receita, dotação global sem especificação, emendas exequíveis e monitoramento da execução em 2027 — em 4 dias, com quem audita e contabiliza isso no município.";
+  "Ler o projeto do Executivo com olho de auditor: receita superestimada, dotação global sem especificação, emendas exequíveis e o acompanhamento da execução em 2027 — em 4 dias, com quem audita isso no município.";
 
 const TITULO = "Câmaras Municipais: Orçamento/LOA 2027 | Unyflex";
 

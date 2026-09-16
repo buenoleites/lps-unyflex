@@ -80,14 +80,15 @@ export const camaraOut26Content: EventLpContent = {
   hero: {
     // O CSS do eyebrow (.lp2-eyebrow) já aplica uppercase.
     eyebrow: "Curso presencial em Curitiba · 13 a 16/10 · 17 horas",
+    // Headline em 2 linhas e subheadline em 3 a >=1440px (regra de 16/09; medido
+    // no preview com o texto injetado no h1, nao estimado por contagem).
     title: (
       <>
-        A LOA 2027 chega à Câmara em outubro. Receita inflada e cheque em branco
-        passam <Kw>se ninguém ler</Kw>.
+        A LOA 2027 chega em outubro. <Kw>Quem vai ler?</Kw>
       </>
     ),
     subtitle:
-      "Ciclo orçamentário, leitura crítica do projeto do Executivo, riscos de superestimativa de receita, dotação global sem especificação, emendas exequíveis e monitoramento da execução em 2027 — em 4 dias, com quem audita e contabiliza isso no município.",
+      "Ler o projeto do Executivo com olho de auditor: receita superestimada, dotação global sem especificação, emendas exequíveis e o acompanhamento da execução em 2027 — em 4 dias, com quem audita isso no município.",
     audiences:
       "Contador e analista de orçamento de Câmara · diretor financeiro · controle interno · assessor parlamentar e legislativo · procurador · secretário de finanças",
     // Sem href ⇒ o CTA vai para #inscricao.
