@@ -102,12 +102,18 @@ Tudo em `lib/lp/lead.ts`.
   storage. Vão no payload com esses nomes minúsculos **e** nas chaves legadas `UTM_*` (o n8n
   mapeia as legadas). Ainda assim, **não quebre a query string** com redirects — o
   `app/page.tsx` já perde as UTMs de quem cai na raiz.
+- **`titulo`:** sempre presente no payload, montado em `buildLeadTitle()` (`lib/lp/lead.ts`)
+  no padrão `LP|<produto>|s=<utm_source>|c=<utm_campaign>|x=<utm_content>|f=<formId>`. UTM
+  ausente vira `-` (nunca vazia, nunca omitida) — é assim que a campanha filtra "sem origem".
+  O token `<produto>` é `form.tituloProduto` quando definido (a vertical, ex. `engenharia`),
+  senão `produto` → `paginaOrigem` → `formId`. **O n8n precisa mapear `titulo`** para o
+  título do lead no CRM; sem isso o campo chega e é ignorado.
 - **`produto` / `pagina_origem`:** opcionais (`content.form.produto` / `paginaOrigem`), só
   entram quando definidos. `produto` é a chave do mapa de cursos do n8n (`licitacao`,
   `licitacao-out26`) — **um slug novo precisa ser cadastrado no n8n antes de a LP receber
   tráfego**, senão o lead entra como "Curso não identificado".
 - **`formId`:** dê um novo a cada LP (`lp-licitacao-ia`, `lp-licitacao-out26`,
-  `lp-reforma-tributaria`, `lp-licitaexpo`). É como o n8n distingue a origem do lead.
+  `lp-reforma-tributaria`, `lp-licitaexpo`, `lp-engenharia-nov26`). É como o n8n distingue a origem do lead.
 - **Pós-submit:** `redirectToThankYou()` — o redirect está no `finally`, ou seja,
   **acontece mesmo se o webhook falhar** (o lead se perde, mas o usuário não trava).
 

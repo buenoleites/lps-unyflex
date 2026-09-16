@@ -51,6 +51,7 @@ export default function FormSection({
           vinculo={content.vinculo}
           produto={content.produto}
           paginaOrigem={content.paginaOrigem}
+          tituloProduto={content.tituloProduto}
           orgaoRequired={content.orgaoRequired}
         />
       </div>

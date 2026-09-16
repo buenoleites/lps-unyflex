@@ -148,16 +148,44 @@ export interface EventLpContent {
     items: {
       name: string;
       price: string;
+      /** Linha pequena sob o preço (ex.: "Investimento por aluno"). OPCIONAL. */
+      sub?: string;
       /** Selo informativo acima do nome (ex.: "100% online · ao vivo"). */
       badge?: string;
       highlighted?: boolean;
       highlightLabel?: string;
       features: { label: string; included: boolean }[];
+      /** Botão do próprio card (→ #inscricao). OPCIONAL; sem ele o card não
+       *  tem botão e a seção fecha com o CTA único de sempre. */
+      ctaLabel?: string;
     }[];
+    /** Card largo "plano recomendado" abaixo da grade (OPCIONAL; criado para
+     *  a /engenharia-nov26). Reusa o visual do card destacado do combo. */
+    featured?: {
+      highlightLabel: string;
+      title: string;
+      desc: string;
+      /** Pílulas com os benefícios exclusivos. */
+      chips: string[];
+      priceLabel: string;
+      price: string;
+      priceNote?: string;
+      ctaPrimary: { href: string; label: string };
+      ctaSecondary?: { href: string; label: string };
+    };
+    /** Tabela comparativa entre os planos (OPCIONAL). Célula boolean vira
+     *  ✓/—; string entra como texto (linha de valores). Só com dados reais. */
+    comparison?: {
+      itemsLabel?: string;
+      columns: { name: string; price: string; sub?: string; highlighted?: boolean }[];
+      rows: { label: string; cells: (boolean | string)[] }[];
+    };
     /** Linha própria e legível abaixo dos cards (formas de pagamento). */
     paymentNote: string;
     /** Regra de virada de lote, em small muted. */
     batchNote: string;
+    /** Nota de rodapé da seção, em small muted (OPCIONAL). */
+    footnote?: string;
     ctaLabel: string;
   };
 
@@ -274,6 +302,12 @@ export interface EventLpContent {
     produto?: string;
     /** Slug da página — vai como `pagina_origem` (OPCIONAL, idem). */
     paginaOrigem?: string;
+    /** Token do produto/vertical no `titulo` do lead
+     *  (`LP|<token>|s=…|c=…|x=…|f=<formId>`, ver lib/lp/lead.ts). OPCIONAL:
+     *  sem ele o título usa `produto`, depois `paginaOrigem`, depois `formId`.
+     *  Criado para a /engenharia-nov26, cujo token é a vertical ("engenharia")
+     *  e não o slug da turma. */
+    tituloProduto?: string;
   };
 
   footer: {

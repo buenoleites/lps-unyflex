@@ -2291,3 +2291,124 @@
     margin-top: 40px;
   }
 }
+
+/* ================= PLANOS — extensões opcionais (append-only) ==============
+   Criadas para a /engenharia-nov26: botão por card, card largo "plano
+   recomendado" (herda .lp2-combo__hero), pílulas de benefício e cabeçalho da
+   tabela com preço. Rotas que não usam as chaves não são afetadas. */
+
+.lp2-plan__sub {
+  margin-top: 6px;
+  font-size: var(--fs-small);
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--text-on-light-muted);
+}
+
+.lp2-plan__cta {
+  margin-top: auto;
+}
+
+.lp2-plan__cta .btn {
+  width: 100%;
+}
+
+/* Card recomendado: mais largo que o hero do combo, texto à esquerda com o
+   preço na coluna da direita a partir de 800px. */
+.lp2-plans__featured {
+  text-align: left;
+  align-items: stretch;
+}
+
+@media (min-width: 700px) {
+  .lp2-plans__featured {
+    max-width: none;
+  }
+}
+
+.lp2-plans__featured-body {
+  display: grid;
+  gap: 24px;
+}
+
+@media (min-width: 800px) {
+  .lp2-plans__featured-body {
+    grid-template-columns: 1fr auto;
+    align-items: start;
+  }
+}
+
+.lp2-plans__featured-price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+@media (min-width: 800px) {
+  .lp2-plans__featured-price {
+    align-items: flex-end;
+    text-align: right;
+  }
+}
+
+.lp2-plans__featured-ctas {
+  align-items: stretch;
+}
+
+@media (min-width: 800px) {
+  .lp2-plans__featured-ctas {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+}
+
+.lp2-plan__chips {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.lp2-plan__chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-light);
+  background: var(--accent-tint);
+  color: var(--accent-deep);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.lp2-combo__th-price,
+.lp2-combo__th-sub {
+  display: block;
+  margin-top: 4px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.lp2-combo__th-price {
+  font-weight: 800;
+  font-size: var(--fs-body);
+}
+
+.lp2-combo__th-sub {
+  font-weight: 400;
+  color: var(--text-on-light-muted);
+}
+
+.lp2-combo__th--highlighted,
+.lp2-combo__td--highlighted {
+  background: var(--accent-tint);
+}
+
+.lp2-combo__th--highlighted {
+  color: var(--accent-deep);
+}
