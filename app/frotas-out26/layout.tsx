@@ -12,7 +12,7 @@ import "./theme.css";
    app/frotas-out26/content.tsx (hero.subtitle) — as duas cópias são
    propositais: uma é a página, a outra é o que os buscadores leem. */
 const SUBTITULO =
-  "Diagnóstico da frota, auditoria digital com painéis de fiscalização, diário de bordo digital, contratos por desempenho na Lei 14.133, IA aplicada e descarbonização — em 4 dias, com quem implantou a gestão de frota em cerca de 40 prefeituras.";
+  "Auditoria digital, painéis de fiscalização, diário de bordo digital, contratos por desempenho na Lei 14.133 e IA aplicada à frota — em 4 dias, com quem implantou isso em cerca de 40 prefeituras.";
 
 const TITULO = "Frotas Públicas: Transformação Digital, Auditoria e IA | Unyflex";
 

@@ -87,14 +87,15 @@ export const frotasOut26Content: EventLpContent = {
   hero: {
     // O CSS do eyebrow (.lp2-eyebrow) já aplica uppercase.
     eyebrow: "Curso presencial em Curitiba · 20 a 23/10 · 17 horas",
+    // Headline em 2 linhas e subheadline em 3 a >=1440px (regra de 16/09; medido
+    // no preview com o texto injetado no h1, nao estimado por contagem).
     title: (
       <>
-        O Tribunal pede abastecimento, odômetro e GPS conciliados. Diário de
-        bordo em papel <Kw>não prova nada</Kw>.
+        Diário de bordo em papel <Kw>não prova nada</Kw>.
       </>
     ),
     subtitle:
-      "Diagnóstico da frota, auditoria digital com painéis de fiscalização, diário de bordo digital, contratos por desempenho na Lei 14.133, IA aplicada e descarbonização — em 4 dias, com quem implantou a gestão de frota em cerca de 40 prefeituras.",
+      "Auditoria digital, painéis de fiscalização, diário de bordo digital, contratos por desempenho na Lei 14.133 e IA aplicada à frota — em 4 dias, com quem implantou isso em cerca de 40 prefeituras.",
     audiences:
       "Gestor de frota e transportes · secretaria de administração · compras, licitações e contratos · fiscal de contrato · controle interno e auditoria",
     // Sem href ⇒ o CTA vai para #inscricao.
