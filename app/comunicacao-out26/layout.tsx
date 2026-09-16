@@ -11,7 +11,7 @@ import "./theme.css";
    app/comunicacao-out26/content.tsx (hero.subtitle) — as duas cópias são
    propositais: uma é a página, a outra é o que os buscadores leem. */
 const SUBTITULO =
-  "Imprensa, redação institucional, mídias sociais, gestão de crise, publicidade institucional e impulsionamento pago: seis painéis em 4 dias, com quem faz comunicação pública todo dia na Câmara, na Prefeitura e nos eventos do setor.";
+  "Imprensa, redação institucional, mídias sociais, gestão de crise, publicidade institucional e impulsionamento pago: seis painéis em 4 dias, com quem faz comunicação pública todo dia.";
 
 const TITULO = "Seminário Comunicação Pública e Mídias Sociais — 2ª edição | Unyflex";
 

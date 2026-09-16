@@ -92,15 +92,15 @@ export const comunicacaoOut26Content: EventLpContent = {
     badge: "2ª edição",
     // O CSS do eyebrow (.lp2-eyebrow) já aplica uppercase.
     eyebrow: "Seminário presencial em Curitiba · 27 a 30/10 · 17 horas",
+    // Headline em 2 linhas e subheadline em 3 a >=1440px (regra de 16/09; medido
+    // no preview com o texto injetado no h1, nao estimado por contagem).
     title: (
       <>
-        Publicidade institucional tem limite. Impulsionamento tem regra. A
-        fronteira entre informar e promover é{" "}
-        <Kw>onde o órgão é autuado</Kw>.
+        Informar tem regra. <Kw>Promover é infração.</Kw>
       </>
     ),
     subtitle:
-      "Imprensa, redação institucional, mídias sociais, gestão de crise, publicidade institucional e impulsionamento pago: seis painéis em 4 dias, com quem faz comunicação pública todo dia na Câmara, na Prefeitura e nos eventos do setor.",
+      "Imprensa, redação institucional, mídias sociais, gestão de crise, publicidade institucional e impulsionamento pago: seis painéis em 4 dias, com quem faz comunicação pública todo dia.",
     audiences:
       "Analista e assessor de comunicação · chefia de imprensa · ouvidoria · procuradoria · controle interno · diretor e secretário que define a presença digital",
     // Sem href ⇒ o CTA vai para #inscricao.
