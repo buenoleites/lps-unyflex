@@ -25,6 +25,10 @@ export interface EventLpContent {
 
   /** 01 — hero. Copy integral do produto; título aceita <Kw> na palavra-chave. */
   hero: {
+    /** Selo curto antes do eyebrow, na mesma linha (ex.: "2ª edição").
+     *  OPCIONAL: ausente, nada renderiza — criado para o seminário
+     *  /comunicacao-out26. */
+    badge?: string;
     eyebrow: string;
     title: ReactNode;
     subtitle: string;
@@ -116,6 +120,11 @@ export interface EventLpContent {
   speakers?: {
     title: ReactNode;
     lead?: string;
+    /** "before-program" renderiza a bancada ANTES da programação (schedule/
+     *  modules), como palestrantes em destaque de um evento. Ausente, a
+     *  posição é a de sempre (depois da programação). Criado para o
+     *  seminário /comunicacao-out26. */
+    placement?: "before-program";
     items: {
       name: string;
       institution: string;

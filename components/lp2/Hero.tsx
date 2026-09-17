@@ -10,7 +10,15 @@ export default function Hero({ content }: { content: EventLpContent["hero"] }) {
 
       <div className="lp2-container">
         <div className="lp2-hero__content">
-          <p className="lp2-eyebrow">{content.eyebrow}</p>
+          {/* O selo vive DENTRO do eyebrow: o stagger do hero (lp2.css,
+              .lp2-hero__content > :nth-child) conta filhos, e um elemento a
+              mais deslocaria as demais rotas. */}
+          <p className="lp2-eyebrow">
+            {content.badge ? (
+              <span className="lp2-hero__badge">{content.badge}</span>
+            ) : null}
+            {content.eyebrow}
+          </p>
 
           <h1 id="hero-title" className="lp2-display lp2-hero__title">
             {content.title}
