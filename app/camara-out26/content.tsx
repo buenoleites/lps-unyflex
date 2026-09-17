@@ -232,23 +232,23 @@ export const camaraOut26Content: EventLpContent = {
     ],
   },
 
-  /* Bancada com 3 professores (documento 2). Só o Nilson tem foto no
-     repositório (a mesma da /patrimonio e /portal); Marlon e Aurenilson ficam
-     com o monograma do template. Bios em até 4 linhas com os fatos do
-     documento; nota e horas na última frase. */
+  /* Bancada com 3 professores (documento 2). Fotos dos três no repositório
+     desde 17/09/2026 (Marlon e Aurenilson chegaram junto com o lote de fotos
+     do Gustavo — antes ficavam com o monograma do template). Bios em até 4
+     linhas com os fatos do documento; nota e horas na última frase. */
   speakers: {
     title: "Quem ensina audita e contabiliza o orçamento municipal",
     items: [
       {
         name: "Marlon Stafin",
         institution: "COORDENADOR DE AUDITORIA · GOVERNO DO ESTADO DO PARANÁ",
-        photoSrc: null,
+        photoSrc: "/camara-out26/palestrantes/marlon-stafin.jpg",
         bio: "Coordenador de auditoria no Governo do Estado do Paraná desde 2019: implementou o Internal Audit Capability Model (IA-CM), assessorou o Controlador-Geral do Estado, coordenou o GT CGE-SESA (2022–2023) e desde 2024 lidera a auditoria do Projeto PR Eficiente. Administração (FAE), três MBAs pela UNIBF e Contabilidade em andamento (Unifatecie); de 1995 a 2014 no setor privado, até gerente administrativo. 63+ horas de aula na Unyflex, avaliação 9,6.",
       },
       {
         name: "Aurenilson Cipriano",
         institution: "CONTADOR EFETIVO · MUNICÍPIO DE ANDIRÁ/PR",
-        photoSrc: null,
+        photoSrc: "/camara-out26/palestrantes/aurenilson-cipriano.jpg",
         bio: "Contador efetivo do Município de Andirá/PR desde 2014. Ciências Contábeis (UENP) e Gestão Pública (IFPR); especialista em Administração e Finanças e em Gestão Pública (UNINA). Presidente da APEPREV (2017/2019), diretor-presidente do FUNPESPA (2011/2019) e professor de Administração e Ciências Contábeis na FACCREI (2017/2022). Experiência em orçamento, finanças e gestão pública com ênfase em RPPS. 228+ horas de aula na Unyflex, avaliação 9,7.",
       },
       {

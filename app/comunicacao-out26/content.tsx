@@ -331,8 +331,9 @@ export const comunicacaoOut26Content: EventLpContent = {
 
   /* Palestrantes em destaque, ANTES da programação (placement). Os três são
      de Câmara, Prefeitura e eventos do setor — é o argumento do seminário.
-     Nenhum tem foto no repositório → monograma (lacuna registrada na PR).
-     Uanilla: sem nota e sem horas (base de 3 h no documento). */
+     Fotos dos três no repositório desde 17/09/2026 (antes ficavam com o
+     monograma — lacuna registrada na PR). Uanilla: sem nota e sem horas
+     (base de 3 h no documento). */
   speakers: {
     title: "Quem ensina faz comunicação pública todo dia",
     lead: "Câmara Municipal, Prefeitura e os maiores eventos de contratações públicas do país: os três palestrantes operam o que ensinam.",
@@ -341,19 +342,19 @@ export const comunicacaoOut26Content: EventLpContent = {
       {
         name: "Michelle Stival",
         institution: "DIRETORIA DE COMUNICAÇÃO · CÂMARA MUNICIPAL DE CURITIBA",
-        photoSrc: null,
+        photoSrc: "/comunicacao-out26/palestrantes/michelle-stival.jpg",
         bio: "Jornalista (PUC-PR), pós-graduada em Gestão da Comunicação Organizacional (FAE). Desde 2009 na Diretoria de Comunicação da Câmara Municipal de Curitiba, onde coordena as mídias sociais; desde 2019 lidera a presença do Legislativo curitibano no Instagram, TikTok, X e YouTube e idealizou o CMC Podcasts. O modelo de comunicação pública que ajudou a construir virou referência nacional, replicado por câmaras de todo o país. Passagens pela Secretaria de Segurança Pública do Paraná e por jornais, revistas, rádio e TV; seis prêmios Sangue Bom. 21+ horas de aula na Unyflex, avaliação 9,6.",
       },
       {
         name: "Uanilla Marcela dos Santos Pivetta",
         institution: "DIRETORIA DE COMUNICAÇÃO · PREFEITURA DE ITAPOÁ/SC",
-        photoSrc: null,
+        photoSrc: "/comunicacao-out26/palestrantes/uanilla-marcela-dos-santos-pivetta.jpg",
         bio: "Jornalista com mais de 15 anos em comunicação, conteúdo, audiovisual, marketing político e comunicação institucional. Diretora de Comunicação da Prefeitura de Itapoá (SC), onde lidera equipe multidisciplinar e responde pelo planejamento e pela gestão da comunicação institucional e digital do município.",
       },
       {
         name: "Max Miller Candido Alves Pereira",
         institution: "DIRETOR DE DESENVOLVIMENTO INSTITUCIONAL · AMPLA E CONECTA",
-        photoSrc: null,
+        photoSrc: "/comunicacao-out26/palestrantes/max-miller-candido-alves-pereira.jpg",
         bio: "Comunicador, professor e coordenador técnico-científico de eventos em mais de 15 áreas da gestão pública. Articulista em publicidade oficial e contratação de serviços de comunicação (agências, comunicação digital, contratação direta e credenciamento); um dos idealizadores da Maratona das Contratações Públicas. Marketing com ênfase em Digital & Data Science, Personal Branding (ESPM). Coautor de “Contratações nos Sistemas: Perspectivas e Desafios” (JML, 2025) e autor de “Descomplicando a Elaboração de Editais para Licitações de Serviços Publicitários” (2022). 15+ horas de aula na Unyflex, avaliação 9,2.",
       },
     ],
