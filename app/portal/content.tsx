@@ -23,26 +23,39 @@ import Kw from "@/components/lp2/Kw";
    bloqueia): textos de avaliação — reviews segue DESLIGADA por ausência da
    chave. */
 
-/* Conferência aritmética obrigatória do briefing — se qualquer número do
-   design divergir destas contas, parar e reportar em vez de ajustar:
-   1.783 + 1.197 + 0 = 2.980 (soma dos preços "no combo")
-   6.193 − 2.980 = 3.213 (economia anunciada)
-   2.900 + 2.394 + 899 = 6.193 (soma dos avulsos, o preço "de") */
-const COMBO_PRECOS = { curso: 1783, biblioteca: 1197, minisserie: 0 };
-const AVULSO_PRECOS = { curso: 2900, biblioteca: 2394, minisserie: 899 };
-const COMBO_TOTAL = 2980;
-const AVULSO_TOTAL = 6193;
-const ECONOMIA = 3213;
-if (
-  COMBO_PRECOS.curso + COMBO_PRECOS.biblioteca + COMBO_PRECOS.minisserie !==
-    COMBO_TOTAL ||
-  AVULSO_PRECOS.curso + AVULSO_PRECOS.biblioteca + AVULSO_PRECOS.minisserie !==
-    AVULSO_TOTAL ||
-  AVULSO_TOTAL - COMBO_TOTAL !== ECONOMIA
-) {
-  throw new Error(
-    "Pricing do combo inconsistente com o briefing — conferir os valores."
-  );
+/* ATUALIZAÇÃO DE 16/09/2026 (briefing "padrão da /engenharia-nov26"): o
+   pricingCombo (combo curso + biblioteca + minissérie, online R$ 2.000) SAIU
+   e entrou o bloco de Investimento da /engenharia-nov26 (3 planos 2.980 /
+   3.200 / 3.980, card recomendado, tabela, rodapé — decisão do Gustavo);
+   reviews LIGADAS com os 3 depoimentos públicos da referência e foto de
+   turma; galeria de 3 para 12 fotos reais da sede (pedido do Bruno);
+   `paginaOrigem: "portal"` para o título do lead sair LP|portal|…. Hero,
+   datas, professores, banner, "Como seu órgão contrata", FAQ, formId e
+   campos do formulário NÃO mudaram. */
+
+/* Os 12 itens da tabela de preços, na ordem do print de 11/09/2026. Os três
+   vetores dizem o que cada plano inclui — servem aos cards E à tabela, para as
+   duas nunca divergirem. Bloco idêntico ao da /engenharia-nov26 (a tabela é a
+   mesma para todos os cursos — briefing de 16/09/2026). */
+const PLANO_ITENS = [
+  "Capacitação prática em 3 dias",
+  "Capacitação prática em 4 dias",
+  "6 Coffee Breaks Gourmet",
+  "Certificado de instituição reconhecida pelo MEC",
+  "Desconto em pós-graduação",
+  "Mentoria exclusiva VIP",
+  "Kit exclusivo UNYFLEX",
+  "Tour Linha Turismo Curitiba",
+  "Almoço no Restaurante Madalosso",
+  "3 meses de Assinatura Premium",
+  "1 semestre de graduação",
+  "UNYPOINTS para troca na UNY store",
+];
+const BASIC = [true, false, true, true, false, false, false, false, false, false, false, false];
+const MASTER = [false, true, true, true, true, false, false, false, false, false, false, false];
+const PREMIUM = [false, true, true, true, true, true, true, true, true, true, true, true];
+function planoFeatures(inclui: boolean[]) {
+  return PLANO_ITENS.map((label, i) => ({ label, included: inclui[i] }));
 }
 
 export const portalContent: EventLpContent = {
@@ -66,12 +79,14 @@ export const portalContent: EventLpContent = {
   hero: {
     // O CSS do eyebrow (.lp2-eyebrow) já aplica uppercase.
     eyebrow: "Curso presencial em Curitiba · 20 a 23/10 · 17 horas",
-    // Título do único anúncio de Portal que se pagou (briefing de outubro):
-    // anúncio e página dizem a mesma coisa.
+    // Headline reformulada em 16/09 (decisão do Gustavo: "nós não respondemos
+    // à LAI"). A anterior era o título do anúncio de Portal que se pagou
+    // ("A LAI manda publicar. A LGPD manda proteger. Quem decide é você."):
+    // anúncio e página deixam de dizer a mesma coisa até o anúncio ser
+    // atualizado. 2 linhas a >=1440px, medido no preview.
     title: (
       <>
-        A LAI manda publicar. A LGPD manda <Kw>proteger</Kw>. Quem decide é
-        você.
+        Publicar ou proteger? <Kw>Quem decide é você.</Kw>
       </>
     ),
     subtitle:
@@ -379,105 +394,147 @@ export const portalContent: EventLpContent = {
         width: 1000,
         height: 750,
       },
+      /* As 9 abaixo entraram em 16/09/2026 (pedido do Bruno: mais fotos da
+         sede) — fotos reais da sala de aula já no repositório, reprocessadas
+         a 1000px, sem repetir as 3 acima (aula-01 e professor-01 são as mesmas
+         sala-01 e professor-02 da /engenharia-nov26). */
+      {
+        src: "/portal/galeria/turma-01.jpg",
+        alt: "Turma posada em pé na sala de aula da Unyflex, em Curitiba, ao fim de um curso presencial.",
+        width: 1000,
+        height: 750,
+      },
+      {
+        src: "/portal/galeria/professor-02.jpg",
+        alt: "Professora à frente da sala, explicando o conteúdo para a turma.",
+        width: 1000,
+        height: 750,
+      },
+      {
+        src: "/portal/galeria/alunos-01.jpg",
+        alt: "Duas alunas acompanhando a aula, com notebook e material sobre a mesa.",
+        width: 1000,
+        height: 750,
+      },
+      {
+        src: "/portal/galeria/alunos-02.jpg",
+        alt: "Alunos em aula na sala clara da Unyflex, com copos e o kit do curso sobre as mesas.",
+        width: 1000,
+        height: 750,
+      },
+      {
+        src: "/portal/galeria/turma-02.jpg",
+        alt: "Grupo de alunos posando diante da TV com a marca Unyflex, na sala de aula.",
+        width: 1000,
+        height: 750,
+      },
+      {
+        src: "/portal/galeria/sala-02.jpg",
+        alt: "Professor com microfone de cabeça conduzindo a aula para uma turma pequena.",
+        width: 1000,
+        height: 750,
+      },
+      {
+        src: "/portal/galeria/sala-03.jpg",
+        alt: "Sala de aula em perspectiva lateral, com o professor à esquerda e o kit do curso sobre a mesa.",
+        width: 1000,
+        height: 750,
+      },
+      {
+        src: "/portal/galeria/alunos-03.jpg",
+        alt: "Três alunos em mesa em L acompanhando a aula, com copos e crachás.",
+        width: 1000,
+        height: 750,
+      },
+      {
+        src: "/portal/galeria/sala-04.jpg",
+        alt: "Sala de aula vista do corredor central, com o professor ao fundo junto à TV.",
+        width: 1000,
+        height: 666,
+      },
     ],
   },
 
-  /* Pricing "combo" com os mesmos valores da /licitacao (briefing). Valores
-     conferidos pela checagem aritmética no topo do arquivo; tabela
-     comparativa com as mesmas células — nenhuma inventada. */
-  pricingCombo: {
-    title: "Investimento",
-    products: [
+  /* Investimento — bloco IDÊNTICO ao da /engenharia-nov26 (tabela de preços
+     única para todos os cursos, briefing de 16/09/2026): três planos, card
+     recomendado, tabela comparativa e nota de rodapé. Substituiu o combo em
+     16/09/2026; sem plano online (a modalidade continua no formulário). */
+  plans: {
+    title: "Três planos de participação",
+    lead: "O mesmo curso, com três níveis de experiência. O PremiumClass é o plano recomendado: capacitação em 4 dias e a agenda completa fora da sala de aula.",
+    items: [
       {
-        name: "Curso",
-        desc: "Aulas presenciais/online, suporte e certificação",
-        price: "R$ 2.900,00",
-        comboPrice: "R$ 1.783,00",
-        discount: "−39%",
+        name: "BasicClass",
+        sub: "Investimento por aluno",
+        price: "R$ 2.980,00",
+        features: planoFeatures(BASIC),
+        ctaLabel: "Quero o BasicClass",
       },
       {
-        name: "Biblioteca Digital",
-        desc: "Acesso, leitura e download do acervo pedagógico de Gestão Pública",
-        price: "R$ 2.394,00",
-        comboPrice: "R$ 1.197,00",
-        discount: "−50%",
+        name: "MasterClass",
+        sub: "Investimento por aluno",
+        price: "R$ 3.200,00",
+        features: planoFeatures(MASTER),
+        ctaLabel: "Quero o MasterClass",
       },
       {
-        name: "Minissérie",
-        desc: "Conteúdo em área correlata com certificação própria, em digital.unyflex.com.br",
-        price: "R$ 899,00",
-        comboPrice: "Grátis",
-        discount: "−100%",
+        name: "PremiumClass",
+        sub: "Investimento por aluno",
+        price: "R$ 3.980,00",
+        highlighted: true,
+        highlightLabel: "Recomendado",
+        features: planoFeatures(PREMIUM),
+        ctaLabel: "Quero o PremiumClass",
       },
     ],
-    combo: {
-      highlightLabel: "★ Compra indicada",
-      name: "Combo: os três produtos de ensino",
-      from: "De R$ 6.193,00",
-      price: "R$ 2.980,00",
-      savings: "Economia de R$ 3.213,00",
-      ctaPrimary: { href: "#inscricao", label: "Quero o combo" },
+    featured: {
+      highlightLabel: "★ Plano recomendado",
+      title: "PremiumClass: a experiência completa em Curitiba",
+      desc: "Quatro dias de capacitação prática e uma agenda pensada para quem vem de fora: city tour, almoço no Madalosso, mentoria individual com o corpo docente e benefícios que seguem com o aluno depois da turma.",
+      chips: [
+        "Tour Linha Turismo Curitiba",
+        "Almoço no Madalosso",
+        "Mentoria exclusiva VIP",
+        "Kit exclusivo",
+        "3 meses de Assinatura Premium",
+        "1 semestre de graduação",
+        "UNYPOINTS na UNY store",
+      ],
+      priceLabel: "Investimento por aluno",
+      price: "R$ 3.980,00",
+      priceNote: "4 dias · benefícios inclusos",
+      ctaPrimary: { href: "#inscricao", label: "Quero o PremiumClass" },
       ctaSecondary: { href: "#inscricao", label: "Falar com consultor" },
     },
     comparison: {
-      itemsLabel: "O que está incluído",
-      columns: ["Curso", "Biblioteca Digital", "Minissérie", "Combo — os três"],
+      itemsLabel: "Benefícios",
+      columns: [
+        { name: "BasicClass", price: "R$ 2.980,00", sub: "Capacitação em 3 dias" },
+        { name: "MasterClass", price: "R$ 3.200,00", sub: "Capacitação em 4 dias" },
+        {
+          name: "PremiumClass",
+          price: "R$ 3.980,00",
+          sub: "4 dias + experiência completa",
+          highlighted: true,
+        },
+      ],
       rows: [
-        {
-          label: "Aulas presenciais/online do curso",
-          cells: [true, false, false, true],
-        },
-        {
-          label: "Suporte durante o curso",
-          cells: [true, false, false, true],
-        },
-        {
-          label: "Certificado de instituição reconhecida pelo MEC",
-          cells: [true, false, false, true],
-        },
-        {
-          label: "Coffee break gourmet",
-          cells: [true, false, false, true],
-        },
-        {
-          label: "Acesso, leitura e download do acervo pedagógico",
-          cells: [false, true, false, true],
-        },
-        {
-          label: "Material em PDF (ebook)",
-          cells: [false, true, false, true],
-        },
-        {
-          label: "Clube de benefícios e desconto em graduação e pós",
-          cells: [false, true, false, true],
-        },
-        {
-          label: "Minissérie em área correlata (digital.unyflex.com.br)",
-          cells: [false, false, true, true],
-        },
-        {
-          label: "Certificação própria da minissérie",
-          cells: [false, false, true, true],
-        },
+        ...PLANO_ITENS.map((label, i) => ({
+          label,
+          cells: [BASIC[i], MASTER[i], PREMIUM[i]],
+        })),
         {
           label: "Valores",
-          cells: [
-            "R$ 2.900,00 · no combo: R$ 1.783,00",
-            "R$ 2.394,00 · no combo: R$ 1.197,00",
-            "R$ 899,00 · no combo: grátis",
-            "R$ 2.980,00 · de R$ 6.193,00",
-          ],
+          cells: ["R$ 2.980,00", "R$ 3.200,00", "R$ 3.980,00"],
         },
       ],
     },
-    online: {
-      name: "Online ao vivo",
-      price: "R$ 2.000,00",
-      desc: "Mesmas aulas, transmitidas em tempo real.",
-    },
-    // Bloco de pagamento crítico para B2G — verbatim do briefing.
     paymentNote:
       "Aceitamos nota de empenho, com prazo de pagamento de 7 dias após a finalização do curso. Fornecemos toda a documentação necessária para a contratação pelo seu órgão. Pessoa física pode se inscrever por qualquer forma de pagamento.",
+    batchNote: "Inscrições até o dia do curso.",
+    footnote:
+      "Valores por aluno: Benefícios do PremiumClass (tour, almoço, assinatura premium, semestre de graduação, kit exclusivo e UNYPOINTS) são concedidos na confirmação da matrícula e não são convertidos em desconto.",
+    ctaLabel: "Receber proposta",
   },
 
   /* "Como seu órgão contrata" — pedido pelo briefing de outubro (§9), que
@@ -507,7 +564,37 @@ export const portalContent: EventLpContent = {
     cta: { label: "Quero receber a proposta" },
   },
 
-  /* reviews (seção opcional): desligada — sem textos reais de avaliação. */
+  /* Avaliações públicas do Google (texto integral e nomes como publicados),
+     as mesmas da /engenharia-nov26 e da /reforma-tributaria — ligadas em
+     16/09/2026 (briefing: "Depoimentos: reutilize os da referência").
+     Renderiza entre a galeria e o Investimento. Foto de turma em sala, da
+     referência. */
+  reviews: {
+    rating: "5,0",
+    ratingValue: 5,
+    volume: "+450 avaliações",
+    sourceLabel: "Google",
+    photo: {
+      src: "/portal/turma.jpg",
+      alt: "Turma em aula presencial da Unyflex: professor à frente, com microfone, e alunos acompanhando a apresentação.",
+      width: 1280,
+      height: 720,
+    },
+    items: [
+      {
+        text: "“Conteúdo prático, atualizado e muito aplicável na rotina. A didática dos professores é excelente e alinhada com entendimento da legislação e parecer dos tribunais.”",
+        author: "Miriã Munhós",
+      },
+      {
+        text: "“Os professores demonstram alto nível de preparo. Destaco a qualidade do conteúdo, sempre atualizado e alinhado com a realidade da administração pública.”",
+        author: "Luiz Felipe Barros",
+      },
+      {
+        text: "“Atendimento excepcional, professores capacitados, ambiente acolhedor. Conteúdo atualizado e condizente com a realidade da administração pública.”",
+        author: "Andréa Munhoz",
+      },
+    ],
+  },
 
   /* compare (seção opcional): não pedida — o online aparece no hero, no card
      do pricing e no campo de modalidade. */
@@ -591,6 +678,12 @@ export const portalContent: EventLpContent = {
       label: "Modalidade preferida",
       options: ["Presencial em Curitiba", "Online ao vivo"],
     },
+    // Slug da página (16/09/2026): vai como `pagina_origem` e é o token do
+    // título do lead — LP|portal|s=…|c=…|x=…|f=lp-portal-lgpd. O formId não
+    // muda (instrução do briefing), por isso o f= não segue lp-{slug}. Sem
+    // `produto`: o slug `portal` do mapa de cursos do n8n ainda aponta para a
+    // turma de setembro (pendência anterior a esta atualização).
+    paginaOrigem: "portal",
   },
 
   /* Rodapé replicado da /licitacao (mesma parceira e mesmas redes). */
@@ -620,7 +713,7 @@ export const portalContent: EventLpContent = {
   },
 
   stickyCta: {
-    priceAnchor: "a partir de R$ 2.000",
+    priceAnchor: "a partir de R$ 2.980",
     label: "Receber proposta",
     href: "#inscricao",
   },

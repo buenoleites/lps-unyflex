@@ -34,3 +34,12 @@
     justify-content: center;
   }
 }
+
+/* Investimento com TRÊS planos (desde 16/09/2026): o grid default abre 4
+   colunas a partir de 1100px e deixaria a quarta vazia (e "R$ 2.980,00"
+   quebrando em duas linhas). Mesmo override por rota da /engenharia-nov26. */
+@media (min-width: 1100px) {
+  .lppo-theme .lp2-plans__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
