@@ -32,27 +32,42 @@ import Kw from "@/components/lp2/Kw";
    AINDA NÃO EXISTE no mapa de cursos do n8n (cadastro é do chat de
    Implementação I.A.). Não rodar tráfego sem os dois. */
 
-/* Conferência aritmética obrigatória (mesmo bloco de Investimento da
-   /engenharia, replicado porque o briefing repete os mesmos números) — se
-   qualquer número divergir destas contas, parar e reportar em vez de ajustar:
-   1.783 + 1.197 + 0 = 2.980 (soma dos preços "no combo")
-   6.193 − 2.980 = 3.213 (economia anunciada)
-   2.900 + 2.394 + 899 = 6.193 (soma dos avulsos, o preço "de") */
-const COMBO_PRECOS = { curso: 1783, biblioteca: 1197, minisserie: 0 };
-const AVULSO_PRECOS = { curso: 2900, biblioteca: 2394, minisserie: 899 };
-const COMBO_TOTAL = 2980;
-const AVULSO_TOTAL = 6193;
-const ECONOMIA = 3213;
-if (
-  COMBO_PRECOS.curso + COMBO_PRECOS.biblioteca + COMBO_PRECOS.minisserie !==
-    COMBO_TOTAL ||
-  AVULSO_PRECOS.curso + AVULSO_PRECOS.biblioteca + AVULSO_PRECOS.minisserie !==
-    AVULSO_TOTAL ||
-  AVULSO_TOTAL - COMBO_TOTAL !== ECONOMIA
-) {
-  throw new Error(
-    "Pricing do combo inconsistente com o briefing — conferir os valores."
-  );
+/* ATUALIZAÇÃO DE 16/09/2026 (briefing "padrão da /engenharia-nov26"): o
+   pricingCombo (combo curso + biblioteca + minissérie, online R$ 2.000) SAIU
+   e entrou o bloco de Investimento da /engenharia-nov26 (3 planos 2.980 /
+   3.200 / 3.980, card recomendado, tabela, rodapé — decisão do Gustavo);
+   galeria "A experiência presencial" NOVA com 12 fotos reais (pedido do
+   Bruno), em public/reforma/galeria/ (pasta compartilhada, sem criar
+   public/reforma-tributaria/); o hero trocou a foto stock/IA (hero-bg.jpg,
+   que a /reforma antiga continua usando) por uma foto real da sede com o
+   slide de IBS/ICMS (hero-sede.jpg). Hero (texto), datas, reviews, "Como seu
+   órgão contrata", FAQ, formId, paginaOrigem e campos do formulário NÃO
+   mudaram. `speakers` continua ausente: não há fonte com os professores
+   desta turma. */
+
+/* Os 12 itens da tabela de preços, na ordem do print de 11/09/2026. Os três
+   vetores dizem o que cada plano inclui — servem aos cards E à tabela, para as
+   duas nunca divergirem. Bloco idêntico ao da /engenharia-nov26 (a tabela é a
+   mesma para todos os cursos — briefing de 16/09/2026). */
+const PLANO_ITENS = [
+  "Capacitação prática em 3 dias",
+  "Capacitação prática em 4 dias",
+  "6 Coffee Breaks Gourmet",
+  "Certificado de instituição reconhecida pelo MEC",
+  "Desconto em pós-graduação",
+  "Mentoria exclusiva VIP",
+  "Kit exclusivo UNYFLEX",
+  "Tour Linha Turismo Curitiba",
+  "Almoço no Restaurante Madalosso",
+  "3 meses de Assinatura Premium",
+  "1 semestre de graduação",
+  "UNYPOINTS para troca na UNY store",
+];
+const BASIC = [true, false, true, true, false, false, false, false, false, false, false, false];
+const MASTER = [false, true, true, true, true, false, false, false, false, false, false, false];
+const PREMIUM = [false, true, true, true, true, true, true, true, true, true, true, true];
+function planoFeatures(inclui: boolean[]) {
+  return PLANO_ITENS.map((label, i) => ({ label, included: inclui[i] }));
 }
 
 export const reformaTributariaContent: EventLpContent = {
@@ -72,19 +87,25 @@ export const reformaTributariaContent: EventLpContent = {
 
   hero: {
     eyebrow: "Curso presencial em Curitiba · 13 a 16/10 · 17 horas",
+    // Headline em 2 linhas e subheadline em 3 a >=1440px (regra de 16/09; medido
+    // no preview com o texto injetado no h1, nao estimado por contagem).
     title: (
       <>
-        O ISS vai acabar. Quem vai explicar ao prefeito como o município{" "}
-        <Kw>arrecada</Kw> depois?
+        O ISS vai acabar. <Kw>Quem explica ao prefeito?</Kw>
       </>
     ),
     subtitle:
-      "A transição da Reforma Tributária começa em 2026 e vai até 2033. IBS, CBS, Imposto Seletivo, split payment, Comitê Gestor, Cadastro Nacional — o que muda na arrecadação do seu município, painel por painel, e o que fazer agora para não perder receita no caminho.",
+      "A transição vai de 2026 a 2033. IBS, CBS, Imposto Seletivo, split payment e Comitê Gestor: o que muda na arrecadação do seu município e o que fazer agora para não perder receita.",
     audiences:
       "Secretário de Fazenda · diretor de tributação · contador público · fiscal de tributos · procuradoria · controle interno",
     cta: { label: "Quero receber a programação com nota de empenho" },
     meta: "Rua Voluntários da Pátria, 547 · Centro, Curitiba/PR · Certificado emitido pela Faculdade Unypública, IES credenciada no MEC · Também disponível online ao vivo",
-    bgSrc: "/reforma/hero-bg.jpg",
+    // Foto REAL da sede (16/09/2026): professor apontando para a TV com o
+    // slide de IBS/ICMS — conteúdo deste curso. Reprocessada de
+    // public/reforma/modulos.jpg a 1600px/q45 (luma média 118, sem ganho de
+    // gama). Substituiu hero-bg.jpg, que é stock/IA e segue só na /reforma
+    // antiga. É o LCP da página — o layout da rota faz o preload.
+    bgSrc: "/reforma/hero-sede.jpg",
   },
 
   ticker: {
@@ -236,6 +257,90 @@ export const reformaTributariaContent: EventLpContent = {
      briefing proíbe explicitamente criar um placeholder de "Quem ensina"
      (decisão registrada na FAQ, pergunta 1). */
 
+  /* Galeria (16/09/2026, pedido do Bruno: mais fotos da sede). Doze fotos
+     reais já no repositório, reprocessadas a 1000px: sala de aula da sede
+     (linha "curso" do catálogo) e uma turma anterior no plenário de Câmara
+     com banner Unyflex. Ficaram de fora a linha LicitaExpo, as fotos stock/IA
+     de public/reforma/ e as com slide legível de outro curso. Título reusado
+     da /engenharia-nov26; alt é acessibilidade, não copy. */
+  gallery: {
+    title: "A experiência presencial",
+    photos: [
+      {
+        src: "/reforma/galeria/turma-01.jpg",
+        alt: "Turma posada em pé na sala de aula da Unyflex, em Curitiba, ao fim de um curso presencial.",
+        width: 1000,
+        height: 750,
+      },
+      {
+        src: "/reforma/galeria/professor-01.jpg",
+        alt: "Professora à frente da sala, explicando o conteúdo para a turma.",
+        width: 1000,
+        height: 750,
+      },
+      {
+        src: "/reforma/galeria/alunos-01.jpg",
+        alt: "Duas alunas acompanhando a aula, com notebook e material sobre a mesa.",
+        width: 1000,
+        height: 750,
+      },
+      {
+        src: "/reforma/galeria/sala-01.jpg",
+        alt: "Sala de aula vista do fundo durante a aula: alunos sentados e o professor junto ao telão.",
+        width: 1000,
+        height: 750,
+      },
+      {
+        src: "/reforma/galeria/alunos-02.jpg",
+        alt: "Alunos em aula na sala clara da Unyflex, com copos e o kit do curso sobre as mesas.",
+        width: 1000,
+        height: 750,
+      },
+      {
+        src: "/reforma/galeria/turma-02.jpg",
+        alt: "Grupo de alunos posando diante da TV com a marca Unyflex, na sala de aula.",
+        width: 1000,
+        height: 750,
+      },
+      {
+        src: "/reforma/galeria/sala-02.jpg",
+        alt: "Professor com microfone de cabeça conduzindo a aula para uma turma pequena.",
+        width: 1000,
+        height: 750,
+      },
+      {
+        src: "/reforma/galeria/turma-03.jpg",
+        alt: "Turma de um curso anterior reunida no plenário de uma Câmara Municipal, com o banner da Unyflex.",
+        width: 1000,
+        height: 562,
+      },
+      {
+        src: "/reforma/galeria/professor-02.jpg",
+        alt: "Professor em pé, gesticulando enquanto conduz a aula.",
+        width: 1000,
+        height: 750,
+      },
+      {
+        src: "/reforma/galeria/sala-03.jpg",
+        alt: "Sala de aula em perspectiva lateral, com o professor à esquerda e o kit do curso sobre a mesa.",
+        width: 1000,
+        height: 750,
+      },
+      {
+        src: "/reforma/galeria/alunos-03.jpg",
+        alt: "Três alunos em mesa em L acompanhando a aula, com copos e crachás.",
+        width: 1000,
+        height: 750,
+      },
+      {
+        src: "/reforma/galeria/sala-04.jpg",
+        alt: "Sala de aula vista do corredor central, com o professor ao fundo junto à TV.",
+        width: 1000,
+        height: 666,
+      },
+    ],
+  },
+
   /* Avaliações públicas do Google, texto e nomes idênticos aos da
      /engenharia — o briefing repete a mesma prova social (§6). Números
      coerentes com o ticker (5,0 · +450 avaliações).
@@ -270,103 +375,86 @@ export const reformaTributariaContent: EventLpContent = {
     ],
   },
 
-  /* Bloco de Investimento replicado EXATAMENTE da /engenharia (o briefing
-     §7 diz "bloco idêntico às outras" e repete os mesmos números e o mesmo
-     paymentNote, inclusive a frase "Inscrições até o dia do curso."). Valores
-     conferidos pela checagem aritmética no topo do arquivo. */
-  pricingCombo: {
-    title: "Investimento",
-    products: [
+  /* Investimento — bloco IDÊNTICO ao da /engenharia-nov26 (tabela de preços
+     única para todos os cursos, briefing de 16/09/2026): três planos, card
+     recomendado, tabela comparativa e nota de rodapé. Substituiu o combo em
+     16/09/2026; sem plano online (a modalidade continua no formulário). */
+  plans: {
+    title: "Três planos de participação",
+    lead: "O mesmo curso, com três níveis de experiência. O PremiumClass é o plano recomendado: capacitação em 4 dias e a agenda completa fora da sala de aula.",
+    items: [
       {
-        name: "Curso",
-        desc: "Aulas presenciais/online, suporte e certificação",
-        price: "R$ 2.900,00",
-        comboPrice: "R$ 1.783,00",
-        discount: "−39%",
+        name: "BasicClass",
+        sub: "Investimento por aluno",
+        price: "R$ 2.980,00",
+        features: planoFeatures(BASIC),
+        ctaLabel: "Quero o BasicClass",
       },
       {
-        name: "Biblioteca Digital",
-        desc: "Acesso, leitura e download do acervo pedagógico de Gestão Pública",
-        price: "R$ 2.394,00",
-        comboPrice: "R$ 1.197,00",
-        discount: "−50%",
+        name: "MasterClass",
+        sub: "Investimento por aluno",
+        price: "R$ 3.200,00",
+        features: planoFeatures(MASTER),
+        ctaLabel: "Quero o MasterClass",
       },
       {
-        name: "Minissérie",
-        desc: "Conteúdo em área correlata com certificação própria, em digital.unyflex.com.br",
-        price: "R$ 899,00",
-        comboPrice: "Grátis",
-        discount: "−100%",
+        name: "PremiumClass",
+        sub: "Investimento por aluno",
+        price: "R$ 3.980,00",
+        highlighted: true,
+        highlightLabel: "Recomendado",
+        features: planoFeatures(PREMIUM),
+        ctaLabel: "Quero o PremiumClass",
       },
     ],
-    combo: {
-      highlightLabel: "★ Compra indicada",
-      name: "Combo: os três produtos de ensino",
-      from: "De R$ 6.193,00",
-      price: "R$ 2.980,00",
-      savings: "Economia de R$ 3.213,00",
-      ctaPrimary: { href: "#inscricao", label: "Quero o combo" },
+    featured: {
+      highlightLabel: "★ Plano recomendado",
+      title: "PremiumClass: a experiência completa em Curitiba",
+      desc: "Quatro dias de capacitação prática e uma agenda pensada para quem vem de fora: city tour, almoço no Madalosso, mentoria individual com o corpo docente e benefícios que seguem com o aluno depois da turma.",
+      chips: [
+        "Tour Linha Turismo Curitiba",
+        "Almoço no Madalosso",
+        "Mentoria exclusiva VIP",
+        "Kit exclusivo",
+        "3 meses de Assinatura Premium",
+        "1 semestre de graduação",
+        "UNYPOINTS na UNY store",
+      ],
+      priceLabel: "Investimento por aluno",
+      price: "R$ 3.980,00",
+      priceNote: "4 dias · benefícios inclusos",
+      ctaPrimary: { href: "#inscricao", label: "Quero o PremiumClass" },
       ctaSecondary: { href: "#inscricao", label: "Falar com consultor" },
     },
     comparison: {
-      itemsLabel: "O que está incluído",
-      columns: ["Curso", "Biblioteca Digital", "Minissérie", "Combo — os três"],
+      itemsLabel: "Benefícios",
+      columns: [
+        { name: "BasicClass", price: "R$ 2.980,00", sub: "Capacitação em 3 dias" },
+        { name: "MasterClass", price: "R$ 3.200,00", sub: "Capacitação em 4 dias" },
+        {
+          name: "PremiumClass",
+          price: "R$ 3.980,00",
+          sub: "4 dias + experiência completa",
+          highlighted: true,
+        },
+      ],
       rows: [
-        {
-          label: "Aulas presenciais/online do curso",
-          cells: [true, false, false, true],
-        },
-        {
-          label: "Suporte durante o curso",
-          cells: [true, false, false, true],
-        },
-        {
-          label: "Certificado de instituição reconhecida pelo MEC",
-          cells: [true, false, false, true],
-        },
-        {
-          label: "Coffee break gourmet",
-          cells: [true, false, false, true],
-        },
-        {
-          label: "Acesso, leitura e download do acervo pedagógico",
-          cells: [false, true, false, true],
-        },
-        {
-          label: "Material em PDF (ebook)",
-          cells: [false, true, false, true],
-        },
-        {
-          label: "Clube de benefícios e desconto em graduação e pós",
-          cells: [false, true, false, true],
-        },
-        {
-          label: "Minissérie em área correlata (digital.unyflex.com.br)",
-          cells: [false, false, true, true],
-        },
-        {
-          label: "Certificação própria da minissérie",
-          cells: [false, false, true, true],
-        },
+        ...PLANO_ITENS.map((label, i) => ({
+          label,
+          cells: [BASIC[i], MASTER[i], PREMIUM[i]],
+        })),
         {
           label: "Valores",
-          cells: [
-            "R$ 2.900,00 · no combo: R$ 1.783,00",
-            "R$ 2.394,00 · no combo: R$ 1.197,00",
-            "R$ 899,00 · no combo: grátis",
-            "R$ 2.980,00 · de R$ 6.193,00",
-          ],
+          cells: ["R$ 2.980,00", "R$ 3.200,00", "R$ 3.980,00"],
         },
       ],
     },
-    online: {
-      name: "Online ao vivo",
-      price: "R$ 2.000,00",
-      desc: "Mesmas aulas, transmitidas em tempo real.",
-    },
-    // Verbatim do briefing §7.
     paymentNote:
-      "Aceitamos nota de empenho, com prazo de pagamento de 7 dias após a finalização do curso. Fornecemos toda a documentação necessária para a contratação pelo seu órgão. Pessoa física pode se inscrever por qualquer forma de pagamento. Inscrições até o dia do curso.",
+      "Aceitamos nota de empenho, com prazo de pagamento de 7 dias após a finalização do curso. Fornecemos toda a documentação necessária para a contratação pelo seu órgão. Pessoa física pode se inscrever por qualquer forma de pagamento.",
+    batchNote: "Inscrições até o dia do curso.",
+    footnote:
+      "Valores por aluno: Benefícios do PremiumClass (tour, almoço, assinatura premium, semestre de graduação, kit exclusivo e UNYPOINTS) são concedidos na confirmação da matrícula e não são convertidos em desconto.",
+    ctaLabel: "Receber proposta",
   },
 
   /* "Como seu órgão contrata" — briefing §8: "mesmos quatro cards das outras
@@ -483,7 +571,7 @@ export const reformaTributariaContent: EventLpContent = {
   },
 
   stickyCta: {
-    priceAnchor: "a partir de R$ 2.000",
+    priceAnchor: "a partir de R$ 2.980",
     label: "Receber proposta",
     href: "#inscricao",
   },

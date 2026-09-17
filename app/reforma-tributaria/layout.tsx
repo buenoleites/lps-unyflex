@@ -6,21 +6,21 @@ import "./theme.css";
 /* Passo a Passo da Reforma Tributária, no template lp2 (turma de 13 a
    16/10/2026 — rota /reforma-tributaria). */
 
-/* Subtítulo do hero, VERBATIM do briefing §1. É a única descrição desta rota:
-   metadata, Open Graph, Twitter e JSON-LD apontam todos para cá, para que não
-   exista na página nenhum texto escrito pelo agente (mesmo padrão da
-   /engenharia). Se o briefing mudar, muda aqui e em ./content.tsx
-   (hero.subtitle) — as duas cópias são propositais: uma é a página, a outra
-   é o que os buscadores leem. */
-const BRIEFING_SUBTITULO =
-  "A transição da Reforma Tributária começa em 2026 e vai até 2033. IBS, CBS, Imposto Seletivo, split payment, Comitê Gestor, Cadastro Nacional — o que muda na arrecadação do seu município, painel por painel, e o que fazer agora para não perder receita no caminho.";
+/* Subtítulo do hero. Até 16/09 era VERBATIM do briefing §1; foi condensado
+   para caber em 3 linhas a >=1440px (decisão do Gustavo) — é texto do agente,
+   listado na PR para auditoria. É a única descrição desta rota: metadata,
+   Open Graph, Twitter e JSON-LD apontam todos para cá. Se mudar, muda aqui e
+   em ./content.tsx (hero.subtitle) — as duas cópias são propositais: uma é a
+   página, a outra é o que os buscadores leem. */
+const SUBTITULO =
+  "A transição vai de 2026 a 2033. IBS, CBS, Imposto Seletivo, split payment e Comitê Gestor: o que muda na arrecadação do seu município e o que fazer agora para não perder receita.";
 
 export const metadata: Metadata = {
   // O root layout define metadataBase com o path /licitacao embutido, o que
   // faria o canonical e a OG desta rota resolverem errado.
   metadataBase: new URL("https://mkt.unyflex.com.br"),
   title: "Passo a Passo da Reforma Tributária | Unyflex",
-  description: BRIEFING_SUBTITULO,
+  description: SUBTITULO,
   keywords: [
     "reforma tributária",
     "IBS",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Passo a Passo da Reforma Tributária | Unyflex",
-    description: BRIEFING_SUBTITULO,
+    description: SUBTITULO,
     url: "/reforma-tributaria",
     siteName: "Unyflex",
     locale: "pt_BR",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Passo a Passo da Reforma Tributária | Unyflex",
-    description: BRIEFING_SUBTITULO,
+    description: SUBTITULO,
   },
 };
 
@@ -55,7 +55,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "EducationEvent",
   name: "Passo a Passo da Reforma Tributária",
-  description: BRIEFING_SUBTITULO,
+  description: SUBTITULO,
   url: "https://mkt.unyflex.com.br/reforma-tributaria",
   startDate: "2026-10-13",
   endDate: "2026-10-16",
@@ -73,9 +73,9 @@ const jsonLd = {
     },
   },
   offers: [
-    { name: "Combo: os três produtos de ensino", price: "2980" },
-    { name: "Curso avulso", price: "2900" },
-    { name: "Online ao vivo", price: "2000" },
+    { name: "BasicClass", price: "2980" },
+    { name: "MasterClass", price: "3200" },
+    { name: "PremiumClass", price: "3980" },
   ].map((plano) => ({
     "@type": "Offer",
     name: plano.name,
@@ -105,7 +105,7 @@ export default function ReformaTributariaLayout({
       <link
         rel="preload"
         as="image"
-        href="/reforma/hero-bg.jpg"
+        href="/reforma/hero-sede.jpg"
         fetchPriority="high"
       />
       <script
