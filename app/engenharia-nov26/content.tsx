@@ -75,14 +75,15 @@ export const engenhariaNov26Content: EventLpContent = {
   hero: {
     // O CSS do eyebrow (.lp2-eyebrow) já aplica uppercase.
     eyebrow: "Curso presencial em Curitiba · 24 a 27/11 · 17 horas",
+    // Headline em 2 linhas e subheadline em 3 a >=1440px (regra de 16/09; medido
+    // no preview com o texto injetado no h1, nao estimado por contagem).
     title: (
       <>
-        Quando a chuva destruir a estrada, a lei te dá <Kw>um ano</Kw> — e
-        cobra quem não tinha plano antes.
+        Chuva levou a estrada? A lei te dá <Kw>um ano</Kw>.
       </>
     ),
     subtitle:
-      "Ata de registro de preços preventiva, especificações técnicas, contratação emergencial e fiscalização pós-evento na Lei 14.133 — mais BIM, drones, orçamentação SINAPI/SICRO e IA aplicada ao projeto. Para quem responde por obras, urbanismo e infraestrutura no município.",
+      "Ata de registro de preços preventiva, contratação emergencial e fiscalização pós-evento na Lei 14.133 — mais BIM, drones, orçamentação SINAPI/SICRO e IA aplicada ao projeto. Em 4 dias, para quem responde por obras no município.",
     audiences:
       "Secretário de obras · engenheiro e arquiteto de prefeitura · fiscal de obras · planejamento urbano · controle interno",
     // Sem href ⇒ o CTA vai para #inscricao.

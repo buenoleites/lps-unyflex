@@ -6,13 +6,14 @@ import "./theme.css";
 /* Soluções Práticas de Engenharia e Urbanismo, no template lp2
    (turma de 24 a 27/11/2026 — rota /engenharia-nov26). */
 
-/* Subtítulo do hero, VERBATIM do briefing §1. É a única descrição desta rota:
-   metadata, Open Graph, Twitter e JSON-LD apontam todos para cá, para que não
-   exista na página nenhum texto escrito pelo agente. Se o briefing mudar, muda
-   aqui e em app/engenharia-nov26/content.tsx (hero.subtitle) — as duas cópias são
+/* Subtítulo do hero. Até 16/09 era VERBATIM do briefing §1; foi condensado
+   para caber em 3 linhas a >=1440px (decisão do Gustavo) — é texto do agente,
+   listado na PR para auditoria. É a única descrição desta rota: metadata,
+   Open Graph, Twitter e JSON-LD apontam todos para cá. Se mudar, muda aqui e
+   em app/engenharia-nov26/content.tsx (hero.subtitle) — as duas cópias são
    propositais: uma é a página, a outra é o que os buscadores leem. */
-const BRIEFING_SUBTITULO =
-  "Ata de registro de preços preventiva, especificações técnicas, contratação emergencial e fiscalização pós-evento na Lei 14.133 — mais BIM, drones, orçamentação SINAPI/SICRO e IA aplicada ao projeto. Para quem responde por obras, urbanismo e infraestrutura no município.";
+const SUBTITULO =
+  "Ata de registro de preços preventiva, contratação emergencial e fiscalização pós-evento na Lei 14.133 — mais BIM, drones, orçamentação SINAPI/SICRO e IA aplicada ao projeto. Em 4 dias, para quem responde por obras no município.";
 
 export const metadata: Metadata = {
   // O root layout define metadataBase com o path /licitacao embutido, o que
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
   // autoria do agente (regra do Gustavo, 03/09/2026). Uso o subtítulo inteiro
   // de propósito: escolher onde cortar já seria decisão editorial. O Google
   // trunca no que couber.
-  description: BRIEFING_SUBTITULO,
+  description: SUBTITULO,
   // Termos levantados literalmente do briefing, não frases compostas.
   keywords: [
     "Lei 14.133",
@@ -44,7 +45,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Soluções Práticas de Engenharia e Urbanismo | Unyflex",
-    description: BRIEFING_SUBTITULO,
+    description: SUBTITULO,
     url: "/engenharia-nov26",
     siteName: "Unyflex",
     locale: "pt_BR",
@@ -53,7 +54,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Soluções Práticas de Engenharia e Urbanismo | Unyflex",
-    description: BRIEFING_SUBTITULO,
+    description: SUBTITULO,
   },
 };
 
@@ -61,7 +62,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "EducationEvent",
   name: "Soluções Práticas de Engenharia e Urbanismo",
-  description: BRIEFING_SUBTITULO,
+  description: SUBTITULO,
   url: "https://mkt.unyflex.com.br/engenharia-nov26",
   startDate: "2026-11-24",
   endDate: "2026-11-27",
