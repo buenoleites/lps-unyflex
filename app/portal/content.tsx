@@ -338,12 +338,10 @@ export const portalContent: EventLpContent = {
      4:5, 640×800, o padrão dos retratos do repo. As de Nilson e Marcus são
      cópia byte a byte dos recortes da /patrimonio (mesma foto de origem; os
      assets são namespaced por LP, então copiar é o certo, não referenciar a
-     pasta de outra rota). A da Mayara é INÉDITA e veio em 150×150: é um
-     recorte 4:5 (96×120 em x=36) ampliado 6,7× — fica visivelmente mais mole
-     que as outras duas, e o enquadramento foi fechado no rosto para casar com
-     a escala dos outros dois cards. Entrar assim foi decisão do Gustavo.
-     TROCAR quando a Emily mandar um arquivo maior: mesmo nome de arquivo,
-     nenhuma mudança de código. */
+     pasta de outra rota). A da Mayara TROCOU em 17/09/2026: o arquivo INÉDITO
+     de 150×150 (ampliação 6,7×, dívida registrada em memória) foi substituído
+     por uma foto em resolução real mandada pelo Gustavo — mesmo nome de
+     arquivo, nenhuma mudança de código. */
   speakers: {
     title: "Quem ensina responde por isso na prática",
     items: [

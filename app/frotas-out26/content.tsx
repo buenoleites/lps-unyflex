@@ -265,17 +265,18 @@ export const frotasOut26Content: EventLpContent = {
     ],
   },
 
-  /* Bancada com 4 professores (documento 3), na ordem do documento. Nilson e
-     Marcus têm foto no repositório (as mesmas da /patrimonio); Everton e José
-     Augusto ficam com o monograma. O grid de 3 colunas vira 2×2 via
-     theme.css. José Augusto: mesma bio da /dispensa-out26. */
+  /* Bancada com 4 professores (documento 3), na ordem do documento. Os
+     quatro têm foto no repositório desde 17/09/2026 (Everton e José Augusto
+     chegaram junto com o lote de fotos do Gustavo — antes ficavam com o
+     monograma). O grid de 3 colunas vira 2×2 via theme.css. José Augusto:
+     mesma bio e mesma foto da /dispensa-out26. */
   speakers: {
     title: "Quem ensina implantou a gestão de frota em dezenas de prefeituras",
     items: [
       {
         name: "Everton Rosa de Jesus",
         institution: "GESTÃO DE FROTAS PÚBLICAS · 18 ANOS",
-        photoSrc: null,
+        photoSrc: "/frotas-out26/palestrantes/everton-rosa-de-jesus.jpg",
         bio: "Administrador, MBA Executivo em Gestão de Negócios Internacionais (Unicesusc e Universidade Lusófona) e MBA em Value Investing (AGF Grupo Barsi). Na Secretaria de Estado da Administração de SC (2008–2019) desenvolveu o sistema GVE, licenciado ao Executivo estadual; desde 2019 orienta rotinas de gestão de frota em cerca de 40 prefeituras de SC e uma do RS. 18 anos em administração de veículos públicos. 27+ horas de aula na Unyflex, avaliação 9,8.",
       },
       {
@@ -293,7 +294,7 @@ export const frotasOut26Content: EventLpContent = {
       {
         name: "José Augusto Alexandria Alves",
         institution: "PROCURADOR · CÂMARA MUNICIPAL DE CURITIBA",
-        photoSrc: null,
+        photoSrc: "/frotas-out26/palestrantes/jose-augusto-alexandria-alves.jpg",
         bio: "Procurador efetivo da Câmara Municipal de Curitiba, atua em licitações e contratos administrativos. Pós-graduado em Direito Público, Trabalho e Previdenciário (Anhanguera-Uniderp), graduado em Direito (Universidade de Cuiabá). 552+ horas de aula na Unyflex, avaliação 9,6.",
       },
     ],

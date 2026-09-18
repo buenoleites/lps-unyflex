@@ -256,25 +256,31 @@ export const dispensaOut26Content: EventLpContent = {
     ],
   },
 
-  /* Bancada com 2 professores (documento 1). Sem foto no repositório para
-     nenhum dos dois → monograma do template (não usar foto anônima do
-     catálogo em professor nomeado). Bios reescritas em até 4 linhas com os
-     fatos do documento; nota e horas na última frase. O grid de 3 colunas
-     vira 2 via theme.css. */
+  /* Bancada com 3 professores (documento 1 + Willyan, currículo colado pelo
+     Gustavo em 17/09/2026). Fotos dos três no repositório — grid default de
+     3 colunas (o override para 2 colunas saiu do theme.css). Bios reescritas
+     em até 4 linhas com os fatos da fonte; nota e horas na última frase
+     quando a fonte traz esse dado (Willyan não traz). */
   speakers: {
     title: "Quem ensina emite o parecer e opera a plataforma",
     items: [
       {
         name: "José Augusto Alexandria Alves",
         institution: "PROCURADOR · CÂMARA MUNICIPAL DE CURITIBA",
-        photoSrc: null,
+        photoSrc: "/dispensa-out26/palestrantes/jose-augusto-alexandria-alves.jpg",
         bio: "Procurador efetivo da Câmara Municipal de Curitiba, atua em licitações e contratos administrativos. Pós-graduado em Direito Público, Trabalho e Previdenciário (Anhanguera-Uniderp), graduado em Direito (Universidade de Cuiabá). 552+ horas de aula na Unyflex, avaliação 9,6.",
       },
       {
         name: "Aluísio Henrique Ferreira",
         institution: "PROCURADOR JURÍDICO · CÂMARA MUNICIPAL DE NOVO ITACOLOMI/PR",
-        photoSrc: null,
+        photoSrc: "/dispensa-out26/palestrantes/aluisio-henrique-ferreira.jpg",
         bio: "Advogado e procurador jurídico da Câmara Municipal de Novo Itacolomi/PR. Doutorando em Direito do Trabalho (Universidad de Buenos Aires), mestre em Ciências Jurídicas (CESUMAR), especialista em Direito Constitucional, Penal e Processual Penal, Eleitoral e Trabalhista. Professor e coordenador de cursos de Direito na FAP, FAFIMAN e UNOPAR entre 2005 e 2021; autor e coautor de obras jurídicas. 36+ horas de aula na Unyflex, avaliação 9,5.",
+      },
+      {
+        name: "Willyan Charles de Campos",
+        institution: "PROCURADOR JURÍDICO · CÂMARA DE VEREADORES DE ITAPEMA/SC",
+        photoSrc: "/dispensa-out26/palestrantes/willyan-charles-de-campos.jpg",
+        bio: "Procurador jurídico de carreira da Câmara de Vereadores de Itapema/SC, advogado com oito anos de atuação no setor público. Mestre em Gestão de Políticas Públicas (UNIVALI), especialista em Direito Público e Direito Penal. Elabora pareceres jurídicos, minutas legislativas e contratos administrativos, conduz processos licitatórios e representa a instituição junto ao Ministério Público, Tribunal de Contas e Poder Judiciário.",
       },
     ],
   },

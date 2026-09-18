@@ -43,7 +43,14 @@ import Kw from "@/components/lp2/Kw";
    slide de IBS/ICMS (hero-sede.jpg). Hero (texto), datas, reviews, "Como seu
    órgão contrata", FAQ, formId, paginaOrigem e campos do formulário NÃO
    mudaram. `speakers` continua ausente: não há fonte com os professores
-   desta turma. */
+   desta turma.
+
+   ATUALIZAÇÃO DE 17/09/2026: 3 professores confirmados (currículos colados
+   pelo Gustavo) — `speakers` entrou e a FAQ pergunta 1 foi corrigida (ver os
+   comentários datados mais abaixo). Isso também criou public/reforma-
+   tributaria/palestrantes/ — a primeira pasta namespaced desta rota; os
+   assets de ambiente (hero, CTA, galeria) continuam em public/reforma/ por
+   decisão do Gustavo de 03/09/2026, sem mudança. */
 
 /* Os 12 itens da tabela de preços, na ordem do print de 11/09/2026. Os três
    vetores dizem o que cada plano inclui — servem aos cards E à tabela, para as
@@ -253,9 +260,42 @@ export const reformaTributariaContent: EventLpContent = {
     ],
   },
 
-  /* quote / speakers / gallery: desligadas. Sem corpo docente definido — o
-     briefing proíbe explicitamente criar um placeholder de "Quem ensina"
-     (decisão registrada na FAQ, pergunta 1). */
+  /* quote: desligada — sem fonte no briefing.
+
+     speakers (17/09/2026): o briefing original proibia criar um placeholder
+     de "Quem ensina" sem corpo docente confirmado (a FAQ, pergunta 1, dizia
+     "em confirmação"). O Gustavo colou nesta data os currículos de 3
+     professores confirmados (Daniel Maurício, Janete Probst Munhoz e Willian
+     Batista de Oliveira) com as fotos — a seção entra, e a FAQ foi corrigida
+     junto. Bios condensadas no mesmo estilo das outras LPs (instituição em
+     caixa alta · cargo, 2–4 frases de credenciais), sem nenhum fato fora do
+     currículo colado; nenhum dos três tem horas de aula/avaliação Unyflex
+     informadas, por isso essa frase final fica de fora (mesmo padrão da
+     Uanilla em /comunicacao-out26). 3 professores → grid default de 3
+     colunas, sem override em theme.css (mesmo caso de /camara-out26). */
+  speakers: {
+    title: "Quem ensina já fiscaliza e arrecada o tributo que você vai apurar",
+    items: [
+      {
+        name: "Daniel Maurício",
+        institution: "AUDITOR DE TRIBUTOS MUNICIPAIS · PREFEITURA MUNICIPAL DE CURITIBA",
+        photoSrc: "/reforma-tributaria/palestrantes/daniel-mauricio.jpg",
+        bio: "Auditor de Tributos Municipais da Secretaria Municipal de Finanças da Prefeitura Municipal de Curitiba; já foi Diretor do Departamento de Rendas Mobiliárias da mesma secretaria. Graduado em Letras (UFPR), Administração de Empresas (FESP) e Direito (FARESC), com pós-graduações em Gestão Administrativa e Tributária, Gestão de Pessoas e Qualidade no Setor Público e Gestão Pública de Tecnologia da Informação. Integrou o Conselho de Recursos Tributários, a Junta de Julgamento Tributário da Prefeitura de Curitiba e a Câmara Técnica Permanente da ABRASF.",
+      },
+      {
+        name: "Janete Probst Munhoz",
+        institution: "COORDENADORA DE EAD E PÓS-GRADUAÇÃO · CENTRO UNIVERSITÁRIO UNIGUAIRACÁ",
+        photoSrc: "/reforma-tributaria/palestrantes/janete-probst-munhoz.jpg",
+        bio: "Doutora em Administração pela Universidade Positivo (2021), com pesquisa em compras públicas municipais na área da saúde, e mestre em Desenvolvimento Econômico pela UFPR (2009). Especialista em Direito Tributário (AVM Faculdade Integrada) e em Metodologia e Didática do Ensino Superior (UNIVALE), com MBA em Gestão do Conhecimento na Educação Superior (Uniguairacá). Foi Diretora do Departamento de Receita da Prefeitura Municipal de Guarapuava (1997–2004), onde coordenou a modernização dos códigos tributário e de postura; hoje é sócia-administradora da Munhoz Consultoria e Assessoria, com projetos em gestão tributária e finanças públicas municipais.",
+      },
+      {
+        name: "Willian Batista de Oliveira",
+        institution: "AUDITOR FISCAL DE TRIBUTOS MUNICIPAIS · PREFEITURA MUNICIPAL DE CURITIBA",
+        photoSrc: "/reforma-tributaria/palestrantes/willian-batista-de-oliveira.jpg",
+        bio: "Auditor Fiscal de Tributos Municipais na Prefeitura Municipal de Curitiba e gerente de Fiscalização do Departamento de Rendas Mobiliárias (ISS). Mestre em Planejamento e Governança Pública (UTFPR) e em Administração Autárquica (Instituto Politécnico de Bragança, Portugal); pós-graduado em Administração Pública e em Auditoria e Controladoria (Unicesumar). Membro do Conselho Municipal de Contribuintes e suplente na Câmara Técnica Permanente da ABRASF; professor na Especialização em Direito Administrativo da UENP/PR e instrutor de formação de auditores fiscais municipais.",
+      },
+    ],
+  },
 
   /* Galeria (16/09/2026, pedido do Bruno: mais fotos da sede). Doze fotos
      reais já no repositório, reprocessadas a 1000px: sala de aula da sede
@@ -496,7 +536,7 @@ export const reformaTributariaContent: EventLpContent = {
     items: [
       {
         q: "Quem são os professores?",
-        a: "O corpo docente da turma está em confirmação e será publicado nesta página. A programação já está fechada; ao receber a proposta, o consultor informa os nomes assim que confirmados.",
+        a: "Daniel Maurício, Janete Probst Munhoz e Willian Batista de Oliveira — as bios completas estão na seção \"Quem ensina\" desta página.",
       },
       {
         q: "A reforma só vale em 2033. Por que fazer o curso agora?",

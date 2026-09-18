@@ -33,16 +33,6 @@
   }
 }
 
-/* Bancada com só 2 professores: o grid default de 3 colunas no desktop
-   deixaria uma célula órfã. Duas colunas com largura contida e centradas. */
-@media (min-width: 1000px) {
-  .lpdi-theme .lp2-speakers__grid {
-    grid-template-columns: repeat(2, 1fr);
-    max-width: 860px;
-    margin-inline: auto;
-  }
-}
-
 /* Navbar: centraliza os links entre logo e CTA no desktop. <800px o template
    já esconde os links. */
 @media (min-width: 800px) {
