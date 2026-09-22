@@ -349,12 +349,6 @@ export const reformaTributariaContent: EventLpContent = {
         height: 750,
       },
       {
-        src: "/reforma/galeria/turma-03.jpg",
-        alt: "Turma de um curso anterior reunida no plenário de uma Câmara Municipal, com o banner da Unyflex.",
-        width: 1000,
-        height: 562,
-      },
-      {
         src: "/reforma/galeria/professor-02.jpg",
         alt: "Professor em pé, gesticulando enquanto conduz a aula.",
         width: 1000,
@@ -385,19 +379,20 @@ export const reformaTributariaContent: EventLpContent = {
      /engenharia — o briefing repete a mesma prova social (§6). Números
      coerentes com o ticker (5,0 · +450 avaliações).
 
-     photo: foto de turma de public/reforma/ (preparada para a página antiga,
-     reaproveitada aqui por referência cruzada). O `alt` é a exceção
-     documentada a "copy só com fonte" — acessibilidade, não copy da página. */
+     photo: turma-03.jpg, a mesma foto que saiu da galeria acima (troca pedida
+     pelo Gustavo em 22/09/2026) — já é foto de turma, já está no repo, sem
+     upload novo. O `alt` é a exceção documentada a "copy só com fonte" —
+     acessibilidade, não copy da página. */
   reviews: {
     rating: "5,0",
     ratingValue: 5,
     volume: "+450 avaliações",
     sourceLabel: "Google",
     photo: {
-      src: "/reforma/card-1.jpg",
-      alt: "Participantes acompanhando a aula durante a capacitação presencial da Unyflex.",
-      width: 1100,
-      height: 825,
+      src: "/reforma/galeria/turma-03.jpg",
+      alt: "Turma de um curso anterior reunida no plenário de uma Câmara Municipal, com o banner da Unyflex.",
+      width: 1000,
+      height: 562,
     },
     items: [
       {

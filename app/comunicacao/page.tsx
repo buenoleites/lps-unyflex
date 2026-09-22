@@ -1,7 +1,9 @@
 "use client";
-import EventLp from "@/components/lp2/EventLp";
-import { comunicacaoContent } from "./content";
+import { useEffect } from "react";
 
 export default function ComunicacaoPage() {
-  return <EventLp content={comunicacaoContent} />;
+  useEffect(() => {
+    window.location.replace("/comunicacao-out26");
+  }, []);
+  return null;
 }

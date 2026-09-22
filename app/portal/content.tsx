@@ -96,10 +96,10 @@ export const portalContent: EventLpContent = {
     // Sem href ⇒ o CTA vai para #inscricao.
     cta: { label: "Quero receber a programação com nota de empenho" },
     meta: "Rua Voluntários da Pátria, 547 — Centro, Curitiba/PR · Certificado emitido após a conclusão por instituição reconhecida pelo MEC · Também disponível online ao vivo",
-    // Foto do catálogo Unyflex (produtos/auditorio-01.jpg): aula em plenário
-    // institucional. Original é retrato 2858×3812; aqui entra a banda central
-    // recortada em 3:2 (1600×1066), que preserva o professor, o banner e as
-    // poltronas. O preload correspondente está no layout da rota.
+    // Foto REAL da sede (troca de 22/09/2026, pedido do Gustavo: a antiga era
+    // um plenário institucional do catálogo, não a sede). Mesmo arquivo de
+    // public/engenharia-nov26/hero.jpg, já 3:2 (1600×1066), luma média 62 —
+    // sem ganho de gama. O preload correspondente está no layout da rota.
     bgSrc: "/portal/hero.jpg",
   },
 
@@ -661,9 +661,9 @@ export const portalContent: EventLpContent = {
     // Verbatim do briefing de outubro; o CSS (.lp2-form-section__meta) já
     // aplica uppercase.
     meta: "Turma de 20 a 23/10 em Curitiba ou online ao vivo · Empenho leva tempo no seu órgão — comece o processo agora.",
-    // Foto do catálogo Unyflex (produtos/grupo-oficial-plenario-01.jpg): a
-    // turma inteira no plenário. Substituiu a provisória que vinha da
-    // /licitacao — o arquivo agora é próprio da rota.
+    // Foto REAL da sede (troca de 22/09/2026, mesmo motivo do hero acima).
+    // public/engenharia-nov26/cta-final.jpg recortado de 1600×1066 para 3:2
+    // → 16:9 (1600×900), luma média 78 — sem ganho de gama.
     bgSrc: "/portal/cta-final.jpg",
     // Novo slug desta LP — precisa ser mapeado no n8n ANTES de rodar mídia.
     formId: "lp-portal-lgpd",

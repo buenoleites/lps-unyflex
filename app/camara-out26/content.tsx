@@ -94,9 +94,10 @@ export const camaraOut26Content: EventLpContent = {
     // Sem href ⇒ o CTA vai para #inscricao.
     cta: { label: "Quero receber a programação com nota de empenho" },
     meta: "Rua Voluntários da Pátria, 547 · Centro, Curitiba/PR · Certificado emitido pela Faculdade Unypública, IES credenciada no MEC",
-    // Plenário de Câmara Municipal com o banner Unyflex, palestrante ao
-    // microfone (foto real da linha "plenário" do catálogo, já usada na
-    // /portal; luma média 141 — sem ganho de gama). É o LCP da página — o
+    // Foto REAL da sede (troca de 22/09/2026, pedido do Gustavo: a antiga era
+    // um plenário institucional do catálogo, não a sede — mesmo caso do
+    // /portal). Mesmo arquivo de public/engenharia-nov26/hero.jpg, já 3:2
+    // (1600×1066), luma média 62 — sem ganho de gama. É o LCP da página — o
     // layout da rota faz o preload.
     bgSrc: "/camara-out26/hero.jpg",
   },
@@ -526,8 +527,9 @@ export const camaraOut26Content: EventLpContent = {
     title: "Garanta sua participação",
     // O CSS do meta (.lp2-form-section__meta) já aplica caixa alta.
     meta: "Turma de 13 a 16/10 em Curitiba · Empenho leva tempo no seu órgão — comece o processo agora.",
-    // Turma reunida no plenário de Câmara Municipal (foto real, já usada na
-    // /portal; luma média 118).
+    // Foto REAL da sede (troca de 22/09/2026, mesmo motivo do hero acima).
+    // public/engenharia-nov26/cta-final.jpg recortado de 1600×1066 para 3:2
+    // → 16:9 (1600×900), luma média 78 — sem ganho de gama.
     bgSrc: "/camara-out26/cta-final.jpg",
     // BLOQUEIO DE PUBLICAÇÃO: o slug `camara-out26` (campo `produto` abaixo)
     // precisa estar no mapa de cursos do n8n antes de a página receber

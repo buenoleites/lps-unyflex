@@ -1,7 +1,9 @@
 "use client";
-import EventLp from "@/components/lp2/EventLp";
-import { licitacaoContent } from "./content";
+import { useEffect } from "react";
 
 export default function LicitacaoPage() {
-  return <EventLp content={licitacaoContent} />;
+  useEffect(() => {
+    window.location.replace("/licitacao-out26");
+  }, []);
+  return null;
 }

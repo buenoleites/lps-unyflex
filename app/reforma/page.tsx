@@ -1,6 +1,9 @@
-import LpPage from "@/components/lp/LpPage";
-import { reformaContent } from "./content";
+"use client";
+import { useEffect } from "react";
 
 export default function ReformaPage() {
-  return <LpPage content={reformaContent} track />;
+  useEffect(() => {
+    window.location.replace("/reforma-tributaria");
+  }, []);
+  return null;
 }
