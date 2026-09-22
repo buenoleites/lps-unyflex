@@ -1,7 +1,9 @@
 "use client";
-import EventLp from "@/components/lp2/EventLp";
-import { tesourariaContent } from "./content";
+import { useEffect } from "react";
 
 export default function TesourariaPage() {
-  return <EventLp content={tesourariaContent} />;
+  useEffect(() => {
+    window.location.replace("https://unyflex.com.br/agendados");
+  }, []);
+  return null;
 }

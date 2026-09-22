@@ -1,27 +1,25 @@
 import type { EventLpContent } from "@/components/lp2/types";
 import Kw from "@/components/lp2/Kw";
 
-/* Os 12 itens da tabela de preços, na ordem do print de 11/09/2026. Os três
-   vetores dizem o que cada plano inclui — servem aos cards E à tabela, para as
-   duas nunca divergirem. Bloco idêntico ao da /engenharia-nov26 (a tabela é a
-   mesma para todos os cursos e seminários — briefing de 16/09/2026). */
+/* Os 9 itens da tabela de preços, substituídos em 22/09/2026 pelo print que o
+   Gustavo mandou (Plano 01/02/03, R$ 3.300/3.600/3.900) — o bloco herdado da
+   /engenharia-nov26 (BasicClass/MasterClass/PremiumClass) saiu. Os três
+   vetores dizem o que cada plano inclui — servem aos cards E à tabela, para
+   as duas nunca divergirem. */
 const PLANO_ITENS = [
-  "Capacitação prática em 3 dias",
-  "Capacitação prática em 4 dias",
-  "6 Coffee Breaks Gourmet",
-  "Certificado de instituição reconhecida pelo MEC",
-  "Desconto em pós-graduação",
-  "Mentoria exclusiva VIP",
-  "Kit exclusivo UNYFLEX",
-  "Tour Linha Turismo Curitiba",
+  "Acesso aos 4 dias de imersão",
+  "Material didático em PDF",
+  "Certificado reconhecido pelo MEC",
+  "Coffee breaks gourmet",
+  "Coquetel de encerramento",
   "Almoço no Restaurante Madalosso",
-  "3 meses de Assinatura Premium",
-  "1 semestre de graduação",
-  "UNYPOINTS para troca na UNY store",
+  "Kit personalizado + brindes",
+  "Mentoria e tutoria individual",
+  "Um semestre de EAD",
 ];
-const BASIC = [true, false, true, true, false, false, false, false, false, false, false, false];
-const MASTER = [false, true, true, true, true, false, false, false, false, false, false, false];
-const PREMIUM = [false, true, true, true, true, true, true, true, true, true, true, true];
+const BASIC = [true, true, true, true, false, false, false, false, false];
+const MASTER = [true, true, true, true, true, true, true, false, false];
+const PREMIUM = [true, true, true, true, true, true, true, true, true];
 function planoFeatures(inclui: boolean[]) {
   return PLANO_ITENS.map((label, i) => ({ label, included: inclui[i] }));
 }
@@ -51,14 +49,21 @@ function planoFeatures(inclui: boolean[]) {
       verbatim; títulos vieram em caixa alta e foram normalizados),
       palestrantes (fatos das bios; o currículo do Max Miller veio com palavras
       coladas e foi corrigido), público-alvo, datas e carga horária.
-   2. app/engenharia-nov26/content.tsx — ticker, reviews, Investimento (3
-      planos, card recomendado, tabela, rodapé), "Como seu órgão contrata", as
-      3 FAQs fixas, formulário, rodapé, stickyCta. Só a palavra "curso" virou
-      "seminário" nesses blocos; nenhum valor mudou.
-   3. Catálogo de fotos já no repositório (sede em Curitiba). NÃO existem
-      fotos da 1ª edição do seminário — a galeria usa as da sede, sem legenda
-      "1ª edição". Nenhum dos três palestrantes tem foto no repositório
-      (monograma do template). Alt de imagem é acessibilidade, não copy.
+   2. app/engenharia-nov26/content.tsx — ticker, reviews, "Como seu órgão
+      contrata", as 3 FAQs fixas, formulário, rodapé, stickyCta. Só a palavra
+      "curso" virou "seminário" nesses blocos; nenhum valor mudou. O bloco
+      `plans` NÃO segue mais essa referência (ver item 4 abaixo).
+   3. Fotos de seminário (troca de 22/09/2026, pedido do Gustavo) — catálogo
+      da planilha do cliente (FOTOS AGENTE DE IMAGEM PUBLICAR CSV.xlsx), ~90
+      URLs remotas com descrição/categoria por foto. As fotos de sala de aula
+      da sede saíram: não representavam um seminário. Evitadas de propósito
+      as fotos do mesmo catálogo com marca "Licita Expo" visível (evento e
+      produto diferentes desta LP). Nenhum dos três palestrantes tem foto no
+      repositório (monograma do template). Alt de imagem é acessibilidade,
+      não copy.
+   4. Tabela de preços (22/09/2026): print fornecido pelo Gustavo (Plano
+      01/02/03, R$ 3.300/3.600/3.900, 9 itens) substituiu o bloco herdado da
+      /engenharia-nov26 — não é mais a mesma referência do item 2.
 
    COPY ESCRITA NESTA PR (pedida pelo briefing, para revisão do Gustavo):
    hero.title, hero.subtitle, audience (4 cards e closing), problem (4
@@ -106,9 +111,12 @@ export const comunicacaoOut26Content: EventLpContent = {
     // Sem href ⇒ o CTA vai para #inscricao.
     cta: { label: "Quero receber a programação com nota de empenho" },
     meta: "Rua Voluntários da Pátria, 547 · Centro, Curitiba/PR · Certificado emitido pela Faculdade Unypública, IES credenciada no MEC",
-    // Sala de aula clara da sede, alunos em aula, sem slide legível (foto real
-    // já no repositório, luma média 154 — sem ganho de gama). É o LCP da
-    // página — o layout da rota faz o preload.
+    // Foto de seminário (troca de 22/09/2026, pedido do Gustavo: a foto de
+    // sala de aula da sede saiu — não representava um seminário). Fonte:
+    // catálogo da planilha do cliente (FOTOS AGENTE DE IMAGEM), foto
+    // "IMG_6831" — auditório com palestrante e plateia às mesas, 3:2 nativo
+    // (sem crop), luma média 123 — sem ganho de gama. É o LCP da página — o
+    // layout da rota faz o preload.
     bgSrc: "/comunicacao-out26/hero.jpg",
   },
 
@@ -360,63 +368,67 @@ export const comunicacaoOut26Content: EventLpContent = {
     ],
   },
 
-  /* Galeria (pedido do Bruno: mais fotos da sede). Não há fotos da 1ª edição
-     do seminário no repositório — entram nove fotos reais da sala de aula da
-     sede, sem legenda "1ª edição". Múltiplo de 3 (o grid é CSS columns: 3). */
+  /* Galeria trocada em 22/09/2026 (pedido do Gustavo): as nove fotos de sala
+     de aula da sede saíram — não representavam um seminário — e entraram
+     nove fotos de seminário do catálogo da planilha do cliente (FOTOS AGENTE
+     DE IMAGEM PUBLICAR CSV.xlsx). Evitadas de propósito as fotos do mesmo
+     catálogo com marca "Licita Expo" visível (evento e produto diferentes) —
+     ver [[catalogo-fotos-unyflex-duas-linhas]]. Múltiplo de 3 (o grid é CSS
+     columns: 3). */
   gallery: {
     title: "A experiência presencial",
     photos: [
       {
-        src: "/comunicacao-out26/galeria/turma-01.jpg",
-        alt: "Turma posada em pé na sala de aula da Unyflex, em Curitiba, ao fim de um curso presencial.",
+        src: "/comunicacao-out26/galeria/palco-01.jpg",
+        alt: "Palestrante ao microfone no palco do seminário, com cortina escura ao fundo.",
         width: 1000,
-        height: 750,
+        height: 666,
       },
       {
-        src: "/comunicacao-out26/galeria/professor-01.jpg",
-        alt: "Professora à frente da sala, explicando o conteúdo para a turma.",
+        src: "/comunicacao-out26/galeria/palestrante-01.jpg",
+        alt: "Palestrante de terno claro apresentando no palco, com o telão ao fundo.",
         width: 1000,
-        height: 750,
+        height: 666,
       },
       {
-        src: "/comunicacao-out26/galeria/alunos-01.jpg",
-        alt: "Duas alunas acompanhando a aula, com notebook e material sobre a mesa.",
+        src: "/comunicacao-out26/galeria/palestrante-02.jpg",
+        alt: "Retrato em preto e branco de um palestrante ao microfone, gesticulando.",
         width: 1000,
-        height: 750,
+        height: 666,
       },
       {
-        src: "/comunicacao-out26/galeria/sala-01.jpg",
-        alt: "Sala de aula vista do fundo durante a aula: alunos sentados e o professor junto ao telão.",
+        src: "/comunicacao-out26/galeria/plateia-01.jpg",
+        alt: "Participantes sentados acompanhando o seminário, em plano fechado.",
         width: 1000,
-        height: 750,
+        height: 666,
       },
       {
-        src: "/comunicacao-out26/galeria/sala-03.jpg",
-        alt: "Sala de aula em perspectiva lateral, com o professor à esquerda e o kit do curso sobre a mesa.",
+        src: "/comunicacao-out26/galeria/plateia-02.jpg",
+        alt: "Plateia acompanhando a apresentação, com anotações sobre a mesa.",
         width: 1000,
-        height: 750,
+        height: 666,
       },
       {
-        src: "/comunicacao-out26/galeria/turma-02.jpg",
-        alt: "Grupo de alunos posando diante da TV com a marca Unyflex, na sala de aula.",
+        src: "/comunicacao-out26/galeria/coffee-break-01.jpg",
+        alt: "Mesa de coffee break do seminário, com salgados e decoração de folhagem.",
         width: 1000,
-        height: 750,
+        height: 666,
       },
       {
-        src: "/comunicacao-out26/galeria/alunos-03.jpg",
-        alt: "Três alunos em mesa em L acompanhando a aula, com copos e crachás.",
-        width: 1000,
-        height: 750,
+        src: "/comunicacao-out26/galeria/coquetel-01.jpg",
+        alt: "Detalhe do coquetel de confraternização: garrafa em balde de gelo.",
+        width: 666,
+        height: 1000,
       },
       {
-        src: "/comunicacao-out26/galeria/professor-02.jpg",
-        alt: "Professor em pé, gesticulando enquanto conduz a aula.",
+        src: "/comunicacao-out26/galeria/networking-01.jpg",
+        alt: "Momento de networking entre participantes durante o intervalo.",
         width: 1000,
-        height: 750,
+        height: 666,
       },
       {
-        src: "/comunicacao-out26/galeria/sala-04.jpg",
-        alt: "Sala de aula vista do corredor central, com o professor ao fundo junto à TV.",
+        src: "/comunicacao-out26/galeria/brindes-01.jpg",
+        alt: "Duas participantes com crachá da Unyflex conferindo o material recebido.",
         width: 1000,
         height: 666,
       },
@@ -424,7 +436,9 @@ export const comunicacaoOut26Content: EventLpContent = {
   },
 
   /* Avaliações públicas do Google, texto integral e nomes como publicados —
-     reutilizadas da referência. Foto de turma em sala, também da referência. */
+     reutilizadas da referência. Foto trocada em 22/09/2026 (mesmo motivo das
+     outras): foto oficial de grupo do catálogo da planilha do cliente, sem
+     marca "Licita Expo" visível. */
   reviews: {
     rating: "5,0",
     ratingValue: 5,
@@ -432,7 +446,7 @@ export const comunicacaoOut26Content: EventLpContent = {
     sourceLabel: "Google",
     photo: {
       src: "/comunicacao-out26/turma.jpg",
-      alt: "Turma em aula presencial da Unyflex: professor à frente, com microfone, e alunos acompanhando a apresentação.",
+      alt: "Foto oficial de grupo em um evento da Unyflex, plateia em plenário ao fundo.",
       width: 1280,
       height: 720,
     },
@@ -452,67 +466,44 @@ export const comunicacaoOut26Content: EventLpContent = {
     ],
   },
 
-  /* Investimento — bloco IDÊNTICO ao da /engenharia-nov26 em valores, planos,
-     card recomendado, tabela e rodapé (tabela única para cursos e seminários,
-     briefing de 16/09/2026). Só "curso" virou "seminário". Sem plano online. */
+  /* Investimento — tabela substituída em 22/09/2026 pelo print que o Gustavo
+     mandou (copy exatamente igual ao print; layout segue o componente lp2 de
+     sempre, `featured` saiu por não ter fonte para essa cópia nos novos 9
+     itens — o destaque do Plano 03 fica só no badge + highlighted do card). */
   plans: {
-    title: "Três planos de participação",
-    lead: "O mesmo seminário, com três níveis de experiência. O PremiumClass é o plano recomendado: capacitação em 4 dias e a agenda completa fora da sala.",
+    title: "Escolha o plano ideal",
+    lead: "Três formatos de participação. Valores por participante.",
     items: [
       {
-        name: "BasicClass",
-        sub: "Investimento por aluno",
-        price: "R$ 2.980,00",
+        name: "Plano 01",
+        sub: "Por participante",
+        price: "R$ 3.300",
         features: planoFeatures(BASIC),
-        ctaLabel: "Quero o BasicClass",
+        ctaLabel: "Quero o Plano 01",
       },
       {
-        name: "MasterClass",
-        sub: "Investimento por aluno",
-        price: "R$ 3.200,00",
+        name: "Plano 02",
+        sub: "Por participante",
+        price: "R$ 3.600",
         features: planoFeatures(MASTER),
-        ctaLabel: "Quero o MasterClass",
+        ctaLabel: "Quero o Plano 02",
       },
       {
-        name: "PremiumClass",
-        sub: "Investimento por aluno",
-        price: "R$ 3.980,00",
+        name: "Plano 03",
+        sub: "Por participante",
+        price: "R$ 3.900",
+        badge: "MAIS COMPLETO",
         highlighted: true,
-        highlightLabel: "Recomendado",
         features: planoFeatures(PREMIUM),
-        ctaLabel: "Quero o PremiumClass",
+        ctaLabel: "Quero o Plano 03",
       },
     ],
-    featured: {
-      highlightLabel: "★ Plano recomendado",
-      title: "PremiumClass: a experiência completa em Curitiba",
-      desc: "Quatro dias de capacitação prática e uma agenda pensada para quem vem de fora: city tour, almoço no Madalosso, mentoria individual com os palestrantes e benefícios que seguem com o aluno depois do seminário.",
-      chips: [
-        "Tour Linha Turismo Curitiba",
-        "Almoço no Madalosso",
-        "Mentoria exclusiva VIP",
-        "Kit exclusivo",
-        "3 meses de Assinatura Premium",
-        "1 semestre de graduação",
-        "UNYPOINTS na UNY store",
-      ],
-      priceLabel: "Investimento por aluno",
-      price: "R$ 3.980,00",
-      priceNote: "4 dias · benefícios inclusos",
-      ctaPrimary: { href: "#inscricao", label: "Quero o PremiumClass" },
-      ctaSecondary: { href: "#inscricao", label: "Falar com consultor" },
-    },
     comparison: {
       itemsLabel: "Benefícios",
       columns: [
-        { name: "BasicClass", price: "R$ 2.980,00", sub: "Capacitação em 3 dias" },
-        { name: "MasterClass", price: "R$ 3.200,00", sub: "Capacitação em 4 dias" },
-        {
-          name: "PremiumClass",
-          price: "R$ 3.980,00",
-          sub: "4 dias + experiência completa",
-          highlighted: true,
-        },
+        { name: "Plano 01", price: "R$ 3.300" },
+        { name: "Plano 02", price: "R$ 3.600" },
+        { name: "Plano 03", price: "R$ 3.900", highlighted: true },
       ],
       rows: [
         ...PLANO_ITENS.map((label, i) => ({
@@ -521,15 +512,14 @@ export const comunicacaoOut26Content: EventLpContent = {
         })),
         {
           label: "Valores",
-          cells: ["R$ 2.980,00", "R$ 3.200,00", "R$ 3.980,00"],
+          cells: ["R$ 3.300", "R$ 3.600", "R$ 3.900"],
         },
       ],
     },
     paymentNote:
-      "Aceitamos nota de empenho, com prazo de pagamento de 7 dias após a finalização do seminário. Fornecemos toda a documentação necessária para a contratação pelo seu órgão. Pessoa física pode se inscrever por qualquer forma de pagamento.",
+      "Parcelamento facilitado e condições especiais para grupos e órgãos públicos. Empenho e nota fiscal conforme a necessidade do órgão.",
     batchNote: "Inscrições até o dia do seminário.",
-    footnote:
-      "Valores por aluno: Benefícios do PremiumClass (tour, almoço, assinatura premium, semestre de graduação, kit exclusivo e UNYPOINTS) são concedidos na confirmação da matrícula e não são convertidos em desconto.",
+    footnote: "Valores por participante — turma de 27 a 30 de outubro de 2026.",
     ctaLabel: "Receber proposta",
   },
 
@@ -605,8 +595,12 @@ export const comunicacaoOut26Content: EventLpContent = {
     title: "Garanta sua participação",
     // O CSS do meta (.lp2-form-section__meta) já aplica caixa alta.
     meta: "2ª edição · 27 a 30/10 em Curitiba · Empenho leva tempo no seu órgão — comece o processo agora.",
-    // Sala menor da sede, professor com microfone de cabeça (foto real já no
-    // repositório, luma média 138).
+    // Foto de seminário (troca de 22/09/2026, mesmo motivo do hero acima).
+    // Fonte: catálogo da planilha do cliente, "musica-ao-vivo-01" — show ao
+    // vivo com a marca Unyflex/Faculdade Unypública no telão. Recortada de
+    // 1600×1066 (3:2) para 16:9 (1600×900); luma original 58, ganho de gama
+    // (eq=gamma=1.30) levou para 72 antes do recorte — abaixo da referência
+    // de ~83, do lado seguro.
     bgSrc: "/comunicacao-out26/cta-final.jpg",
     // BLOQUEIO DE PUBLICAÇÃO: o slug `comunicacao-out26` (campo `produto`
     // abaixo) precisa estar no mapa de cursos do n8n antes de a página receber
@@ -667,7 +661,7 @@ export const comunicacaoOut26Content: EventLpContent = {
   },
 
   stickyCta: {
-    priceAnchor: "a partir de R$ 2.980",
+    priceAnchor: "a partir de R$ 3.300",
     label: "Receber proposta",
     href: "#inscricao",
   },

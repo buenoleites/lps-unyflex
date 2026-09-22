@@ -1,7 +1,9 @@
 "use client";
-import EventLp from "@/components/lp2/EventLp";
-import { engenhariaContent } from "./content";
+import { useEffect } from "react";
 
 export default function EngenhariaPage() {
-  return <EventLp content={engenhariaContent} />;
+  useEffect(() => {
+    window.location.replace("/engenharia-nov26");
+  }, []);
+  return null;
 }
