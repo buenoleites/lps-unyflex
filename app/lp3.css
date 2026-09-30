@@ -543,8 +543,9 @@
     min-height: 92vh;
     display: flex;
     align-items: center;
-    padding-top: calc(var(--nav-h) + 64px);
-    padding-bottom: 96px;
+    /* espaçamentos apertados (rodada 3) para prova + botões caberem em 1440×900 */
+    padding-top: calc(var(--nav-h) + 32px);
+    padding-bottom: 72px;
   }
   .lp3-hero__media {
     background-position: center;
@@ -555,10 +556,15 @@
       linear-gradient(180deg, transparent 60%, var(--bg-0) 100%);
   }
   .lp3-hero__inner {
-    gap: 24px;
+    gap: 16px;
+  }
+  /* desktop: a prova social entra entre a linha de atributos e os botões
+     (order no grid; o DOM segue com os CTAs antes da prova, como no celular) */
+  .lp3-hero__ctas {
+    order: 1;
   }
   .lp3-hero__proof {
-    padding-top: 24px;
+    padding-top: 12px;
   }
 }
 

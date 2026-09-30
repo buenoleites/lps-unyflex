@@ -39,8 +39,8 @@ import type { Lp3Content } from "@/components/lp3/types";
    precisa mapear: plano_interesse, Municipio, Orgao, c, consentimento (além
    de `titulo`, pendente desde 11/09). */
 
-/* Os 12 itens da tabela de planos, na ordem do briefing. Os três vetores
-   dizem o que cada plano inclui — servem aos cards E à tabela. */
+/* Os 12 itens dos planos, na ordem do briefing. Os três vetores dizem o que
+   cada plano inclui (a tabela comparativa saiu na rodada 2; só os cards ficam). */
 const PLANO_ITENS = [
   "Capacitação prática em 3 dias",
   "Capacitação prática em 4 dias",
@@ -58,10 +58,12 @@ const PLANO_ITENS = [
 const BASIC = [true, false, true, true, false, false, false, false, false, false, false, false];
 const MASTER = [false, true, true, true, true, false, false, false, false, false, false, false];
 const PREMIUM = [false, true, true, true, true, true, true, true, true, true, true, true];
-/* `rotulos` troca o texto de um item só neste card (a tabela segue com o
-   rótulo curto de PLANO_ITENS). */
-function planoFeatures(inclui: boolean[], rotulos: Record<number, string> = {}) {
-  return PLANO_ITENS.map((label, i) => ({ label: rotulos[i] ?? label, included: inclui[i] }));
+/* `rotulos` troca o texto de um item só neste card; `omitir` tira índices do
+   card (rodada 3: "3 dias" não aparece como não incluso no Master e no Premium). */
+function planoFeatures(inclui: boolean[], rotulos: Record<number, string> = {}, omitir: number[] = []) {
+  return PLANO_ITENS.map((label, i) => ({ label: rotulos[i] ?? label, included: inclui[i] })).filter(
+    (_, i) => !omitir.includes(i),
+  );
 }
 
 export const SLUG = "tesouraria-nov26";
@@ -284,7 +286,7 @@ export const tesourariaNov26Content: Lp3Content = {
         name: "MasterClass",
         sub: "Investimento por aluno",
         price: "R$ 3.200,00",
-        features: planoFeatures(MASTER),
+        features: planoFeatures(MASTER, {}, [0]),
         ctaLabel: "Quero o MasterClass",
       },
       {
@@ -293,7 +295,8 @@ export const tesourariaNov26Content: Lp3Content = {
         price: "R$ 3.980,00",
         highlighted: true,
         highlightLabel: "Recomendado",
-        features: planoFeatures(PREMIUM),
+        // Sem item não incluso: o card não mostra "ver o que não inclui".
+        features: planoFeatures(PREMIUM, {}, [0]),
         ctaLabel: "Quero o PremiumClass",
       },
     ],
