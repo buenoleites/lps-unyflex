@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Audience from "@/components/lp3/Audience";
+import Banner from "@/components/lp3/Banner";
 import Faq from "@/components/lp3/Faq";
 import Footer from "@/components/lp3/Footer";
 import Form from "@/components/lp3/Form";
@@ -38,6 +39,7 @@ export default function PortalPage() {
       <Nav content={content.nav} />
       <main id="conteudo-principal">
         <Hero content={content.hero} proof={content.proof} />
+        {content.banner ? <Banner content={content.banner} /> : null}
         {content.audience ? <Audience content={content.audience} /> : null}
         {content.problem ? <Outcomes content={content.problem} /> : null}
         <Modules content={content.modules} />

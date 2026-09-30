@@ -58,6 +58,10 @@ export interface Lp3Content {
     items: string[];
   };
 
+  /** Faixa de aviso logo abaixo do hero (ex.: remarketing de turma anterior).
+   *  Opcional: sem a chave, nada é renderizado. */
+  banner?: { text: string };
+
   /** Ficha do curso: lista rótulo → valor, com filetes (sem cards). Opcional:
    *  a /tesouraria-nov26 levou a ficha para a linha de fatos do hero. */
   facts?: {

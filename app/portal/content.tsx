@@ -24,12 +24,10 @@ import type { Lp3Content } from "@/components/lp3/types";
    /tesouraria-nov26) estão listados para auditoria no relatório da entrega.
 
    TODO (sem dado confirmado):
-   - Número de alunos: "49.000+" aqui; a /tesouraria-nov26 diz "+40 mil".
-     Usar um número só em todas as LPs, quando o Gustavo confirmar qual.
+   - "1.200+ órgãos atendidos" segue sem confirmação do Gustavo. O "49.000+
+     alunos" foi confirmado e vale para todas as LPs.
    - `produto` "portal" precisa apontar, no mapa de cursos do n8n, para a
-     turma de 20 a 23/10 (antes apontava para a de setembro).
-   - Faixa de remarketing "Não deu em setembro?..." da versão lp2 não consta
-     da lista de seções do briefing e não foi migrada — decidir. */
+     turma de 20 a 23/10 (antes apontava para a de setembro). */
 
 /* Os 12 itens dos planos, na ordem do briefing. Os três vetores dizem o que
    cada plano inclui. */
@@ -92,6 +90,12 @@ export const portalContent: Lp3Content = {
       "1.200+ órgãos atendidos",
       "5,0 no Google · +450 avaliações",
     ],
+  },
+
+  /* Faixa de remarketing, verbatim do lp2: fala com quem perdeu a turma de
+     setembro (mesma turma, 20 a 23/10). */
+  banner: {
+    text: "Não deu em setembro? A mesma turma, com a mesma programação, em 20 a 23 de outubro. Tempo de sobra para o empenho.",
   },
 
   audience: {

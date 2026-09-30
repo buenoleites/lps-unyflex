@@ -156,6 +156,22 @@
   white-space: nowrap;
 }
 
+/* ============================ BANNER ====================================== */
+
+.lp3-banner {
+  background: var(--bg-1);
+  color: var(--ink-on-dark);
+  border-block: 1px solid var(--line-on-dark);
+  padding-block: 14px;
+}
+
+.lp3-banner__text {
+  margin: 0;
+  text-align: center;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
 /* ============================ TIPOGRAFIA ================================== */
 
 .lp3-eyebrow {
