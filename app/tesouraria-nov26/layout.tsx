@@ -42,9 +42,15 @@ const jsonLd = {
   eventStatus: "https://schema.org/EventScheduled",
   location: {
     "@type": "Place",
-    name: "Curitiba",
-    // TODO: endereço do local (não confirmado no briefing de 30/09).
-    address: { "@type": "PostalAddress", addressLocality: "Curitiba", addressRegion: "PR", addressCountry: "BR" },
+    name: "Sede da Unyflex",
+    // Endereço confirmado pelo Gustavo na rodada 4 (30/09); sem CEP no briefing.
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "R. Voluntários da Pátria, 547",
+      addressLocality: "Curitiba",
+      addressRegion: "PR",
+      addressCountry: "BR",
+    },
   },
   offers: [
     { name: "BasicClass", price: "2980" },

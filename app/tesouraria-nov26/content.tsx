@@ -27,11 +27,10 @@ import type { Lp3Content } from "@/components/lp3/types";
 
    TODO (sem dado confirmado — não inventar):
    - Professores: seção não existe até a confirmação da bancada.
-   - Endereço do local em Curitiba (FAQ "Onde é o curso?" e JSON-LD em
-     layout.tsx só têm a cidade).
-   - Foto do topo: deve ser a mesma dos anúncios (rodada 2). Até o arquivo
-     original chegar, o hero reaproveita a sala da sede
-     (public/engenharia-nov26/hero.jpg, copiada para public/tesouraria-nov26/).
+   Fechados na rodada 4 (30/09): endereço da sede na FAQ e no JSON-LD;
+   foto do topo fica a sala da sede (public/engenharia-nov26/hero.jpg copiada
+   para public/tesouraria-nov26/), ancorada à esquerda no desktop para o
+   professor e a TV aparecerem.
 
    PRODUTO / n8n — BLOQUEIO DE PUBLICAÇÃO: cadastrar `tesouraria-nov26` no
    mapa de cursos do n8n antes de rodar tráfego, senão o lead entra como
@@ -369,9 +368,8 @@ export const tesourariaNov26Content: Lp3Content = {
         a: "Sim, no BasicClass: terça a quinta (10 a 12/11) ou quarta a sexta (11 a 13/11).",
       },
       {
-        // TODO: endereço do local, quando confirmado (hoje só a cidade).
         q: "Onde é o curso?",
-        a: "Em Curitiba-PR.",
+        a: "Na sede da Unyflex: R. Voluntários da Pátria, 547, Centro, Curitiba-PR.",
       },
       {
         q: "O certificado é reconhecido?",

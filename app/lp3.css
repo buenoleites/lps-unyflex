@@ -547,12 +547,26 @@
     padding-top: calc(var(--nav-h) + 32px);
     padding-bottom: 72px;
   }
+  /* rodada 4 (30/09): foto ancorada à esquerda para o professor e a TV
+     (terço esquerdo da foto) sobreviverem ao corte em viewports mais quadrados
+     que 3:2 (1280×800, 1024×768). */
   .lp3-hero__media {
-    background-position: center;
+    background-position: left center;
   }
+  /* rodada 4: overlay mais leve no eixo horizontal (a foto lê atrás do título)
+     + faixa escura só no topo, onde a promessa em âmbar cruza a luz do teto
+     (sem ela o âmbar cai a 2,1:1). As opacidades intermediárias vêm de
+     color-mix sobre --bg-0 — sem token novo. Medido: 0% de pixels de glifo
+     abaixo de AA em 800–1920px; pior caso 4,1:1 (h1, limiar 3:1). */
   .lp3-hero__scrim {
     background:
-      linear-gradient(90deg, var(--bg-0) 0%, var(--scrim-floor) 46%, var(--scrim-side) 100%),
+      linear-gradient(180deg, var(--scrim-floor) 0, var(--scrim-floor) 215px, transparent 285px),
+      linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--bg-0) 60%, transparent) 0%,
+        color-mix(in srgb, var(--bg-0) 55%, transparent) 40%,
+        var(--scrim-side) 100%
+      ),
       linear-gradient(180deg, transparent 60%, var(--bg-0) 100%);
   }
   .lp3-hero__inner {
