@@ -1,0 +1,18 @@
+/* Tema da LP Patrimônio & Frotas no lp3 — o ÚNICO bloco de cor da rota; só os
+   tokens --accent* são sobrescritos (briefing de 30/09/2026).
+
+   Verde #66CB8E: mesmo L 0,765 do âmbar da Tesouraria (OKLCH L 0,765 · C 0,130 ·
+   H 155), só o matiz muda. Variantes derivadas no mesmo matiz e medidas
+   (WCAG 2.x):
+     accent  sobre --bg-0 (#0a0e14) 9,67:1 · sobre --bg-1 (#141a23) 8,74:1
+     ink     sobre accent (botão)   7,06:1
+     deep    sobre --paper (#f5f2ec) 5,62:1 · sobre --paper-2 (#ebe5d9) 5,01:1
+   O seletor .lppa-theme .lp3-root vence o bloco default de .lp3-root por
+   especificidade, independente da ordem dos imports de CSS. */
+.lppa-theme .lp3-root {
+  --accent: #66cb8e;
+  --accent-ink: #1e2f24; /* texto sobre accent */
+  --accent-deep: #006f3e; /* accent p/ texto em superfície clara */
+  --accent-ring: rgba(102, 203, 142, 0.32);
+  --accent-tint: rgba(102, 203, 142, 0.12);
+}
