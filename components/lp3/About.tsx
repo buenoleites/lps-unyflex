@@ -2,7 +2,7 @@
 import Section from "./Section";
 import type { Lp3Content } from "./types";
 
-export default function About({ content }: { content: Lp3Content["about"] }) {
+export default function About({ content }: { content: NonNullable<Lp3Content["about"]> }) {
   return (
     <Section id="curso" tone="paper" labelledBy="curso-title">
       <div className="lp3-about">

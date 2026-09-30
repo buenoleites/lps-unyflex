@@ -7,23 +7,31 @@ import type { Lp3Content } from "@/components/lp3/types";
    13/11/2026, Curitiba-PR (/tesouraria-nov26). Piloto do visual novo (lp3).
 
    FONTES (nada aqui é de autoria do agente — regra do Gustavo, 03/09/2026):
-   1. Briefing de 30/09/2026 (Gustavo): topo, "IA na prática", planos e nota
-      de rodapé dos benefícios.
-   2. Página institucional unyflex.com.br/curso/novaera-tesouraria-comIA-2-2
-      (lida em 30/09/2026): descrição, os 6 módulos com seus tópicos, público-
-      alvo, rótulos das seções ("Visão Geral", "Conteúdo do Curso",
-      "Público-Alvo", "Três planos de participação"), textos dos planos.
-   3. Rodapé e prova social do Google: replicados das LPs ativas
-      (/engenharia-nov26), número verificado (memória de 09/2026).
+   1. Briefing de 30/09/2026 (Gustavo), 1ª parte: título, datas, "IA na
+      prática", planos e nota de rodapé dos benefícios.
+   2. Briefing de 30/09/2026, 2ª parte (rodada 2): promessa do topo, faixa de
+      prova social, os 4 itens de "Para quem", "O que muda", as linhas de
+      resultado dos módulos, rótulo e frase de "IA na prática", rótulo do
+      BasicClass, título e "Como funciona" da inscrição, as 5 perguntas
+      frequentes. Textos usados como estão.
+   3. Página institucional unyflex.com.br/curso/novaera-tesouraria-comIA-2-2
+      (lida em 30/09/2026): descrição (hoje introdução da Programação), os 6
+      módulos com seus tópicos, título e nota do público-alvo, rótulos das
+      seções, textos dos planos.
+   4. Rodapé e nota do Google: replicados das LPs ativas (/engenharia-nov26),
+      número verificado (memória de 09/2026).
    Textos de ligação escritos pelo agente (para auditoria, TIRAR se não
-   aprovados): form.meta, hero.ctaSecondary.label, o hint do WhatsApp em
+   aprovados): hero.ctaSecondary.label, o hint do WhatsApp em
    components/lp3/Form.tsx e o rótulo do consentimento em form.consent.
+   (form.meta, do agente, saiu na rodada 2: o "Como funciona" cobre o papel.)
 
    TODO (sem dado confirmado — não inventar):
    - Professores: seção não existe até a confirmação da bancada.
-   - Endereço do local em Curitiba (JSON-LD em layout.tsx só tem a cidade).
-   - Foto própria da turma de Tesouraria (hero reaproveita a sala da sede,
-     public/engenharia-nov26/hero.jpg, copiada para public/tesouraria-nov26/).
+   - Endereço do local em Curitiba (FAQ "Onde é o curso?" e JSON-LD em
+     layout.tsx só têm a cidade).
+   - Foto do topo: deve ser a mesma dos anúncios (rodada 2). Até o arquivo
+     original chegar, o hero reaproveita a sala da sede
+     (public/engenharia-nov26/hero.jpg, copiada para public/tesouraria-nov26/).
 
    PRODUTO / n8n — BLOQUEIO DE PUBLICAÇÃO: cadastrar `tesouraria-nov26` no
    mapa de cursos do n8n antes de rodar tráfego, senão o lead entra como
@@ -50,8 +58,10 @@ const PLANO_ITENS = [
 const BASIC = [true, false, true, true, false, false, false, false, false, false, false, false];
 const MASTER = [false, true, true, true, true, false, false, false, false, false, false, false];
 const PREMIUM = [false, true, true, true, true, true, true, true, true, true, true, true];
-function planoFeatures(inclui: boolean[]) {
-  return PLANO_ITENS.map((label, i) => ({ label, included: inclui[i] }));
+/* `rotulos` troca o texto de um item só neste card (a tabela segue com o
+   rótulo curto de PLANO_ITENS). */
+function planoFeatures(inclui: boolean[], rotulos: Record<number, string> = {}) {
+  return PLANO_ITENS.map((label, i) => ({ label: rotulos[i] ?? label, included: inclui[i] }));
 }
 
 export const SLUG = "tesouraria-nov26";
@@ -71,41 +81,73 @@ export const tesourariaNov26Content: Lp3Content = {
 
   hero: {
     badge: "Inscrições abertas",
+    promise:
+      "Feche o exercício sem pendência, responda ao TCE com segurança e deixe a IA com o trabalho repetitivo da tesouraria.",
     title: TITULO,
     subtitle: SUBTITULO,
     dates: "10, 11, 12 e 13 de novembro",
     place: "Curitiba-PR",
-    facts: ["4 dias", "17 horas", "6 painéis", "certificado"],
+    // A antiga ficha técnica virou esta linha: os dois últimos itens são as
+    // áreas e os materiais que só existiam lá.
+    facts: [
+      "4 dias",
+      "17 horas",
+      "6 painéis",
+      "certificado",
+      "Controle Interno e Finanças Municipais",
+      "materiais didáticos com acesso ilimitado",
+    ],
     bgSrc: `/${SLUG}/hero.jpg`,
     bgAlt: "Turma em sala de aula da Unyflex em Curitiba",
     ctaPrimary: { href: "#inscricao", label: "Receber proposta" },
     ctaSecondary: { href: "#planos", label: "Ver planos e preços" },
   },
 
-  facts: {
+  /* Prova social: os três textos do briefing (rodada 2), como estão. Aparece
+     no topo (abaixo dos botões) e ao lado do formulário. */
+  proof: {
     items: [
-      { label: "Quando", value: "10, 11, 12 e 13 de novembro" },
-      { label: "Onde", value: "Curitiba-PR" },
-      { label: "Duração", value: "4 dias · 17 horas" },
-      { label: "Painéis", value: "6" },
-      { label: "Áreas", value: "Controle Interno · Finanças Municipais" },
-      { label: "Certificado", value: "Sim" },
-      { label: "Materiais didáticos", value: "Acesso ilimitado" },
+      "5,0 no Google · +450 avaliações",
+      "Desde 2009 · +40 mil agentes públicos capacitados",
+      "Faculdade Unypública · nota 5 no MEC",
     ],
   },
 
-  about: {
-    eyebrow: "Visão Geral",
-    title: TITULO,
-    paragraphs: [DESCRICAO],
+  /* "O que muda" substitui a "Visão Geral" (rodada 2). Os 4 blocos são do
+     briefing; o parágrafo institucional virou a introdução da Programação. */
+  outcomes: {
+    eyebrow: "Resultados",
+    title: "O que muda na sua tesouraria depois dos 4 dias",
+    items: [
+      {
+        title: "Conciliação sem ressalva",
+        text: "Os erros de conciliação bancária que viram apontamento no TCE e a conciliação automática por arquivo OFX.",
+      },
+      {
+        title: "Fechamento sob controle",
+        text: "Restos a pagar, fontes de recursos e decretos de encerramento preparados desde o início do ano.",
+      },
+      {
+        title: "Risco mapeado",
+        text: "Matriz de impacto e probabilidade e checklist diário de controle interno na tesouraria.",
+      },
+      {
+        title: "IA na rotina",
+        text: "Cada módulo termina com uma aplicação de IA para usar no trabalho da semana seguinte.",
+      },
+    ],
   },
 
+  /* As linhas `result` (visíveis com o acordeão fechado) são do briefing da
+     rodada 2, "01…06", como estão. */
   modules: {
-    eyebrow: "Conteúdo do Curso",
+    eyebrow: "Programação",
     title: "6 módulos do curso",
+    lead: DESCRICAO,
     items: [
       {
         title: "Execução Orçamentária e Financeira na Prática",
+        result: "Cronograma de desembolso, ordem cronológica e encerramento do exercício sob controle.",
         topics: [
           "Cronograma de desembolso mensal: Como montar e cumprir.",
           "Empenho, Liquidação e Pagamento: O rigor da ordem cronológica.",
@@ -120,6 +162,7 @@ export const tesourariaNov26Content: Lp3Content = {
       },
       {
         title: "Apontamentos Críticos e Jurisprudência",
+        result: "Os motivos de ressalva nas contas municipais e como evitá-los antes do envio.",
         topics: [
           "Principais motivos de irregularidades nas contas municipais.",
           "Gestão de restos a pagar e a conformidade com a LRF.",
@@ -134,6 +177,7 @@ export const tesourariaNov26Content: Lp3Content = {
       },
       {
         title: "Mapa de Riscos na Tesouraria e Contabilidade Municipal",
+        result: "Matriz de riscos e checklists diários para tesouraria e contabilidade.",
         topics: [
           "Riscos na Tesouraria: Fraudes, erros, duplicidade e perda de prazos.",
           "Riscos na Contabilidade: Lançamentos, conciliação e divergências.",
@@ -148,6 +192,7 @@ export const tesourariaNov26Content: Lp3Content = {
       },
       {
         title: "Eficiência Operacional I – Automação e Processos",
+        result: "Conciliação automática, despesa sem papel e painel de indicadores para o gestor.",
         topics: [
           "Mapeamento de processos: Identificando gargalos na burocracia municipal.",
           "Digitalização total do processo de despesa (Paperless).",
@@ -162,6 +207,7 @@ export const tesourariaNov26Content: Lp3Content = {
       },
       {
         title: "Eficiência Operacional II – Inteligência Estratégica",
+        result: "Projeção de receitas próprias e como explicar números a quem não é contador.",
         topics: [
           "A transição do contador/tesoureiro operacional para o consultivo.",
           "Comunicação assertiva: Como explicar dados técnicos para não contadores.",
@@ -176,6 +222,7 @@ export const tesourariaNov26Content: Lp3Content = {
       },
       {
         title: "Tesouraria 4.0 e Novas Normas em Vigor",
+        result: "Custos no setor público, Lei 14.133 no fluxo de caixa, reforma tributária e LGPD.",
         topics: [
           "Panorama da Contabilidade Aplicada ao Setor Público (CASP) atualizada.",
           "O papel do Tesoureiro como gestor de riscos e não apenas \"pagador\".",
@@ -191,10 +238,11 @@ export const tesourariaNov26Content: Lp3Content = {
     ],
   },
 
-  /* Os 4 itens são os do briefing de 30/09, na redação do briefing. */
+  /* Os 4 itens são os do briefing de 30/09; rótulo e frase da rodada 2. */
   highlight: {
-    eyebrow: "Dica de IA",
+    eyebrow: "Em todos os módulos",
     title: "IA na prática",
+    lead: "Cada módulo termina com uma aplicação de IA que você usa na semana seguinte.",
     items: [
       "Automação da conciliação bancária (OFX/TXT)",
       "Monitoramento de CNDs de fornecedores",
@@ -203,19 +251,16 @@ export const tesourariaNov26Content: Lp3Content = {
     ],
   },
 
-  /* Público-alvo verbatim da página institucional. NÃO estava na lista de
-     fatos do briefing de 30/09 — é opcional (chave `audience`): apagar o
-     bloco se o Gustavo não quiser. */
+  /* Público-alvo: título e nota da página institucional; os 4 itens são do
+     briefing da rodada 2 (Gustavo, 30/09), como estão. */
   audience: {
-    eyebrow: "Público-Alvo",
+    eyebrow: "Para quem",
     title: "Para quem responde, no dia a dia, pela tesouraria e pela contabilidade do município",
     items: [
-      "Tesoureiros e Contadores municipais responsáveis pela execução financeira e contábil em Prefeituras e Câmaras Municipais",
-      "Secretários de Fazenda e Finanças que buscam modernizar processos de tesouraria com apoio de inteligência artificial",
-      "Diretores e Chefes de Departamento Financeiro de Autarquias e Fundações Públicas municipais",
-      "Controladores Internos que atuam na fiscalização da execução orçamentária e financeira de Prefeituras e Consórcios Públicos",
-      "Procuradores e Assessores Jurídicos que assessoram órgãos municipais em questões contábeis e tributárias",
-      "Analistas de Tecnologia da Informação que implementam soluções de automação e IA na gestão contábil municipal",
+      "Tesoureiros e contadores de prefeituras e câmaras",
+      "Controladores internos",
+      "Secretários e diretores de Fazenda e Finanças",
+      "Equipes financeiras de autarquias, fundações e consórcios",
     ],
     note: "Não encontrou o seu cargo na lista? A turma é aberta a servidores e gestores de prefeituras, câmaras, autarquias, consórcios e tribunais — fale com um consultor e confirme a aderência antes de inscrever a equipe.",
   },
@@ -229,7 +274,10 @@ export const tesourariaNov26Content: Lp3Content = {
         name: "BasicClass",
         sub: "Investimento por aluno",
         price: "R$ 2.980,00",
-        features: planoFeatures(BASIC),
+        // Rótulo longo só neste card (rodada 2); a tabela mantém o curto.
+        features: planoFeatures(BASIC, {
+          0: "Capacitação prática em 3 dias: terça a quinta (10 a 12/11) ou quarta a sexta (11 a 13/11)",
+        }),
         ctaLabel: "Quero o BasicClass",
       },
       {
@@ -249,47 +297,22 @@ export const tesourariaNov26Content: Lp3Content = {
         ctaLabel: "Quero o PremiumClass",
       },
     ],
-    featured: {
-      highlightLabel: "★ Plano recomendado",
-      title: "PremiumClass: a experiência completa em Curitiba",
-      desc: "Quatro dias de capacitação prática e uma agenda pensada para quem vem de fora: city tour, almoço no Madalosso, mentoria individual com o corpo docente e benefícios que seguem com o aluno depois da turma.",
-      chips: [
-        "Tour Linha Turismo Curitiba",
-        "Almoço no Madalosso",
-        "Mentoria exclusiva VIP",
-        "Kit exclusivo",
-        "3 meses de Assinatura Premium",
-        "1 semestre de graduação",
-        "UNYPOINTS na UNY store",
-      ],
-      priceLabel: "Investimento por aluno",
-      price: "R$ 3.980,00",
-      priceNote: "4 dias · benefícios inclusos",
-      plan: "PremiumClass",
-      ctaPrimary: "Quero o PremiumClass",
-      ctaSecondary: "Falar com consultor",
-    },
-    comparison: {
-      itemsLabel: "Benefícios",
-      columns: [
-        { name: "BasicClass", price: "R$ 2.980,00", sub: "Capacitação em 3 dias" },
-        { name: "MasterClass", price: "R$ 3.200,00", sub: "Capacitação em 4 dias" },
-        { name: "PremiumClass", price: "R$ 3.980,00", sub: "4 dias + experiência completa", highlighted: true },
-      ],
-      rows: [
-        ...PLANO_ITENS.map((label, i) => ({ label, cells: [BASIC[i], MASTER[i], PREMIUM[i]] })),
-        { label: "Valores", cells: ["R$ 2.980,00", "R$ 3.200,00", "R$ 3.980,00"] },
-      ],
-    },
     footnote:
       "Valores por aluno. Benefícios do PremiumClass (tour, almoço, assinatura premium, semestre de graduação, kit exclusivo e UNYPOINTS) são concedidos na confirmação da matrícula e não são convertidos em desconto.",
   },
 
   form: {
     eyebrow: "Inscrição",
-    title: "Matricular no curso",
-    // Texto do agente (auditoria).
-    meta: "Preencha os dados e um consultor da Unyflex entra em contato para fechar a inscrição — inclusive por nota de empenho.",
+    title: "Receba a proposta para o seu órgão",
+    /* "Como funciona": os 3 passos do briefing (rodada 2), como estão. */
+    steps: {
+      title: "Como funciona",
+      items: [
+        "Você envia seus dados.",
+        "Recebe nossa mensagem no WhatsApp, e um consultor monta a proposta com a documentação para a contratação.",
+        "O órgão emite a nota de empenho e a vaga está garantida.",
+      ],
+    },
     formId: "lp-tesouraria-nov26",
     produto: SLUG,
     paginaOrigem: SLUG,
@@ -311,6 +334,47 @@ export const tesourariaNov26Content: Lp3Content = {
       value: "sim",
     },
     thankYou: { url: "/obrigado", withPii: false },
+  },
+
+  /* Perguntas frequentes: as 5 do briefing (rodada 2), como estão. Os
+     documentos que embasam as respostas (declaração, atestado, CNPJ, roteiro)
+     NÃO entram na página. */
+  faq: {
+    eyebrow: "Dúvidas",
+    title: "Perguntas frequentes",
+    items: [
+      {
+        q: "O órgão pode pagar por nota de empenho?",
+        a: "Sim. Na matrícula em curso aberto, a nota de empenho substitui o contrato, entendimento adotado pela União (Despacho n. 051/2022/ECJU/CGU/AGU e IN n. 21/2022).",
+      },
+      {
+        q: "Quais documentos a Unyflex envia para a contratação?",
+        a: (
+          <>
+            Declaração de notória especialização e singularidade (art. 74, III, &ldquo;f&rdquo;, da Lei 14.133/21),
+            atestados de capacidade técnica, comprovante de CNPJ, certidões de regularidade fiscal e trabalhista e um
+            roteiro do processo com modelos de DFD, ETP e Termo de Referência. Tudo em{" "}
+            <a href="https://unyflex.com.br/certidoes#orientacoes" target="_blank" rel="noopener noreferrer">
+              unyflex.com.br/certidoes#orientacoes
+            </a>
+            .
+          </>
+        ),
+      },
+      {
+        q: "Posso fazer só 3 dias?",
+        a: "Sim, no BasicClass: terça a quinta (10 a 12/11) ou quarta a sexta (11 a 13/11).",
+      },
+      {
+        // TODO: endereço do local, quando confirmado (hoje só a cidade).
+        q: "Onde é o curso?",
+        a: "Em Curitiba-PR.",
+      },
+      {
+        q: "O certificado é reconhecido?",
+        a: "Sim, emitido pela Faculdade Unypública, instituição reconhecida pelo MEC.",
+      },
+    ],
   },
 
   footer: {

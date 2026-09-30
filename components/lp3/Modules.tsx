@@ -44,7 +44,10 @@ export default function Modules({ content }: { content: Lp3Content["modules"] })
                   <span className="lp3-modules__num" aria-hidden="true">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="lp3-modules__title">{item.title}</span>
+                  <span className="lp3-modules__text">
+                    <span className="lp3-modules__title">{item.title}</span>
+                    {item.result ? <span className="lp3-modules__result">{item.result}</span> : null}
+                  </span>
                   <svg className="lp3-modules__chevron" viewBox="0 0 24 24" aria-hidden="true">
                     <path
                       d="M6 9l6 6 6-6"

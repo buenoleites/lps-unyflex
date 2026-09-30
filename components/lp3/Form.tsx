@@ -3,7 +3,9 @@ import { useEffect, useRef, useState } from "react";
 import { submitLead, redirectToThankYou } from "@/lib/lp/lead";
 import { getCampaign } from "@/lib/lp3/campaign";
 import Arrow from "./Arrow";
+import Proof from "./Proof";
 import Section from "./Section";
+import Steps from "./Steps";
 import type { Lp3Content } from "./types";
 
 /* Formulário do lp3. Mesmo caminho de envio das outras LPs (lib/lp/lead.ts →
@@ -135,10 +137,12 @@ function Field({
 
 export default function Form({
   content,
+  proof,
   plano,
   onPlanoChange,
 }: {
   content: Lp3Content["form"];
+  proof?: Lp3Content["proof"];
   /** Plano de interesse — estado vive na página, porque os botões da seção
    *  de planos o preenchem. */
   plano: string;
@@ -224,7 +228,9 @@ export default function Form({
         extra: {
           Orgao: form.orgao.trim(),
           Municipio: form.municipio.trim(),
-          plano_interesse: plano,
+          // Sem clique em plano, vai o texto do padrão do select (n8n/CRM lê
+          // "" como campo ausente).
+          plano_interesse: plano || "Ainda não decidi",
           c,
           consentimento: content.consent.value,
         },
@@ -245,6 +251,8 @@ export default function Form({
             {content.title}
           </h2>
           {content.meta ? <p className="lp3-lead">{content.meta}</p> : null}
+          {content.steps ? <Steps content={content.steps} /> : null}
+          {proof ? <Proof content={proof} className="lp3-form__proof" /> : null}
         </div>
 
         <form

@@ -405,13 +405,21 @@
   }
 }
 
+/* nunca dois "Receber proposta" na mesma tela: com a barra fixa visível
+   (mobile), o botão do menu some. */
+@media (max-width: 799px) {
+  .lp3-root:has(.lp3-sticky.is-visible) .lp3-nav .lp3-btn {
+    visibility: hidden;
+  }
+}
+
 /* ================================ HERO ==================================== */
 
 .lp3-hero {
   position: relative;
   isolation: isolate;
-  padding-top: calc(var(--nav-h) + 200px);
-  padding-bottom: 56px;
+  padding-top: calc(var(--nav-h) + 96px);
+  padding-bottom: 48px;
   background: var(--bg-0);
   color: var(--ink-on-dark);
   --tone-ink: var(--ink-on-dark);
@@ -434,15 +442,30 @@
   background: linear-gradient(
     180deg,
     var(--scrim-top) 0,
-    var(--scrim-floor) 220px,
+    var(--scrim-floor) 130px,
     var(--bg-0) 100%
   );
 }
 
 .lp3-hero__inner {
   display: grid;
-  gap: 24px;
+  gap: 16px;
   max-width: 720px;
+}
+
+/* promessa: acima do título, em âmbar (9,4:1 sobre --bg-0) */
+.lp3-hero__promise {
+  font-size: var(--fs-body);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--accent);
+  max-width: 34ch;
+  text-wrap: pretty;
+}
+
+.lp3-hero__proof {
+  padding-top: 20px;
+  border-top: 1px solid var(--line-on-dark);
 }
 
 .lp3-hero__badge {
@@ -532,8 +555,56 @@
       linear-gradient(180deg, transparent 60%, var(--bg-0) 100%);
   }
   .lp3-hero__inner {
-    gap: 28px;
+    gap: 24px;
   }
+  .lp3-hero__proof {
+    padding-top: 24px;
+  }
+}
+
+/* ============================== PROOF ==================================== */
+
+.lp3-proof {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 0;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--tone-ink, var(--ink-on-dark));
+}
+
+.lp3-proof li {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.lp3-proof li + li::before {
+  content: "·";
+  margin-inline: 10px;
+  color: var(--tone-accent, var(--accent));
+}
+
+/* no hero, uma linha por item no celular (os textos são longos) */
+@media (max-width: 639px) {
+  .lp3-hero__proof {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .lp3-hero__proof li + li::before {
+    content: none;
+  }
+}
+
+.lp3-form__proof {
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid var(--tone-line);
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lp3-form__proof li + li::before {
+  content: none;
 }
 
 /* =============================== FACTS ==================================== */
@@ -637,10 +708,22 @@
   font-variant-numeric: tabular-nums;
 }
 
+.lp3-modules__text {
+  display: grid;
+  gap: 4px;
+}
+
 .lp3-modules__title {
   font-size: var(--fs-h3);
   font-weight: 700;
   line-height: 1.25;
+}
+
+.lp3-modules__result {
+  font-size: var(--fs-small);
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--tone-muted);
 }
 
 .lp3-modules__chevron {
@@ -750,6 +833,11 @@
   font-variant-numeric: tabular-nums;
 }
 
+.lp3-highlight__lead {
+  color: var(--accent-ink);
+  font-weight: 500;
+}
+
 @media (min-width: 800px) {
   .lp3-highlight {
     grid-template-columns: 5fr 7fr;
@@ -785,6 +873,42 @@
   .lp3-audience__list {
     grid-template-columns: repeat(2, 1fr);
     column-gap: 40px;
+  }
+}
+
+/* ============================== OUTCOMES ================================== */
+
+.lp3-outcomes {
+  display: grid;
+  border-top: 1px solid var(--tone-line);
+}
+
+.lp3-outcomes li {
+  display: grid;
+  gap: 8px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--tone-line);
+}
+
+.lp3-outcomes__title {
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--tone-accent);
+}
+
+.lp3-outcomes__text {
+  color: var(--tone-muted);
+  max-width: 48ch;
+}
+
+@media (min-width: 800px) {
+  .lp3-outcomes {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 48px;
+  }
+  .lp3-outcomes li {
+    padding: 32px 0;
   }
 }
 
@@ -878,6 +1002,40 @@
 
 .lp3-plan__feature--off .lp3-plan__mark {
   color: inherit;
+}
+
+.lp3-plan__off {
+  display: grid;
+  gap: 12px;
+}
+
+.lp3-plan__features-off {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.lp3-plan__more {
+  display: none;
+  min-height: var(--touch);
+  padding: 0;
+  text-align: left;
+  font-size: var(--fs-small);
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 699px) {
+  .lp3-plan__more {
+    display: block;
+  }
+  .lp3-plan__features-off {
+    display: none;
+  }
+  .lp3-plan__off.is-open .lp3-plan__features-off {
+    display: grid;
+  }
 }
 
 .lp3-plan__cta {
@@ -1090,6 +1248,44 @@
   }
 }
 
+.lp3-steps {
+  display: grid;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.lp3-steps__title {
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.lp3-steps__list {
+  display: grid;
+  border-top: 1px solid var(--tone-line);
+  counter-reset: step;
+}
+
+.lp3-steps__list li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  align-items: baseline;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--tone-line);
+  font-weight: 500;
+}
+
+.lp3-steps__list li::before {
+  counter-increment: step;
+  content: counter(step, decimal-leading-zero);
+  font-size: var(--fs-small);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  font-variant-numeric: tabular-nums;
+  color: var(--tone-accent);
+}
+
 .lp3-form__grid {
   display: grid;
   gap: 20px;
@@ -1253,6 +1449,71 @@
 
 .lp3-form__submit {
   margin-top: 24px;
+}
+
+/* ================================ FAQ ===================================== */
+
+.lp3-faq {
+  max-width: 800px;
+  border-top: 1px solid var(--tone-line);
+}
+
+.lp3-faq__item {
+  border-bottom: 1px solid var(--tone-line);
+}
+
+.lp3-faq__q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 64px;
+  padding: 18px 0;
+  text-align: left;
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  line-height: 1.25;
+  color: inherit;
+}
+
+.lp3-faq__chevron {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  transition: transform 200ms ease;
+  color: var(--tone-muted);
+}
+
+.lp3-faq__item.is-open .lp3-faq__chevron {
+  transform: rotate(180deg);
+}
+
+.lp3-faq__a {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 240ms ease;
+}
+
+.lp3-faq__item.is-open .lp3-faq__a {
+  grid-template-rows: 1fr;
+}
+
+.lp3-faq__a-inner {
+  overflow: hidden;
+}
+
+.lp3-faq__a-inner p {
+  padding-bottom: 24px;
+  color: var(--tone-muted);
+  max-width: 62ch;
+}
+
+.lp3-faq__a-inner a {
+  color: var(--tone-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
 }
 
 /* =============================== FOOTER =================================== */

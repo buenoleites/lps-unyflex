@@ -24,6 +24,8 @@ export interface Lp3Content {
 
   hero: {
     badge: string;
+    /** Frase de promessa acima do título (o que a pessoa ganha). */
+    promise?: string;
     title: string;
     subtitle: string;
     /** Linha de data em destaque, ex. "10 a 13 de novembro". */
@@ -39,16 +41,30 @@ export interface Lp3Content {
     ctaSecondary?: { href: string; label: string };
   };
 
-  /** Ficha do curso: lista rótulo → valor, com filetes (sem cards). */
-  facts: {
+  /** Faixa de prova social (números CONFIRMADOS pelo cliente), repetida no
+   *  hero e ao lado do formulário. */
+  proof?: {
+    items: string[];
+  };
+
+  /** Ficha do curso: lista rótulo → valor, com filetes (sem cards). Opcional:
+   *  a /tesouraria-nov26 levou a ficha para a linha de fatos do hero. */
+  facts?: {
     items: { label: string; value: string }[];
   };
 
-  /** Descrição do curso (fundo claro). */
-  about: {
+  /** Descrição do curso (fundo claro). Opcional (ver `outcomes`). */
+  about?: {
     eyebrow: string;
     title: string;
     paragraphs: string[];
+  };
+
+  /** "O que muda": 4 resultados concretos (título + frase), lista com filete. */
+  outcomes?: {
+    eyebrow?: string;
+    title: string;
+    items: { title: string; text: string }[];
   };
 
   /** Programação em acordeão numerado. */
@@ -56,13 +72,15 @@ export interface Lp3Content {
     eyebrow: string;
     title: string;
     lead?: string;
-    items: { title: string; topics: string[] }[];
+    /** `result`: frase de resultado visível com o acordeão fechado. */
+    items: { title: string; result?: string; topics: string[] }[];
   };
 
   /** Bloco de destaque em accent, com itens numerados. */
   highlight: {
     eyebrow: string;
     title: string;
+    lead?: string;
     items: string[];
   };
 
@@ -113,8 +131,17 @@ export interface Lp3Content {
     campaignFallback: string;
     planOptions: string[];
     submitLabel: string;
+    /** "Como funciona": passos numerados na coluna ao lado do formulário. */
+    steps?: { title: string; items: string[] };
     consent: { label: ReactNode; value: string };
     thankYou: { url: string; withPii: false };
+  };
+
+  /** Perguntas frequentes em acordeão (depois do formulário). */
+  faq?: {
+    eyebrow?: string;
+    title: string;
+    items: { q: string; a: ReactNode }[];
   };
 
   footer: {

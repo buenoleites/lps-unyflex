@@ -4,7 +4,7 @@ import type { Lp3Content } from "./types";
 
 export default function Audience({ content }: { content: NonNullable<Lp3Content["audience"]> }) {
   return (
-    <Section id="para-quem" tone="dark" labelledBy="para-quem-title">
+    <Section id="para-quem" tone="paper" labelledBy="para-quem-title">
       <div className="lp3-sec-head" data-reveal style={{ "--reveal-i": 0 } as React.CSSProperties}>
         <span className="lp3-eyebrow">{content.eyebrow}</span>
         <h2 id="para-quem-title" className="lp3-h2">

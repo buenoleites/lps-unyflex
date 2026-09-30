@@ -1,12 +1,13 @@
 "use client";
 import { handleAnchorClick } from "@/lib/lp/scroll";
 import Arrow from "./Arrow";
+import Proof from "./Proof";
 import type { Lp3Content } from "./types";
 
 /** Hero na composição dos criativos: foto real de turma escurecida, pílula
  *  "Inscrições abertas", título, subtítulo, bloco de data + local em accent,
  *  linha de fatos e CTAs. */
-export default function Hero({ content }: { content: Lp3Content["hero"] }) {
+export default function Hero({ content, proof }: { content: Lp3Content["hero"]; proof?: Lp3Content["proof"] }) {
   return (
     <section id="topo" className="lp3-hero" aria-labelledby="hero-title">
       <div
@@ -19,6 +20,7 @@ export default function Hero({ content }: { content: Lp3Content["hero"] }) {
       <div className="lp3-container">
         <div className="lp3-hero__inner">
           <span className="lp3-hero__badge">{content.badge}</span>
+          {content.promise ? <p className="lp3-hero__promise">{content.promise}</p> : null}
           <h1 id="hero-title" className="lp3-h1">
             {content.title}
           </h1>
@@ -51,6 +53,7 @@ export default function Hero({ content }: { content: Lp3Content["hero"] }) {
               </a>
             ) : null}
           </div>
+          {proof ? <Proof content={proof} className="lp3-hero__proof" /> : null}
         </div>
       </div>
     </section>

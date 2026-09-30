@@ -3,7 +3,7 @@ import Section from "./Section";
 import type { Lp3Content } from "./types";
 
 /** Ficha do curso em lista com filetes (rótulo pequeno, valor grande). */
-export default function Facts({ content }: { content: Lp3Content["facts"] }) {
+export default function Facts({ content }: { content: NonNullable<Lp3Content["facts"]> }) {
   return (
     <Section id="ficha" tone="elevated" labelledBy="ficha-title">
       <h2 id="ficha-title" className="lp3-sr-only">

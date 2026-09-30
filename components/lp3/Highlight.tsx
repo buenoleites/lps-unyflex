@@ -12,6 +12,7 @@ export default function Highlight({ content }: { content: Lp3Content["highlight"
           <h2 id="ia-title" className="lp3-h2">
             {content.title}
           </h2>
+          {content.lead ? <p className="lp3-lead lp3-highlight__lead">{content.lead}</p> : null}
         </div>
         <ol className="lp3-highlight__list">
           {content.items.map((item, i) => (

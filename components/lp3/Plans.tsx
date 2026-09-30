@@ -1,13 +1,18 @@
 "use client";
+import { useState } from "react";
 import { scrollToId } from "@/lib/lp/scroll";
 import Arrow from "./Arrow";
 import Section from "./Section";
 import type { Lp3Content } from "./types";
 
-/** Investimento: 3 cards + card largo do plano recomendado + tabela.
+/** Investimento: 3 cards; card largo e tabela comparativa são opcionais
+ *  (a /tesouraria-nov26 usa só os cards).
  *  Mesmo shape de dados do lp2 (portável entre templates). Diferença central:
  *  todo botão chama onSelectPlan(nome) ANTES de rolar ao formulário — o plano
- *  clicado vira `plano_interesse` no lead. Nenhum botão abre WhatsApp. */
+ *  clicado vira `plano_interesse` no lead. Nenhum botão abre WhatsApp.
+ *  No celular (<700px) os itens NÃO inclusos de cada card ficam recolhidos
+ *  atrás de "ver o que não inclui" (CSS esconde a lista até .is-open; no
+ *  desktop ela aparece sempre e o botão some). */
 export default function Plans({
   content,
   onSelectPlan,
@@ -23,6 +28,8 @@ export default function Plans({
     };
   }
   let reveal = 2;
+  // Cards com os itens não inclusos expandidos (só afeta o mobile).
+  const [offOpen, setOffOpen] = useState<Record<string, boolean>>({});
 
   return (
     <Section id="planos" tone="dark" labelledBy="planos-title">
@@ -50,22 +57,47 @@ export default function Plans({
               <p className="lp3-plan__price">{plan.price}</p>
             </div>
             <ul className="lp3-plan__features">
-              {plan.features.map((feature) => (
-                <li
-                  key={feature.label}
-                  className={`lp3-plan__feature${feature.included ? "" : " lp3-plan__feature--off"}`}
-                >
-                  <span
-                    className="lp3-plan__mark"
-                    role="img"
-                    aria-label={feature.included ? "incluso" : "não incluso"}
-                  >
-                    {feature.included ? "✓" : "—"}
-                  </span>
-                  {feature.label}
-                </li>
-              ))}
+              {plan.features
+                .filter((f) => f.included)
+                .map((feature) => (
+                  <li key={feature.label} className="lp3-plan__feature">
+                    <span className="lp3-plan__mark" role="img" aria-label="incluso">
+                      ✓
+                    </span>
+                    {feature.label}
+                  </li>
+                ))}
             </ul>
+            {plan.features.some((f) => !f.included) ? (
+              <div className={`lp3-plan__off${offOpen[plan.name] ? " is-open" : ""}`}>
+                <button
+                  type="button"
+                  className="lp3-plan__more"
+                  id={`plan-off-btn-${plan.name}`}
+                  aria-expanded={!!offOpen[plan.name]}
+                  aria-controls={`plan-off-${plan.name}`}
+                  onClick={() => setOffOpen((o) => ({ ...o, [plan.name]: !o[plan.name] }))}
+                >
+                  {offOpen[plan.name] ? "ocultar o que não inclui" : "ver o que não inclui"}
+                </button>
+                <ul
+                  id={`plan-off-${plan.name}`}
+                  className="lp3-plan__features lp3-plan__features-off"
+                  aria-labelledby={`plan-off-btn-${plan.name}`}
+                >
+                  {plan.features
+                    .filter((f) => !f.included)
+                    .map((feature) => (
+                      <li key={feature.label} className="lp3-plan__feature lp3-plan__feature--off">
+                        <span className="lp3-plan__mark" role="img" aria-label="não incluso">
+                          —
+                        </span>
+                        {feature.label}
+                      </li>
+                    ))}
+                </ul>
+              </div>
+            ) : null}
             <div className="lp3-plan__cta">
               <a
                 className={`lp3-btn lp3-btn--block ${plan.highlighted ? "lp3-btn--primary" : "lp3-btn--ghost"}`}
