@@ -65,6 +65,14 @@ export interface SubmitOptions {
   /** Token do produto/vertical no `titulo` do lead (ex.: "engenharia"). Sem
    *  ele o título cai em `produto` → `paginaOrigem` → `formId`. */
   tituloProduto?: string;
+  /** Chaves extras, espalhadas no FIM do payload (ex.: plano_interesse,
+   *  Municipio, c, consentimento). Opt-in por LP: quem não passa nada segue
+   *  mandando o payload de sempre, byte a byte. Não sobrescreve chave fixa. */
+  extra?: Record<string, string>;
+  /** Usado só quando a sessão NÃO tem utm_campaign: alimenta UTM_Campaign,
+   *  utm_campaign e o token `c=` do `titulo`. Criado para a /tesouraria-nov26,
+   *  cujos anúncios chegam com `?c=` em vez de utm_campaign. */
+  campaignFallback?: string;
 }
 
 /* Título do lead, no padrão que a campanha usa para ler origem sem depender do
@@ -88,7 +96,10 @@ export async function submitLead(
 ): Promise<void> {
   // Query atual com fallback no sessionStorage (lib/lp/utm.ts): a atribuição
   // sobrevive à navegação entre páginas antes da conversão.
-  const t = getTracking();
+  const t: TrackingParams = { ...getTracking() };
+  if (!t.utm_campaign?.trim() && opts.campaignFallback) {
+    t.utm_campaign = opts.campaignFallback;
+  }
   const geo = await getGeo();
 
   const payload = {
@@ -138,6 +149,7 @@ export async function submitLead(
     utm_id: t.utm_id ?? "",
     fbclid: t.fbclid ?? "",
     gclid: t.gclid ?? "",
+    ...(opts.extra ?? {}),
   };
 
   await fetch(WEBHOOK_URL, {
