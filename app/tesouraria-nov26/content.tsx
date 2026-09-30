@@ -109,7 +109,7 @@ export const tesourariaNov26Content: Lp3Content = {
   proof: {
     items: [
       "5,0 no Google · +450 avaliações",
-      "Desde 2009 · +40 mil agentes públicos capacitados",
+      "Desde 2009 · 49.000+ alunos",
       "Faculdade Unypública · nota 5 no MEC",
     ],
   },

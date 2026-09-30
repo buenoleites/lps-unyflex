@@ -12,11 +12,21 @@ export default function Audience({ content }: { content: NonNullable<Lp3Content[
         </h2>
       </div>
       <ul className="lp3-audience__list">
-        {content.items.map((item, i) => (
-          <li key={item} data-reveal style={{ "--reveal-i": i + 1 } as React.CSSProperties}>
-            {item}
-          </li>
-        ))}
+        {content.items.map((item, i) => {
+          const label = typeof item === "string" ? item : item.label;
+          return (
+            <li key={label} data-reveal style={{ "--reveal-i": i + 1 } as React.CSSProperties}>
+              {typeof item === "string" ? (
+                item
+              ) : (
+                <>
+                  <strong className="lp3-audience__label">{item.label}</strong>
+                  <span className="lp3-audience__desc">{item.description}</span>
+                </>
+              )}
+            </li>
+          );
+        })}
       </ul>
       {content.note ? <p className="lp3-audience__note">{content.note}</p> : null}
     </Section>

@@ -39,7 +39,7 @@ export default function TesourariaNov26Page() {
         {content.audience ? <Audience content={content.audience} /> : null}
         {content.outcomes ? <Outcomes content={content.outcomes} /> : null}
         <Modules content={content.modules} />
-        <Highlight content={content.highlight} />
+        {content.highlight ? <Highlight content={content.highlight} /> : null}
         <Plans content={content.plans} onSelectPlan={setPlano} />
         <Form content={content.form} proof={content.proof} plano={plano} onPlanoChange={setPlano} />
         {content.faq ? <Faq content={content.faq} /> : null}

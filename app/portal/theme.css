@@ -1,45 +1,18 @@
-/* Tema da LP Portal, LGPD, e-SIC e Ouvidoria — o ÚNICO bloco de cor da LP:
-   nenhum literal de cor fora daqui (exceção: opengraph-image.tsx, que não lê
-   CSS — mesmo precedente das outras instâncias lp2).
+/* Tema da LP Portal, LGPD, e-SIC e Ouvidoria no lp3 — o ÚNICO bloco de cor
+   da rota; só os tokens --accent* são sobrescritos (briefing de 30/09/2026).
 
-   O curso pertence à vertical Licitações/Gestão, então o accent é o mesmo
-   ciano da /licitacao (#00aeef), que hoje coincide com o default do lp2.css —
-   os tokens são fixados aqui mesmo assim: um retune futuro do default do
-   template não pode restilizar em silêncio uma rota com tráfego pago.
-
-   O seletor .lppo-theme (wrapper no layout da rota) vence o bloco default de
-   .lp2-root por especificidade, independente da ordem dos imports de CSS.
-   (.lpp- já é o prefixo da /patrimonio — daí o .lppo-.) */
-.lppo-theme .lp2-root {
-  --accent: #00aeef; /* ciano vertical Licitações — mesmo valor do default do lp2 */
-  --accent-ink: #071016; /* texto sobre accent — branco sobre #00aeef reprova AA */
-  --accent-ring: rgba(0, 174, 239, 0.28);
-  --accent-tint: rgba(0, 174, 239, 0.12);
-  --accent-deep: #006b93; /* accent p/ texto/foco em superfície clara — 5,9:1 no branco */
-}
-
-/* Sem patch do .lp2-bento aqui: são 5 cards de problema e o template dá
-   largura dupla ao 1º — 6 células, duas linhas exatas no grid de 3 colunas. */
-
-/* Navbar com 4 links + CTA (mesmo caso da /licitacao): centraliza os links
-   entre logo e CTA no desktop. <800px o template já esconde os links. */
-@media (min-width: 800px) {
-  .lppo-theme .lp2-nav__inner {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: 16px;
-  }
-
-  .lppo-theme .lp2-nav__links {
-    justify-content: center;
-  }
-}
-
-/* Investimento com TRÊS planos (desde 16/09/2026): o grid default abre 4
-   colunas a partir de 1100px e deixaria a quarta vazia (e "R$ 2.980,00"
-   quebrando em duas linhas). Mesmo override por rota da /engenharia-nov26. */
-@media (min-width: 1100px) {
-  .lppo-theme .lp2-plans__grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+   Azul #71B8FF: mesmo L 0,765 do âmbar da Tesouraria (OKLCH L 0,765 · C 0,125 ·
+   H 250), só o matiz muda. As variantes foram derivadas no mesmo matiz e
+   medidas (WCAG 2.x):
+     accent  sobre --bg-0 (#0a0e14) 9,21:1 · sobre --bg-1 (#141a23) 8,32:1
+     ink     sobre accent (botão)   7,04:1
+     deep    sobre --paper (#f5f2ec) 5,62:1 · sobre --paper-2 (#ebe5d9) 5,00:1
+   O seletor .lppo-theme .lp3-root vence o bloco default de .lp3-root por
+   especificidade, independente da ordem dos imports de CSS. */
+.lppo-theme .lp3-root {
+  --accent: #71b8ff;
+  --accent-ink: #1c2936; /* texto sobre accent */
+  --accent-deep: #24639d; /* accent p/ texto em superfície clara */
+  --accent-ring: rgba(113, 184, 255, 0.32);
+  --accent-tint: rgba(113, 184, 255, 0.12);
 }

@@ -50,6 +50,7 @@ type Values = {
   municipio: string;
   cargo: string;
   servidorPublico: string;
+  modalidade: string;
   consent: boolean;
 };
 
@@ -68,6 +69,7 @@ function validate(field: keyof Values, value: string | boolean): string {
     case "municipio":
       return String(value).trim() ? "" : "Informe o município.";
     case "servidorPublico":
+    case "modalidade":
       return value ? "" : "Selecione uma opção.";
     case "consent":
       return value ? "" : "É preciso autorizar o contato para enviar.";
@@ -156,6 +158,7 @@ export default function Form({
     municipio: "",
     cargo: "",
     servidorPublico: "",
+    modalidade: "",
     consent: false,
   });
   const [errors, setErrors] = useState<Errors>({});
@@ -194,7 +197,18 @@ export default function Form({
     if (submittingRef.current) return;
 
     const next: Errors = {};
-    (["nome", "whatsapp", "email", "orgao", "municipio", "servidorPublico", "consent"] as const).forEach((f) => {
+    (
+      [
+        "nome",
+        "whatsapp",
+        "email",
+        "orgao",
+        "municipio",
+        "servidorPublico",
+        ...(content.modalidade ? (["modalidade"] as const) : []),
+        "consent",
+      ] as const
+    ).forEach((f) => {
       const err = validate(f, form[f]);
       if (err) next[f] = err;
     });
@@ -217,6 +231,8 @@ export default function Form({
       // n8n atual lê Orgao_Municipio: vai concatenado; Municipio separado abaixo.
       orgao: `${form.orgao.trim()} – ${form.municipio.trim()}`,
       servidorPublico: form.servidorPublico,
+      // A presença da chave decide se Modalidade_Preferida entra no payload.
+      ...(content.modalidade ? { modalidade: form.modalidade } : {}),
     };
 
     try {
@@ -383,6 +399,39 @@ export default function Form({
                 </span>
               ) : null}
             </div>
+
+            {content.modalidade ? (
+              <div className={`lp3-form__field lp3-form__field--full${errors.modalidade ? " is-error" : ""}`}>
+                <span className="lp3-form__toggle-label" id="lbl-modalidade">
+                  {content.modalidade.label}{" "}
+                  <span className="lp3-form__req" aria-hidden="true">
+                    *
+                  </span>
+                </span>
+                <div className="lp3-form__toggle-group" role="group" aria-labelledby="lbl-modalidade">
+                  {content.modalidade.options.map((opt, i) => (
+                    <button
+                      key={opt}
+                      type="button"
+                      id={i === 0 ? "f-modalidade" : undefined}
+                      className={`lp3-form__toggle-btn${form.modalidade === opt ? " is-active" : ""}`}
+                      onClick={() => {
+                        setForm((f) => ({ ...f, modalidade: opt }));
+                        setErrors((prev) => ({ ...prev, modalidade: undefined }));
+                      }}
+                      aria-pressed={form.modalidade === opt}
+                    >
+                      {opt}
+                    </button>
+                  ))}
+                </div>
+                {errors.modalidade ? (
+                  <span className="lp3-form__err" role="alert">
+                    {errors.modalidade}
+                  </span>
+                ) : null}
+              </div>
+            ) : null}
 
             <div className={`lp3-form__field lp3-form__field--full${errors.consent ? " is-error" : ""}`}>
               <div className="lp3-form__consent">

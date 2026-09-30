@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import "../lp2.css";
+import "../lp3.css";
 import "./theme.css";
 
-/* Portal, LGPD, e-SIC e Ouvidoria, no template lp2 (turma de 20 a
-   23/10/2026 — a de setembro não aconteceu; ver content.tsx). Fotos dos
-   professores ainda pendentes. */
+/* Portal, LGPD, e-SIC e Ouvidoria, no template lp3 (turma de 20 a
+   23/10/2026 — a de setembro não aconteceu; ver content.tsx). Migrada do
+   lp2 para o lp3 em 30/09/2026. */
 
 export const metadata: Metadata = {
   // O root layout define metadataBase com o path /licitacao embutido, o que
@@ -95,7 +95,7 @@ export default function PortalLayout({
   children: React.ReactNode;
 }) {
   return (
-    // .lppo-theme: os tokens de cor da LP (theme.css) valem só sob este wrapper.
+    // .lppo-theme: o accent azul da LP (theme.css) vale só sob este wrapper.
     <div className="lppo-theme">
       {/* O hero é background-image em CSS (MediaBackdrop) e o browser só o
           descobre tarde — preload derruba o LCP mobile. React hoisteia o
