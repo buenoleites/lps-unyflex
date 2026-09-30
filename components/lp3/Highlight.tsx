@@ -3,7 +3,7 @@ import Section from "./Section";
 import type { Lp3Content } from "./types";
 
 /** Bloco em accent com itens numerados (o único fundo âmbar da página). */
-export default function Highlight({ content }: { content: Lp3Content["highlight"] }) {
+export default function Highlight({ content }: { content: NonNullable<Lp3Content["highlight"]> }) {
   return (
     <Section id="ia" tone="accent" labelledBy="ia-title">
       <div className="lp3-highlight">

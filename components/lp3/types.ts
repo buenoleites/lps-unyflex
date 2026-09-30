@@ -15,6 +15,17 @@ export interface Lp3Plan {
   ctaLabel: string;
 }
 
+export interface Lp3Outcomes {
+  eyebrow?: string;
+  title: string;
+  items: { title: string; text: string }[];
+  /** Âncora da seção (padrão "o-que-muda"). */
+  id?: string;
+  /** Tom de fundo (padrão "elevated"). */
+  tone?: "dark" | "elevated" | "paper";
+  cta?: { label: string; href: string };
+}
+
 export interface Lp3Content {
   nav: {
     logoSrc: string;
@@ -61,10 +72,37 @@ export interface Lp3Content {
   };
 
   /** "O que muda": 4 resultados concretos (título + frase), lista com filete. */
-  outcomes?: {
+  outcomes?: Lp3Outcomes;
+
+  /** Mesmo layout de "O que muda" (título + frase, filete), para a seção de
+   *  desafios do Portal. Migração do `problem` do lp2. */
+  problem?: Lp3Outcomes;
+
+  /** Mesmo layout, com botão opcional: "Como seu órgão contrata". */
+  procurement?: Lp3Outcomes;
+
+  /** Professores: nome, linha de instituição, foto 4:5 e bio. Sem nota. */
+  speakers?: {
     eyebrow?: string;
     title: string;
-    items: { title: string; text: string }[];
+    items: { name: string; institution?: string; photoSrc?: string; bio: string }[];
+  };
+
+  /** Galeria de fotos reais da sala de aula. */
+  gallery?: {
+    eyebrow?: string;
+    title: string;
+    photos: { src: string; alt: string; width: number; height: number }[];
+  };
+
+  /** Depoimentos públicos (texto integral e nomes como publicados). */
+  reviews?: {
+    eyebrow?: string;
+    rating: string;
+    volume: string;
+    sourceLabel: string;
+    photo?: { src: string; alt: string; width: number; height: number };
+    items: { text: string; author: string }[];
   };
 
   /** Programação em acordeão numerado. */
@@ -77,7 +115,7 @@ export interface Lp3Content {
   };
 
   /** Bloco de destaque em accent, com itens numerados. */
-  highlight: {
+  highlight?: {
     eyebrow: string;
     title: string;
     lead?: string;
@@ -88,7 +126,8 @@ export interface Lp3Content {
   audience?: {
     eyebrow: string;
     title: string;
-    items: string[];
+    /** Texto simples, ou rótulo + descrição (Portal). */
+    items: (string | { label: string; description: string })[];
     note?: string;
   };
 
@@ -130,6 +169,8 @@ export interface Lp3Content {
     /** Slug enviado como `c` quando a URL não traz `?c=`. */
     campaignFallback: string;
     planOptions: string[];
+    /** Campo opcional (toggle obrigatório → `Modalidade_Preferida`). */
+    modalidade?: { label: string; options: [string, string] };
     submitLabel: string;
     /** "Como funciona": passos numerados na coluna ao lado do formulário. */
     steps?: { title: string; items: string[] };
