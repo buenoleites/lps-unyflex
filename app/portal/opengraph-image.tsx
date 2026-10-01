@@ -7,7 +7,7 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 /* A ImageResponse não lê CSS — os valores abaixo espelham os tokens desta LP
-   (--bg-dark #0a0e14 do lp2.css, --accent #F38EB7 do theme.css). */
+   (--bg-dark #0a0e14 do lp2.css, --accent #05CCCC do theme.css). */
 export default function OgImage() {
   return new ImageResponse(
     (
@@ -25,7 +25,7 @@ export default function OgImage() {
         <div
           style={{
             fontSize: "18px",
-            color: "#F38EB7",
+            color: "#05CCCC",
             fontWeight: 700,
             letterSpacing: "0.16em",
             textTransform: "uppercase",
