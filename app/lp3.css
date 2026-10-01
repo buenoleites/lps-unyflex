@@ -1035,6 +1035,10 @@
   .lp3-speaker__photo {
     width: 160px;
   }
+  /* professor sem foto: o texto ocupa a linha toda, não a coluna da foto */
+  .lp3-speaker:not(:has(.lp3-speaker__photo)) {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ============================== GALLERY =================================== */

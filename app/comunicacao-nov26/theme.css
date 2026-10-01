@@ -1,0 +1,17 @@
+/* Tema da LP Comunicação Pública 360º no lp3 — o ÚNICO bloco de cor da rota;
+   só os tokens --accent* são sobrescritos (briefing de 30/09/2026).
+
+   Lilás #BF9FF9: mesmo L 0,765 do âmbar da Tesouraria, só o matiz muda.
+   Variantes derivadas no mesmo matiz e medidas (WCAG 2.x):
+     accent  sobre --bg-0 (#0a0e14) 8,79:1 · sobre --bg-1 (#141a23) 7,94:1
+     ink     sobre accent (botão)   7,01:1
+     deep    sobre --paper (#f5f2ec) 5,62:1 · sobre --paper-2 (#ebe5d9) 5,01:1
+   O seletor .lpcm-theme .lp3-root vence o bloco default de .lp3-root por
+   especificidade, independente da ordem dos imports de CSS. */
+.lpcm-theme .lp3-root {
+  --accent: #bf9ff9;
+  --accent-ink: #272232; /* texto sobre accent */
+  --accent-deep: #6e529b; /* accent p/ texto em superfície clara */
+  --accent-ring: rgba(191, 159, 249, 0.32);
+  --accent-tint: rgba(191, 159, 249, 0.12);
+}
