@@ -7,7 +7,7 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 /* A ImageResponse não lê CSS — os valores espelham os tokens do lp3.css
-   (--bg-0 #0a0e14, --accent #66CB8E, --accent-ink #1e2f24). Textos: os do
+   (--bg-0 #0a0e14, --accent #84C776, --accent-ink #1f2a1c). Textos: os do
    topo do briefing, na composição dos criativos. */
 export default function OgImage() {
   return new ImageResponse(
@@ -28,8 +28,8 @@ export default function OgImage() {
           style={{
             display: "flex",
             alignSelf: "flex-start",
-            background: "#66CB8E",
-            color: "#1e2f24",
+            background: "#84C776",
+            color: "#1f2a1c",
             fontSize: "18px",
             fontWeight: 700,
             letterSpacing: "0.12em",
@@ -47,7 +47,7 @@ export default function OgImage() {
         <div style={{ fontSize: "26px", color: "rgba(247,245,240,0.74)", marginTop: "16px" }}>{SUBTITULO}</div>
         <div style={{ display: "flex", alignItems: "baseline", gap: "20px", marginTop: "40px" }}>
           <div style={{ fontSize: "40px", fontWeight: 800 }}>20 a 23 de outubro</div>
-          <div style={{ fontSize: "28px", fontWeight: 700, color: "#66CB8E" }}>Curitiba-PR</div>
+          <div style={{ fontSize: "28px", fontWeight: 700, color: "#84C776" }}>Curitiba-PR</div>
         </div>
         <div style={{ fontSize: "20px", fontWeight: 600, marginTop: "12px" }}>4 dias · 17 horas · 6 painéis · certificado</div>
       </div>
