@@ -1,18 +1,18 @@
 /* Tema da LP Portal, LGPD, e-SIC e Ouvidoria no lp3 — o ÚNICO bloco de cor
-   da rota; só os tokens --accent* são sobrescritos (briefing de 30/09/2026).
+   da rota; só os tokens --accent* são sobrescritos. Turquesa #05CCCC (decisão
+   de 01/10/2026: o ciano passou a ser de Licitações).
 
-   Azul #71B8FF: mesmo L 0,765 do âmbar da Tesouraria (OKLCH L 0,765 · C 0,125 ·
-   H 250), só o matiz muda. As variantes foram derivadas no mesmo matiz e
-   medidas (WCAG 2.x):
-     accent  sobre --bg-0 (#0a0e14) 9,21:1 · sobre --bg-1 (#141a23) 8,32:1
-     ink     sobre accent (botão)   7,04:1
-     deep    sobre --paper (#f5f2ec) 5,62:1 · sobre --paper-2 (#ebe5d9) 5,00:1
+   Mesmo L 0,765 do âmbar da Tesouraria (OKLCH L 0,765 · C 0,130 · H 195), só o
+   matiz muda. As variantes foram derivadas no mesmo matiz e medidas (WCAG 2.x):
+     accent  sobre --bg-0 (#0a0e14) 9,68:1 · sobre --bg-1 (#141a23) 8,75:1
+     ink     sobre accent (botão)   7,47:1
+     deep    sobre --paper (#f5f2ec) 5,65:1 · sobre --paper-2 (#ebe5d9) 5,04:1
    O seletor .lppo-theme .lp3-root vence o bloco default de .lp3-root por
    especificidade, independente da ordem dos imports de CSS. */
 .lppo-theme .lp3-root {
-  --accent: #71b8ff;
-  --accent-ink: #1c2936; /* texto sobre accent */
-  --accent-deep: #24639d; /* accent p/ texto em superfície clara */
-  --accent-ring: rgba(113, 184, 255, 0.32);
-  --accent-tint: rgba(113, 184, 255, 0.12);
+  --accent: #05cccc;
+  --accent-ink: #132b2b; /* texto sobre accent */
+  --accent-deep: #076b6b; /* accent p/ texto em superfície clara */
+  --accent-ring: rgba(5, 204, 204, 0.32);
+  --accent-tint: rgba(5, 204, 204, 0.12);
 }
