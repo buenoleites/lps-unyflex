@@ -21,9 +21,8 @@ import type { Lp3Content } from "@/components/lp3/types";
    A descrição da rota (metadata/OG/JSON-LD) é a promessa do topo, verbatim.
 
    TODO (sem dado confirmado — não inventar):
-   - Foto do Giovani Capri: não há arquivo (o Gustavo vai salvar em
-     ~/Downloads/fotos-professores/). Sem foto, o professor aparece só com
-     nome e bio. A foto da Ana Paula chegou em 201×251 px (baixa resolução).
+   - Foto da Ana Paula em 201×251 px (baixa resolução); trocar quando
+     chegar uma maior em ~/Downloads/fotos-professores/.
    - n8n: cadastrar `comunicacao-nov26` no mapa de cursos antes de rodar
      tráfego, senão o lead entra como "Curso não identificado". Chaves
      novas no payload que o n8n precisa mapear: plano_interesse, Municipio,
@@ -220,7 +219,7 @@ export const comunicacaoNov26Content: Lp3Content = {
 
   /* Professores: nome, foto e bio curta, sem nota de avaliação (briefing).
      Fotos: Uanilla (já no repositório), Adriane e Ana Paula (pasta do Gustavo,
-     01/10). Giovani: TODO (sem foto). */
+     01/10). */
   speakers: {
     title: "Quem ensina",
     items: [
@@ -241,6 +240,7 @@ export const comunicacaoNov26Content: Lp3Content = {
       },
       {
         name: "Giovani Capri",
+        photoSrc: `/${SLUG}/palestrantes/giovani-capri.jpg`,
         bio: "Mais de 10 mil alunos em mais de 300 turmas presenciais de treinamento.",
       },
     ],
