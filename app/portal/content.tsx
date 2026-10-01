@@ -67,7 +67,7 @@ export const portalContent: Lp3Content = {
     badge: "Inscrições abertas",
     title: "Publicar ou proteger? Quem decide é você.",
     subtitle:
-      "Portal da Transparência, e-SIC, Ouvidoria e LGPD em um curso só — com o módulo de IA aplicada ao setor público. 17 horas para sair com o portal em conformidade, a ouvidoria estruturada e o RIPD encaminhado.",
+      "Portal da Transparência, e-SIC, Ouvidoria e LGPD em um curso só, com o módulo de IA aplicada ao setor público.",
     dates: "20, 21, 22 e 23 de outubro",
     place: "Curitiba-PR",
     facts: [
@@ -78,7 +78,7 @@ export const portalContent: Lp3Content = {
     ],
     bgSrc: "/portal/hero.jpg",
     bgAlt: "Turma em sala de aula da Unyflex em Curitiba",
-    ctaPrimary: { href: "#inscricao", label: "Quero receber a programação com nota de empenho" },
+    ctaPrimary: { href: "#inscricao", label: "Receber a programação" },
   },
 
   /* Os números do topo da versão lp2 (ticker), como estavam. */
