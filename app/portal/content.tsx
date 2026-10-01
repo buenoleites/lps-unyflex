@@ -24,8 +24,6 @@ import type { Lp3Content } from "@/components/lp3/types";
    /tesouraria-nov26) estão listados para auditoria no relatório da entrega.
 
    TODO (sem dado confirmado):
-   - "1.200+ órgãos atendidos" segue sem confirmação do Gustavo. O "49.000+
-     alunos" foi confirmado e vale para todas as LPs.
    - `produto` "portal" precisa apontar, no mapa de cursos do n8n, para a
      turma de 20 a 23/10 (antes apontava para a de setembro). */
 
