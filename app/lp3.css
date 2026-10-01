@@ -275,7 +275,7 @@
   --tone-bg: var(--accent);
   --tone-ink: var(--accent-ink);
   --tone-muted: var(--accent-ink);
-  --tone-line: rgba(26, 18, 5, 0.22);
+  --tone-line: color-mix(in srgb, var(--accent-ink) 22%, transparent);
   --tone-accent: var(--accent-ink);
 }
 
@@ -577,8 +577,12 @@
      color-mix sobre --bg-0 — sem token novo. Medido: 0% de pixels de glifo
      abaixo de AA em 800–1920px; pior caso 4,1:1 (h1, limiar 3:1). */
   .lp3-hero__scrim {
+    /* o conteúdo do hero é centralizado na vertical: em telas altas (ou com
+       título de uma linha) a promessa desce e sai da faixa fixa. Por isso o fim
+       da faixa cresce com a altura da viewport acima de 900px. */
+    --scrim-top-end: calc(235px + max(0px, 100vh - 900px) * 0.6);
     background:
-      linear-gradient(180deg, var(--scrim-floor) 0, var(--scrim-floor) 215px, transparent 285px),
+      linear-gradient(180deg, var(--scrim-floor) 0, var(--scrim-floor) var(--scrim-top-end), transparent calc(var(--scrim-top-end) + 70px)),
       linear-gradient(
         90deg,
         color-mix(in srgb, var(--bg-0) 62%, transparent) 0%,
