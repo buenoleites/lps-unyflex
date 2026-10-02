@@ -542,6 +542,10 @@
   color: var(--accent);
 }
 
+.lp3-live {
+  white-space: nowrap;
+}
+
 .lp3-live-dot {
   display: inline-block;
   width: 0.55em;
