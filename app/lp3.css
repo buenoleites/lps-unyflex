@@ -542,6 +542,15 @@
   color: var(--accent);
 }
 
+.lp3-live-dot {
+  display: inline-block;
+  width: 0.55em;
+  height: 0.55em;
+  border-radius: 50%;
+  background: #e5484d;
+  vertical-align: 0.04em;
+}
+
 .lp3-hero__ctas {
   display: flex;
   flex-direction: column;
