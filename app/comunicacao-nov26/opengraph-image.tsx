@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { SUBTITULO, TITULO } from "./content";
 
 export const dynamic = "force-static";
-export const alt = `${TITULO} · curso presencial em Curitiba · 24 a 27/11 · 17 horas`;
+export const alt = `${TITULO} · curso presencial em Curitiba · 24 a 27/11 · 20 horas`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -49,7 +49,7 @@ export default function OgImage() {
           <div style={{ fontSize: "40px", fontWeight: 800 }}>24 a 27 de novembro</div>
           <div style={{ fontSize: "28px", fontWeight: 700, color: "#BF9FF9" }}>Curitiba-PR</div>
         </div>
-        <div style={{ fontSize: "20px", fontWeight: 600, marginTop: "12px" }}>4 dias · 17 horas · 6 painéis · certificado</div>
+        <div style={{ fontSize: "20px", fontWeight: 600, marginTop: "12px" }}>4 dias · 20 horas · 6 painéis · certificado</div>
       </div>
     ),
     { ...size }
