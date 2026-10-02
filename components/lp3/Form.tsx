@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { submitLead, redirectToThankYou } from "@/lib/lp/lead";
 import { getCampaign } from "@/lib/lp3/campaign";
 import Arrow from "./Arrow";
+import LiveText from "./LiveText";
 import Proof from "./Proof";
 import Section from "./Section";
 import Steps from "./Steps";
@@ -266,7 +267,7 @@ export default function Form({
           <h2 id="inscricao-title" className="lp3-h2">
             {content.title}
           </h2>
-          {content.meta ? <p className="lp3-lead">{content.meta}</p> : null}
+          {content.meta ? <p className="lp3-lead"><LiveText text={content.meta} /></p> : null}
           {content.steps ? <Steps content={content.steps} /> : null}
           {proof ? <Proof content={proof} className="lp3-form__proof" /> : null}
         </div>
@@ -421,7 +422,7 @@ export default function Form({
                       }}
                       aria-pressed={form.modalidade === opt}
                     >
-                      {opt}
+                      {content.modalidade?.labels?.[i] ?? opt}
                     </button>
                   ))}
                 </div>

@@ -69,12 +69,11 @@ export const portalContent: Lp3Content = {
     subtitle:
       "Portal da Transparência, e-SIC, Ouvidoria e LGPD em um curso só, com o módulo de IA aplicada ao setor público.",
     dates: "20, 21, 22 e 23 de outubro",
-    place: "Curitiba-PR",
+    place: "Curitiba-PR · presencial ou ● ao vivo",
     facts: [
       "4 dias",
-      "17 horas",
+      "20 horas",
       "certificado emitido por instituição reconhecida pelo MEC",
-      "também disponível online ao vivo",
     ],
     bgSrc: "/portal/hero.jpg",
     bgAlt: "Turma em sala de aula da Unyflex em Curitiba",
@@ -165,7 +164,7 @@ export const portalContent: Lp3Content = {
 
   modules: {
     eyebrow: "Programação",
-    title: "Em 17 horas, do marco legal à prática — Ouvidoria, Portal, LGPD e IA",
+    title: "Em 20 horas, do marco legal à prática — Ouvidoria, Portal, LGPD e IA",
     items: [
       {
         title: "Ouvidoria: Canal de Controle e Cidadania",
@@ -474,7 +473,7 @@ export const portalContent: Lp3Content = {
   form: {
     eyebrow: "Inscrição",
     title: "Garanta sua participação",
-    meta: "Turma de 20 a 23/10 em Curitiba ou online ao vivo · Empenho leva tempo no seu órgão — comece o processo agora.",
+    meta: "Turma de 20 a 23/10 · Curitiba-PR · presencial ou ● ao vivo · Empenho leva tempo no seu órgão — comece o processo agora.",
     steps: {
       title: "Como funciona",
       items: [
@@ -492,7 +491,9 @@ export const portalContent: Lp3Content = {
     planOptions: ["BasicClass", "MasterClass", "PremiumClass"],
     modalidade: {
       label: "Modalidade preferida",
+      // Valores vão no payload (Modalidade_Preferida) e não mudam; só o rótulo.
       options: ["Presencial em Curitiba", "Online ao vivo"],
+      labels: ["Presencial em Curitiba", "Ao vivo"],
     },
     submitLabel: "Receber proposta",
     consent: {

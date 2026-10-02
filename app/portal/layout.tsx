@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://mkt.unyflex.com.br"),
   title: "Portal da Transparência, LGPD, e-SIC e Ouvidoria | Unyflex",
   description:
-    "17 horas em Curitiba (e online ao vivo): Portal da Transparência, LGPD, e-SIC e Ouvidoria para o município e a Câmara — LAI e Lei nº 13.709 cumpridas ao mesmo tempo. 20 a 23 de outubro de 2026. Aceitamos nota de empenho.",
+    "20 horas em Curitiba (presencial ou ao vivo): Portal da Transparência, LGPD, e-SIC e Ouvidoria para o município e a Câmara — LAI e Lei nº 13.709 cumpridas ao mesmo tempo. 20 a 23 de outubro de 2026. Aceitamos nota de empenho.",
   keywords: [
     "portal da transparência",
     "LGPD no setor público",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Portal da Transparência, LGPD, e-SIC e Ouvidoria | Unyflex",
     description:
-      "O portal manda publicar; a LGPD manda proteger. O caminho para cumprir as duas — portal, e-SIC, ouvidoria e adequação de dados na prática do município. 17 horas, Curitiba e online ao vivo, 20 a 23 de outubro de 2026.",
+      "O portal manda publicar; a LGPD manda proteger. O caminho para cumprir as duas — portal, e-SIC, ouvidoria e adequação de dados na prática do município. 20 horas, Curitiba, presencial ou ao vivo, 20 a 23 de outubro de 2026.",
     url: "/portal",
     siteName: "Unyflex",
     locale: "pt_BR",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Portal da Transparência, LGPD, e-SIC e Ouvidoria | Unyflex",
     description:
-      "O portal manda publicar; a LGPD manda proteger. O caminho para cumprir as duas — portal, e-SIC, ouvidoria e adequação de dados na prática do município. 17 horas, Curitiba e online ao vivo, 20 a 23 de outubro de 2026.",
+      "O portal manda publicar; a LGPD manda proteger. O caminho para cumprir as duas — portal, e-SIC, ouvidoria e adequação de dados na prática do município. 20 horas, Curitiba, presencial ou ao vivo, 20 a 23 de outubro de 2026.",
   },
 };
 
@@ -53,7 +53,7 @@ const jsonLd = {
   "@type": "EducationEvent",
   name: "Portal, LGPD, e-SIC e Ouvidoria",
   description:
-    "Curso de Portal da Transparência, LGPD, e-SIC e Ouvidoria para municípios e Câmaras: LAI, adequação à Lei nº 13.709/2018 e ferramentas de IA aplicadas à gestão municipal. 17 horas, presencial em Curitiba e online ao vivo.",
+    "Curso de Portal da Transparência, LGPD, e-SIC e Ouvidoria para municípios e Câmaras: LAI, adequação à Lei nº 13.709/2018 e ferramentas de IA aplicadas à gestão municipal. 20 horas, presencial em Curitiba ou ao vivo.",
   url: "https://mkt.unyflex.com.br/portal",
   startDate: "2026-10-20",
   endDate: "2026-10-23",

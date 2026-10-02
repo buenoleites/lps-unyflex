@@ -43,7 +43,7 @@ export interface Lp3Content {
     dates: string;
     /** Local, em accent, ex. "Curitiba-PR". */
     place: string;
-    /** Linha de fatos "4 dias · 17 horas · 6 painéis · certificado". */
+    /** Linha de fatos "4 dias · 20 horas · 6 painéis · certificado". */
     facts: string[];
     /** Foto real de turma, escurecida pelo scrim. */
     bgSrc: string;
@@ -174,7 +174,13 @@ export interface Lp3Content {
     campaignFallback: string;
     planOptions: string[];
     /** Campo opcional (toggle obrigatório → `Modalidade_Preferida`). */
-    modalidade?: { label: string; options: [string, string] };
+    modalidade?: {
+      label: string;
+      /** Valores enviados no payload (`Modalidade_Preferida`). */
+      options: [string, string];
+      /** Rótulos exibidos nos botões; sem isso, mostra o próprio valor. */
+      labels?: [string, string];
+    };
     submitLabel: string;
     /** "Como funciona": passos numerados na coluna ao lado do formulário. */
     steps?: { title: string; items: string[] };

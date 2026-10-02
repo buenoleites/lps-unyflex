@@ -1,6 +1,7 @@
 "use client";
 import { handleAnchorClick } from "@/lib/lp/scroll";
 import Arrow from "./Arrow";
+import LiveText from "./LiveText";
 import Proof from "./Proof";
 import type { Lp3Content } from "./types";
 
@@ -27,7 +28,9 @@ export default function Hero({ content, proof }: { content: Lp3Content["hero"]; 
           <p className="lp3-hero__subtitle">{content.subtitle}</p>
           <div className="lp3-hero__when">
             <p className="lp3-hero__dates">{content.dates}</p>
-            <p className="lp3-hero__place">{content.place}</p>
+            <p className="lp3-hero__place">
+              <LiveText text={content.place} />
+            </p>
           </div>
           <ul className="lp3-hero__facts" aria-label="Resumo do curso">
             {content.facts.map((fact) => (

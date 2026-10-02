@@ -92,7 +92,7 @@ export const tesourariaNov26Content: Lp3Content = {
     // áreas e os materiais que só existiam lá.
     facts: [
       "4 dias",
-      "17 horas",
+      "20 horas",
       "6 painéis",
       "certificado",
       "Controle Interno e Finanças Municipais",
