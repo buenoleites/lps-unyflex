@@ -78,7 +78,7 @@ export const patrimonioOut26Content: Lp3Content = {
     place: "Curitiba-PR",
     facts: [
       "4 dias",
-      "17 horas",
+      "20 horas",
       "6 painéis",
       "certificado",
       "Patrimônio",
