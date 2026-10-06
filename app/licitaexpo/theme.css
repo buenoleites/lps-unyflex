@@ -1,0 +1,39 @@
+/* Tema da LP LicitaExpo no lp3 — o ÚNICO bloco de cor da rota; só os tokens
+   --accent* são sobrescritos. Ciano #4EABE9 do setor Licitações (grade de
+   06/10/2026; decisão de 01/10: o ciano passou a ser de Licitações).
+
+   Variantes derivadas no mesmo matiz (escala em RGB linear) e medidas (WCAG 2.x,
+   scratchpad/tokens.mjs):
+     accent  sobre --bg-0 (#0a0e14) 7,67:1 · sobre --bg-1 (#141a23) 6,93:1
+     ink     sobre accent (botão)   7,04:1
+     deep    sobre --paper (#f5f2ec) 5,62:1 · sobre --paper-2 (#ebe5d9) 5,01:1
+   O seletor .lplx-theme .lp3-root vence o bloco default de .lp3-root por
+   especificidade, independente da ordem dos imports de CSS. */
+.lplx-theme .lp3-root {
+  --accent: #4eabe9;
+  --accent-ink: #061a27; /* texto sobre accent */
+  --accent-deep: #2b658c; /* accent p/ texto em superfície clara */
+  --accent-ring: rgba(78, 171, 233, 0.32);
+  --accent-tint: rgba(78, 171, 233, 0.12);
+}
+
+/* Quatro planos (Online Ao Vivo + 3 presenciais): o lp3 fixa 3 colunas a partir
+   de 700px. Aqui: 2 colunas de 700 a 999px e 4 a partir de 1000px. */
+@media (min-width: 700px) {
+  .lplx-theme .lp3-plans__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1000px) {
+  .lplx-theme .lp3-plans__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Dois logos de parceiros lado a lado no rodapé (o lp3 só previa um). */
+.lplx-theme .lp3-footer__partners {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 28px;
+}
