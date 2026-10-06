@@ -17,8 +17,9 @@ import type { Lp3Content } from "@/components/lp3/types";
       metodologia, planos e itens, bios de Everson, Rafael, Marcio, Gabriela e
       Igor, parceiros.
    3. Das LPs lp3 (/comunicacao-nov26): consentimento, rodapé, link da política.
-   Jarbas Renê não estava na LP anterior: instituição e bio são a linha da
-   grade, literalmente. Caroline de Souza saiu (grade de 06/10).
+   Jarbas Renê não estava na LP anterior: a bio é a enviada pelo Gustavo em
+   06/10; a instituição resume a bio. Caroline de Souza saiu (grade de 06/10).
+   Texto do certificado: o exato enviado em 06/10.
 
    TODO (sem dado confirmado — não inventar):
    - Foto do Jarbas Renê não veio no briefing; sem `photoSrc` ele aparece em
@@ -75,7 +76,7 @@ export const licitaexpoContent: Lp3Content = {
     subtitle: `${GANCHO} Os pontos onde o certame e a execução contratual travam, mapeados para você decidir com respaldo, não no escuro.`,
     dates: "24 a 27 de novembro de 2026",
     place: "Curitiba-PR · presencial ou ● ao vivo",
-    facts: ["Seminário presencial", "4 dias", "17 horas", "Certificado emitido pela Faculdade Unyp pelo MEC"],
+    facts: ["Seminário presencial", "4 dias", "17 horas", "Certificado emitido pela Faculdade Unypública, instituição credenciada pelo MEC"],
     bgSrc: `/${SLUG}/hero.jpg`,
     bgAlt: "Plenário do LicitaExpo em Curitiba",
     ctaPrimary: { href: "#inscricao", label: "Garanta sua vaga" },
@@ -185,7 +186,7 @@ export const licitaexpoContent: Lp3Content = {
       {
         name: "Jarbas Renê",
         institution: "Analista Judiciário · Contabilidade · TRT da 24ª Região",
-        bio: "Analista Judiciário, especialidade Contabilidade, no TRT da 24ª Região.",
+        bio: "Graduado em Ciências Contábeis pela Universidade de Santo Amaro. Analista Judiciário, especialidade Contabilidade, no Tribunal Regional do Trabalho da 24ª Região (MS).",
       },
       {
         name: "Everson da Silva Biazon",
