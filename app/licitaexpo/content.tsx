@@ -22,9 +22,6 @@ import type { Lp3Content } from "@/components/lp3/types";
    Texto do certificado: o exato enviado em 06/10.
 
    TODO (sem dado confirmado — não inventar):
-   - Foto do Jarbas Renê não veio no briefing; sem `photoSrc` ele aparece em
-     linha inteira. Quando chegar: public/licitaexpo/palestrantes/jarbas-rene.jpg
-     (4:5, 640×800).
    - Dia 3, 14h–17h (Julgamento de propostas): professor a confirmar. */
 
 /* Itens dos planos presenciais, na ordem da LP anterior. "6 painéis" saiu do
@@ -186,6 +183,7 @@ export const licitaexpoContent: Lp3Content = {
       {
         name: "Jarbas Renê",
         institution: "Analista Judiciário · Contabilidade · TRT da 24ª Região",
+        photoSrc: "/licitaexpo/palestrantes/jarbas-rene.jpg",
         bio: "Graduado em Ciências Contábeis pela Universidade de Santo Amaro. Analista Judiciário, especialidade Contabilidade, no Tribunal Regional do Trabalho da 24ª Região (MS).",
       },
       {

@@ -22,8 +22,6 @@ import type { Lp3Content } from "@/components/lp3/types";
      de outubro).
 
    TODO (sem dado confirmado):
-   - foto da Solange Gonçalves: não existe no repositório (sem photoSrc = linha
-     inteira, tratamento padrão do lp3);
    - n8n: cadastrar `produto` "portal-nov26" e formId "lp-portal-nov26" antes de
      rodar mídia, senão o lead entra como "Curso não identificado". */
 
@@ -272,14 +270,14 @@ export const portalNov26Content: Lp3Content = {
   },
 
   /* 4 professores, na ordem e com as bios enviadas pelo Gustavo em 07/10 (só
-     profissionais, encurtadas da ficha). Sem Hélio. Solange sem foto no repo. */
+     profissionais, encurtadas da ficha). Sem Hélio. */
   speakers: {
     title: "Quem ensina responde por isso na prática",
     items: [
       {
         name: "Solange Gonçalves",
         institution: "CONTROLE INTERNO · CÂMARA MUNICIPAL DE PORTO AMAZONAS",
-        // TODO: foto — não existe em public/; pedir à Gestão.
+        photoSrc: "/portal-nov26/palestrantes/solange-goncalves.jpg",
         bio: "Administração; pós em Gestão Pública Municipal (UEPG); Controle Interno na Câmara Municipal de Porto Amazonas.",
       },
       {
