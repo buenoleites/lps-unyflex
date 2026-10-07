@@ -1,170 +1,172 @@
-import type { EventLpContent } from "@/components/lp2/types";
-import Kw from "@/components/lp2/Kw";
+import type { Lp3Content } from "@/components/lp3/types";
 
 /* TODA a copy e todos os paths de imagem desta LP vivem aqui — os componentes
-   do template (components/lp2/) não têm texto próprio.
+   do template (components/lp3/) não têm texto próprio.
 
-   Turma de 27 a 30/10/2026 (/licitacao-out26). Duplicação da /licitacao
-   (turma de 15 a 18/09) a partir do briefing de 27/08/2026: layout, ordem e
-   copy idênticos, exceto datas, bancada (Igor no lugar do Rafael), campo de
-   vínculo, bloco "Como seu órgão contrata" e rastreamento. O conteúdo
-   programático dos 6 módulos é VERBATIM do programa do cliente; as frases de
-   resultado (`result`) vieram prontas do briefing. Copy derivada (marcada nos
-   comentários): micro-títulos do problema, título da seção de módulos, linhas
-   de instituição dos professores e a redação das respostas do FAQ (as
-   diretrizes por pergunta são do briefing). */
+   Turma de 27 a 30/10/2026 (/licitacao-out26). Migrada do lp2 para o lp3 em
+   07/10/2026, a pedido do Gustavo: mesma copy, mesmos professores e mesmo
+   formulário (formId/produto/paginaOrigem) da versão lp2, com três decisões
+   dele: carga horária 17 → 20 horas (alinhada ao PR #38 das outras lp3),
+   "presencial ou ● ao vivo" no topo e no formulário, e o bloco de planos
+   padrão das LPs lp3 (BasicClass/MasterClass/PremiumClass, copiado da
+   /portal) no lugar do "combo" do lp2 — o card "Online ao vivo R$ 2.000" e o
+   combo R$ 2.980 saíram da página; a modalidade segue no formulário.
 
-/* Conferência aritmética obrigatória do briefing — se qualquer número do
-   design divergir destas contas, parar e reportar em vez de ajustar:
-   1.783 + 1.197 + 0 = 2.980 (soma dos preços "no combo")
-   6.193 − 2.980 = 3.213 (economia anunciada)
-   2.900 + 2.394 + 899 = 6.193 (soma dos avulsos, o preço "de") */
-const COMBO_PRECOS = { curso: 1783, biblioteca: 1197, minisserie: 0 };
-const AVULSO_PRECOS = { curso: 2900, biblioteca: 2394, minisserie: 899 };
-const COMBO_TOTAL = 2980;
-const AVULSO_TOTAL = 6193;
-const ECONOMIA = 3213;
-if (
-  COMBO_PRECOS.curso + COMBO_PRECOS.biblioteca + COMBO_PRECOS.minisserie !==
-    COMBO_TOTAL ||
-  AVULSO_PRECOS.curso + AVULSO_PRECOS.biblioteca + AVULSO_PRECOS.minisserie !==
-    AVULSO_TOTAL ||
-  AVULSO_TOTAL - COMBO_TOTAL !== ECONOMIA
-) {
-  throw new Error(
-    "Pricing do combo inconsistente com o briefing — conferir os valores."
+   O que veio VERBATIM da versão lp2 (briefing de 27/08/2026): título,
+   subtítulo, 4 perfis de "Para quem", as 3 citações de "Desafios", os 6
+   módulos (programa do cliente, com as frases de `result` do briefing), os 3
+   professores com bio, "Como seu órgão contrata", as 8 perguntas do FAQ, o
+   campo de vínculo e a prova social. Da /portal (lp3): fatos do hero,
+   passos "Como funciona", consentimento, planos, nota de empenho e rodapé.
+
+   Ainda sem slot no lp3 (ficou de fora, não reescrito): a linha de endereço
+   do hero (segue no JSON-LD do layout), o lead "Você recebe tudo pronto…" de
+   "Como seu órgão contrata" e o 5º item (Notória Especialização), que
+   continua PENDENTE de confirmação do Gustavo. */
+
+/* Os 12 itens dos planos, na ordem do briefing. Os três vetores dizem o que
+   cada plano inclui. */
+const PLANO_ITENS = [
+  "Capacitação prática em 3 dias",
+  "Capacitação prática em 4 dias",
+  "6 Coffee Breaks Gourmet",
+  "Certificado de instituição reconhecida pelo MEC",
+  "Desconto em pós-graduação",
+  "Mentoria exclusiva VIP",
+  "Kit exclusivo UNYFLEX",
+  "Tour Linha Turismo Curitiba",
+  "Almoço no Restaurante Madalosso",
+  "3 meses de Assinatura Premium",
+  "1 semestre de graduação",
+  "UNYPOINTS para troca na UNY store",
+];
+const BASIC = [true, false, true, true, false, false, false, false, false, false, false, false];
+const MASTER = [false, true, true, true, true, false, false, false, false, false, false, false];
+const PREMIUM = [false, true, true, true, true, true, true, true, true, true, true, true];
+/* `rotulos` troca o texto de um item só neste card; `omitir` tira índices do
+   card ("3 dias" não aparece como não incluso no Master e no Premium). */
+function planoFeatures(inclui: boolean[], rotulos: Record<number, string> = {}, omitir: number[] = []) {
+  return PLANO_ITENS.map((label, i) => ({ label: rotulos[i] ?? label, included: inclui[i] })).filter(
+    (_, i) => !omitir.includes(i),
   );
 }
 
-/* Escassez do hero (briefing): só entra se for o número REAL de vagas da
-   sala. null ⇒ não renderiza nada. Sem "últimas vagas" nem contador. O `as`
-   preserva a união — com anotação de tipo o TS estreita para null e o ramo
-   do template vira `never`. */
-const VAGAS = null as number | null;
+export const SLUG = "licitacao-out26";
+/* O h1 do lp2 ("DFD, ETP, TR e Mapa de Riscos com Inteligência Artificial")
+   dava 4 linhas no h1 do lp3 a 1440px. Repartido como na /licitaexpo: a
+   linha de promessa (accent) fica com "Licitações com Inteligência
+   Artificial" (o nome da LP no title/metadata) e o título com as peças. */
+export const NOME_OFICIAL = "Licitações com Inteligência Artificial";
+export const GANCHO = "DFD, ETP, TR e Mapa de Riscos";
+/* Subtítulo = só a primeira frase do subtítulo do lp2 (as duas frases davam
+   4 linhas a 1440px e 7 a 390px; regra do topo: até 3). A segunda frase,
+   "Para quem assina ou revisa os documentos da contratação.", já está
+   coberta pela seção "Para quem". */
+export const DESCRICAO =
+  "A fase de planejamento da Lei nº 14.133/2021, do jeito que o Tribunal de Contas espera — com a IA acelerando o trabalho sem fragilizar o processo.";
 
-// O CSS do eyebrow (.lp2-eyebrow) já aplica uppercase.
-const HERO_EYEBROW = `Curso presencial em Curitiba · 27 a 30/10 · 17 horas${
-  VAGAS !== null ? ` · Turma limitada a ${VAGAS} vagas` : ""
-}`;
-
-export const licitacaoOut26Content: EventLpContent = {
-  /* O accent (#00aeef, ciano da vertical Licitações) NÃO é definido aqui:
+export const licitacaoOut26Content: Lp3Content = {
+  /* O accent (#4EABE9, ciano da vertical Licitações) NÃO é definido aqui:
      todos os tokens de cor da LP vivem em um único bloco em ./theme.css. */
 
   nav: {
     logoSrc: "/logo.png",
     logoAlt: "Unyflex",
-    links: [
-      { href: "#para-quem", label: "Para quem" },
-      { href: "#problema", label: "Desafios" },
-      { href: "#modulos", label: "Módulos" },
-      { href: "#planos", label: "Investimento" },
-      { href: "#faq", label: "FAQ" },
-    ],
     cta: { href: "#inscricao", label: "Receber proposta" },
   },
 
   hero: {
-    eyebrow: HERO_EYEBROW,
-    title: (
-      <>
-        DFD, ETP, TR e Mapa de Riscos com <Kw>Inteligência Artificial</Kw>
-      </>
-    ),
-    subtitle:
-      "A fase de planejamento da Lei nº 14.133/2021, do jeito que o Tribunal de Contas espera — com a IA acelerando o trabalho sem fragilizar o processo. Para quem assina ou revisa os documentos da contratação.",
-    // Linha derivada dos 4 perfis da seção "Para quem é" do briefing (o campo
-    // é obrigatório no template e o briefing não traz linha própria de públicos).
-    audiences:
-      "Pregoeiro e agente de contratação · licitações e compras · jurídico · controle interno",
-    // Sem href ⇒ o CTA vai para #inscricao (briefing: âncora para o formulário).
-    cta: { label: "Quero receber proposta com nota de empenho" },
-    // Os 3 badges do briefing na linha de meta (small muted) — o template não
-    // tem slot próprio de badges (mesma solução da /patrimonio).
-    meta: "Rua Voluntários da Pátria, 547 — Centro, Curitiba/PR · Certificado emitido após a conclusão por instituição reconhecida pelo MEC · Também disponível online ao vivo",
-    bgSrc: "/licitacao-out26/hero.jpg",
+    badge: "Inscrições abertas",
+    promise: NOME_OFICIAL,
+    title: GANCHO,
+    subtitle: DESCRICAO,
+    dates: "27, 28, 29 e 30 de outubro",
+    place: "Curitiba-PR · presencial ou ● ao vivo",
+    facts: [
+      "4 dias",
+      "20 horas",
+      "certificado emitido por instituição reconhecida pelo MEC",
+    ],
+    bgSrc: `/${SLUG}/hero.jpg`,
+    bgAlt: "Turma em sala de aula da Unyflex em Curitiba",
+    // Label da versão lp2 ("Quero receber proposta com nota de empenho")
+    // dava 3 linhas no botão a 390px e jogava o CTA para fora da primeira
+    // dobra; fica o label do CTA de "Como seu órgão contrata" (mesma copy).
+    ctaPrimary: { href: "#inscricao", label: "Quero receber a proposta" },
   },
 
-  ticker: {
-    metrics: [
-      { value: "49.000+", label: "alunos formados" },
-      { value: "1.200+", label: "órgãos atendidos" },
-      { value: "5,0", label: "no Google · +450 avaliações" },
-      { value: "17", label: "horas de capacitação" },
+  proof: {
+    items: [
+      "49.000+ alunos formados",
+      "1.200+ órgãos atendidos",
+      "5,0 no Google · +450 avaliações",
     ],
   },
 
-  /* variant "grid" (briefing): os 4 perfis visíveis de uma vez, como filtro de
-     autoqualificação — mesmo padrão da /patrimonio. */
   audience: {
+    eyebrow: "Para quem",
     title: "Este curso é para quem responde pela contratação",
-    variant: "grid",
-    groups: [
+    items: [
       {
-        id: "pregoeiro",
         label: "Pregoeiro e Agente de Contratação",
         description:
           "E a equipe de planejamento da contratação: quem assina ou produz DFD, ETP, TR, Mapa de Riscos e alimenta o PCA.",
       },
       {
-        id: "licitacoes",
         label: "Setor de Licitações e Compras",
         description:
           "Chefe de compras e coordenador de licitações que respondem pelo fluxo do processo.",
       },
       {
-        id: "juridico",
         label: "Jurídico e Procuradoria",
         description:
           "Quem revisa e dá parecer sobre as peças e precisa aceitar ou vetar o uso de IA nos documentos.",
       },
       {
-        id: "controle",
         label: "Controle interno e auditoria",
         description:
           "Foco na qualidade do planejamento e na mitigação de riscos antes da publicação do edital.",
       },
     ],
-    closing:
-      "Se você lida com DFD, ETP, TR e Mapa de Riscos — e agora precisa usar IA sem fragilizar o processo — o curso é seu.",
+    note: "Se você lida com DFD, ETP, TR e Mapa de Riscos — e agora precisa usar IA sem fragilizar o processo — o curso é seu.",
   },
 
-  /* As 3 citações do briefing, verbatim, como cards ("voz do servidor"). Os
-     micro-títulos são derivados — o contrato do grid exige `title` por card e
-     o briefing só trouxe as falas; flagado no relatório para validação. O grid
-     vira 1+2 via theme.css (o template assume 6–10 cards). */
+  /* As 3 citações do briefing, verbatim ("voz do servidor"); micro-títulos
+     derivados, herdados da versão lp2. */
   problem: {
+    id: "problema",
+    tone: "elevated",
+    eyebrow: "Desafios",
     title: "Se alguma dessas frases podia ser sua, o curso é seu",
     items: [
       {
         title: "Modelo velho e copiar/colar",
-        desc: "“Eu já faço DFD, ETP, TR e Mapa de Riscos na marra, com modelo velho e copiar/colar. Todo mundo fala em IA, mas tenho medo de gerar documento genérico e dar munição pro controle interno ou pro TCE anular o processo.”",
+        text: "“Eu já faço DFD, ETP, TR e Mapa de Riscos na marra, com modelo velho e copiar/colar. Todo mundo fala em IA, mas tenho medo de gerar documento genérico e dar munição pro controle interno ou pro TCE anular o processo.”",
       },
       {
         title: "O planejamento virou gargalo",
-        desc: "“A fase de planejamento virou gargalo: montar ETP, TR e MR bem feitos leva semanas. Se tento acelerar com IA genérica, fico inseguro de base legal, jurisprudência e coerência entre as peças.”",
+        text: "“A fase de planejamento virou gargalo: montar ETP, TR e MR bem feitos leva semanas. Se tento acelerar com IA genérica, fico inseguro de base legal, jurisprudência e coerência entre as peças.”",
       },
       {
         title: "Ninguém me ensinou as regras",
-        desc: "“Ninguém me ensinou a usar IA dentro das regras da Lei 14.133 — o que posso ou não jogar na ferramenta, como revisar o que ela gera, e como continuar responsável pelo texto sem virar apertador de botão.”",
+        text: "“Ninguém me ensinou a usar IA dentro das regras da Lei 14.133 — o que posso ou não jogar na ferramenta, como revisar o que ela gera, e como continuar responsável pelo texto sem virar apertador de botão.”",
       },
     ],
   },
 
-  /* schedule (timeline por dia) desligada nesta LP: o briefing pede o
-     conteúdo programático em accordion — seção `modules`. */
-
-  /* Conteúdo programático VERBATIM do programa do cliente (mesmo programa da turma de setembro).
-     As frases de `result` (visíveis com o card fechado) vieram prontas do
-     briefing. Convenção dos sub-itens: cada item lettrado (a, b, c…) é uma
-     string própria em `topics`, com a letra preservada; o tópico-pai termina
-     em dois-pontos. Nada aqui é reconstruído ou resumido.
-     Módulo 5 (PCA): a numeração do programa original tinha itens repetidos
-     (5, 6 e 7 apareciam duas vezes); renumerado sequencialmente preservando o
+  /* Conteúdo programático VERBATIM do programa do cliente (mesmo programa da
+     turma de setembro). As frases de `result` (visíveis com o acordeão
+     fechado) vieram prontas do briefing. Convenção dos sub-itens: cada item
+     lettrado (a, b, c…) é uma string própria em `topics`, com a letra
+     preservada; o tópico-pai termina em dois-pontos. Nada aqui é
+     reconstruído ou resumido. Módulo 5 (PCA): a numeração do programa
+     original tinha itens repetidos; renumerado sequencialmente preservando o
      texto de cada item — único ajuste permitido pelo cliente. */
   modules: {
-    // Título derivado (o briefing não traz título para a seção).
-    title: "Em 17 horas, a fase de planejamento inteira — peça por peça",
+    eyebrow: "Programação",
+    // Título derivado (o briefing não traz título para a seção); 20 horas
+    // por decisão do Gustavo em 07/10.
+    title: "Em 20 horas, a fase de planejamento inteira — peça por peça",
     items: [
       {
         title: "Planejamento In Foco: Ensino e Soluções de I.A.",
@@ -315,15 +317,9 @@ export const licitacaoOut26Content: EventLpContent = {
     ],
   },
 
-  /* quote (seção opcional): não pedida pelo briefing — desligada. */
-
-  /* 3 professores = grid default do template, sem patch de layout. Turma de
-     outubro (briefing de 27/08): Igor Pires Gomes da Costa entra no lugar do
-     Rafael Costa Santos; Marcus e Gabriela são os cards da /licitacao, sem
-     alteração. Ordem numerada do briefing: Marcus, Gabriela, Igor. Rótulo do
-     Igor e bio verbatim do briefing (sem ampliar). Fotos: Igor e Gabriela em
-     400×400 (mesmos assets da /licitaexpo-v2 — o template recorta em 4:5 via
-     CSS); a do Marcus é o upscale 640×800 já aceito na /patrimonio. */
+  /* Turma de outubro (briefing de 27/08): Igor Pires Gomes da Costa no lugar
+     do Rafael Costa Santos; Marcus e Gabriela como na /licitacao. Ordem
+     numerada do briefing: Marcus, Gabriela, Igor. Bios verbatim. */
   speakers: {
     title: "Quem ensina responde por isso na prática",
     items: [
@@ -348,151 +344,143 @@ export const licitacaoOut26Content: EventLpContent = {
     ],
   },
 
-  /* gallery (seção opcional): não pedida pelo briefing — desligada. */
-
-  /* Pricing "combo" do briefing — substitui a tabela de turmas (`plans`) das
-     outras LPs. Valores conferidos pela checagem aritmética no topo do
-     arquivo. A tabela comparativa entra quando o print com as células ✓/✗
-     chegar (nenhuma célula pode ser inventada — veto do briefing). */
-  pricingCombo: {
-    title: "Investimento",
-    products: [
+  /* Bloco de planos padrão das LPs lp3 (copiado da /portal, decisão do
+     Gustavo em 07/10): substitui o "combo" da versão lp2. Só o rótulo dos
+     3 dias do BasicClass muda, para as datas desta turma. */
+  plans: {
+    eyebrow: "Planos e Preços",
+    title: "Três planos de participação",
+    lead: "O mesmo curso, com três níveis de experiência. O PremiumClass é o plano recomendado: capacitação em 4 dias e a agenda completa fora da sala de aula.",
+    items: [
       {
-        name: "Curso",
-        desc: "Aulas presenciais/online, suporte e certificação",
-        price: "R$ 2.900,00",
-        comboPrice: "R$ 1.783,00",
-        discount: "−39%",
+        name: "BasicClass",
+        sub: "Investimento por aluno",
+        price: "R$ 2.980,00",
+        features: planoFeatures(BASIC, {
+          0: "Capacitação prática em 3 dias: terça a quinta (27 a 29/10) ou quarta a sexta (28 a 30/10)",
+        }),
+        ctaLabel: "Quero o BasicClass",
       },
       {
-        name: "Biblioteca Digital",
-        desc: "Acesso, leitura e download do acervo pedagógico de Gestão Pública",
-        price: "R$ 2.394,00",
-        comboPrice: "R$ 1.197,00",
-        discount: "−50%",
+        name: "MasterClass",
+        sub: "Investimento por aluno",
+        price: "R$ 3.200,00",
+        features: planoFeatures(MASTER, {}, [0]),
+        ctaLabel: "Quero o MasterClass",
       },
       {
-        name: "Minissérie",
-        desc: "Conteúdo em área correlata com certificação própria, em digital.unyflex.com.br",
-        price: "R$ 899,00",
-        comboPrice: "Grátis",
-        discount: "−100%",
+        name: "PremiumClass",
+        sub: "Investimento por aluno",
+        price: "R$ 3.980,00",
+        highlighted: true,
+        highlightLabel: "Recomendado",
+        features: planoFeatures(PREMIUM, {}, [0]),
+        ctaLabel: "Quero o PremiumClass",
       },
     ],
-    combo: {
-      highlightLabel: "★ Compra indicada",
-      name: "Combo: os três produtos de ensino",
-      from: "De R$ 6.193,00",
-      price: "R$ 2.980,00",
-      savings: "Economia de R$ 3.213,00",
-      ctaPrimary: { href: "#inscricao", label: "Quero o combo" },
-      ctaSecondary: { href: "#inscricao", label: "Falar com consultor" },
-    },
-    // Células transcritas do print do briefing (recebido em 11/08/2026) —
-    // nenhuma inventada.
-    comparison: {
-      itemsLabel: "O que está incluído",
-      columns: ["Curso", "Biblioteca Digital", "Minissérie", "Combo — os três"],
-      rows: [
-        {
-          label: "Aulas presenciais/online do curso",
-          cells: [true, false, false, true],
-        },
-        {
-          label: "Suporte durante o curso",
-          cells: [true, false, false, true],
-        },
-        {
-          label: "Certificado de instituição reconhecida pelo MEC",
-          cells: [true, false, false, true],
-        },
-        {
-          label: "Coffee break gourmet",
-          cells: [true, false, false, true],
-        },
-        {
-          label: "Acesso, leitura e download do acervo pedagógico",
-          cells: [false, true, false, true],
-        },
-        {
-          label: "Material em PDF (ebook)",
-          cells: [false, true, false, true],
-        },
-        {
-          label: "Clube de benefícios e desconto em graduação e pós",
-          cells: [false, true, false, true],
-        },
-        {
-          label: "Minissérie em área correlata (digital.unyflex.com.br)",
-          cells: [false, false, true, true],
-        },
-        {
-          label: "Certificação própria da minissérie",
-          cells: [false, false, true, true],
-        },
-        {
-          label: "Valores",
-          cells: [
-            "R$ 2.900,00 · no combo: R$ 1.783,00",
-            "R$ 2.394,00 · no combo: R$ 1.197,00",
-            "R$ 899,00 · no combo: grátis",
-            "R$ 2.980,00 · de R$ 6.193,00",
-          ],
-        },
-      ],
-    },
-    online: {
-      name: "Online ao vivo",
-      price: "R$ 2.000,00",
-      desc: "Mesmas aulas, transmitidas em tempo real.",
-    },
     // Bloco de pagamento crítico para B2G — verbatim do briefing.
     paymentNote:
       "Aceitamos nota de empenho, com prazo de pagamento de 7 dias após a finalização do curso. Fornecemos toda a documentação necessária para a contratação pelo seu órgão. Pessoa física pode se inscrever por qualquer forma de pagamento.",
+    footnote:
+      "Valores por aluno. Benefícios do PremiumClass (tour, almoço, assinatura premium, semestre de graduação, kit exclusivo e UNYPOINTS) são concedidos na confirmação da matrícula e não são convertidos em desconto.",
   },
 
-  /* "Como seu órgão contrata": depois de preço, a pergunta mais frequente dos
-     leads é "me manda o cronograma para eu pedir autorização ao gestor". Copy
-     verbatim do briefing. */
+  /* "Como seu órgão contrata": copy verbatim do briefing (os 4 itens). O
+     lead "Você recebe tudo pronto para levar ao gestor — não precisa montar
+     nada." não tem slot no lp3. */
   procurement: {
+    id: "como-contratar",
+    tone: "paper",
+    eyebrow: "Contratação",
     title: "Como seu órgão contrata",
-    lead: "Você recebe tudo pronto para levar ao gestor — não precisa montar nada.",
     items: [
       {
         title: "Proposta formal",
-        desc: "Em nome do seu órgão, com valores e condições.",
+        text: "Em nome do seu órgão, com valores e condições.",
       },
       {
         title: "Nota de empenho",
-        desc: "Pagamento em até 7 dias após a conclusão do curso.",
+        text: "Pagamento em até 7 dias após a conclusão do curso.",
       },
       {
         title: "Documentação para contratação",
-        desc: "Enviamos todos os documentos exigidos no processo.",
+        text: "Enviamos todos os documentos exigidos no processo.",
       },
       {
         title: "Certificado reconhecido",
-        desc: "Emitido por instituição reconhecida pelo MEC após a conclusão.",
+        text: "Emitido por instituição reconhecida pelo MEC após a conclusão.",
       },
       // PENDENTE DE CONFIRMAÇÃO (Gustavo) — NÃO ativar sem ok. Quinto item,
       // pronto para entrar:
       // {
       //   title: "Declaração de Notória Especialização",
-      //   desc: "Permite a contratação direta por inexigibilidade.",
+      //   text: "Permite a contratação direta por inexigibilidade.",
       // },
     ],
-    cta: { label: "Quero receber a proposta" },
+    cta: { label: "Quero receber a proposta", href: "#inscricao" },
   },
 
-  /* reviews (seção opcional): desligada — sem textos reais de avaliação. */
+  form: {
+    eyebrow: "Inscrição",
+    title: "Garanta sua participação",
+    // Urgência factual, sem escassez fabricada (vetada pelo briefing).
+    meta: "Turma de 27 a 30/10 · Curitiba-PR · presencial ou ● ao vivo · Empenho leva tempo no seu órgão — comece o processo agora.",
+    steps: {
+      title: "Como funciona",
+      items: [
+        "Você envia seus dados.",
+        "Recebe nossa mensagem no WhatsApp, e um consultor monta a proposta com a documentação para a contratação.",
+        "O órgão emite a nota de empenho e a vaga está garantida.",
+      ],
+    },
+    // formId, produto e paginaOrigem NÃO mudam na migração: é por eles que
+    // o n8n identifica a turma (slug `licitacao-out26` já no mapa de cursos).
+    formId: "lp-licitacao-out26",
+    produto: SLUG,
+    paginaOrigem: SLUG,
+    // `c` = ?c= da URL com fallback no slug; também preenche utm_campaign e o
+    // token c= do `titulo` quando não há UTM (antes ia "-").
+    campaignFallback: SLUG,
+    planOptions: ["BasicClass", "MasterClass", "PremiumClass"],
+    modalidade: {
+      label: "Modalidade preferida",
+      // Valores vão no payload (Modalidade_Preferida) e não mudam; só o rótulo.
+      options: ["Presencial em Curitiba", "Online ao vivo"],
+      labels: ["Presencial em Curitiba", "Ao vivo"],
+    },
+    vinculo: {
+      label: "Seu vínculo",
+      // O toggle Sim/Não reprovava lead qualificado (contador de prefeitura
+      // marcava "Não" e o n8n fechava como Perdido). Values = payload.
+      options: [
+        { value: "servidor", label: "Servidor efetivo ou comissionado" },
+        {
+          value: "terceirizado",
+          label: "Terceirizado ou prestador para órgão público",
+        },
+        { value: "fornecedor", label: "Empresa fornecedora do poder público" },
+        { value: "outro", label: "Outro" },
+      ],
+    },
+    submitLabel: "Receber proposta",
+    consent: {
+      label: (
+        <>
+          Autorizo o contato da Unyflex por WhatsApp, telefone e e-mail sobre este curso, conforme a{" "}
+          <a href="https://unyflex.com.br/lgpd" target="_blank" rel="noopener noreferrer">
+            política de privacidade
+          </a>
+          .
+        </>
+      ),
+      value: "sim",
+    },
+    thankYou: { url: "/obrigado", withPii: false },
+  },
 
-  /* compare (seção opcional): não pedida — o online aparece no hero, no card
-     do pricing e no campo de modalidade. */
-
-  /* FAQ: as 8 perguntas do briefing; respostas de 2 a 4 frases redigidas a
-     partir das diretrizes por pergunta. Vetos respeitados: sem afirmar posição
-     de tribunal específico (P3), sem prometer prompts prontos (P4). */
+  /* FAQ: as 8 perguntas do briefing; respostas herdadas da versão lp2. */
   faq: {
+    eyebrow: "Dúvidas",
     title: "Perguntas frequentes",
     items: [
       {
@@ -530,56 +518,12 @@ export const licitacaoOut26Content: EventLpContent = {
     ],
   },
 
-  form: {
-    title: "Garanta sua participação",
-    // Urgência factual, sem escassez fabricada (vetada pelo briefing).
-    meta: "Turma de 27 a 30/10, em Curitiba. Empenho leva tempo no seu órgão — comece o processo agora.",
-    // [ASSET PROVISÓRIO]: foto oficial Unyflex reaproveitada da /patrimonio
-    // (que por sua vez veio da /comunicacao). TODO: substituir quando chegar.
-    bgSrc: "/licitacao-out26/cta-final.jpg",
-    // Novo formId desta turma. BLOQUEIO DE PUBLICAÇÃO: o slug `licitacao-out26`
-    // (campo `produto` abaixo) precisa estar no mapa de cursos do n8n antes de
-    // a página receber tráfego, senão o lead entra como "Curso não identificado".
-    formId: "lp-licitacao-out26",
-    submitLabel: "Receber proposta",
-    thankYou: { url: "/obrigado", withPii: false },
-    modalidade: {
-      label: "Modalidade preferida",
-      options: ["Presencial em Curitiba", "Online ao vivo"],
-    },
-    vinculo: {
-      label: "Seu vínculo",
-      // O toggle Sim/Não reprovava lead qualificado (contador de prefeitura
-      // marcava "Não" e o n8n fechava como Perdido). Values = payload.
-      options: [
-        { value: "servidor", label: "Servidor efetivo ou comissionado" },
-        {
-          value: "terceirizado",
-          label: "Terceirizado ou prestador para órgão público",
-        },
-        { value: "fornecedor", label: "Empresa fornecedora do poder público" },
-        { value: "outro", label: "Outro" },
-      ],
-    },
-    // Chave pela qual o mapa de cursos do n8n identifica a turma (cCodIntOp
-    // no CRM) — distinta entre as turmas de setembro e outubro.
-    produto: "licitacao-out26",
-    paginaOrigem: "licitacao-out26",
-  },
-
-  /* Rodapé replicado da /patrimonio (mesma parceira e mesmas redes). */
   footer: {
-    logoSrc: "/logo.png",
+    logoSrc: `/${SLUG}/logo-escura.png`, // mesmo recorte das outras lp3
     logoAlt: "Unyflex",
-    partners: [
-      // invert: o logo original é escuro — em marca branca sobre o rodapé.
-      {
-        src: "/licitacao-out26/parceiros/faculdade-unypublica.png",
-        alt: "Faculdade Unypública",
-        invert: true,
-      },
-    ],
-    legal: [],
+    partnersLabel: "Certificação",
+    partners: [{ src: `/${SLUG}/parceiros/faculdade-unypublica.png`, alt: "Faculdade Unypública" }],
+    legal: [{ href: "https://unyflex.com.br/lgpd", label: "Política de privacidade" }],
     social: [
       {
         kind: "google",
@@ -594,7 +538,7 @@ export const licitacaoOut26Content: EventLpContent = {
   },
 
   stickyCta: {
-    priceAnchor: "a partir de R$ 2.000",
+    priceAnchor: "a partir de R$ 2.980",
     label: "Receber proposta",
     href: "#inscricao",
   },

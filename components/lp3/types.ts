@@ -181,6 +181,11 @@ export interface Lp3Content {
       /** Rótulos exibidos nos botões; sem isso, mostra o próprio valor. */
       labels?: [string, string];
     };
+    /** Select "Seu vínculo" (opt-in, mesmo shape do lp2). Quando presente
+     *  SUBSTITUI o toggle "É servidor público?": o payload manda `vinculo` e
+     *  não manda Orgao_Publico (lib/lp/lead.ts decide pela presença da chave;
+     *  o n8n fechava como "Perdido" quem marcava "Não" no toggle). */
+    vinculo?: { label: string; options: { value: string; label: string }[] };
     submitLabel: string;
     /** "Como funciona": passos numerados na coluna ao lado do formulário. */
     steps?: { title: string; items: string[] };

@@ -21,7 +21,10 @@ import type { Lp3Content } from "./types";
      com a regra "11 dígitos").
    - Consentimento obrigatório com link para a política (`consentimento`).
    - `c` = ?c= da URL, com fallback no slug (lib/lp3/campaign.ts); também
-     alimenta utm_campaign/titulo quando a sessão não tem UTM. */
+     alimenta utm_campaign/titulo quando a sessão não tem UTM.
+   - `vinculo` (opt-in por LP, desde 07/10 para a /licitacao-out26): select
+     "Seu vínculo" no lugar do toggle "É servidor público?"; o payload manda
+     `vinculo` em vez de Orgao_Publico, como no lp2. */
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -51,6 +54,7 @@ type Values = {
   municipio: string;
   cargo: string;
   servidorPublico: string;
+  vinculo: string;
   modalidade: string;
   consent: boolean;
 };
@@ -70,6 +74,7 @@ function validate(field: keyof Values, value: string | boolean): string {
     case "municipio":
       return String(value).trim() ? "" : "Informe o município.";
     case "servidorPublico":
+    case "vinculo":
     case "modalidade":
       return value ? "" : "Selecione uma opção.";
     case "consent":
@@ -159,6 +164,7 @@ export default function Form({
     municipio: "",
     cargo: "",
     servidorPublico: "",
+    vinculo: "",
     modalidade: "",
     consent: false,
   });
@@ -205,7 +211,7 @@ export default function Form({
         "email",
         "orgao",
         "municipio",
-        "servidorPublico",
+        content.vinculo ? "vinculo" : "servidorPublico",
         ...(content.modalidade ? (["modalidade"] as const) : []),
         "consent",
       ] as const
@@ -231,7 +237,11 @@ export default function Form({
       cargo: form.cargo.trim(),
       // n8n atual lê Orgao_Municipio: vai concatenado; Municipio separado abaixo.
       orgao: `${form.orgao.trim()} – ${form.municipio.trim()}`,
-      servidorPublico: form.servidorPublico,
+      // Com `vinculo` configurado o payload manda `vinculo` e omite
+      // Orgao_Publico; sem ele, o toggle de sempre (lib/lp/lead.ts).
+      ...(content.vinculo
+        ? { vinculo: form.vinculo }
+        : { servidorPublico: form.servidorPublico }),
       // A presença da chave decide se Modalidade_Preferida entra no payload.
       ...(content.modalidade ? { modalidade: form.modalidade } : {}),
     };
@@ -370,6 +380,45 @@ export default function Form({
               </div>
             </div>
 
+            {content.vinculo ? (
+              <div className={`lp3-form__field${errors.vinculo ? " is-error" : ""}`}>
+                <label htmlFor="f-vinculo">
+                  {content.vinculo.label}
+                  <span className="lp3-form__req" aria-hidden="true">
+                    {" "}
+                    *
+                  </span>
+                </label>
+                <div className="lp3-form__select">
+                  <select
+                    id="f-vinculo"
+                    name="vinculo"
+                    value={form.vinculo}
+                    required
+                    aria-invalid={errors.vinculo ? "true" : undefined}
+                    aria-describedby={errors.vinculo ? "err-vinculo" : undefined}
+                    className={form.vinculo === "" ? "is-placeholder" : undefined}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setForm((f) => ({ ...f, vinculo: value }));
+                      setErrors((prev) => ({ ...prev, vinculo: undefined }));
+                    }}
+                  >
+                    <option value="">Selecione</option>
+                    {content.vinculo.options.map((opt) => (
+                      <option key={opt.value} value={opt.value}>
+                        {opt.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                {errors.vinculo ? (
+                  <span className="lp3-form__err" id="err-vinculo" role="alert">
+                    {errors.vinculo}
+                  </span>
+                ) : null}
+              </div>
+            ) : (
             <div className={`lp3-form__field lp3-form__field--full${errors.servidorPublico ? " is-error" : ""}`}>
               <span className="lp3-form__toggle-label" id="lbl-servidor">
                 É servidor público?{" "}
@@ -400,6 +449,7 @@ export default function Form({
                 </span>
               ) : null}
             </div>
+            )}
 
             {content.modalidade ? (
               <div className={`lp3-form__field lp3-form__field--full${errors.modalidade ? " is-error" : ""}`}>
