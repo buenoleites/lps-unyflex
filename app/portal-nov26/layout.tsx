@@ -4,9 +4,8 @@ import "../lp3.css";
 import "./theme.css";
 
 /* Portal, LGPD, e-SIC e Ouvidoria, turma de 16 a 19/11/2026 (/portal-nov26),
-   clone da /portal em 07/10/2026 — ver content.tsx.
-   TODO: "20 horas" aqui (description, OG, JSON-LD) aguarda a Gestão confirmar
-   17 ou 20. */
+   clone da /portal em 07/10/2026 — ver content.tsx. 20 horas = decisão da
+   Gestão (07/10). */
 
 export const metadata: Metadata = {
   // O root layout define metadataBase com o path /licitacao embutido, o que

@@ -6,8 +6,7 @@ export const alt =
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-/* TODO: "20 horas" aguarda a Gestão (17 ou 20).
-   A ImageResponse não lê CSS — os valores abaixo espelham os tokens desta LP
+/* A ImageResponse não lê CSS — os valores abaixo espelham os tokens desta LP
    (--bg-dark #0a0e14 do lp2.css, --accent #05CCCC do theme.css). */
 export default function OgImage() {
   return new ImageResponse(

@@ -11,7 +11,10 @@ import type { Lp3Content } from "@/components/lp3/types";
    depoimentos, "Como seu órgão contrata" e FAQ são os da /portal, VERBATIM.
 
    Decisões de 07/10:
-   - os 6 módulos são os da /portal (a ficha anexa não chegou; Gustavo confere);
+   - os 6 módulos foram conferidos com a ficha da turma de 16/11 (enviada em
+     07/10): 1–5 idênticos à /portal; o Módulo 6 (IA) recebeu os 13 tópicos da
+     ficha no lugar da lista de ferramentas Google herdada da /licitacao;
+   - carga horária: 20 horas (decisão da Gestão, 07/10; a ficha diz 17);
    - a linha "Áreas:" da ficha NÃO vira público-alvo ("Para quem" = /portal);
    - h1 mantido ("Publicar ou proteger?…"); "Guia atualizado para municípios"
      fica no <title>, description e OG;
@@ -19,8 +22,6 @@ import type { Lp3Content } from "@/components/lp3/types";
      de outubro).
 
    TODO (sem dado confirmado):
-   - carga horária: 17 ou 20 horas — a Gestão ainda não confirmou. Está "20"
-     (hero.facts, modules.title, layout.tsx, opengraph-image.tsx);
    - foto da Solange Gonçalves: não existe no repositório (sem photoSrc = linha
      inteira, tratamento padrão do lp3);
    - n8n: cadastrar `produto` "portal-nov26" e formId "lp-portal-nov26" antes de
@@ -72,7 +73,7 @@ export const portalNov26Content: Lp3Content = {
     place: "Curitiba-PR · presencial ou ● ao vivo",
     facts: [
       "4 dias",
-      "20 horas", // TODO: 17 ou 20 — aguardando a Gestão
+      "20 horas",
       "certificado emitido por instituição reconhecida pelo MEC",
     ],
     bgSrc: "/portal-nov26/hero.jpg",
@@ -158,7 +159,6 @@ export const portalNov26Content: Lp3Content = {
 
   modules: {
     eyebrow: "Programação",
-    // TODO: "20 horas" no título depende da confirmação da carga horária.
     title: "Em 20 horas, do marco legal à prática — Ouvidoria, Portal, LGPD e IA",
     items: [
       {
@@ -247,24 +247,25 @@ export const portalNov26Content: Lp3Content = {
         ],
       },
       {
-        // Título do briefing de outubro (lista oficial dos 6 módulos); result
-        // e topics são os do Módulo 6 da /licitacao, cujo conteúdo é idêntico.
+        // Título, result (montado só com expressões da ficha) e os 13 tópicos
+        // vêm da ficha da turma de 16/11 (07/10).
         title: "Inteligência Artificial no Setor Público",
         result:
-          "Da análise de documentos ao antifraude: o panorama das ferramentas aplicáveis à realidade municipal",
+          "Fundamentos, IA generativa, agentes e automação de processos: potencial e limites da IA na Administração Pública",
         topics: [
-          "Gemini (Vertex AI) para análise de documentos e relatórios",
-          "Vision AI para monitoramento urbano e ambiental",
-          "Video AI para segurança pública e eventos",
-          "Dialogflow e Agent Garden para atendimento ao cidadão",
-          "BigQuery ML para planejamento estratégico municipal",
-          "AI Dashboards para transparência e controle social",
-          "IoT + IA para sustentabilidade e gestão ambiental",
-          "Sistemas especialistas aplicados à gestão pública",
-          "Computação cognitiva e redes neurais generativas",
-          "IA antifraude e biometria em serviços municipais",
-          "RFID e inteligência artificial: predição e automação estratégica",
-          "Integração de IA com plataformas governamentais (SICONFI, Transferegov, SIT)",
+          "Fundamentos da IA e machine learning",
+          "Assistentes virtuais e chatbots",
+          "Potencial e limites da IA na Administração Pública",
+          "Avaliação de impacto regulatório com IA",
+          "Segurança Jurídica e Normatização da IA na Administração Pública",
+          "Ferramentas de IA generativa",
+          "Engenharia de Prompts",
+          "Agentes e Assistentes personalizados",
+          "Detecção e prevenção de danos (irregularidades, desvios, fraudes, etc.)",
+          "Automação de processos internos",
+          "Sistemas inteligentes de atendimento e comunicação",
+          "Análise preditiva de gestão estratégica setorial",
+          "Segurança e ética no uso da IA",
         ],
       },
     ],
