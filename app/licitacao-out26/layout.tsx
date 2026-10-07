@@ -1,20 +1,25 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import "../lp2.css";
+import "../lp3.css";
 import "./theme.css";
+import { SLUG } from "./content";
 
 /* Licitações — DFD, ETP, TR e Mapa de Riscos com Inteligência Artificial,
-   no template lp2 (turma de 27 a 30/10/2026 — rota /licitacao-out26). */
+   turma de 27 a 30/10/2026 (rota /licitacao-out26). Migrada do lp2 para o
+   lp3 em 07/10/2026 (ciano #4EABE9, 20 horas, presencial ou ao vivo). */
+
+const PAGE_TITLE =
+  "Licitações: DFD, ETP, TR e Mapa de Riscos com Inteligência Artificial | Unyflex";
+const PAGE_URL = `https://mkt.unyflex.com.br/${SLUG}`;
 
 export const metadata: Metadata = {
   // O root layout define metadataBase com o path /licitacao embutido, o que
   // faria o canonical e a OG desta rota resolverem errado. Aqui a base é a
   // origem, como deveria ser.
   metadataBase: new URL("https://mkt.unyflex.com.br"),
-  title:
-    "Licitações: DFD, ETP, TR e Mapa de Riscos com Inteligência Artificial | Unyflex",
+  title: PAGE_TITLE,
   description:
-    "17 horas em Curitiba (e online ao vivo): a fase de planejamento da Lei nº 14.133/2021 com IA aplicada — DFD, ETP, TR, Mapa de Riscos e PCA. 27 a 30 de outubro de 2026. Aceitamos nota de empenho.",
+    "20 horas em Curitiba (presencial ou ao vivo): a fase de planejamento da Lei nº 14.133/2021 com IA aplicada — DFD, ETP, TR, Mapa de Riscos e PCA. 27 a 30 de outubro de 2026. Aceitamos nota de empenho.",
   keywords: [
     "licitações com inteligência artificial",
     "IA nas licitações",
@@ -28,36 +33,33 @@ export const metadata: Metadata = {
     "PCA Lei 14.133",
   ],
   alternates: {
-    canonical: "/licitacao-out26",
+    canonical: `/${SLUG}`,
   },
   openGraph: {
-    title:
-      "Licitações: DFD, ETP, TR e Mapa de Riscos com Inteligência Artificial | Unyflex",
+    title: PAGE_TITLE,
     description:
-      "A fase de planejamento da Lei nº 14.133/2021, do jeito que o Tribunal de Contas espera — com a IA acelerando o trabalho. 17 horas, Curitiba e online ao vivo, 27 a 30 de outubro de 2026.",
-    url: "/licitacao-out26",
+      "A fase de planejamento da Lei nº 14.133/2021, do jeito que o Tribunal de Contas espera — com a IA acelerando o trabalho. 20 horas, Curitiba, presencial ou ao vivo, 27 a 30 de outubro de 2026.",
+    url: `/${SLUG}`,
     siteName: "Unyflex",
     locale: "pt_BR",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title:
-      "Licitações: DFD, ETP, TR e Mapa de Riscos com Inteligência Artificial | Unyflex",
+    title: PAGE_TITLE,
     description:
-      "A fase de planejamento da Lei nº 14.133/2021, do jeito que o Tribunal de Contas espera — com a IA acelerando o trabalho. 17 horas, Curitiba e online ao vivo, 27 a 30 de outubro de 2026.",
+      "A fase de planejamento da Lei nº 14.133/2021, do jeito que o Tribunal de Contas espera — com a IA acelerando o trabalho. 20 horas, Curitiba, presencial ou ao vivo, 27 a 30 de outubro de 2026.",
   },
 };
 
-// O EducationEvent desta rota (o root layout não injeta mais schema nenhum —
-// o antigo, com datas de 2025, foi removido junto com esta migração).
+// O EducationEvent desta rota.
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "EducationEvent",
   name: "Licitações — DFD, ETP, TR e Mapa de Riscos com Inteligência Artificial",
   description:
-    "Curso da fase de planejamento da Lei nº 14.133/2021 com IA aplicada: DFD, ETP, TR, Mapa de Riscos e PCA. 17 horas, presencial em Curitiba e online ao vivo.",
-  url: "https://mkt.unyflex.com.br/licitacao-out26",
+    "Curso da fase de planejamento da Lei nº 14.133/2021 com IA aplicada: DFD, ETP, TR, Mapa de Riscos e PCA. 20 horas, presencial em Curitiba ou ao vivo.",
+  url: PAGE_URL,
   startDate: "2026-10-27",
   endDate: "2026-10-30",
   eventAttendanceMode: "https://schema.org/MixedEventAttendanceMode",
@@ -74,16 +76,16 @@ const jsonLd = {
     },
   },
   offers: [
-    { name: "Combo: os três produtos de ensino", price: "2980" },
-    { name: "Curso avulso", price: "2900" },
-    { name: "Online ao vivo", price: "2000" },
+    { name: "BasicClass", price: "2980" },
+    { name: "MasterClass", price: "3200" },
+    { name: "PremiumClass", price: "3980" },
   ].map((plano) => ({
     "@type": "Offer",
     name: plano.name,
     price: plano.price,
     priceCurrency: "BRL",
     availability: "https://schema.org/InStock",
-    url: "https://mkt.unyflex.com.br/licitacao-out26",
+    url: PAGE_URL,
   })),
   organizer: {
     "@type": "Organization",
@@ -100,13 +102,12 @@ export default function LicitacaoOut26Layout({
   return (
     // .lplo-theme: os tokens de cor da LP (theme.css) valem só sob este wrapper.
     <div className="lplo-theme">
-      {/* O hero é background-image em CSS (MediaBackdrop) e o browser só o
-          descobre tarde — preload derruba o LCP mobile. React hoisteia o
-          <link> para o <head>. */}
+      {/* O hero é background-image em CSS e o browser só o descobre tarde —
+          preload derruba o LCP mobile. React hoisteia o <link> para o <head>. */}
       <link
         rel="preload"
         as="image"
-        href="/licitacao-out26/hero.jpg"
+        href={`/${SLUG}/hero.jpg`}
         fetchPriority="high"
       />
       <script

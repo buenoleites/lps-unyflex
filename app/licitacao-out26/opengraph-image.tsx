@@ -1,13 +1,13 @@
 import { ImageResponse } from "next/og";
+import { GANCHO, NOME_OFICIAL } from "./content";
 
 export const dynamic = "force-static";
-export const alt =
-  "Licitações — DFD, ETP, TR e Mapa de Riscos com Inteligência Artificial — curso presencial e online em Curitiba";
+export const alt = `${NOME_OFICIAL}: ${GANCHO} · curso presencial em Curitiba ou ao vivo · 27 a 30/10/2026 · 20 horas`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-/* A ImageResponse não lê CSS — os valores abaixo espelham os tokens desta LP
-   (--bg-dark #0a0e14 do lp2.css, --accent #00aeef do theme.css). */
+/* A ImageResponse não lê CSS — os valores espelham os tokens do lp3.css
+   (--bg-0 #0a0e14) e do theme.css da rota (--accent #4EABE9, --accent-ink #061a27). */
 export default function OgImage() {
   return new ImageResponse(
     (
@@ -19,54 +19,51 @@ export default function OgImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          padding: "80px",
+          padding: "72px 80px",
+          color: "#f7f5f0",
         }}
       >
         <div
           style={{
+            display: "flex",
+            alignSelf: "flex-start",
+            background: "#4EABE9",
+            color: "#061a27",
             fontSize: "18px",
-            color: "#00aeef",
             fontWeight: 700,
-            letterSpacing: "0.16em",
+            letterSpacing: "0.12em",
             textTransform: "uppercase",
-            marginBottom: "28px",
+            padding: "8px 18px",
+            borderRadius: "999px",
+            marginBottom: "32px",
           }}
         >
-          Curso presencial em Curitiba · também online ao vivo
+          Curso presencial · Curitiba-PR
         </div>
         <div
           style={{
-            fontSize: "54px",
-            fontWeight: 800,
-            color: "#ffffff",
-            lineHeight: 1.1,
-            letterSpacing: "-1px",
-            marginBottom: "28px",
-            maxWidth: "1020px",
-          }}
-        >
-          DFD, ETP, TR e Mapa de Riscos com Inteligência Artificial
-        </div>
-        <div
-          style={{
-            fontSize: "22px",
-            color: "rgba(255, 255, 255, 0.7)",
-            marginBottom: "44px",
-            maxWidth: "860px",
-            lineHeight: 1.5,
-          }}
-        >
-          A fase de planejamento da Lei nº 14.133/2021 com IA aplicada — do DFD
-          ao Plano de Contratações Anual.
-        </div>
-        <div
-          style={{
-            fontSize: "18px",
-            color: "#ffffff",
+            fontSize: "26px",
+            color: "#4EABE9",
             fontWeight: 700,
+            marginBottom: "20px",
           }}
         >
-          17 horas · Curitiba-PR · 27 a 30/10 de 2026
+          {NOME_OFICIAL}
+        </div>
+        <div
+          style={{
+            fontSize: "58px",
+            fontWeight: 800,
+            lineHeight: 1.05,
+            letterSpacing: "-1px",
+            marginBottom: "36px",
+            maxWidth: "980px",
+          }}
+        >
+          {GANCHO}
+        </div>
+        <div style={{ fontSize: "20px", fontWeight: 700, color: "#f7f5f0" }}>
+          4 dias · 20 horas · 27 a 30 de outubro de 2026 · presencial ou ao vivo
         </div>
       </div>
     ),
