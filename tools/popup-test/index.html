@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teste local do popup.js (simula o site unyflex.com.br)</title>
+<!--
+  Página de teste do public/popup.js. NÃO é publicada (fica fora de public/ e
+  de app/). Abra pelo arquivo ou sirva a raiz do repo:
+
+      npx serve . -l 4050   →  http://localhost:4050/tools/popup-test/
+
+  O CSS abaixo é propositalmente hostil (regras em div, a, button, img, p,
+  box-sizing global, z-index alto no header, Comic Sans no body) para provar
+  que nada disso entra no popup e que o popup não altera o site.
+-->
+<style>
+  * { box-sizing: content-box; }
+  body { margin: 0; font-family: "Comic Sans MS", cursive; background: #f4efe6; color: #333; }
+  header { position: sticky; top: 0; z-index: 99999; background: #1b3a5b; color: #fff; padding: 16px 24px; }
+  header nav a { color: #ffd; margin-right: 16px; font-size: 18px; }
+  a { color: red; text-decoration: underline wavy; }
+  div { padding: 6px; border: 1px dashed rgba(255,0,0,.35); }
+  p { font-size: 22px; line-height: 2.2; letter-spacing: .1em; }
+  button { background: yellow; color: purple; font-size: 30px; border: 4px ridge green; border-radius: 0; padding: 20px; }
+  img { width: 100%; border: 6px solid lime; }
+  strong { color: orange; font-size: 40px; }
+  span { background: pink; }
+  main { max-width: 900px; margin: 0 auto; padding: 24px; }
+  .painel { position: fixed; top: 80px; right: 16px; z-index: 100000; background: #fff; border: 2px solid #1b3a5b; padding: 12px; font: 13px/1.4 system-ui, sans-serif; width: 240px; }
+  .painel button { all: revert; font: inherit; display: block; width: 100%; margin: 6px 0; padding: 6px; cursor: pointer; }
+  .painel code { word-break: break-all; }
+</style>
+</head>
+<body>
+<header>
+  <strong style="font-size:20px;color:#fff">unyflex.com.br (simulação)</strong>
+  <nav><a href="#">Cursos</a><a href="#">Agenda</a><a href="#">Contato</a></nav>
+</header>
+
+<div class="painel" aria-label="Controles de teste">
+  <b>Controles de teste</b>
+  <button type="button" onclick="UnyflexPopup.show(true)">Mostrar agora (ignora 7 dias)</button>
+  <button type="button" onclick="UnyflexPopup.reset(); location.reload()">Zerar 7 dias e recarregar</button>
+  <button type="button" onclick="UnyflexPopup.close()">Fechar popup</button>
+  <div style="all:revert;margin-top:8px">localStorage: <code id="ls">—</code></div>
+  <div style="all:revert">modo: <code id="modo">—</code></div>
+</div>
+
+<main>
+  <h1>Página institucional (simulação)</h1>
+  <p>Texto corrido do site em PHP, com CSS próprio agressivo. Role a página,
+     espere 8 segundos (ou leve o mouse para fora pelo topo da janela no desktop)
+     e o aviso aparece: modal no desktop, faixa fixa embaixo no celular.</p>
+  <div><p>Bloco 1 com borda tracejada vermelha vinda da regra global de <code>div</code>.</p></div>
+  <div><p>Bloco 2. Os botões do site são amarelos e roxos, os links vermelhos: o popup não pode herdar nada disso.</p></div>
+  <div><p>Bloco 3.</p></div>
+  <div><p>Bloco 4.</p></div>
+  <div><p>Bloco 5.</p></div>
+  <div><p>Bloco 6.</p></div>
+  <div><p>Bloco 7.</p></div>
+  <div><p>Bloco 8. Fim da página.</p></div>
+</main>
+
+<!-- No site real: <script src="https://mkt.unyflex.com.br/popup.js" defer></script> -->
+<script src="../../public/popup.js" defer></script>
+<script>
+  (function () {
+    function tick() {
+      var v = null;
+      try { v = localStorage.getItem(UnyflexPopup.config.storageKey); } catch (e) { v = "(indisponível)"; }
+      document.getElementById("ls").textContent = v ? new Date(+v).toLocaleString("pt-BR") : "vazio";
+      var r = document.getElementById("uxp-root");
+      document.getElementById("modo").textContent = r ? r.className : "fechado · " + (innerWidth < 768 ? "faixa" : "modal") + " quando abrir";
+    }
+    window.addEventListener("load", function () { tick(); setInterval(tick, 500); });
+  })();
+</script>
+</body>
+</html>
