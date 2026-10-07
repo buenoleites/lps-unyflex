@@ -100,8 +100,9 @@ Tudo em `lib/lp/lead.ts`.
   e `gclid` da query **na carga da página** (`captureTracking()` em `EventLp`, `LpPage` e
   `/licitaexpo`) e persiste em `sessionStorage`; no submit lê a query atual com fallback no
   storage. Vão no payload com esses nomes minúsculos **e** nas chaves legadas `UTM_*` (o n8n
-  mapeia as legadas). Ainda assim, **não quebre a query string** com redirects — o
-  `app/page.tsx` já perde as UTMs de quem cai na raiz.
+  mapeia as legadas). Ainda assim, **não quebre a query string** com redirects: toda rota
+  que só encaminha (a raiz e as LPs desativadas) usa `redirectPreserving()` de
+  `lib/lp/redirect.ts`, que carrega `location.search` e `location.hash` para o destino.
 - **`titulo`:** sempre presente no payload, montado em `buildLeadTitle()` (`lib/lp/lead.ts`)
   no padrão `LP|<produto>|s=<utm_source>|c=<utm_campaign>|x=<utm_content>|f=<formId>`. UTM
   ausente vira `-` (nunca vazia, nunca omitida) — é assim que a campanha filtra "sem origem".
@@ -178,5 +179,3 @@ Tokens (no topo do arquivo): `--brand: #00aeef` (ciano), CTA em gradiente
   precisa sobrescrever o `canonical`.
 - O `og:image` do root aponta para `/og-image.png`, que **não existe** em `public/`. Use
   um `opengraph-image.tsx` na pasta da rota (metadata baseada em arquivo tem prioridade).
-- `app/page.tsx` redireciona para `/licitacao` **descartando a query string** — tráfego
-  pago que cair na raiz perde as UTMs e o `fbclid`.
