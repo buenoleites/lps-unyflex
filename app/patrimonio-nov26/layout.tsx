@@ -4,7 +4,7 @@ import "../lp3.css";
 import "./theme.css";
 import { DESCRICAO, SLUG, SUBTITULO, TITULO } from "./content";
 
-/* Patrimônio & Frotas — turma 2330, 16 a 19/11/2026 provisório (rota /patrimonio-nov26, clone da /patrimonio-out26).
+/* Patrimônio & Frotas — turma 2330, 16 a 19/11/2026 (rota /patrimonio-nov26, clone da /patrimonio-out26).
    Template lp3 com o accent verde do setor (theme.css). */
 
 const PAGE_TITLE = `${TITULO} | Unyflex`;
@@ -37,7 +37,7 @@ const jsonLd = {
   name: `${TITULO} ${SUBTITULO}`,
   description: DESCRICAO,
   url: PAGE_URL,
-  startDate: "2026-11-16", // TODO: provisório (ver content.tsx)
+  startDate: "2026-11-16",
   endDate: "2026-11-19",
   eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
   eventStatus: "https://schema.org/EventScheduled",

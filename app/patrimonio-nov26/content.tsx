@@ -3,7 +3,7 @@ import type { Lp3Content } from "@/components/lp3/types";
 /* TODA a copy e todos os paths de imagem desta LP vivem aqui — os componentes
    do template (components/lp3/) não têm texto próprio.
 
-   Patrimônio & Frotas — turma 2330, 16 a 19/11/2026 (PROVISÓRIO), Curitiba-PR
+   Patrimônio & Frotas — turma 2330, 16 a 19/11/2026 (confirmado pela Gestão em 08/10), Curitiba-PR
    (/patrimonio-nov26). CLONE da /patrimonio-out26 (turma 20–23/10) em 08/10/2026,
    a pedido do Gustavo: mesma copy, módulos, planos e accent (#84C776); mudam só as
    datas (hero, rótulo do BasicClass, FAQ, JSON-LD, OG) e os identificadores do lead
@@ -25,9 +25,6 @@ import type { Lp3Content } from "@/components/lp3/types";
    rota (metadata/OG/JSON-LD) é a promessa do topo, verbatim do briefing.
 
    TODO (sem dado confirmado — não inventar):
-   - DATAS: "16 a 19/11/2026" é provisório; a Gestão ainda vai confirmar.
-     Ao mudar, trocar hero.dates, o rótulo do BasicClass, a FAQ "só 3 dias",
-     o JSON-LD do layout e o opengraph-image.
    - Professores: seção oculta até a Gestão confirmar a bancada com a Emily.
    - n8n: cadastrar `patrimonio-nov26` (produto) e `lp-patrimonio-nov26`
      (formId) antes de rodar tráfego, senão o lead entra como "Curso não
@@ -81,7 +78,7 @@ export const patrimonioNov26Content: Lp3Content = {
     promise: DESCRICAO,
     title: TITULO,
     subtitle: SUBTITULO,
-    dates: "16, 17, 18 e 19 de novembro", // TODO: data provisória (16 a 19/11/2026), confirmar com a Gestão
+    dates: "16, 17, 18 e 19 de novembro",
     place: "Curitiba-PR",
     facts: [
       "4 dias",
