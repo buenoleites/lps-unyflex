@@ -17,8 +17,9 @@ import type { Lp3Content } from "@/components/lp3/types";
       metodologia, planos e itens, bios de Everson, Rafael, Marcio, Gabriela e
       Igor, parceiros.
    3. Das LPs lp3 (/comunicacao-nov26): consentimento, rodapé, link da política.
-   4. Briefing do Gustavo de 08/10/2026: Edilson Liberal (painel do Dia 3 14h,
-      bio e foto); a instituição resume a bio, como a do Jarbas.
+   4. Briefings do Gustavo de 08/10/2026: Edilson Liberal (painel do Dia 3 14h,
+      foto); instituição e bio são o texto exato do 2º briefing, a pedido do
+      professor (sem citar a instituição onde trabalha).
    Jarbas Renê não estava na LP anterior: a bio é a enviada pelo Gustavo em
    06/10; a instituição resume a bio. Caroline de Souza saiu (grade de 06/10).
    Texto do certificado: o exato enviado em 06/10. */
@@ -205,9 +206,9 @@ export const licitaexpoContent: Lp3Content = {
       },
       {
         name: "Edilson Liberal",
-        institution: "Tribunal de Contas do Estado do Paraná",
+        institution: "Mestre em Direito Público · Especialista em Licitações e Contratos",
         photoSrc: `/${SLUG}/palestrantes/edilson-liberal.jpg`,
-        bio: "Servidor do Tribunal de Contas do Estado do Paraná desde 2010, hoje na Coordenadoria de Gestão Municipal. Foi diretor da Escola de Gestão Pública e supervisor de Licitações e Contratos do TCE-PR. Bacharel em Direito, pós-graduado em Gestão Pública e mestre em Direito Público pela FGV-SP.",
+        bio: "Mestre em Direito Público pela FGV-SP, bacharel em Direito, pós-graduado em Gestão Pública e especialista em licitações e contratos. Foi diretor de escola de gestão pública e supervisor de licitações e contratos.",
       },
       {
         name: "Gabriela Lira Borges",
