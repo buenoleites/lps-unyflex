@@ -9,7 +9,7 @@ import type { Lp3Content } from "@/components/lp3/types";
 
    FONTES (nada aqui é de autoria do agente):
    1. Grade oficial de 06/10/2026 (Gustavo): nome oficial, datas, carga horária,
-      lista e ordem dos 6 professores, programação por dia/horário, texto do
+      lista e ordem dos 7 professores, programação por dia/horário, texto do
       certificado, regra do 1º lote, formato "presencial ou ● ao vivo".
    2. A própria LP anterior (app/licitaexpo/page.tsx até 06/10): título e
       subtítulo do topo, "Para quem", as 8 falhas (viram os tópicos da
@@ -17,12 +17,11 @@ import type { Lp3Content } from "@/components/lp3/types";
       metodologia, planos e itens, bios de Everson, Rafael, Marcio, Gabriela e
       Igor, parceiros.
    3. Das LPs lp3 (/comunicacao-nov26): consentimento, rodapé, link da política.
+   4. Briefing do Gustavo de 08/10/2026: Edilson Liberal (painel do Dia 3 14h,
+      bio e foto); a instituição resume a bio, como a do Jarbas.
    Jarbas Renê não estava na LP anterior: a bio é a enviada pelo Gustavo em
    06/10; a instituição resume a bio. Caroline de Souza saiu (grade de 06/10).
-   Texto do certificado: o exato enviado em 06/10.
-
-   TODO (sem dado confirmado — não inventar):
-   - Dia 3, 14h–17h (Julgamento de propostas): professor a confirmar. */
+   Texto do certificado: o exato enviado em 06/10. */
 
 /* Itens dos planos presenciais, na ordem da LP anterior. "6 painéis" saiu do
    primeiro item (decisão de 06/10: a grade tem 8 painéis em 7 blocos). */
@@ -147,7 +146,7 @@ export const licitaexpoContent: Lp3Content = {
       },
       {
         title: "Julgamento de propostas",
-        result: "Dia 3 · 26/11 · 14h–17h · professor a confirmar",
+        result: "Dia 3 · 26/11 · 14h–17h · Edilson Liberal",
         topics: ["Reduzir subjetividade e prevenir desclassificação indevida."],
       },
       {
@@ -203,6 +202,12 @@ export const licitaexpoContent: Lp3Content = {
         institution: "Tribunal de Contas do Estado do Paraná",
         photoSrc: `/${SLUG}/palestrantes/marcio-jose-assumpcao.jpg`,
         bio: "Auditor do TCE/PR. Mestre em Administração e Finanças (Universidad de Extremadura). Contador público, ex-professor da Universidade Positivo, especialista em contabilidade aplicada ao setor público e auditoria.",
+      },
+      {
+        name: "Edilson Liberal",
+        institution: "Tribunal de Contas do Estado do Paraná",
+        photoSrc: `/${SLUG}/palestrantes/edilson-liberal.jpg`,
+        bio: "Servidor do Tribunal de Contas do Estado do Paraná desde 2010, hoje na Coordenadoria de Gestão Municipal. Foi diretor da Escola de Gestão Pública e supervisor de Licitações e Contratos do TCE-PR. Bacharel em Direito, pós-graduado em Gestão Pública e mestre em Direito Público pela FGV-SP.",
       },
       {
         name: "Gabriela Lira Borges",
