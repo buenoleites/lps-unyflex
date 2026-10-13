@@ -13,7 +13,7 @@ import type { Lp3Content } from "@/components/lp3/types";
       certificado, regra do 1º lote, formato "presencial ou ● ao vivo".
    2. A própria LP anterior (app/licitaexpo/page.tsx até 06/10): título e
       subtítulo do topo, "Para quem", as 8 falhas (viram os tópicos da
-      programação), prova social (270 inscritos / edições / 98 municípios),
+      programação), prova social (270 inscrições / edições / 98 municípios),
       metodologia, planos e itens, bios de Everson, Rafael, Marcio, Gabriela e
       Igor, parceiros.
    3. Das LPs lp3 (/comunicacao-nov26): consentimento, rodapé, link da política.
@@ -22,7 +22,11 @@ import type { Lp3Content } from "@/components/lp3/types";
       professor (sem citar a instituição onde trabalha).
    Jarbas Renê não estava na LP anterior: a bio é a enviada pelo Gustavo em
    06/10; a instituição resume a bio. Caroline de Souza saiu (grade de 06/10).
-   Texto do certificado: o exato enviado em 06/10. */
+   Texto do certificado: o exato enviado em 06/10.
+   5. Briefing do Gustavo de 13/10/2026: "75 vagas" na faixa de fatos do hero e
+      acima do formulário (sem "vagas limitadas", sem contador); "270 inscritos"
+      vira "270 inscrições" — a base tem 229 pessoas em 5 edições, então o 271
+      conta inscrições, não pessoas. */
 
 /* Itens dos planos presenciais, na ordem da LP anterior. "6 painéis" saiu do
    primeiro item (decisão de 06/10: a grade tem 8 painéis em 7 blocos). */
@@ -73,7 +77,7 @@ export const licitaexpoContent: Lp3Content = {
     subtitle: `${GANCHO} Os pontos onde o certame e a execução contratual travam, mapeados para você decidir com respaldo, não no escuro.`,
     dates: "24 a 27 de novembro de 2026",
     place: "Curitiba-PR · presencial ou ● ao vivo",
-    facts: ["Seminário presencial", "4 dias", "17 horas", "Certificado emitido pela Faculdade Unypública, instituição credenciada pelo MEC"],
+    facts: ["Seminário presencial", "4 dias", "17 horas", "75 vagas", "Certificado emitido pela Faculdade Unypública, instituição credenciada pelo MEC"],
     bgSrc: `/${SLUG}/hero.jpg`,
     bgAlt: "Plenário do LicitaExpo em Curitiba",
     ctaPrimary: { href: "#inscricao", label: "Garanta sua vaga" },
@@ -82,7 +86,7 @@ export const licitaexpoContent: Lp3Content = {
   /* Números já publicados na LP anterior (nenhum novo). */
   proof: {
     items: [
-      "Mais de 270 inscritos",
+      "Mais de 270 inscrições",
       "Edições em 2023, 2024, 2025 e 2026",
       "98 municípios do Paraná e de Santa Catarina",
     ],
@@ -273,7 +277,7 @@ export const licitaexpoContent: Lp3Content = {
   form: {
     eyebrow: "Inscrição",
     title: "Garanta sua vaga",
-    meta: "24 a 27 de novembro de 2026 · Curitiba-PR · presencial ou ● ao vivo",
+    meta: "24 a 27 de novembro de 2026 · Curitiba-PR · presencial ou ● ao vivo · 75 vagas",
     // Mesmo formId da LP anterior: é por ele que o n8n identifica a origem.
     // Sem `produto`/`paginaOrigem` (decisão de 06/10: nenhum cadastro novo no n8n).
     formId: "lp-licitaexpo",
