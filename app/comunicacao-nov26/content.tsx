@@ -250,7 +250,18 @@ export const comunicacaoNov26Content: Lp3Content = {
     eyebrow: "Planos e Preços",
     title: "Três planos de participação",
     lead: "O mesmo curso, com três níveis de experiência. O PremiumClass é o plano recomendado: capacitação em 4 dias e a agenda completa fora da sala de aula.",
+    fourColumns: true,
     items: [
+      /* Online ao vivo: a Gestão confirmou em 14/10/2026 que o online segue
+         visível nas LPs. Copy só com fonte: nome, preço e linha verbatim do
+         card `online` da /licitacao-out26 lp2; sem lista de itens. */
+      {
+        name: "Online ao vivo",
+        sub: "Mesmas aulas, transmitidas em tempo real.",
+        price: "R$ 2.000,00",
+        features: [],
+        ctaLabel: "Quero o online ao vivo",
+      },
       {
         name: "BasicClass",
         sub: "Investimento por aluno",
@@ -301,7 +312,7 @@ export const comunicacaoNov26Content: Lp3Content = {
     // Token da vertical no título do lead: LP|comunicacao|s=…|c=…|x=…|f=…
     tituloProduto: "comunicacao",
     campaignFallback: SLUG,
-    planOptions: ["BasicClass", "MasterClass", "PremiumClass"],
+    planOptions: ["Online ao vivo", "BasicClass", "MasterClass", "PremiumClass"],
     submitLabel: "Receber proposta",
     consent: {
       label: (

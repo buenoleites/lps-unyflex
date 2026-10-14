@@ -140,6 +140,9 @@ export interface Lp3Content {
     title: string;
     lead?: string;
     items: Lp3Plan[];
+    /** 4 cards lado a lado no desktop (2×2 abaixo de 1200px). Opt-in: a /licitaexpo
+     *  tem 4 cards e segue no 3+1 de sempre. */
+    fourColumns?: boolean;
     featured?: {
       highlightLabel: string;
       title: string;
