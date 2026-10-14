@@ -17,19 +17,6 @@
   --accent-tint: rgba(78, 171, 233, 0.12);
 }
 
-/* Quatro planos (Online Ao Vivo + 3 presenciais): o lp3 fixa 3 colunas a partir
-   de 700px. Aqui: 2 colunas de 700 a 999px e 4 a partir de 1000px. */
-@media (min-width: 700px) {
-  .lplx-theme .lp3-plans__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (min-width: 1000px) {
-  .lplx-theme .lp3-plans__grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
 /* Dois logos de parceiros lado a lado no rodapé (o lp3 só previa um). */
 .lplx-theme .lp3-footer__partners {
   display: flex;
