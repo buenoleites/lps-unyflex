@@ -240,7 +240,7 @@ export const patrimonioNov26Content: Lp3Content = {
       {
         name: "BasicClass",
         sub: "Investimento por aluno",
-        price: "R$ 2.980,00",
+        price: "R$ 3.200,00",
         // Rótulo longo só neste card (rodada 2); a tabela mantém o curto.
         features: planoFeatures(BASIC, {
           0: "Capacitação prática em 3 dias: segunda a quarta (16 a 18/11) ou terça a quinta (17 a 19/11)",
@@ -250,14 +250,14 @@ export const patrimonioNov26Content: Lp3Content = {
       {
         name: "MasterClass",
         sub: "Investimento por aluno",
-        price: "R$ 3.200,00",
+        price: "R$ 3.600,00",
         features: planoFeatures(MASTER, {}, [0]),
         ctaLabel: "Quero o MasterClass",
       },
       {
         name: "PremiumClass",
         sub: "Investimento por aluno",
-        price: "R$ 3.980,00",
+        price: "R$ 3.900,00",
         highlighted: true,
         highlightLabel: "Recomendado",
         // Sem item não incluso: o card não mostra "ver o que não inclui".
@@ -364,7 +364,7 @@ export const patrimonioNov26Content: Lp3Content = {
   },
 
   stickyCta: {
-    priceAnchor: "a partir de R$ 2.980",
+    priceAnchor: "a partir de R$ 3.200",
     label: "Receber proposta",
     href: "#inscricao",
   },
