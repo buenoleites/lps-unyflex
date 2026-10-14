@@ -1828,7 +1828,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  height: var(--sticky-h);
+  min-height: var(--sticky-h);
   padding: 0 var(--gutter);
   padding-bottom: env(safe-area-inset-bottom);
   background: var(--nav-bg);
@@ -1844,15 +1844,34 @@
   transform: none;
 }
 
+/* Âncora longa (ex.: presencial + online) quebra em até 3 linhas; curta segue em 1. */
 .lp3-sticky__price {
+  min-width: 0;
   font-size: var(--fs-small);
   font-weight: 600;
-  white-space: nowrap;
+  line-height: 1.2;
+  text-wrap: balance;
 }
 
 .lp3-sticky .lp3-btn {
+  flex-shrink: 0;
   white-space: nowrap;
   padding-inline: 16px;
+}
+
+/* Celular estreito (360px): âncora menor e botão mais justo para o preço caber. */
+@media (max-width: 399px) {
+  .lp3-sticky {
+    gap: 10px;
+  }
+
+  .lp3-sticky__price {
+    font-size: 12px;
+  }
+
+  .lp3-sticky .lp3-btn {
+    padding-inline: 12px;
+  }
 }
 
 @media (min-width: 800px) {

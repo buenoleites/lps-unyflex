@@ -234,8 +234,9 @@ export const patrimonioNov26Content: Lp3Content = {
 
   plans: {
     eyebrow: "Planos e Preços",
-    title: "Três planos de participação",
-    lead: "O mesmo curso, com três níveis de experiência. O PremiumClass é o plano recomendado: capacitação em 4 dias e a agenda completa fora da sala de aula.",
+    // Título, abertura e âncora da barra fixa: Gestão, 14/10 (4 planos com o online).
+    title: "Quatro formas de participar",
+    lead: "O mesmo curso, do online ao vivo à experiência Premium. O PremiumClass é o plano recomendado: capacitação em 4 dias e a agenda completa fora da sala de aula.",
     fourColumns: true,
     items: [
       /* Online ao vivo: a Gestão confirmou em 14/10/2026 que o online segue
@@ -375,7 +376,7 @@ export const patrimonioNov26Content: Lp3Content = {
   },
 
   stickyCta: {
-    priceAnchor: "a partir de R$ 3.200",
+    priceAnchor: "Presencial a partir de R$\u00a03.200\u00a0· online\u00a0R$\u00a02.000",
     label: "Receber proposta",
     href: "#inscricao",
   },
