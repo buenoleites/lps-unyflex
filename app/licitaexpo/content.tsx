@@ -10,7 +10,8 @@ import type { Lp3Content } from "@/components/lp3/types";
    FONTES (nada aqui é de autoria do agente):
    1. Grade oficial de 06/10/2026 (Gustavo): nome oficial, datas, carga horária,
       lista e ordem dos 7 professores, programação por dia/horário, texto do
-      certificado, regra do 1º lote, formato "presencial ou ● ao vivo".
+      certificado, regra do 1º lote, formato "presencial ou ● ao vivo" (superado
+      pelo item 6).
    2. A própria LP anterior (app/licitaexpo/page.tsx até 06/10): título e
       subtítulo do topo, "Para quem", as 8 falhas (viram os tópicos da
       programação), prova social (270 inscrições / edições / 98 municípios),
@@ -26,7 +27,10 @@ import type { Lp3Content } from "@/components/lp3/types";
    5. Briefing do Gustavo de 13/10/2026: "75 vagas" na faixa de fatos do hero e
       acima do formulário (sem "vagas limitadas", sem contador); "270 inscritos"
       vira "270 inscrições" — a base tem 229 pessoas em 5 edições, então o 271
-      conta inscrições, não pessoas. */
+      conta inscrições, não pessoas.
+   6. Decisão do Bruno de 14/10/2026: os seminários passam a ser só presenciais.
+      Sai o plano online (card e opção do formulário); toda menção a "ao vivo"
+      vira "presencial em Curitiba"; a âncora da barra fixa passa ao BasicClass. */
 
 /* Itens dos planos presenciais, na ordem da LP anterior. "6 painéis" saiu do
    primeiro item (decisão de 06/10: a grade tem 8 painéis em 7 blocos). */
@@ -76,7 +80,7 @@ export const licitaexpoContent: Lp3Content = {
     title: TITULO,
     subtitle: `${GANCHO} Os pontos onde o certame e a execução contratual travam, mapeados para você decidir com respaldo, não no escuro.`,
     dates: "24 a 27 de novembro de 2026",
-    place: "Curitiba-PR · presencial ou ● ao vivo",
+    place: "Presencial em Curitiba",
     facts: ["Seminário presencial", "4 dias", "20 horas", "75 vagas", "Certificado emitido pela Faculdade Unypública, instituição credenciada pelo MEC"],
     bgSrc: `/${SLUG}/hero.jpg`,
     bgAlt: "Plenário do LicitaExpo em Curitiba",
@@ -229,24 +233,14 @@ export const licitaexpoContent: Lp3Content = {
     ],
   },
 
-  /* Planos e preços como estavam (Online Ao Vivo, Basic, Master, Premium).
+  /* Planos e preços como estavam (Basic, Master, Premium; o Online Ao Vivo saiu
+     em 14/10, decisão do Bruno).
      O "Mais escolhido" do MasterClass é o destaque da LP anterior. */
   plans: {
     eyebrow: "Planos",
     title: "Escolha como quer viver o LicitaExpo.",
     lead: "Todos os planos dão acesso aos 4 dias e ao certificado. A diferença está no que você leva além do conteúdo. O que protege sua decisão é o conteúdo — e ele é o mesmo em todos os planos. O restante é o que torna os quatro dias mais leves: alimentação, materiais e, nos planos superiores, formação que continua depois do evento.",
     items: [
-      {
-        name: "Online Ao Vivo",
-        sub: "100% ao vivo",
-        price: "R$ 2.000",
-        features: [
-          { label: "Acesso à transmissão ao vivo dos 4 dias", included: true },
-          { label: "Certificado", included: true },
-          { label: "Itens presenciais (coffee-breaks, almoço, kit e vouchers)", included: false },
-        ],
-        ctaLabel: "Quero o Online Ao Vivo",
-      },
       {
         name: "BasicClass",
         sub: "Presencial",
@@ -277,13 +271,13 @@ export const licitaexpoContent: Lp3Content = {
   form: {
     eyebrow: "Inscrição",
     title: "Garanta sua vaga",
-    meta: "24 a 27 de novembro de 2026 · Curitiba-PR · presencial ou ● ao vivo · 75 vagas",
+    meta: "24 a 27 de novembro de 2026 · presencial em Curitiba · 75 vagas",
     // Mesmo formId da LP anterior: é por ele que o n8n identifica a origem.
     // Sem `produto`/`paginaOrigem` (decisão de 06/10: nenhum cadastro novo no n8n).
     formId: "lp-licitaexpo",
     // `c` do payload quando a URL não traz ?c=; também cobre utm_campaign ausente.
     campaignFallback: SLUG,
-    planOptions: ["Online Ao Vivo", "BasicClass", "MasterClass", "PremiumClass"],
+    planOptions: ["BasicClass", "MasterClass", "PremiumClass"],
     submitLabel: "Garanta sua vaga",
     consent: {
       label: (
@@ -323,7 +317,7 @@ export const licitaexpoContent: Lp3Content = {
   },
 
   stickyCta: {
-    priceAnchor: "a partir de R$ 2.000",
+    priceAnchor: "a partir de R$ 3.300",
     label: "Garanta sua vaga",
     href: "#inscricao",
   },

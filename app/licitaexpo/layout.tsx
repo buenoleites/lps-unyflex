@@ -9,7 +9,7 @@ import { DESCRICAO, NOME_OFICIAL, SLUG } from "./content";
 
 const PAGE_TITLE = `${NOME_OFICIAL} | Unyflex`;
 const PAGE_URL = `https://mkt.unyflex.com.br/${SLUG}`;
-const META_DESCRIPTION = `Seminário presencial em Curitiba-PR, 24 a 27 de novembro de 2026 (4 dias · 20 horas), presencial ou ao vivo. ${DESCRICAO}`;
+const META_DESCRIPTION = `Seminário presencial em Curitiba-PR, 24 a 27 de novembro de 2026 (4 dias · 20 horas). ${DESCRICAO}`;
 
 export const metadata: Metadata = {
   // O root layout embute /licitacao no metadataBase; aqui a base é a origem.
@@ -56,8 +56,8 @@ const jsonLd = {
   url: PAGE_URL,
   startDate: "2026-11-24",
   endDate: "2026-11-27",
-  // Há o plano Online Ao Vivo, então o evento é misto.
-  eventAttendanceMode: "https://schema.org/MixedEventAttendanceMode",
+  // Só presencial desde 14/10/2026 (o plano Online Ao Vivo saiu).
+  eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
   eventStatus: "https://schema.org/EventScheduled",
   location: {
     "@type": "Place",
@@ -70,7 +70,6 @@ const jsonLd = {
     },
   },
   offers: [
-    { name: "Online Ao Vivo", price: "2000" },
     { name: "BasicClass", price: "3300" },
     { name: "MasterClass", price: "3800" },
     { name: "PremiumClass", price: "5200" },

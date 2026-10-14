@@ -63,7 +63,7 @@ export default function OgImage() {
           {GANCHO}
         </div>
         <div style={{ fontSize: "20px", fontWeight: 700, color: "#f7f5f0" }}>
-          4 dias · 20 horas · 24 a 27 de novembro de 2026 · presencial ou ao vivo
+          4 dias · 20 horas · 24 a 27 de novembro de 2026 · presencial em Curitiba
         </div>
       </div>
     ),
