@@ -426,14 +426,14 @@ export const portalNov26Content: Lp3Content = {
       {
         name: "MasterClass",
         sub: "Investimento por aluno",
-        price: "R$ 3.600,00",
+        price: "R$ 3.500,00",
         features: planoFeatures(MASTER, {}, [0]),
         ctaLabel: "Quero o MasterClass",
       },
       {
         name: "PremiumClass",
         sub: "Investimento por aluno",
-        price: "R$ 3.900,00",
+        price: "R$ 4.280,00",
         highlighted: true,
         highlightLabel: "Recomendado",
         features: planoFeatures(PREMIUM, {}, [0]),
