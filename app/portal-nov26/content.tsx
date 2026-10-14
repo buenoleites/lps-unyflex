@@ -413,7 +413,18 @@ export const portalNov26Content: Lp3Content = {
     eyebrow: "Planos e Preços",
     title: "Três planos de participação",
     lead: "O mesmo curso, com três níveis de experiência. O PremiumClass é o plano recomendado: capacitação em 4 dias e a agenda completa fora da sala de aula.",
+    fourColumns: true,
     items: [
+      /* Online ao vivo: a Gestão confirmou em 14/10/2026 que o online segue
+         visível nas LPs. Copy só com fonte: nome, preço e linha verbatim do
+         card `online` da /licitacao-out26 lp2; sem lista de itens. */
+      {
+        name: "Online ao vivo",
+        sub: "Mesmas aulas, transmitidas em tempo real.",
+        price: "R$ 2.000,00",
+        features: [],
+        ctaLabel: "Quero o online ao vivo",
+      },
       {
         name: "BasicClass",
         sub: "Investimento por aluno",
@@ -426,14 +437,14 @@ export const portalNov26Content: Lp3Content = {
       {
         name: "MasterClass",
         sub: "Investimento por aluno",
-        price: "R$ 3.600,00",
+        price: "R$ 3.500,00",
         features: planoFeatures(MASTER, {}, [0]),
         ctaLabel: "Quero o MasterClass",
       },
       {
         name: "PremiumClass",
         sub: "Investimento por aluno",
-        price: "R$ 3.900,00",
+        price: "R$ 4.280,00",
         highlighted: true,
         highlightLabel: "Recomendado",
         features: planoFeatures(PREMIUM, {}, [0]),
@@ -490,7 +501,7 @@ export const portalNov26Content: Lp3Content = {
     produto: SLUG,
     paginaOrigem: SLUG,
     campaignFallback: SLUG,
-    planOptions: ["BasicClass", "MasterClass", "PremiumClass"],
+    planOptions: ["Online ao vivo", "BasicClass", "MasterClass", "PremiumClass"],
     modalidade: {
       label: "Modalidade preferida",
       // Valores vão no payload (Modalidade_Preferida) e não mudam; só o rótulo.

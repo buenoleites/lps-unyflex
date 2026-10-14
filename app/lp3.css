@@ -1257,6 +1257,29 @@
   }
 }
 
+/* 4 cards (online + os 3 planos, 14/10/2026): 2×2 até 1199px, 4 colunas a
+   partir de 1200px (container cheio). Opt-in por `plans.fourColumns`: a
+   /licitaexpo, com 4 cards, fica no 3+1. */
+@media (min-width: 700px) {
+  .lp3-plans__grid--4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .lp3-plans__grid--4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  /* Card de ~250px: o preço cheio quebrava "R$" e o valor em duas linhas. */
+  .lp3-plans__grid--4 .lp3-plan {
+    padding-inline: 20px;
+  }
+  .lp3-plans__grid--4 .lp3-plan__price {
+    font-size: 2rem;
+    white-space: nowrap;
+  }
+}
+
 @media (max-width: 699px) {
   .lp3-plan--highlighted {
     order: -1;

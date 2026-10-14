@@ -5,7 +5,7 @@ import Arrow from "./Arrow";
 import Section from "./Section";
 import type { Lp3Content } from "./types";
 
-/** Investimento: 3 cards; card largo e tabela comparativa são opcionais
+/** Investimento: 3 cards (4 com o online; `fourColumns` liga o grid --4); card largo e tabela comparativa são opcionais
  *  (a /tesouraria-nov26 usa só os cards).
  *  Mesmo shape de dados do lp2 (portável entre templates). Diferença central:
  *  todo botão chama onSelectPlan(nome) ANTES de rolar ao formulário — o plano
@@ -41,7 +41,9 @@ export default function Plans({
         {content.lead ? <p className="lp3-lead">{content.lead}</p> : null}
       </div>
 
-      <div className="lp3-plans__grid" data-reveal style={{ "--reveal-i": 1 } as React.CSSProperties}>
+      <div
+        className={`lp3-plans__grid${content.fourColumns ? " lp3-plans__grid--4" : ""}`}
+        data-reveal style={{ "--reveal-i": 1 } as React.CSSProperties}>
         {content.items.map((plan) => (
           <article
             key={plan.name}
@@ -56,18 +58,21 @@ export default function Plans({
               {plan.sub ? <p className="lp3-plan__sub">{plan.sub}</p> : null}
               <p className="lp3-plan__price">{plan.price}</p>
             </div>
-            <ul className="lp3-plan__features">
-              {plan.features
-                .filter((f) => f.included)
-                .map((feature) => (
-                  <li key={feature.label} className="lp3-plan__feature">
-                    <span className="lp3-plan__mark" role="img" aria-label="incluso">
-                      ✓
-                    </span>
-                    {feature.label}
-                  </li>
-                ))}
-            </ul>
+            {/* Card sem itens (o online, 14/10/2026) não deixa lista vazia. */}
+            {plan.features.some((f) => f.included) ? (
+              <ul className="lp3-plan__features">
+                {plan.features
+                  .filter((f) => f.included)
+                  .map((feature) => (
+                    <li key={feature.label} className="lp3-plan__feature">
+                      <span className="lp3-plan__mark" role="img" aria-label="incluso">
+                        ✓
+                      </span>
+                      {feature.label}
+                    </li>
+                  ))}
+              </ul>
+            ) : null}
             {plan.features.some((f) => !f.included) ? (
               <div className={`lp3-plan__off${offOpen[plan.name] ? " is-open" : ""}`}>
                 <button
