@@ -4,7 +4,7 @@ import type { Lp3Content } from "@/components/lp3/types";
    do template (components/lp3/) não têm texto próprio.
 
    LicitaExpo · Blindagem nas Licitações e Contratos — seminário presencial,
-   Curitiba-PR, 24 a 27/11/2026 (4 dias · 17 horas). Migração da página inline
+   Curitiba-PR, 24 a 27/11/2026 (4 dias · 20 horas). Migração da página inline
    (template antigo, app/lp.css) para o lp3 em 06/10/2026.
 
    FONTES (nada aqui é de autoria do agente):
@@ -77,7 +77,7 @@ export const licitaexpoContent: Lp3Content = {
     subtitle: `${GANCHO} Os pontos onde o certame e a execução contratual travam, mapeados para você decidir com respaldo, não no escuro.`,
     dates: "24 a 27 de novembro de 2026",
     place: "Curitiba-PR · presencial ou ● ao vivo",
-    facts: ["Seminário presencial", "4 dias", "17 horas", "75 vagas", "Certificado emitido pela Faculdade Unypública, instituição credenciada pelo MEC"],
+    facts: ["Seminário presencial", "4 dias", "20 horas", "75 vagas", "Certificado emitido pela Faculdade Unypública, instituição credenciada pelo MEC"],
     bgSrc: `/${SLUG}/hero.jpg`,
     bgAlt: "Plenário do LicitaExpo em Curitiba",
     ctaPrimary: { href: "#inscricao", label: "Garanta sua vaga" },
@@ -122,7 +122,7 @@ export const licitaexpoContent: Lp3Content = {
   modules: {
     eyebrow: "Programação",
     title: "As falhas que mais geram apontamento — uma a uma.",
-    lead: "4 dias · 17 horas · 24 a 27 de novembro de 2026",
+    lead: "4 dias · 20 horas · 24 a 27 de novembro de 2026",
     items: [
       {
         title: "O certame é um campo minado",
