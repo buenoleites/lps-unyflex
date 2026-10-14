@@ -9,7 +9,7 @@ import { DESCRICAO, NOME_OFICIAL, SLUG } from "./content";
 
 const PAGE_TITLE = `${NOME_OFICIAL} | Unyflex`;
 const PAGE_URL = `https://mkt.unyflex.com.br/${SLUG}`;
-const META_DESCRIPTION = `Seminário presencial em Curitiba-PR, 24 a 27 de novembro de 2026 (4 dias · 17 horas), presencial ou ao vivo. ${DESCRICAO}`;
+const META_DESCRIPTION = `Seminário presencial em Curitiba-PR, 24 a 27 de novembro de 2026 (4 dias · 20 horas), presencial ou ao vivo. ${DESCRICAO}`;
 
 export const metadata: Metadata = {
   // O root layout embute /licitacao no metadataBase; aqui a base é a origem.

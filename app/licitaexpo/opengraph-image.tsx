@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { GANCHO, NOME_OFICIAL } from "./content";
 
 export const dynamic = "force-static";
-export const alt = `${NOME_OFICIAL} · seminário presencial em Curitiba · 24 a 27/11/2026 · 17 horas`;
+export const alt = `${NOME_OFICIAL} · seminário presencial em Curitiba · 24 a 27/11/2026 · 20 horas`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -63,7 +63,7 @@ export default function OgImage() {
           {GANCHO}
         </div>
         <div style={{ fontSize: "20px", fontWeight: 700, color: "#f7f5f0" }}>
-          4 dias · 17 horas · 24 a 27 de novembro de 2026 · presencial ou ao vivo
+          4 dias · 20 horas · 24 a 27 de novembro de 2026 · presencial ou ao vivo
         </div>
       </div>
     ),
