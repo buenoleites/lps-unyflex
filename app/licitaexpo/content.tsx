@@ -30,7 +30,10 @@ import type { Lp3Content } from "@/components/lp3/types";
       conta inscrições, não pessoas.
    6. Decisão do Bruno de 14/10/2026: os seminários passam a ser só presenciais.
       Sai o plano online (card e opção do formulário); toda menção a "ao vivo"
-      vira "presencial em Curitiba"; a âncora da barra fixa passa ao BasicClass. */
+      vira "presencial em Curitiba"; a âncora da barra fixa passa ao BasicClass.
+   7. Decisão da Gestão de 15/10/2026: a LicitaExpo segue a tabela de seminário.
+      Basic R$ 3.300 (sem mudança), Master R$ 3.600, Premium R$ 3.900. Itens dos
+      planos, "20 horas" e o aviso do 1º lote (25/10, +10%) ficam como estavam. */
 
 /* Itens dos planos presenciais, na ordem da LP anterior. "6 painéis" saiu do
    primeiro item (decisão de 06/10: a grade tem 8 painéis em 7 blocos). */
@@ -233,8 +236,8 @@ export const licitaexpoContent: Lp3Content = {
     ],
   },
 
-  /* Planos e preços como estavam (Basic, Master, Premium; o Online Ao Vivo saiu
-     em 14/10, decisão do Bruno).
+  /* Planos: Basic, Master, Premium (o Online Ao Vivo saiu em 14/10, decisão do
+     Bruno). Preços da tabela de seminário (Gestão, 15/10; ver FONTES item 7).
      O "Mais escolhido" do MasterClass é o destaque da LP anterior. */
   plans: {
     eyebrow: "Planos",
@@ -251,7 +254,7 @@ export const licitaexpoContent: Lp3Content = {
       {
         name: "MasterClass",
         sub: "Presencial",
-        price: "R$ 3.800",
+        price: "R$ 3.600",
         highlighted: true,
         highlightLabel: "Mais escolhido",
         features: planoFeatures(MASTER),
@@ -260,7 +263,7 @@ export const licitaexpoContent: Lp3Content = {
       {
         name: "PremiumClass",
         sub: "Presencial",
-        price: "R$ 5.200",
+        price: "R$ 3.900",
         features: planoFeatures(PREMIUM),
         ctaLabel: "Quero o PremiumClass",
       },
