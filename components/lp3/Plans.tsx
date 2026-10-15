@@ -39,6 +39,7 @@ export default function Plans({
           {content.title}
         </h2>
         {content.lead ? <p className="lp3-lead">{content.lead}</p> : null}
+        {content.badge ? <p className="lp3-lote">{content.badge}</p> : null}
       </div>
 
       <div
