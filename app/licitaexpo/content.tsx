@@ -40,7 +40,8 @@ import type { Lp3Content } from "@/components/lp3/types";
       cards. O aviso "A partir de 25/10…" segue embaixo dos cards.
    9. Gustavo, 15/10/2026: no 2º lote (a partir de 25/10) sai o selo "1º lote até
       24/10" e o aviso embaixo dos cards passa a "Valores do 2º lote. Inscrições
-      até 21/11." Os valores do 2º lote ainda não foram passados. */
+      até 21/11." Valores do 2º lote (Gestão, 15/10/2026), sem arredondar:
+      Basic R$ 3.630, Master R$ 3.960, Premium R$ 4.290. */
 
 /* Itens dos planos presenciais, na ordem da LP anterior. "6 painéis" saiu do
    primeiro item (decisão de 06/10: a grade tem 8 painéis em 7 blocos). */
@@ -244,9 +245,8 @@ export const licitaexpoContent: Lp3Content = {
   },
 
   /* Planos: Basic, Master, Premium (o Online Ao Vivo saiu em 14/10, decisão do
-     Bruno). Preços da tabela de seminário (Gestão, 15/10; ver FONTES item 7).
-     MasterClass "Recomendado": Gestão, 15/10 (FONTES item 8). Aviso do 2º lote:
-     FONTES item 9. */
+     Bruno). Preços e aviso do 2º lote: FONTES item 9 (o item 7 é a tabela do
+     1º lote). MasterClass "Recomendado": Gestão, 15/10 (FONTES item 8). */
   plans: {
     eyebrow: "Planos",
     title: "Escolha como quer viver o LicitaExpo.",
@@ -255,14 +255,14 @@ export const licitaexpoContent: Lp3Content = {
       {
         name: "BasicClass",
         sub: "Presencial",
-        price: "R$ 3.300",
+        price: "R$ 3.630",
         features: planoFeatures(BASIC),
         ctaLabel: "Quero o BasicClass",
       },
       {
         name: "MasterClass",
         sub: "Presencial",
-        price: "R$ 3.600",
+        price: "R$ 3.960",
         highlighted: true,
         highlightLabel: "Recomendado",
         features: planoFeatures(MASTER),
@@ -271,7 +271,7 @@ export const licitaexpoContent: Lp3Content = {
       {
         name: "PremiumClass",
         sub: "Presencial",
-        price: "R$ 3.900",
+        price: "R$ 4.290",
         features: planoFeatures(PREMIUM),
         ctaLabel: "Quero o PremiumClass",
       },
@@ -328,7 +328,7 @@ export const licitaexpoContent: Lp3Content = {
   },
 
   stickyCta: {
-    priceAnchor: "a partir de R$ 3.300",
+    priceAnchor: "a partir de R$ 3.630",
     label: "Garanta sua vaga",
     href: "#inscricao",
   },

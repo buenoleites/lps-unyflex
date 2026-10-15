@@ -70,9 +70,9 @@ const jsonLd = {
     },
   },
   offers: [
-    { name: "BasicClass", price: "3300" },
-    { name: "MasterClass", price: "3600" },
-    { name: "PremiumClass", price: "3900" },
+    { name: "BasicClass", price: "3630" },
+    { name: "MasterClass", price: "3960" },
+    { name: "PremiumClass", price: "4290" },
   ].map((plano) => ({
     "@type": "Offer",
     name: plano.name,
