@@ -259,7 +259,7 @@ export default function Form({
           // "" como campo ausente).
           plano_interesse: plano || "Ainda não decidi",
           c,
-          consentimento: content.consent.value,
+          consentimento: form.consent ? content.consent.value : "nao",
         },
       });
     } catch (err) {

@@ -1553,7 +1553,9 @@
   color: var(--accent);
 }
 
-.lp3-form__field input,
+/* O checkbox do consentimento fica fora destas regras: com appearance: none o
+   navegador não desenha o "✓" e o min-height de 48px deformava a caixa. */
+.lp3-form__field input:not([type="checkbox"]),
 .lp3-form__field select {
   width: 100%;
   min-height: var(--touch);
@@ -1573,7 +1575,7 @@
   opacity: 0.7;
 }
 
-.lp3-form__field input:focus,
+.lp3-form__field input:not([type="checkbox"]):focus,
 .lp3-form__field select:focus {
   outline: none;
   border-color: var(--accent);
@@ -1587,7 +1589,7 @@
   transition: background-color 9999s ease-out;
 }
 
-.lp3-form__field.is-error input,
+.lp3-form__field.is-error input:not([type="checkbox"]),
 .lp3-form__field.is-error select {
   border-color: var(--error);
 }
@@ -1659,12 +1661,19 @@
   color: var(--ink-on-dark-muted);
 }
 
+/* 24×24 é o mínimo da WCAG 2.5.8; o <label> clicável amplia a área real. */
 .lp3-form__consent input {
-  width: 22px;
-  height: 22px;
-  margin: 2px 0 0;
+  width: 24px;
+  height: 24px;
+  margin: 0;
   accent-color: var(--accent);
+  cursor: pointer;
   flex: none;
+}
+
+.lp3-form__field.is-error .lp3-form__consent input:not(:focus-visible) {
+  outline: 2px solid var(--error);
+  outline-offset: 2px;
 }
 
 .lp3-form__consent a {
