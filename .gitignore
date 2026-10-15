@@ -52,3 +52,6 @@ ds-bundle/
 .design-sync/.cache/
 .design-sync/learnings/
 .design-sync/node_modules
+
+# prints de revisão de UX (locais, não versionar)
+/.ux-prints/
