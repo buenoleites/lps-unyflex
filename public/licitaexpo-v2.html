@@ -1,0 +1,24 @@
+<!doctype html>
+<!--
+  /licitaexpo-v2 -> /licitaexpo. A rota app/licitaexpo-v2 (LP de teste no lp2,
+  aposentada em 07/10/2026) saiu do codigo em 15/10/2026 porque o build a
+  trazia de volta com a meta antiga. O redirect continua, aqui, como HTML
+  estatico: com `output: 'export'` o next.config nao faz redirects(). O script
+  repete o redirectPreserving() de lib/lp/redirect.ts: leva query (UTMs,
+  fbclid, ?c=) e hash (#inscricao) para o destino.
+-->
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex">
+    <link rel="canonical" href="https://mkt.unyflex.com.br/licitaexpo">
+    <title>LicitaExpo</title>
+    <script>
+      location.replace("/licitaexpo" + location.search + location.hash);
+    </script>
+    <noscript><meta http-equiv="refresh" content="0; url=/licitaexpo"></noscript>
+  </head>
+  <body>
+    <p><a href="/licitaexpo">Ir para a LicitaExpo</a></p>
+  </body>
+</html>
