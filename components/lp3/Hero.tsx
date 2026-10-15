@@ -27,6 +27,7 @@ export default function Hero({ content, proof }: { content: Lp3Content["hero"]; 
           </h1>
           <p className="lp3-hero__subtitle">{content.subtitle}</p>
           <div className="lp3-hero__when">
+            {content.datesBadge ? <p className="lp3-lote">{content.datesBadge}</p> : null}
             <p className="lp3-hero__dates">{content.dates}</p>
             <p className="lp3-hero__place">
               <LiveText text={content.place} />
