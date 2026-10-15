@@ -196,7 +196,10 @@ export interface Lp3Content {
     submitLabel: string;
     /** "Como funciona": passos numerados na coluna ao lado do formulário. */
     steps?: { title: string; items: string[] };
-    consent: { label: ReactNode; value: string };
+    /** `mode: "notice"`: aviso acima do botão, sem caixa para marcar, e
+     *  `consentimento` vai sempre com `value` (ex. "aviso-v1"). Sem `mode`,
+     *  checkbox obrigatório (só a /licitaexpo, até a parte 2 do UX-C). */
+    consent: { label: ReactNode; value: string; mode?: "checkbox" | "notice" };
     thankYou: { url: string; withPii: false };
   };
 
@@ -219,6 +222,8 @@ export interface Lp3Content {
       label?: string;
     }[];
     copyright: string;
+    /** Nome/CNPJ/endereço e WhatsApp do comercial (lib/lp/empresa.ts). */
+    company?: { line: string; whatsapp: { href: string; label: string } };
   };
 
   stickyCta: {

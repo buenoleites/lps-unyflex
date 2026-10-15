@@ -1709,6 +1709,24 @@
   margin-top: 24px;
 }
 
+/* Aviso de consentimento (consent.mode "notice"): texto corrido logo acima do
+   botão, no lugar do checkbox. */
+.lp3-form__notice {
+  margin-top: 20px;
+  font-size: var(--fs-small);
+  color: var(--ink-on-dark-muted);
+}
+
+.lp3-form__notice + .lp3-form__submit {
+  margin-top: 16px;
+}
+
+.lp3-form__notice a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 /* ================================ FAQ ===================================== */
 
 .lp3-faq {
@@ -1838,6 +1856,24 @@
 
 .lp3-footer__social svg {
   fill: currentColor;
+}
+
+.lp3-footer__company {
+  display: grid;
+  gap: 4px;
+  justify-items: start;
+  font-size: var(--fs-small);
+  color: var(--ink-on-paper-muted);
+}
+
+.lp3-footer__company a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 600;
+  color: var(--ink-on-paper);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .lp3-footer__copy {

@@ -1,4 +1,5 @@
 import type { Lp3Content } from "@/components/lp3/types";
+import { FOOTER_COMPANY } from "@/lib/lp/empresa";
 
 /* TODA a copy e todos os paths de imagem desta LP vivem aqui — os componentes
    do template (components/lp3/) não têm texto próprio.
@@ -21,12 +22,14 @@ import type { Lp3Content } from "@/components/lp3/types";
    4. Rodapé e nota do Google: replicados das LPs ativas (/engenharia-nov26),
       número verificado (memória de 09/2026).
    Textos de ligação escritos pelo agente (para auditoria, TIRAR se não
-   aprovados): hero.ctaSecondary.label, o hint do WhatsApp em
-   components/lp3/Form.tsx e o rótulo do consentimento em form.consent.
+   aprovados): hero.ctaSecondary.label e o hint do WhatsApp em
+   components/lp3/Form.tsx. O aviso de consentimento (form.consent) é o texto
+   do pedido UX-C (Gustavo, 15/10).
    (form.meta, do agente, saiu na rodada 2: o "Como funciona" cobre o papel.)
 
-   TODO (sem dado confirmado — não inventar):
-   - Professores: seção não existe até a confirmação da bancada.
+   Professores (UX-C, 15/10): títulos, nomes e bios do briefing do Gustavo,
+   como estão. Fotos de Nilson e Aurenilson copiadas das que já estavam no
+   repo; a da Suely chega até 20/10 e entra só quando o arquivo existir.
    Fechados na rodada 4 (30/09): endereço da sede na FAQ e no JSON-LD;
    foto do topo fica a sala da sede (public/engenharia-nov26/hero.jpg copiada
    para public/tesouraria-nov26/), ancorada à esquerda no desktop para o
@@ -266,6 +269,30 @@ export const tesourariaNov26Content: Lp3Content = {
     note: "Não encontrou o seu cargo na lista? A turma é aberta a servidores e gestores de prefeituras, câmaras, autarquias, consórcios e tribunais — fale com um consultor e confirme a aderência antes de inscrever a equipe.",
   },
 
+  speakers: {
+    eyebrow: "PROFESSORES",
+    title: "Contadores que vivem a rotina do município",
+    items: [
+      {
+        name: "Suely Luzia Pereira",
+        institution: "CONTROLADORA · FUNDAÇÃO RIO DAS OSTRAS DE CULTURA",
+        bio: "Contadora (UFF) e servidora concursada desde 2004. Mais de 20 anos em controle interno, auditoria, prestação de contas e contratações públicas.",
+      },
+      {
+        name: "Nilson Francisco Tognato",
+        institution: "CONTADOR PÚBLICO HÁ 33 ANOS",
+        photoSrc: `/${SLUG}/palestrantes/nilson-francisco-tognato.jpg`,
+        bio: "MBA em Gestão Pública e Inovação (Unicentro) e especialista em Contabilidade Gerencial (Fecilcam). Professor da Unyflex desde 2020, com foco em contabilidade, patrimônio, orçamento e planejamento municipal.",
+      },
+      {
+        name: "Aurenilson Cipriano",
+        institution: "CONTADOR · MUNICÍPIO DE ANDIRÁ-PR",
+        photoSrc: `/${SLUG}/palestrantes/aurenilson-cipriano.jpg`,
+        bio: "Especialista em Administração e Finanças e em Gestão Pública. Ex-presidente da APEPREV e ex-diretor-presidente do fundo de previdência de Andirá (RPPS). Professor de Ciências Contábeis (FACCREI, 2017–2022).",
+      },
+    ],
+  },
+
   plans: {
     eyebrow: "Planos e Preços",
     // Título, abertura e âncora da barra fixa: Gestão, 14/10 (4 planos com o online).
@@ -338,14 +365,16 @@ export const tesourariaNov26Content: Lp3Content = {
     consent: {
       label: (
         <>
-          Autorizo o contato da Unyflex por WhatsApp, telefone e e-mail sobre este curso, conforme a{" "}
+          Ao enviar, você autoriza a Unyflex a entrar em contato sobre este curso por WhatsApp, telefone e
+          e-mail, conforme a{" "}
           <a href="https://unyflex.com.br/lgpd" target="_blank" rel="noopener noreferrer">
             política de privacidade
           </a>
           .
         </>
       ),
-      value: "sim",
+      value: "aviso-v1",
+      mode: "notice",
     },
     thankYou: { url: "/obrigado", withPii: false },
   },
@@ -407,6 +436,7 @@ export const tesourariaNov26Content: Lp3Content = {
       { kind: "youtube", href: "https://youtube.com/@unyflex" },
     ],
     copyright: "© Unyflex 2026",
+    company: FOOTER_COMPANY,
   },
 
   stickyCta: {

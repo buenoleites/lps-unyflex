@@ -10,6 +10,7 @@ import Modules from "@/components/lp3/Modules";
 import Nav from "@/components/lp3/Nav";
 import Outcomes from "@/components/lp3/Outcomes";
 import Plans from "@/components/lp3/Plans";
+import Speakers from "@/components/lp3/Speakers";
 import StickyCta from "@/components/lp3/StickyCta";
 import { trackEvent } from "@/lib/lp/meta";
 import { captureTracking } from "@/lib/lp/utm";
@@ -17,9 +18,9 @@ import { captureCampaign } from "@/lib/lp3/campaign";
 import { tesourariaNov26Content as content } from "./content";
 
 /* Ordem das seções (rodada 2, 30/09): topo (promessa + prova social) →
-   para quem → o que muda → programação → IA na prática → planos → inscrição
-   (com "Como funciona") → perguntas frequentes → rodapé.
-   Professores: sem seção até a confirmação. */
+   para quem → o que muda → programação → IA na prática → professores (UX-C,
+   15/10) → planos → inscrição (com "Como funciona") → perguntas frequentes →
+   rodapé. */
 export default function TesourariaNov26Page() {
   // Plano de interesse: preenchido pelos botões da seção de planos, editável
   // no formulário, enviado como `plano_interesse`.
@@ -40,6 +41,7 @@ export default function TesourariaNov26Page() {
         {content.outcomes ? <Outcomes content={content.outcomes} /> : null}
         <Modules content={content.modules} />
         {content.highlight ? <Highlight content={content.highlight} /> : null}
+        {content.speakers ? <Speakers content={content.speakers} /> : null}
         <Plans content={content.plans} onSelectPlan={setPlano} />
         <Form content={content.form} proof={content.proof} plano={plano} onPlanoChange={setPlano} />
         {content.faq ? <Faq content={content.faq} /> : null}
