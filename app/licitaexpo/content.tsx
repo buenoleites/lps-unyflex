@@ -37,7 +37,11 @@ import type { Lp3Content } from "@/components/lp3/types";
    8. Decisão da Gestão de 15/10/2026: o selo do MasterClass passa de "Mais
       escolhido" a "Recomendado" (não há dado de venda que sustente "mais
       escolhido"); selo "1º lote até 24/10" no hero, junto da data, e acima dos
-      cards. O aviso "A partir de 25/10…" segue embaixo dos cards. */
+      cards. O aviso "A partir de 25/10…" segue embaixo dos cards.
+   9. Gustavo, 15/10/2026: no 2º lote (a partir de 25/10) sai o selo "1º lote até
+      24/10" e o aviso embaixo dos cards passa a "Valores do 2º lote. Inscrições
+      até 21/11." Valores do 2º lote (Gestão, 15/10/2026), sem arredondar:
+      Basic R$ 3.630, Master R$ 3.960, Premium R$ 4.290. */
 
 /* Itens dos planos presenciais, na ordem da LP anterior. "6 painéis" saiu do
    primeiro item (decisão de 06/10: a grade tem 8 painéis em 7 blocos). */
@@ -86,7 +90,6 @@ export const licitaexpoContent: Lp3Content = {
     promise: SUBTITULO,
     title: TITULO,
     subtitle: `${GANCHO} Os pontos onde o certame e a execução contratual travam, mapeados para você decidir com respaldo, não no escuro.`,
-    datesBadge: "1º lote até 24/10",
     dates: "24 a 27 de novembro de 2026",
     place: "Presencial em Curitiba",
     facts: ["Seminário presencial", "4 dias", "20 horas", "75 vagas", "Certificado emitido pela Faculdade Unypública, instituição credenciada pelo MEC"],
@@ -242,25 +245,24 @@ export const licitaexpoContent: Lp3Content = {
   },
 
   /* Planos: Basic, Master, Premium (o Online Ao Vivo saiu em 14/10, decisão do
-     Bruno). Preços da tabela de seminário (Gestão, 15/10; ver FONTES item 7).
-     MasterClass "Recomendado" e selo do 1º lote: Gestão, 15/10 (FONTES item 8). */
+     Bruno). Preços e aviso do 2º lote: FONTES item 9 (o item 7 é a tabela do
+     1º lote). MasterClass "Recomendado": Gestão, 15/10 (FONTES item 8). */
   plans: {
     eyebrow: "Planos",
     title: "Escolha como quer viver o LicitaExpo.",
     lead: "Todos os planos dão acesso aos 4 dias e ao certificado. A diferença está no que você leva além do conteúdo. O que protege sua decisão é o conteúdo — e ele é o mesmo em todos os planos. O restante é o que torna os quatro dias mais leves: alimentação, materiais e, nos planos superiores, formação que continua depois do evento.",
-    badge: "1º lote até 24/10",
     items: [
       {
         name: "BasicClass",
         sub: "Presencial",
-        price: "R$ 3.300",
+        price: "R$ 3.630",
         features: planoFeatures(BASIC),
         ctaLabel: "Quero o BasicClass",
       },
       {
         name: "MasterClass",
         sub: "Presencial",
-        price: "R$ 3.600",
+        price: "R$ 3.960",
         highlighted: true,
         highlightLabel: "Recomendado",
         features: planoFeatures(MASTER),
@@ -269,12 +271,12 @@ export const licitaexpoContent: Lp3Content = {
       {
         name: "PremiumClass",
         sub: "Presencial",
-        price: "R$ 3.900",
+        price: "R$ 4.290",
         features: planoFeatures(PREMIUM),
         ctaLabel: "Quero o PremiumClass",
       },
     ],
-    footnote: "Estes são os valores do 1º lote. A partir de 25/10, o preço sobe 10%. Inscrições até 21/11.",
+    footnote: "Valores do 2º lote. Inscrições até 21/11.",
   },
 
   form: {
@@ -326,7 +328,7 @@ export const licitaexpoContent: Lp3Content = {
   },
 
   stickyCta: {
-    priceAnchor: "a partir de R$ 3.300",
+    priceAnchor: "a partir de R$ 3.630",
     label: "Garanta sua vaga",
     href: "#inscricao",
   },
