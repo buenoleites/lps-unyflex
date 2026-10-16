@@ -1,4 +1,5 @@
 import type { Lp3Content } from "@/components/lp3/types";
+import { FOOTER_COMPANY } from "@/lib/lp/empresa";
 
 /* TODA a copy e todos os paths de imagem desta LP vivem aqui — os componentes
    do template (components/lp3/) não têm texto próprio.
@@ -513,14 +514,16 @@ export const portalNov26Content: Lp3Content = {
     consent: {
       label: (
         <>
-          Autorizo o contato da Unyflex por WhatsApp, telefone e e-mail sobre este curso, conforme a{" "}
+          Ao enviar, você autoriza a Unyflex a entrar em contato sobre este curso por WhatsApp, telefone e
+          e-mail, conforme a{" "}
           <a href="https://unyflex.com.br/lgpd" target="_blank" rel="noopener noreferrer">
             política de privacidade
           </a>
           .
         </>
       ),
-      value: "sim",
+      value: "aviso-v1",
+      mode: "notice",
     },
     thankYou: { url: "/obrigado", withPii: false },
   },
@@ -598,6 +601,7 @@ export const portalNov26Content: Lp3Content = {
       { kind: "youtube", href: "https://youtube.com/@unyflex" },
     ],
     copyright: "© Unyflex 2026",
+    company: FOOTER_COMPANY,
   },
 
   stickyCta: {

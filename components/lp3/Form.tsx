@@ -19,7 +19,10 @@ import type { Lp3Content } from "./types";
    - Telefone validado de verdade: 11 dígitos, DDD 11–99, nono dígito 9 e sem
      sequência repetida (em setembro, 18% dos leads tinham telefone inválido
      com a regra "11 dígitos").
-   - Consentimento obrigatório com link para a política (`consentimento`).
+   - Consentimento com link para a política (`consentimento`). Desde o UX-C
+     (15/10) a LP escolhe: `consent.mode: "notice"` mostra um aviso acima do
+     botão e manda sempre `consent.value`; sem `mode`, checkbox obrigatório
+     (só a /licitaexpo, até a parte 2).
    - `c` = ?c= da URL, com fallback no slug (lib/lp3/campaign.ts); também
      alimenta utm_campaign/titulo quando a sessão não tem UTM.
    - `vinculo` (opt-in por LP, desde 07/10 para a /licitacao-out26): select
@@ -169,6 +172,7 @@ export default function Form({
     consent: false,
   });
   const [errors, setErrors] = useState<Errors>({});
+  const notice = content.consent.mode === "notice";
   const [submitting, setSubmitting] = useState(false);
   const submittingRef = useRef(false);
   const planoRef = useRef<HTMLSelectElement>(null);
@@ -213,7 +217,7 @@ export default function Form({
         "municipio",
         content.vinculo ? "vinculo" : "servidorPublico",
         ...(content.modalidade ? (["modalidade"] as const) : []),
-        "consent",
+        ...(notice ? [] : (["consent"] as const)),
       ] as const
     ).forEach((f) => {
       const err = validate(f, form[f]);
@@ -259,7 +263,7 @@ export default function Form({
           // "" como campo ausente).
           plano_interesse: plano || "Ainda não decidi",
           c,
-          consentimento: form.consent ? content.consent.value : "nao",
+          consentimento: notice || form.consent ? content.consent.value : "nao",
         },
       });
     } catch (err) {
@@ -484,6 +488,7 @@ export default function Form({
               </div>
             ) : null}
 
+            {notice ? null : (
             <div className={`lp3-form__field lp3-form__field--full${errors.consent ? " is-error" : ""}`}>
               <div className="lp3-form__consent">
                 <input
@@ -508,7 +513,10 @@ export default function Form({
                 </span>
               ) : null}
             </div>
+            )}
           </div>
+
+          {notice ? <p className="lp3-form__notice">{content.consent.label}</p> : null}
 
           <button
             type="submit"

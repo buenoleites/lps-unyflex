@@ -95,6 +95,15 @@ export default function Footer({ content }: { content: Lp3Content["footer"] }) {
           </div>
         ) : null}
 
+        {content.company ? (
+          <div className="lp3-footer__company">
+            <a href={content.company.whatsapp.href} target="_blank" rel="noopener">
+              {content.company.whatsapp.label}
+            </a>
+            <p>{content.company.line}</p>
+          </div>
+        ) : null}
+
         <p className="lp3-footer__copy">{content.copyright}</p>
       </div>
     </footer>
