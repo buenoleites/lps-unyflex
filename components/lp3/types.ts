@@ -39,7 +39,7 @@ export interface Lp3Content {
     promise?: string;
     title: string;
     subtitle: string;
-    /** Selo de prazo logo acima da data, ex. "1º lote até 24/10". Opcional. */
+    /** Selo de prazo logo acima da data, ex. "Inscrições abertas". Opcional. */
     datesBadge?: string;
     /** Linha de data em destaque, ex. "10 a 13 de novembro". */
     dates: string;
@@ -142,7 +142,7 @@ export interface Lp3Content {
     title: string;
     lead?: string;
     items: Lp3Plan[];
-    /** Selo de prazo logo acima dos cards, ex. "1º lote até 24/10". Opcional. */
+    /** Selo de prazo logo acima dos cards, ex. "Inscrições abertas". Opcional. */
     badge?: string;
     /** 4 cards lado a lado no desktop (2×2 abaixo de 1200px). Opt-in: a /licitaexpo
      *  tem 4 cards e segue no 3+1 de sempre. */

@@ -10,7 +10,7 @@ import type { Lp3Content } from "@/components/lp3/types";
    FONTES (nada aqui é de autoria do agente):
    1. Grade oficial de 06/10/2026 (Gustavo): nome oficial, datas, carga horária,
       lista e ordem dos 7 professores, programação por dia/horário, texto do
-      certificado, regra do 1º lote, formato "presencial ou ● ao vivo" (superado
+      certificado, formato "presencial ou ● ao vivo" (superado
       pelo item 6).
    2. A própria LP anterior (app/licitaexpo/page.tsx até 06/10): título e
       subtítulo do topo, "Para quem", as 8 falhas (viram os tópicos da
@@ -35,11 +35,13 @@ import type { Lp3Content } from "@/components/lp3/types";
       vira "presencial em Curitiba"; a âncora da barra fixa passa ao BasicClass.
    7. Decisão da Gestão de 15/10/2026: a LicitaExpo segue a tabela de seminário.
       Basic R$ 3.300 (sem mudança), Master R$ 3.600, Premium R$ 3.900. Itens dos
-      planos, "20 horas" e o aviso do 1º lote (25/10, +10%) ficam como estavam.
+      planos e "20 horas" ficam como estavam.
    8. Decisão da Gestão de 15/10/2026: o selo do MasterClass passa de "Mais
       escolhido" a "Recomendado" (não há dado de venda que sustente "mais
-      escolhido"); selo "1º lote até 24/10" no hero, junto da data, e acima dos
-      cards. O aviso "A partir de 25/10…" segue embaixo dos cards. */
+      escolhido").
+   9. Decisão da Gestão de 06/11/2026: o LicitaExpo não tem mais preço por data; o preço
+      atual continua. Saem os selos de prazo (hero e planos) e o aviso de
+      reajuste; valores, planos e benefícios não mudam. */
 
 /* Itens dos planos presenciais, na ordem da LP anterior. "6 painéis" saiu do
    primeiro item (decisão de 06/10: a grade tem 8 painéis em 7 blocos). */
@@ -88,7 +90,6 @@ export const licitaexpoContent: Lp3Content = {
     promise: SUBTITULO,
     title: TITULO,
     subtitle: `${GANCHO} Os pontos onde o certame e a execução contratual travam, mapeados para você decidir com respaldo, não no escuro.`,
-    datesBadge: "1º lote até 24/10",
     dates: "24 a 27 de novembro de 2026",
     place: "Presencial em Curitiba",
     facts: ["Seminário presencial", "4 dias", "20 horas", "75 vagas", "Certificado emitido pela Faculdade Unypública, instituição credenciada pelo MEC"],
@@ -248,12 +249,11 @@ export const licitaexpoContent: Lp3Content = {
 
   /* Planos: Basic, Master, Premium (o Online Ao Vivo saiu em 14/10, decisão do
      Bruno). Preços da tabela de seminário (Gestão, 15/10; ver FONTES item 7).
-     MasterClass "Recomendado" e selo do 1º lote: Gestão, 15/10 (FONTES item 8). */
+     MasterClass "Recomendado": Gestão, 15/10 (FONTES item 8). */
   plans: {
     eyebrow: "Planos",
     title: "Escolha como quer viver o LicitaExpo.",
     lead: "Todos os planos dão acesso aos 4 dias e ao certificado. A diferença está no que você leva além do conteúdo. O que protege sua decisão é o conteúdo — e ele é o mesmo em todos os planos. O restante é o que torna os quatro dias mais leves: alimentação, materiais e, nos planos superiores, formação que continua depois do evento.",
-    badge: "1º lote até 24/10",
     items: [
       {
         name: "BasicClass",
@@ -279,7 +279,7 @@ export const licitaexpoContent: Lp3Content = {
         ctaLabel: "Quero o PremiumClass",
       },
     ],
-    footnote: "Estes são os valores do 1º lote. A partir de 25/10, o preço sobe 10%. Inscrições até 21/11.",
+    footnote: "Inscrições até 21/11.",
   },
 
   form: {
