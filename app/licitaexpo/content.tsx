@@ -15,12 +15,14 @@ import type { Lp3Content } from "@/components/lp3/types";
    2. A própria LP anterior (app/licitaexpo/page.tsx até 06/10): título e
       subtítulo do topo, "Para quem", as 8 falhas (viram os tópicos da
       programação), prova social (270 inscrições / edições / 98 municípios),
-      metodologia, planos e itens, bios de Everson, Rafael, Marcio, Gabriela e
-      Igor, parceiros.
+      metodologia, planos e itens, bios de Everson, Rafael, Marcio e Gabriela,
+      parceiros. (A bio do Igor saiu em 06/11: ele deixou o evento.)
    3. Das LPs lp3 (/comunicacao-nov26): consentimento, rodapé, link da política.
    4. Briefings do Gustavo de 08/10/2026: Edilson Liberal (painel do Dia 3 14h,
-      foto); instituição e bio são o texto exato do 2º briefing, a pedido do
-      professor (sem citar a instituição onde trabalha).
+      foto); bio é o texto exato do 2º briefing. A linha de cargo é "Mestre em
+      Direito Público · Especialista em Licitações e Contratos" (a pedido do
+      professor, sem citar o órgão). Decisão da Gestão em 06/11: manter assim;
+      TCE-PR só se a Emily confirmar autorização.
    Jarbas Renê não estava na LP anterior: a bio é a enviada pelo Gustavo em
    06/10; a instituição resume a bio. Caroline de Souza saiu (grade de 06/10).
    Texto do certificado: o exato enviado em 06/10.
@@ -128,7 +130,7 @@ export const licitaexpoContent: Lp3Content = {
     note: "Se o seu nome aparece no processo, o risco é seu. Servidores das esferas municipal, estadual e federal.",
   },
 
-  /* Programação da grade de 06/10: um item por painel, na ordem dos dias.
+  /* Programação da planilha confirmada da Emily (05/11): um item por painel, na ordem dos dias.
      `result` = dia · data · horário · professor; `topics` = a frase do card de
      falhas da LP anterior correspondente ao painel. */
   modules: {
@@ -137,19 +139,19 @@ export const licitaexpoContent: Lp3Content = {
     lead: "4 dias · 20 horas · 24 a 27 de novembro de 2026",
     items: [
       {
-        title: "O certame é um campo minado",
-        result: "Dia 1 · 24/11 · 14h–17h · Jarbas Renê",
-        topics: ["Pontos críticos, deficiências, restrições e direcionamento na fase interna e externa."],
-      },
-      {
         title: "As ciladas da execução contratual",
-        result: "Dia 1 · 24/11 · 14h–17h · Jarbas Renê",
+        result: "Dia 1 · 24/11 · 14h–15h30 · Jarbas Renê",
         topics: ["Os pontos nevrálgicos da gestão e fiscalização que mais viram responsabilização."],
       },
       {
-        title: "O poder condicionado do parecer jurídico",
-        result: "Dia 2 · 25/11 · 9h–12h · Everson Biazon",
-        topics: ["Onde termina a função consultiva e começa a sua responsabilidade."],
+        title: "Cesta de preços",
+        result: "Dia 1 · 24/11 · 15h45–17h · Jarbas Renê",
+        topics: ["Como estruturar pesquisa de preços sem sobrepreço nem inexequibilidade."],
+      },
+      {
+        title: "Prorrogação contratual",
+        result: "Dia 2 · 25/11 · 9h–12h · Gabriela Lira",
+        topics: ["O que o controle exige que você demonstre."],
       },
       {
         title: "ETP, TR e edital",
@@ -157,24 +159,24 @@ export const licitaexpoContent: Lp3Content = {
         topics: ["Elaborar com segurança técnica e jurídica."],
       },
       {
-        title: "Cesta de preços",
+        title: "O certame é um campo minado",
         result: "Dia 3 · 26/11 · 9h–12h · Marcio Assumpção",
-        topics: ["Como estruturar pesquisa de preços sem sobrepreço nem inexequibilidade."],
+        topics: ["Pontos críticos, deficiências, restrições e direcionamento na fase interna e externa."],
       },
       {
-        title: "Julgamento de propostas",
+        title: "Licitações e contratos sob a ótica dos Tribunais de Contas",
         result: "Dia 3 · 26/11 · 14h–17h · Edilson Liberal",
-        topics: ["Reduzir subjetividade e prevenir desclassificação indevida."],
+        topics: ["Fiscalização, controle e responsabilização: o que o Tribunal olha no seu processo."],
       },
       {
-        title: "Prorrogação contratual",
-        result: "Dia 4 · 27/11 · 9h–10h · Gabriela Lira",
-        topics: ["O que o controle exige que você demonstre."],
+        title: "O poder condicionado do parecer jurídico",
+        result: "Dia 4 · 27/11 · 9h–10h · Everson Biazon",
+        topics: ["Onde termina a função consultiva e começa a sua responsabilidade."],
       },
       {
-        title: "Segregação de funções",
-        result: "Dia 4 · 27/11 · 10h–11h · Igor Pires",
-        topics: ["Como a concentração indevida de atribuições vira responsabilização."],
+        title: "Nuances da excelência profissional no setor público",
+        result: "Dia 4 · 27/11 · 10h–11h · Prof. Jonias Oliveira",
+        topics: ["Evolua! Conquiste! Brilhe! O que diferencia o servidor que decide com segurança e cresce na carreira."],
       },
     ],
   },
@@ -187,11 +189,13 @@ export const licitaexpoContent: Lp3Content = {
       "Exposição dialogada",
       "Análise de casos concretos",
       "Interpretação de decisões dos órgãos de controle",
-      "Dinâmicas de fixação nos módulos de ETP/TR/edital e julgamento de propostas",
+      "Dinâmicas de fixação nos módulos de ETP/TR/edital e cesta de preços",
     ],
   },
 
-  /* Ordem da grade de 06/10. Bios: as da LP anterior; Jarbas = linha da grade. */
+  /* Ordem da grade de 06/10. Bios: as da LP anterior; Jarbas = linha da grade.
+     06/11: Igor Pires saiu do evento (confirmado pela Emily) e o Prof. Jonias
+     Oliveira entrou como último card. */
   speakers: {
     eyebrow: "Palestrantes",
     title: "Quem vai te ensinar já esteve onde você está.",
@@ -233,10 +237,11 @@ export const licitaexpoContent: Lp3Content = {
         bio: "Mestre em Governança e Planejamento Público (UTFPR). Ex-Procuradora do Estado do Acre e ex-consultora da Zênite. Coautora de Horizontes e Perspectivas da Lei nº 14.133/2021 (Lumen Juris).",
       },
       {
-        name: "Igor Pires Gomes da Costa",
-        institution: "Procurador do Estado do Paraná",
-        photoSrc: `/${SLUG}/palestrantes/igor-pires-gomes-da-costa.jpg`,
-        bio: "Procurador do Estado do Paraná. Mestre em Direito Público (Université de Nantes) e em Direito do Estado (UFPR). Pesquisa e publica sobre governança pública e gestão de riscos na nova Lei de Licitações.",
+        // Prof. Jonias Oliveira (professor, pai do Bruno) — NÃO é o "jonIAs" do comercial.
+        name: "Prof. Jonias Oliveira",
+        institution: "Diretor e Professor da Faculdade Unypública",
+        photoSrc: `/${SLUG}/palestrantes/jonias-oliveira.jpg`,
+        bio: "Advogado (OAB/PR desde 1999), especialista em Direito Constitucional e em Docência no Ensino Superior. 33 anos de experiência técnica e jurídica no setor governamental, em gestão estratégica e consultoria jurídica a Executivo, Legislativo, consórcios e fundos. Professor universitário desde 2003 e no ensino de servidores públicos desde 2006, com mais de 1.600 temas de aula ministrados.",
       },
     ],
   },
