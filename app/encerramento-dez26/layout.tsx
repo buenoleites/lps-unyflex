@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import "../lp3.css";
+import "./theme.css";
 import { DESCRICAO, NOME_OFICIAL, SLUG } from "./content";
 
 /* Seminário Encerramento do Exercício — presencial em Curitiba-PR, 08 a
    11/12/2026. Template lp3 (padrão da /licitaexpo) com o âmbar de Finanças
-   (accent default do lp3.css; não precisa de theme.css). */
+   (accent default do lp3.css). O theme.css só alivia o scrim do hero no
+   celular (sem cor nova). */
 
 const PAGE_TITLE = `${NOME_OFICIAL} | Unyflex`;
 const PAGE_URL = `https://mkt.unyflex.com.br/${SLUG}`;
@@ -55,9 +57,9 @@ const jsonLd = {
     },
   },
   offers: [
-    { name: "BasicClass", price: "3300" },
-    { name: "MasterClass", price: "3600" },
-    { name: "PremiumClass", price: "3900" },
+    { name: "BasicClass", price: "3200" },
+    { name: "MasterClass", price: "3500" },
+    { name: "PremiumClass", price: "4280" },
   ].map((plano) => ({
     "@type": "Offer",
     name: plano.name,
@@ -87,7 +89,8 @@ export default function EncerramentoDez26Layout({ children }: { children: React.
         document,'script','https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '1168799437651546');
       `}</Script>
-      {children}
+      {/* .lpenc-theme: o ajuste de hero da LP (theme.css) vale só sob este wrapper. */}
+      <div className="lpenc-theme">{children}</div>
     </>
   );
 }

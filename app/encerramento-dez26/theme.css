@@ -1,0 +1,24 @@
+/* Ajustes do hero da /encerramento-dez26 — só nesta rota, só no celular
+   (pedido do Gustavo, 11/11/2026: "no celular, reduza a camada escura do topo
+   para a foto aparecer"). O template (app/lp3.css) não muda: o scrim mobile
+   padrão chega a 0,92 em 130px e apaga a foto inteira.
+
+   Sem cor nova: o accent segue o âmbar default do lp3.css.
+   O seletor .lpenc-theme (wrapper no layout da rota) vence o bloco default por
+   especificidade, independente da ordem dos imports de CSS. */
+@media (max-width: 799px) {
+  .lpenc-theme .lp3-hero__scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(10, 14, 20, 0.2) 0,
+      rgba(10, 14, 20, 0.45) 140px,
+      rgba(10, 14, 20, 0.65) 55%,
+      var(--bg-0) 100%
+    );
+  }
+  /* no celular a foto é cortada na vertical; ancorada perto da esquerda, o
+     palestrante (terço esquerdo da foto) entra no recorte. */
+  .lpenc-theme .lp3-hero__media {
+    background-position: 10% center;
+  }
+}
