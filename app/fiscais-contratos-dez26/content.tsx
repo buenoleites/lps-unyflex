@@ -50,7 +50,6 @@ import { FOOTER_COMPANY } from "@/lib/lp/empresa";
    plano_interesse, Municipio, Orgao, c, consentimento e `titulo`. */
 
 export const PENDENTE: string[] = [
-  "Foto do hero: public/fiscais-contratos-dez26/hero.jpg é cópia provisória da /comunicacao-nov26; trocar por foto do curso e remover este item.",
   "Cadastro do produto `fiscais-contratos-dez26` no n8n (Gestão/Sistemas) antes do tráfego.",
 ];
 
