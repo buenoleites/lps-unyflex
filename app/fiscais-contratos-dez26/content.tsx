@@ -49,9 +49,7 @@ import { FOOTER_COMPANY } from "@/lib/lp/empresa";
    Gestão ou o Sistemas). Chaves no payload que o n8n precisa mapear:
    plano_interesse, Municipio, Orgao, c, consentimento e `titulo`. */
 
-export const PENDENTE: string[] = [
-  "Cadastro do produto `fiscais-contratos-dez26` no n8n (Gestão/Sistemas) antes do tráfego.",
-];
+export const PENDENTE: string[] = [];
 
 export const SLUG = "fiscais-contratos-dez26";
 export const TITULO = "Fiscais de Contratos e Papel do Gestor";

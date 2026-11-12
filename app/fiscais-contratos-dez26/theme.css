@@ -20,15 +20,24 @@
    padrão do lp3 chega a 0,92 em 130px e apaga a foto; aqui ele fica mais leve
    (mesmo critério da /encerramento-dez26) e o recorte ancora no professor
    (~55% da largura). Só nesta rota; o template não muda. */
+/* Desktop: a foto é 4:3 e o hero é mais largo; 30% mantém o professor (em pé,
+   camisa preta) dentro do corte. */
+.lpfc-theme .lp3-hero__media {
+  background-position: center 30%;
+}
 @media (max-width: 799px) {
   .lpfc-theme .lp3-hero__scrim {
     background: linear-gradient(
       180deg,
-      rgba(10, 14, 20, 0.3) 0,
-      rgba(10, 14, 20, 0.5) 140px,
+      rgba(10, 14, 20, 0.35) 0,
+      rgba(10, 14, 20, 0.6) 140px,
       rgba(10, 14, 20, 0.7) 55%,
       var(--bg-0) 100%
     );
+  }
+  /* Medido: ciano sobre as luzes do teto = 1,7–2,1:1 (reprova). Branco nesta LP. */
+  .lpfc-theme .lp3-hero__promise {
+    color: #fff;
   }
   .lpfc-theme .lp3-hero__media {
     background-position: 55% center;
