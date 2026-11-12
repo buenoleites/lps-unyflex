@@ -36,6 +36,8 @@ import { FOOTER_COMPANY } from "@/lib/lp/empresa";
    9. Gustavo, 12/11/2026: bios (uma frase) e fotos dos 3 professores; plano ao
       vivo R$ 2.000 (D-09a) com card e opção no formulário; seção "O que muda"
       fica de fora; certificado mantém "credenciada".
+  10. Gustavo, 12/11/2026: público-alvo aprovado (seção "Para quem"); preços
+      3.200/3.500/4.280 confirmados pelo Painel.
 
    PENDENTE (sem fonte; NÃO inventar). Enquanto a lista não estiver vazia, o
    build de produção FALHA de propósito, para que um out/ com conteúdo
@@ -48,7 +50,6 @@ import { FOOTER_COMPANY } from "@/lib/lp/empresa";
    plano_interesse, Municipio, Orgao, c, consentimento e `titulo`. */
 
 export const PENDENTE: string[] = [
-  "Público-alvo (\"Para quem\"): a página do curso não traz; a seção `audience` fica de fora até chegar.",
   "Foto do hero: public/fiscais-contratos-dez26/hero.jpg é cópia provisória da /comunicacao-nov26; trocar por foto do curso e remover este item.",
   "Cadastro do produto `fiscais-contratos-dez26` no n8n (Gestão/Sistemas) antes do tráfego.",
 ];
@@ -128,6 +129,14 @@ export const fiscaisContratosDez26Content: Lp3Content = {
       "5,0 no Google · 510 avaliações",
       "Desde 2009 · 49.000+ alunos",
       "Faculdade Unypública · nota 5 no MEC",
+    ],
+  },
+
+  audience: {
+    eyebrow: "Para quem",
+    title: "Para quem é o curso",
+    items: [
+      "Fiscais e gestores de contratos, agentes de contratação, controle interno e assessoria jurídica de prefeituras, câmaras e autarquias",
     ],
   },
 
