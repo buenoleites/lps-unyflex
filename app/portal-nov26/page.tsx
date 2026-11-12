@@ -19,7 +19,7 @@ import { captureTracking } from "@/lib/lp/utm";
 import { captureCampaign } from "@/lib/lp3/campaign";
 import { portalNov26Content as content } from "./content";
 
-/* Turma de 16 a 19/11/2026, clone da /portal (ver content.tsx).
+/* Turma de 01 a 04/12/2026, clone da /portal (ver content.tsx).
    Ordem das seções (a da /portal, sem a faixa de remarketing): topo com números → para quem →
    desafios → programação → professores → galeria → depoimentos → planos →
    como seu órgão contrata → inscrição → perguntas frequentes → rodapé. */

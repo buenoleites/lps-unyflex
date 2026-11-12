@@ -74,7 +74,7 @@ export const engenhariaNov26Content: EventLpContent = {
 
   hero: {
     // O CSS do eyebrow (.lp2-eyebrow) já aplica uppercase.
-    eyebrow: "Curso presencial em Curitiba · 24 a 27/11 · 17 horas",
+    eyebrow: "Curso presencial em Curitiba · 24 a 27/11 · 20 horas",
     // Headline em 2 linhas e subheadline em 3 a >=1440px (regra de 16/09; medido
     // no preview com o texto injetado no h1, nao estimado por contagem).
     title: (
@@ -181,7 +181,7 @@ export const engenhariaNov26Content: EventLpContent = {
      tem nenhuma palavra de autoria do agente. O campo virou opcional no
      contrato do lp2 por causa disso; não repor. */
   modules: {
-    title: "Em 17 horas, do risco climático ao recebimento da obra",
+    title: "Em 20 horas, do risco climático ao recebimento da obra",
     items: [
       {
         title: "Contratações Planejadas em Eventos Climáticos",
@@ -510,7 +510,7 @@ export const engenhariaNov26Content: EventLpContent = {
         a: "Nota de empenho com pagamento em 7 dias após o curso. Pessoa física paga por PIX, cartão ou boleto.",
       },
       {
-        q: "Tem opção online?",
+        q: "Tem opção ao vivo?",
         a: "Sim, ao vivo, com as mesmas aulas e transmissão em tempo real. Kit, coffee e vouchers são exclusivos do presencial.",
       },
     ],
@@ -534,6 +534,8 @@ export const engenhariaNov26Content: EventLpContent = {
     modalidade: {
       label: "Modalidade preferida",
       options: ["Presencial em Curitiba", "Online ao vivo"],
+      // Valores do payload inalterados; só o rótulo dos botões muda (12/11).
+      labels: ["Presencial em Curitiba", "Ao vivo"],
     },
     vinculo: {
       label: "Seu vínculo",

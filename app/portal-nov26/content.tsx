@@ -4,7 +4,7 @@ import { FOOTER_COMPANY } from "@/lib/lp/empresa";
 /* TODA a copy e todos os paths de imagem desta LP vivem aqui — os componentes
    do template (components/lp3/) não têm texto próprio.
 
-   Portal, LGPD, e-SIC e Ouvidoria — turma de 16 a 19/11/2026 (/portal-nov26).
+   Portal, LGPD, e-SIC e Ouvidoria — turma de 01 a 04/12/2026 (/portal-nov26).
    CLONE da /portal (turma 20–23/10, lp3 turquesa) em 07/10/2026, a pedido do
    Gustavo, com os dados da Gestão: datas, 4 professores (bios curtas, só
    profissionais, nas palavras dele), planos padrão das lp3 presenciais,
@@ -12,7 +12,7 @@ import { FOOTER_COMPANY } from "@/lib/lp/empresa";
    depoimentos, "Como seu órgão contrata" e FAQ são os da /portal, VERBATIM.
 
    Decisões de 07/10:
-   - os 6 módulos foram conferidos com a ficha da turma de 16/11 (enviada em
+   - os 6 módulos foram conferidos com a ficha da turma de 01/12 (enviada em
      07/10): 1–5 idênticos à /portal; o Módulo 6 (IA) recebeu os 13 tópicos da
      ficha no lugar da lista de ferramentas Google herdada da /licitacao;
    - carga horária: 20 horas (decisão da Gestão, 07/10; a ficha diz 17);
@@ -68,7 +68,7 @@ export const portalNov26Content: Lp3Content = {
     title: "Publicar ou proteger? Quem decide é você.",
     subtitle:
       "Portal da Transparência, e-SIC, Ouvidoria e LGPD em um curso só, com o módulo de IA aplicada ao setor público.",
-    dates: "16, 17, 18 e 19 de novembro",
+    dates: "1, 2, 3 e 4 de dezembro",
     place: "Curitiba-PR · presencial ou ● ao vivo",
     facts: [
       "4 dias",
@@ -247,7 +247,7 @@ export const portalNov26Content: Lp3Content = {
       },
       {
         // Título, result (montado só com expressões da ficha) e os 13 tópicos
-        // vêm da ficha da turma de 16/11 (07/10).
+        // vêm da ficha da turma de 01/12 (07/10).
         title: "Inteligência Artificial no Setor Público",
         result:
           "Fundamentos, IA generativa, agentes e automação de processos: potencial e limites da IA na Administração Pública",
@@ -414,25 +414,27 @@ export const portalNov26Content: Lp3Content = {
     eyebrow: "Planos e Preços",
     // Título, abertura e âncora da barra fixa: Gestão, 14/10 (4 planos com o online).
     title: "Quatro formas de participar",
-    lead: "O mesmo curso, do online ao vivo à experiência Premium. O PremiumClass é o plano recomendado: capacitação em 4 dias e a agenda completa fora da sala de aula.",
+    lead: "O mesmo curso, do ao vivo à experiência Premium. O PremiumClass é o plano recomendado: capacitação em 4 dias e a agenda completa fora da sala de aula.",
     fourColumns: true,
     items: [
       /* Online ao vivo: a Gestão confirmou em 14/10/2026 que o online segue
          visível nas LPs. Copy só com fonte: nome, preço e linha verbatim do
          card `online` da /licitacao-out26 lp2; sem lista de itens. */
       {
-        name: "Online ao vivo",
+        name: "Ao vivo",
+        // Valor do plano_interesse no n8n inalterado (12/11: só o rótulo muda).
+        value: "Online ao vivo",
         sub: "Mesmas aulas, transmitidas em tempo real.",
         price: "R$ 2.000,00",
         features: [],
-        ctaLabel: "Quero o online ao vivo",
+        ctaLabel: "Quero o ao vivo",
       },
       {
         name: "BasicClass",
         sub: "Investimento por aluno",
         price: "R$ 3.200,00",
         features: planoFeatures(BASIC, {
-          0: "Capacitação prática em 3 dias: segunda a quarta (16 a 18/11) ou terça a quinta (17 a 19/11)",
+          0: "Capacitação prática em 3 dias: terça a quinta (01 a 03/12) ou quarta a sexta (02 a 04/12)",
         }),
         ctaLabel: "Quero o BasicClass",
       },
@@ -488,7 +490,7 @@ export const portalNov26Content: Lp3Content = {
   form: {
     eyebrow: "Inscrição",
     title: "Garanta sua participação",
-    meta: "Turma de 16 a 19/11 · Curitiba-PR · presencial ou ● ao vivo · Empenho leva tempo no seu órgão — comece o processo agora.",
+    meta: "Turma de 01 a 04/12 · Curitiba-PR · presencial ou ● ao vivo · Empenho leva tempo no seu órgão — comece o processo agora.",
     steps: {
       title: "Como funciona",
       items: [
@@ -503,7 +505,7 @@ export const portalNov26Content: Lp3Content = {
     produto: SLUG,
     paginaOrigem: SLUG,
     campaignFallback: SLUG,
-    planOptions: ["Online ao vivo", "BasicClass", "MasterClass", "PremiumClass"],
+    planOptions: [{ value: "Online ao vivo", label: "Ao vivo" }, "BasicClass", "MasterClass", "PremiumClass"],
     modalidade: {
       label: "Modalidade preferida",
       // Valores vão no payload (Modalidade_Preferida) e não mudam; só o rótulo.
@@ -605,7 +607,7 @@ export const portalNov26Content: Lp3Content = {
   },
 
   stickyCta: {
-    priceAnchor: "Presencial a partir de R$\u00a03.200\u00a0· online\u00a0R$\u00a02.000",
+    priceAnchor: "Presencial a partir de R$\u00a03.200\u00a0· ao vivo\u00a0R$\u00a02.000",
     label: "Receber proposta",
     href: "#inscricao",
   },

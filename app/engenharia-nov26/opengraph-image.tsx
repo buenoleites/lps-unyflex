@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 export const dynamic = "force-static";
 export const alt =
-  "Soluções Práticas de Engenharia e Urbanismo · curso presencial em Curitiba · 24 a 27/11 · 17 horas";
+  "Soluções Práticas de Engenharia e Urbanismo · curso presencial em Curitiba · 24 a 27/11 · 20 horas";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -36,7 +36,7 @@ export default function OgImage() {
             marginBottom: "28px",
           }}
         >
-          Curso presencial em Curitiba · 24 a 27/11 · 17 horas
+          Curso presencial em Curitiba · 24 a 27/11 · 20 horas
         </div>
         <div
           style={{

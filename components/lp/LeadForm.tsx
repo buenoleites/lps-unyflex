@@ -200,7 +200,8 @@ export default function LeadForm({
   thankYou?: ThankYouOptions;
   /** Campo opcional de modalidade (toggle). A chave `modalidade` só entra no
    *  state — e portanto no payload — quando esta prop é passada. */
-  modalidade?: { label: string; options: [string, string] };
+  /** `labels` (opcional): rótulos dos botões; o payload manda `options`. */
+  modalidade?: { label: string; options: [string, string]; labels?: [string, string] };
   /** Substitui o toggle "É servidor público?" por um <select>. Quando presente,
    *  o state tem `vinculo` (e não `servidorPublico`), então o payload manda
    *  `vinculo` e NÃO manda Orgao_Publico. */
@@ -409,7 +410,7 @@ export default function LeadForm({
               role="group"
               aria-label={modalidade.label}
             >
-              {modalidade.options.map((opt) => (
+              {modalidade.options.map((opt, i) => (
                 <button
                   key={opt}
                   type="button"
@@ -422,7 +423,7 @@ export default function LeadForm({
                   }}
                   aria-pressed={form.modalidade === opt}
                 >
-                  {opt}
+                  {modalidade.labels?.[i] ?? opt}
                 </button>
               ))}
             </div>
