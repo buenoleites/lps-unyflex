@@ -33,6 +33,10 @@ import { FOOTER_COMPANY } from "@/lib/lp/empresa";
       a regra dos 3 dias das outras LPs lp3 aplicada às datas desta turma
       (08/12/2026 é terça).
 
+   9. Gustavo, 12/11/2026: bios (uma frase) e fotos dos 3 professores; plano ao
+      vivo R$ 2.000 (D-09a) com card e opção no formulário; seção "O que muda"
+      fica de fora; certificado mantém "credenciada".
+
    PENDENTE (sem fonte; NÃO inventar). Enquanto a lista não estiver vazia, o
    build de produção FALHA de propósito, para que um out/ com conteúdo
    provisório nunca chegue ao nginx. Para ver a página: npm run dev, ou
@@ -45,10 +49,7 @@ import { FOOTER_COMPANY } from "@/lib/lp/empresa";
 
 export const PENDENTE: string[] = [
   "Público-alvo (\"Para quem\"): a página do curso não traz; a seção `audience` fica de fora até chegar.",
-  "Professores (Juliana Fiorese, Marcos Vinícius Henrique, Everson da Silva Biazon): faltam bio e foto; a seção `speakers` fica de fora. As notas da página não entram.",
   "Foto do hero: public/fiscais-contratos-dez26/hero.jpg é cópia provisória da /comunicacao-nov26; trocar por foto do curso e remover este item.",
-  "Plano e preço da modalidade ao vivo: a página só tem os 3 planos presenciais; sem card nem opção de plano ao vivo até haver fonte.",
-  "Texto \"O que muda\": a página não traz; a seção `outcomes` fica de fora (opcional no lp3).",
   "Cadastro do produto `fiscais-contratos-dez26` no n8n (Gestão/Sistemas) antes do tráfego.",
 ];
 
@@ -211,11 +212,47 @@ export const fiscaisContratosDez26Content: Lp3Content = {
     ],
   },
 
+  /* Professores: nome, foto e bio de uma frase, do site que o Gustavo mandou ao
+     Design (12/11/2026). Fotos: recortes enviados por ele, compostos em fundo
+     escuro 640x800. Sem nota de avaliação. */
+  speakers: {
+    title: "Quem ensina",
+    items: [
+      {
+        name: "Juliana Fiorese",
+        photoSrc: `/${SLUG}/professores/juliana-fiorese.jpg`,
+        bio: "Graduada em Direito pela PUCPR, especialista em licitações e contratos administrativos.",
+      },
+      {
+        name: "Marcos Vinícius Henrique",
+        photoSrc: `/${SLUG}/professores/marcos-vinicius-henrique.jpg`,
+        bio: "Mestre em Desenvolvimento Econômico pela UFPR, analista de finanças na FAS Curitiba, com atuação em contratos administrativos.",
+      },
+      {
+        name: "Everson da Silva Biazon",
+        photoSrc: `/${SLUG}/professores/everson-da-silva-biazon.jpg`,
+        bio: "Procurador do Estado do Paraná, ex-Procurador-Chefe da Procuradoria Consultiva junto à Governadoria.",
+      },
+    ],
+  },
+
   plans: {
     eyebrow: "Planos e Preços",
-    title: "Três planos de participação",
-    lead: "O mesmo curso, com três níveis de experiência. O PremiumClass é o plano recomendado: capacitação em 4 dias e a agenda completa fora da sala de aula.",
+    title: "Quatro formas de participar",
+    lead: "O mesmo curso, do ao vivo à experiência Premium. O PremiumClass é o plano recomendado: capacitação em 4 dias e a agenda completa fora da sala de aula.",
+    fourColumns: true,
     items: [
+      /* Ao vivo: R$ 2.000 confirmado pelo Gustavo em 12/11/2026 (D-09a). Mesmo
+         card da /comunicacao-nov26: sem lista de itens. */
+      {
+        name: "Ao vivo",
+        // Valor do plano_interesse no n8n inalterado: só o rótulo muda.
+        value: "Online ao vivo",
+        sub: "Mesmas aulas, transmitidas em tempo real.",
+        price: "R$ 2.000,00",
+        features: [],
+        ctaLabel: "Quero o ao vivo",
+      },
       {
         name: "BasicClass",
         sub: "Investimento por aluno",
@@ -264,7 +301,7 @@ export const fiscaisContratosDez26Content: Lp3Content = {
     // Token da vertical no título do lead: LP|fiscais-contratos|s=…|c=…|x=…|f=…
     tituloProduto: "fiscais-contratos",
     campaignFallback: SLUG,
-    planOptions: ["BasicClass", "MasterClass", "PremiumClass"],
+    planOptions: [{ value: "Online ao vivo", label: "Ao vivo" }, "BasicClass", "MasterClass", "PremiumClass"],
     modalidade: {
       label: "Modalidade preferida",
       // Valores vão no payload (Modalidade_Preferida) e não mudam; só o rótulo.
@@ -343,7 +380,7 @@ export const fiscaisContratosDez26Content: Lp3Content = {
   },
 
   stickyCta: {
-    priceAnchor: "Presencial a partir de R$ 3.200",
+    priceAnchor: "Presencial a partir de R$\u00a03.200\u00a0· ao vivo\u00a0R$\u00a02.000",
     label: "Receber proposta",
     href: "#inscricao",
   },

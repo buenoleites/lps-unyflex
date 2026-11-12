@@ -54,6 +54,7 @@ const jsonLd = {
     },
   },
   offers: [
+    { name: "Ao vivo", price: "2000" },
     { name: "BasicClass", price: "3200" },
     { name: "MasterClass", price: "3500" },
     { name: "PremiumClass", price: "4280" },
