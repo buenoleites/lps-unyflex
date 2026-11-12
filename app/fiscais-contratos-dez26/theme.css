@@ -1,0 +1,17 @@
+/* Tema da LP Fiscais de Contratos e Papel do Gestor no lp3 — o ÚNICO bloco de
+   cor da rota; só os tokens --accent* são sobrescritos.
+
+   Ciano #00AEEF: o da vertical Licitações (Gustavo, 12/11/2026) — assunto da
+   Lei 14.133. Variantes medidas (WCAG 2.x):
+     accent  sobre --bg-0 (#0a0e14) 7,64:1 · sobre --bg-1 (#141a23) 6,91:1
+     ink     (#0a0e14) sobre accent (botão)  7,64:1
+     deep    (#006a96) sobre --paper (#f5f2ec) 5,37:1 · sobre --paper-2 (#ebe5d9) 4,78:1
+   O seletor .lpfc-theme .lp3-root vence o bloco default de .lp3-root por
+   especificidade, independente da ordem dos imports de CSS. */
+.lpfc-theme .lp3-root {
+  --accent: #00aeef;
+  --accent-ink: #0a0e14; /* texto sobre accent */
+  --accent-deep: #006a96; /* accent p/ texto em superfície clara */
+  --accent-ring: rgba(0, 174, 239, 0.32);
+  --accent-tint: rgba(0, 174, 239, 0.12);
+}
