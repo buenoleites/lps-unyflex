@@ -375,11 +375,14 @@ export default function Form({
                   className={plano === "" ? "is-placeholder" : undefined}
                 >
                   <option value="">Ainda não decidi</option>
-                  {content.planOptions.map((opt) => (
-                    <option key={opt} value={opt}>
-                      {opt}
-                    </option>
-                  ))}
+                  {content.planOptions.map((opt) => {
+                    const { value, label } = typeof opt === "string" ? { value: opt, label: opt } : opt;
+                    return (
+                      <option key={value} value={value}>
+                        {label}
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
             </div>

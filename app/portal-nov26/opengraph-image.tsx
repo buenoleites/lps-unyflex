@@ -65,7 +65,7 @@ export default function OgImage() {
             fontWeight: 700,
           }}
         >
-          4 dias · 20 horas · 16 a 19 de novembro de 2026 · presencial ou ao vivo
+          4 dias · 20 horas · 1 a 4 de dezembro de 2026 · presencial ou ao vivo
         </div>
       </div>
     ),

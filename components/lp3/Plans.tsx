@@ -8,7 +8,7 @@ import type { Lp3Content } from "./types";
 /** Investimento: 3 cards (4 com o online; `fourColumns` liga o grid --4); card largo e tabela comparativa são opcionais
  *  (a /tesouraria-nov26 usa só os cards).
  *  Mesmo shape de dados do lp2 (portável entre templates). Diferença central:
- *  todo botão chama onSelectPlan(nome) ANTES de rolar ao formulário — o plano
+ *  todo botão chama onSelectPlan(value ?? nome) ANTES de rolar ao formulário — o plano
  *  clicado vira `plano_interesse` no lead. Nenhum botão abre WhatsApp.
  *  No celular (<700px) os itens NÃO inclusos de cada card ficam recolhidos
  *  atrás de "ver o que não inclui" (CSS esconde a lista até .is-open; no
@@ -108,7 +108,7 @@ export default function Plans({
               <a
                 className={`lp3-btn lp3-btn--block ${plan.highlighted ? "lp3-btn--primary" : "lp3-btn--ghost"}`}
                 href="#inscricao"
-                onClick={pick(plan.name)}
+                onClick={pick(plan.value ?? plan.name)}
               >
                 {plan.ctaLabel}
               </a>

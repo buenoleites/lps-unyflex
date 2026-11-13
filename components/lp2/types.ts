@@ -300,7 +300,7 @@ export interface EventLpContent {
     /** Escolha de modalidade (OPCIONAL). Quando presente, vira campo
      *  obrigatório do formulário e entra no payload como Modalidade_Preferida;
      *  ausente, o payload das demais LPs fica byte-idêntico ao atual. */
-    modalidade?: { label: string; options: [string, string] };
+    modalidade?: { label: string; options: [string, string]; labels?: [string, string] };
     /** Campo "Seu vínculo" (OPCIONAL): select que SUBSTITUI o toggle "É
      *  servidor público?". Presente, o payload manda `vinculo` (value da
      *  opção) e não manda Orgao_Publico; ausente, nada muda. */

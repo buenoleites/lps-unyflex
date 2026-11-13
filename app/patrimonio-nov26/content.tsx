@@ -237,18 +237,20 @@ export const patrimonioNov26Content: Lp3Content = {
     eyebrow: "Planos e Preços",
     // Título, abertura e âncora da barra fixa: Gestão, 14/10 (4 planos com o online).
     title: "Quatro formas de participar",
-    lead: "O mesmo curso, do online ao vivo à experiência Premium. O PremiumClass é o plano recomendado: capacitação em 4 dias e a agenda completa fora da sala de aula.",
+    lead: "O mesmo curso, do ao vivo à experiência Premium. O PremiumClass é o plano recomendado: capacitação em 4 dias e a agenda completa fora da sala de aula.",
     fourColumns: true,
     items: [
       /* Online ao vivo: a Gestão confirmou em 14/10/2026 que o online segue
          visível nas LPs. Copy só com fonte: nome, preço e linha verbatim do
          card `online` da /licitacao-out26 lp2; sem lista de itens. */
       {
-        name: "Online ao vivo",
+        name: "Ao vivo",
+        // Valor do plano_interesse no n8n inalterado (12/11: só o rótulo muda).
+        value: "Online ao vivo",
         sub: "Mesmas aulas, transmitidas em tempo real.",
         price: "R$ 2.000,00",
         features: [],
-        ctaLabel: "Quero o online ao vivo",
+        ctaLabel: "Quero o ao vivo",
       },
       {
         name: "BasicClass",
@@ -300,7 +302,7 @@ export const patrimonioNov26Content: Lp3Content = {
     // Token da vertical no título do lead: LP|patrimonio|s=…|c=…|x=…|f=…
     tituloProduto: "patrimonio",
     campaignFallback: SLUG,
-    planOptions: ["Online ao vivo", "BasicClass", "MasterClass", "PremiumClass"],
+    planOptions: [{ value: "Online ao vivo", label: "Ao vivo" }, "BasicClass", "MasterClass", "PremiumClass"],
     submitLabel: "Receber proposta",
     consent: {
       label: (
@@ -380,7 +382,7 @@ export const patrimonioNov26Content: Lp3Content = {
   },
 
   stickyCta: {
-    priceAnchor: "Presencial a partir de R$\u00a03.200\u00a0· online\u00a0R$\u00a02.000",
+    priceAnchor: "Presencial a partir de R$\u00a03.200\u00a0· ao vivo\u00a0R$\u00a02.000",
     label: "Receber proposta",
     href: "#inscricao",
   },

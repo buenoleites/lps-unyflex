@@ -7,6 +7,9 @@ import type { ReactNode } from "react";
 
 export interface Lp3Plan {
   name: string;
+  /** Valor enviado como `plano_interesse` (e o value no select do form) quando
+   *  difere do nome exibido; sem isso, vai o próprio `name`. */
+  value?: string;
   price: string;
   sub?: string;
   highlighted?: boolean;
@@ -179,7 +182,9 @@ export interface Lp3Content {
     tituloProduto?: string;
     /** Slug enviado como `c` quando a URL não traz `?c=`. */
     campaignFallback: string;
-    planOptions: string[];
+    /** String = valor e rótulo iguais; objeto separa o rótulo exibido do valor
+     *  enviado ao n8n (ex. rótulo "Ao vivo", valor "Online ao vivo"). */
+    planOptions: (string | { value: string; label: string })[];
     /** Campo opcional (toggle obrigatório → `Modalidade_Preferida`). */
     modalidade?: {
       label: string;
