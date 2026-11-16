@@ -21,6 +21,12 @@
       cargo opcional, como nas LPs.
    4. AGENTE: rótulos de campo, dicas e botões de ação ("Enviar", "Tentar
       novamente", "Voltar ao formulário", "Fechar") — microcopy de interface.
+   5. Gustavo, 16/11/2026: aprovou o título, o subtítulo e o agradecimento do
+      quiosque propostos pelo agente. Sem "50%" no quiosque: o número fica no
+      /consultor, com o preço da Emily.
+   6. Medidas da tela: sem resposta da Gestão em 16/11. Saíram do PENDENTE
+      porque não mudam o código (layout testado em retrato 1080×1920 e paisagem
+      1920×1080, fontes em vmax). CONFERIR NO APARELHO NO DIA DA MONTAGEM.
 
    PENDENTE (sem fonte; NÃO inventar). Enquanto a lista não estiver vazia, o
    build de produção FALHA de propósito, para que um out/ com conteúdo
@@ -33,10 +39,7 @@
    acrescenta outro 55 ao WhatsApp, que aqui já chega com 13 dígitos. */
 
 export const PENDENTE: string[] = [
-  "Medidas e orientação da tela do totem (o layout já atende retrato e paisagem)",
   "Datas e local do LicitaExpo 2027 (linha de apoio do topo do quiosque)",
-  "Título e subtítulo do topo do quiosque",
-  "Texto da tela de agradecimento",
   "Ementa (dados da Emily)",
   "Programação (dados da Emily)",
   "Planos, itens e preço cheio / com 50% (dados da Emily)",
@@ -65,8 +68,9 @@ export const totem = {
   logoSrc: "/logo.png",
   logoAlt: "Unyflex",
   eyebrow: "Pré-matrícula · LicitaExpo 2027",
-  title: "PENDENTE: título do quiosque",
-  subtitle: "PENDENTE: subtítulo do quiosque",
+  title: "Garanta seu lugar no LicitaExpo\u00a02027",
+  subtitle:
+    "Preencha seus dados e a equipe da Unyflex entra em contato com as condições da pré-matrícula.",
   meta: "PENDENTE: datas e local do LicitaExpo 2027",
 
   submit: {
@@ -122,8 +126,8 @@ export const totem = {
   sendingLabel: "Enviando…",
 
   success: {
-    title: "PENDENTE: título do agradecimento",
-    text: "PENDENTE: texto do agradecimento",
+    title: "Pré-matrícula recebida.",
+    text: "Vamos falar com você por WhatsApp ou e-mail. Se quiser, fale agora com um consultor do estande.",
   },
 
   error: {
