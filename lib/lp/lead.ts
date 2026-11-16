@@ -1,15 +1,15 @@
 import { getTracking, type TrackingParams } from "./utm";
 
-const WEBHOOK_URL = "https://n8n.unyflex.com.br/webhook/lp-leads-unyflex";
+export const WEBHOOK_URL = "https://n8n.unyflex.com.br/webhook/lp-leads-unyflex";
 const REDIRECT_URL = "/obrigado";
 
-function nowStamp(): string {
+export function nowStamp(): string {
   const d = new Date();
   const p = (n: number) => String(n).padStart(2, "0");
   return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
 }
 
-function getDevice(): string {
+export function getDevice(): string {
   if (typeof navigator === "undefined") return "Desktop";
   return /Mobi|Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent)
     ? "Mobile"

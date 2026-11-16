@@ -1,0 +1,390 @@
+/* Totem do estande do LicitaExpo (quiosque + menu do consultor).
+   Escopo .totem-root (sempre junto de .lp3-root): cores, raios e fonte vêm dos
+   tokens do lp3 e do ciano de app/licitaexpo/theme.css. Nenhuma cor literal.
+
+   Quiosque: tela cheia, fonte base ~22 px, alvos de toque ≥ 56 px (o mínimo
+   do briefing é 48). As medidas da tela estão PENDENTE: o layout responde à
+   ORIENTAÇÃO — retrato empilha marca e formulário; paisagem põe lado a lado. */
+
+.totem-root {
+  --t-fs: clamp(20px, 1.15vmax, 26px);
+  --t-fs-label: clamp(18px, 1vmax, 22px);
+  --t-fs-title: clamp(32px, 2.6vmax, 60px);
+  --t-touch: 64px;
+  --t-gap: clamp(16px, 1.6vmax, 28px);
+
+  min-height: 100dvh;
+  font-size: var(--t-fs);
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+.totem-root :where(input, textarea) {
+  user-select: text;
+}
+
+/* ------------------------------------------------------------ layout --- */
+
+.totem {
+  min-height: 100dvh;
+  display: grid;
+  gap: calc(var(--t-gap) * 1.5);
+  align-content: center;
+  padding: calc(var(--t-gap) * 2) calc(var(--t-gap) * 1.5);
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+@media (orientation: landscape) {
+  .totem {
+    max-width: 1600px;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: center;
+    column-gap: calc(var(--t-gap) * 3);
+  }
+}
+
+.totem__brand {
+  display: grid;
+  gap: calc(var(--t-gap) * 0.6);
+  justify-items: start;
+}
+
+.totem__logo {
+  height: clamp(36px, 3vmax, 64px);
+  width: auto;
+}
+
+.totem__eyebrow {
+  font-size: var(--t-fs-label);
+}
+
+.totem__title {
+  font-size: var(--t-fs-title);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.totem__subtitle {
+  color: var(--ink-on-dark-muted);
+}
+
+.totem__meta {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* -------------------------------------------------------------- form --- */
+
+.totem__form {
+  display: grid;
+  gap: var(--t-gap);
+  padding: calc(var(--t-gap) * 1.25);
+  background: var(--bg-1);
+  border: 1px solid var(--line-on-dark);
+  border-radius: var(--radius-card);
+}
+
+.totem__field {
+  display: grid;
+  gap: 8px;
+}
+
+.totem__field label {
+  font-size: var(--t-fs-label);
+  font-weight: 700;
+}
+
+.totem__req {
+  color: var(--accent);
+}
+
+.totem__field input,
+.totem__phone {
+  width: 100%;
+  min-height: var(--t-touch);
+  font-size: var(--t-fs);
+  background: var(--field-bg);
+  border: 2px solid var(--field-border);
+  border-radius: var(--radius-input);
+  color: var(--ink-on-dark);
+}
+
+.totem__field input {
+  padding: 12px 18px;
+}
+
+.totem__field input::placeholder {
+  color: var(--ink-on-dark-muted);
+  opacity: 0.7;
+}
+
+.totem__field input:focus,
+.totem__phone:focus-within {
+  border-color: var(--accent);
+  outline: none;
+  box-shadow: 0 0 0 4px var(--accent-ring);
+}
+
+.totem__phone {
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+}
+
+.totem__prefix {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  font-weight: 700;
+  color: var(--ink-on-dark-muted);
+  border-right: 2px solid var(--field-border);
+}
+
+.totem__phone input,
+.totem__phone input:focus {
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+.totem__field.is-error input:not(:focus),
+.totem__field.is-error .totem__phone:not(:focus-within) {
+  border-color: var(--error);
+}
+
+.totem__hint {
+  font-size: var(--t-fs-label);
+  color: var(--ink-on-dark-muted);
+}
+
+.totem__err {
+  font-size: var(--t-fs-label);
+  font-weight: 600;
+  color: var(--error);
+}
+
+/* Consentimento: checkbox de 36 px, linha inteira tocável (≥ 56 px). */
+.totem__consent {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px 16px;
+  align-items: start;
+  min-height: var(--t-touch);
+  font-size: var(--t-fs-label);
+  line-height: 1.45;
+}
+
+.totem__consent input {
+  width: 36px;
+  height: 36px;
+  margin: 2px 0 0;
+  accent-color: var(--accent);
+}
+
+.totem__consent label {
+  padding-top: 4px;
+}
+
+.totem__consent .totem__err {
+  grid-column: 2;
+}
+
+.totem__link {
+  display: inline;
+  min-height: 0;
+  padding: 0;
+  font: inherit;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  /* alvo de toque maior que o texto, sem mexer no fluxo da linha */
+  position: relative;
+}
+
+.totem__link::after {
+  content: "";
+  position: absolute;
+  inset: -14px -6px;
+}
+
+.totem__submit {
+  width: 100%;
+  min-height: 72px;
+  font-size: var(--t-fs);
+}
+
+.totem__submit:disabled {
+  opacity: 0.4;
+}
+
+/* ---------------------------------------------------------- overlays --- */
+
+.totem__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: calc(var(--t-gap) * 2);
+  background: var(--bg-0);
+  text-align: center;
+}
+
+.totem__panel,
+.totem__screen {
+  display: grid;
+  gap: calc(var(--t-gap) * 1.25);
+  justify-items: center;
+  max-width: 860px;
+}
+
+.totem__panel {
+  padding: calc(var(--t-gap) * 2);
+  background: var(--bg-1);
+  border: 1px solid var(--line-on-dark);
+  border-radius: var(--radius-card);
+}
+
+.totem__panel-title,
+.totem__screen-title {
+  font-size: var(--t-fs-title);
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.totem__qr {
+  width: min(320px, 50vmin);
+  height: auto;
+  border-radius: var(--radius-input);
+}
+
+.totem__url {
+  font-size: var(--t-fs-title);
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.totem__overlay--error .totem__screen-title {
+  color: var(--error);
+}
+
+.totem__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--t-gap);
+}
+
+.totem__actions .lp3-btn,
+.totem__panel .lp3-btn {
+  min-height: 72px;
+  min-width: 280px;
+  font-size: var(--t-fs);
+}
+
+/* ========================================================= consultor === */
+
+.consultor {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: calc(var(--t-gap) * 2) calc(var(--t-gap) * 1.5) calc(var(--t-gap) * 3);
+  display: grid;
+  gap: calc(var(--t-gap) * 2);
+  user-select: text;
+}
+
+.consultor__head {
+  display: grid;
+  gap: calc(var(--t-gap) * 0.6);
+}
+
+.consultor__section {
+  display: grid;
+  gap: var(--t-gap);
+  padding-top: calc(var(--t-gap) * 1.5);
+  border-top: 1px solid var(--line-on-dark);
+}
+
+.consultor__h2 {
+  font-size: calc(var(--t-fs-title) * 0.75);
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.consultor__list {
+  display: grid;
+  gap: 10px;
+}
+
+.consultor__list li {
+  padding-left: 22px;
+  position: relative;
+}
+
+.consultor__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.consultor__day {
+  display: grid;
+  gap: 10px;
+}
+
+.consultor__day-title {
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.consultor__plans {
+  display: grid;
+  gap: var(--t-gap);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.consultor__plan {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+  padding: calc(var(--t-gap) * 1.25);
+  background: var(--bg-1);
+  border: 1px solid var(--line-on-dark);
+  border-radius: var(--radius-card);
+}
+
+.consultor__plan-name {
+  font-size: var(--t-fs);
+  font-weight: 800;
+}
+
+.consultor__price {
+  display: grid;
+  gap: 4px;
+}
+
+.consultor__price-de {
+  color: var(--ink-on-dark-muted);
+}
+
+.consultor__price-por {
+  font-size: var(--t-fs-title);
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1.1;
+}
+
+.consultor__cert {
+  font-weight: 700;
+}
