@@ -107,7 +107,7 @@ export const encerramentoDez26Content: Lp3Content = {
   },
 
   proof: {
-    items: ["5,0 no Google · 510 avaliações", "Desde 2009 · 49.000+ alunos"],
+    items: ["5,0 no Google · 510 avaliações", "Desde 2009 · 49.000+ alunos", "Faculdade Unypública · nota 5 no MEC"],
   },
 
   audience: {

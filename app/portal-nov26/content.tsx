@@ -32,7 +32,7 @@ const PLANO_ITENS = [
   "Capacitação prática em 3 dias",
   "Capacitação prática em 4 dias",
   "6 Coffee Breaks Gourmet",
-  "Certificado de instituição reconhecida pelo MEC",
+  "Certificado emitido pela Faculdade Unypública, instituição credenciada pelo MEC",
   "Desconto em pós-graduação",
   "Mentoria exclusiva VIP",
   "Kit exclusivo UNYFLEX",
