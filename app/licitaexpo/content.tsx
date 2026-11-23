@@ -279,7 +279,7 @@ export const licitaexpoContent: Lp3Content = {
         ctaLabel: "Quero o PremiumClass",
       },
     ],
-    footnote: "Inscrições até 21/11.",
+    footnote: "Últimas vagas.",
   },
 
   form: {
