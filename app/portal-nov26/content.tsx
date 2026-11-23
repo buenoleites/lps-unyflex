@@ -73,7 +73,7 @@ export const portalNov26Content: Lp3Content = {
     facts: [
       "4 dias",
       "20 horas",
-      "certificado emitido por instituição reconhecida pelo MEC",
+      "certificado emitido pela Faculdade Unypública, instituição credenciada pelo MEC",
     ],
     bgSrc: "/portal-nov26/hero.jpg",
     bgAlt: "Turma em sala de aula da Unyflex em Curitiba",
