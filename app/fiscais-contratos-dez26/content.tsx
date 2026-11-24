@@ -33,7 +33,7 @@ import { FOOTER_COMPANY } from "@/lib/lp/empresa";
       a regra dos 3 dias das outras LPs lp3 aplicada às datas desta turma
       (08/12/2026 é terça).
 
-   9. Gustavo, 12/11/2026: bios (uma frase) e fotos dos 3 professores; plano ao
+   9. Gustavo, 12/11/2026: bios (uma frase) e fotos dos professores; plano ao
       vivo R$ 2.000 (D-09a) com card e opção no formulário; seção "O que muda"
       fica de fora; certificado mantém "credenciada".
   10. Gustavo, 12/11/2026: público-alvo aprovado (seção "Para quem"); preços
@@ -224,11 +224,6 @@ export const fiscaisContratosDez26Content: Lp3Content = {
   speakers: {
     title: "Quem ensina",
     items: [
-      {
-        name: "Juliana Fiorese",
-        photoSrc: `/${SLUG}/professores/juliana-fiorese.jpg`,
-        bio: "Graduada em Direito pela PUCPR, especialista em licitações e contratos administrativos.",
-      },
       {
         name: "Marcos Vinícius Henrique",
         photoSrc: `/${SLUG}/professores/marcos-vinicius-henrique.jpg`,
